@@ -43,7 +43,7 @@ public class Map
             //TODO:找到Pawn的位置，返回
             if (_mapDatas[i].HandleThings.Contains(pawn))
             {
-                return new PathNode() { MapDataIndex = i, Pawn = pawn ,Pos = pawn.Position};
+                return new PathNode() { MapDataIndex = i,Pos = pawn.Position.Copy()};
             }
         }
 

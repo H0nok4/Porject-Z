@@ -24,6 +24,29 @@ public static class PathFinder {
             map = useMap;
         }
 
+        var openList = SimplePool<PriorityQueue<PathNode>>.Get();
+        openList.Clear();
+        var closeList = SimplePool<HashSet<PathNode>>.Get();
+        closeList.Clear();
+        
+        openList.Enqueue(startPos);
+
+        while (openList.Count > 0)
+        {
+            var node = openList.Dequeue();
+            //TODO:将附近的格子加入到队列中
+            
+
+        }
         return result;
+
+        void AddNode(PathNode parentNode)
+        {
+            var mapData = map.GetMapDataByIndex(parentNode.MapDataIndex);
+            if (mapData.GetSectionByPosition(parentNode.Pos + IntVec2.North) != null)
+            {
+                
+            }
+        }
     }
 }

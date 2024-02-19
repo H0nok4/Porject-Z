@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 
 public struct IntVec2
 {
@@ -55,5 +56,10 @@ public struct IntVec2
     {
         X = x;
         Y = y;
+    }
+
+    public IntVec2 Copy()
+    {
+        return new IntVec2(this.X,this.Y);
     }
 }
