@@ -6,6 +6,8 @@ public class Section
 
     public MapData ParentMap;
 
+    public int MapIndex;
+
     public SectionType SectionType;
     //TODO:首先，分可以行走和不可行走
     public bool Walkable;
@@ -15,5 +17,10 @@ public class Section
     public void Init()
     {
 
+    }
+
+    public PathNode CreatePathNode()
+    {
+        return new PathNode() { Pos = Position.Copy(), MapDataIndex = MapIndex };
     }
 }

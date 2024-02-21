@@ -20,6 +20,10 @@ public class PathNode : IComparable<PathNode> {
 
     public int totalCost;//消耗总计
 
+    public bool IsSameNode(PathNode other)
+    {
+        return other.Pos == this.Pos && MapDataIndex == other.MapDataIndex;
+    }
 
     public int CompareTo(PathNode other)
     {

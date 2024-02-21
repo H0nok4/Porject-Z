@@ -45,7 +45,7 @@ public class MapController :  Singleton<MapController>
                     sb.Append(GetSectionName(tile.SectionType));
 
                     mapData.Sections[mapX, mapY] = new Section()
-                        { ParentMap = mapData, SectionType = tile.SectionType, Walkable = tile.IsWalkable };
+                        { ParentMap = mapData, SectionType = tile.SectionType, Walkable = tile.IsWalkable,MapIndex = i};
                     mapX++;
 
                 }
