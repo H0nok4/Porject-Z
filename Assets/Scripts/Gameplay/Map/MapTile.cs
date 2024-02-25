@@ -32,18 +32,4 @@ public class MapTile : Tile
         base.RefreshTile(position, tilemap);
     }
 
-#if UNITY_EDITOR
-    [MenuItem("Assets/Create/Zombieland/Tiles/MapTile")]
-    public static void CreateZombielandTile() {
-        string path =
-            EditorUtility.SaveFilePanelInProject("Save Map Tile", "New Map Tile", "Asset", "Save Map Tile", "Assets");
-        if (path == "") {
-            return;
-        }
-
-        AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<MapTile>(), path);
-    }
-#endif
-
-
 }

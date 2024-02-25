@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 749f182dcd6422e4a951c28d3a6eb6cb, type: 3}
-  m_Name: Stair
+  m_Script: {fileID: 11500000, guid: 90dbc646613141e4ab60a46b376e010d, type: 3}
+  m_Name: FloorTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: a7f6a89b6c9e6b4408c298f322830d86, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fda6174a667d17b41b5e5ad62d21a845, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -35,4 +35,4 @@ MonoBehaviour:
   m_Flags: 1
   m_ColliderType: 1
   IsWalkable: 1
-  SectionType: 3
+  SectionType: 1

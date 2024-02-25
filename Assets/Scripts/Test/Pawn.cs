@@ -23,6 +23,8 @@ public class Pawn : MonoBehaviour,IThing
 
             _position.X = value.X;
             _position.Y = value.Y;
+
+            transform.position = new Vector3(_position.X, _position.Y);
         }
     }
 

@@ -1,10 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 /// <summary>
 /// 单层的地图数据
 /// </summary>
-public class MapData {
+public class MapData
+{
+    public Tilemap TileMapObject;
+
+    public MapDataHandleThingGameObjectManager ThingObjectManager;
+
     public Section[,] Sections;
 
     public int Size => Sections.GetLength(0) * Sections.GetLength(1);
@@ -13,7 +20,7 @@ public class MapData {
 
     public int Height => Sections.GetLength(1);
 
-    public List<IThing> HandleThings;
+    public List<IThing> HandleThings = new List<IThing>();
 
     public IEnumerable<Section> EnumerableSections {
         get {
@@ -25,12 +32,26 @@ public class MapData {
         }
     }
 
+    public bool Visible
+    {
+        get => TileMapObject != null && TileMapObject.isActiveAndEnabled;
+        set
+        {
+            if (TileMapObject == null)
+            {
+                return;   
+            }
+
+            TileMapObject.gameObject.SetActive(value);
+        }
+    }
 
     //TODO:Thing应该有一个自己的管理器，能够快速查到某样物品是否存在和所在位置
     public void RegisterThing(IThing thing,IntVec2 position)
     {
         //TODO:添加并且做一些操作，比如更新ThingGrid
         HandleThings.Add(thing);
+        
     }
 
     public void UnRegisterThing(IThing thing)
@@ -54,11 +75,21 @@ public class MapData {
 
     public Section GetSectionByPosition(IntVec2 targetPos)
     {
-        if (targetPos.X < 0 || targetPos.X >= Sections.Length || targetPos.Y < 0 || targetPos.Y >= Sections.LongLength)
+        if (targetPos.X < 0 || targetPos.X >= Sections.GetLength(0) || targetPos.Y < 0 || targetPos.Y >= Sections.GetLength(1))
         {
             return null;
         }
 
-        return Sections[targetPos.X, targetPos.Y];
+        try
+        {
+            return Sections[targetPos.X, targetPos.Y];
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
     }
 }
+

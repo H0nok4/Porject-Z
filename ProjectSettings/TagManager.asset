@@ -12,8 +12,8 @@ TagManager:
   - Water
   - UI
   - 
-  - 
-  - 
+  - Pawn
+  - Grid
   - 
   - 
   - 
@@ -40,4 +40,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Env
+    uniqueID: 906091369
+    locked: 0
+  - name: Grid
+    uniqueID: 3495834117
+    locked: 0
+  - name: Things
+    uniqueID: 875991855
     locked: 0
