@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Pawn : MonoBehaviour,IThing
 {
-    public List<IntVec2> Path;
+    public PathMover PathMover;
+
+    public PawnPath FindingPath;
 
     private IntVec2 _position = IntVec2.Invalid;
 
@@ -35,8 +37,7 @@ public class Pawn : MonoBehaviour,IThing
         
     }
 
-    public Pawn(List<IntVec2> path, IntVec2 position, bool isDestoryed, ThingType thingType) {
-        Path = path;
+    public Pawn(IntVec2 position, bool isDestoryed, ThingType thingType) {
         Position = position;
         IsDestoryed = isDestoryed;
         ThingType = thingType;
@@ -44,4 +45,42 @@ public class Pawn : MonoBehaviour,IThing
 
     public bool IsDestoryed { get; set; }
     public ThingType ThingType { get; set; }
+}
+
+public class PathMover
+{
+    public Pawn RegisterPawn;
+
+    public PawnPath CurrentMovingPath;
+
+    public PathMover(Pawn pawn)
+    {
+        RegisterPawn = pawn;
+    }
+}
+
+public class PawnPath
+{
+    public List<PathNode> FindingPath;
+
+    /// <summary>
+    /// 当前前往的格子索引
+    /// </summary>
+    public int CurMovingIndex;
+
+    /// <summary>
+    /// 是否正在寻路
+    /// </summary>
+    public bool Using;
+
+    public bool End => CurMovingIndex == FindingPath.Count;
+    public PathNode GetNextPosition()
+    {
+        if (End)
+        {
+            return null;
+        }
+
+        return FindingPath[++CurMovingIndex];
+    }
 }

@@ -23,7 +23,7 @@ public static class PathFinder {
         { IntVec2.North, IntVec2.East, IntVec2.South, IntVec2.West };
 
     public static List<PathNode> AStarFindPath(PathNode startPos, PathNode endPos, Map useMap = null) {
-        //TODO:A*寻路
+        //A*寻路
         List<PathNode> result = SimplePool<List<PathNode>>.Get();
         result.Clear();
         Map map = MapController.Instance.Map;
@@ -41,7 +41,7 @@ public static class PathFinder {
         while (openList.Count > 0)
         {
             var node = openList.Dequeue();
-            //TODO:将附近的格子加入到队列中
+            //将附近的格子加入到队列中
             var mapData = map.GetMapDataByIndex(node.MapDataIndex);
 
             foreach (var dir in DirVecList) {
@@ -87,7 +87,7 @@ public static class PathFinder {
             }
 
             closeList.Add(node);
-            //TODO:为了防止找了超级大的范围，需要一个跳出
+            //为了防止找了超级大的范围，需要一个跳出
 
             if (openList.Count >= 100000)
             {
@@ -96,7 +96,7 @@ public static class PathFinder {
         }
 
 
-        //TODO:找遍了地图没有找到终点，可能没有路径能够到达
+        //找遍了地图没有找到终点，可能没有路径能够到达
         Debug.LogError("没有对应的路径到达目标点");
 
         return result;
