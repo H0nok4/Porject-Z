@@ -1,5 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+using UnityEngine;
 
 public class PathNode : IComparable<PathNode> {
     public int MapDataIndex;
@@ -35,6 +37,10 @@ public class PathNode : IComparable<PathNode> {
     {
         //这个接口用于寻路，比较消耗就可以了
         return totalCost.CompareTo(other.totalCost);
+    }
+
+    public float FastDistance(Vector3 vec3) {
+        return Vector3.Distance(vec3, new Vector3() {x = Pos.X, y = Pos.Y});
     }
 
 }

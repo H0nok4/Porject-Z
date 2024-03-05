@@ -10,6 +10,7 @@ public class Pawn : MonoBehaviour,IThing
 
     private IntVec2 _position = IntVec2.Invalid;
 
+    private float _moveSpeed = 1f;
     public IntVec2 Position
     {
         get
@@ -33,8 +34,16 @@ public class Pawn : MonoBehaviour,IThing
 
     public void Tick()
     {
-        //TODO:�鿴�Ƿ�ǰ��Ѱ·��
-        
+        //TODO:查看是否当前有寻路的
+        PathMover.Tick();
+    }
+
+    private void EnterPos() {
+
+    }
+
+    private void ExitPos() {
+
     }
 
     public Pawn(IntVec2 position, bool isDestoryed, ThingType thingType) {
@@ -51,11 +60,28 @@ public class PathMover
 {
     public Pawn RegisterPawn;
 
+    public Map AllMap => MapController.Instance.Map;
+
     public PawnPath CurrentMovingPath;
 
     public PathMover(Pawn pawn)
     {
         RegisterPawn = pawn;
+    }
+
+    public void Tick() {
+        if (CurrentMovingPath is {Using:false}) {
+            //没有正在移动的路径,返回
+            return;
+        }
+
+        //TODO:根据当前的路径点移动物体
+        if (CurrentMovingPath.GetCurrentPosition() is {} currentNode) {
+            if (currentNode.FastDistance(RegisterPawn.transform.position) > Mathf.Epsilon) {
+                //TODO:还没有重合,将Pawn朝目标点移动
+
+            }
+        }
     }
 }
 
@@ -64,16 +90,28 @@ public class PawnPath
     public List<PathNode> FindingPath;
 
     /// <summary>
-    /// ��ǰǰ���ĸ�������
+    /// 当前前往的格子索引
     /// </summary>
-    public int CurMovingIndex;
+    public int CurMovingIndex = 0;
 
     /// <summary>
-    /// �Ƿ�����Ѱ·
+    /// 是否正在寻路
     /// </summary>
     public bool Using;
 
     public bool End => CurMovingIndex == FindingPath.Count;
+
+    public PathNode StartNode => Length > 0 ? FindingPath[0] : null;
+    public int Length => FindingPath.Count;
+
+    public PathNode GetCurrentPosition() {
+        if (End) {
+            return null;
+        }
+
+        return FindingPath[CurMovingIndex];
+    }
+
     public PathNode GetNextPosition()
     {
         if (End)
