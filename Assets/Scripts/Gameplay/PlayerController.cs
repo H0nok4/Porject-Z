@@ -31,7 +31,8 @@ public class PlayerController : Singleton<PlayerController>
             MapController.Instance.Map.GetMapDataByIndex(0)
                 .GetSectionByPosition(new IntVec2(cellPosition.x, cellPosition.y)).CreatePathNode(),
             MapController.Instance.Map);
-        CoroutineRunner.Instance.StartCoroutine(MovePawn(pawn, findPath));
+        PawnPath path = new PawnPath() { FindingPath = findPath ,Using = true};
+        pawn.PathMover.SetPath(path);
     }
 
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
+using UnityEngine;
 
 public struct IntVec2
 {
@@ -61,5 +62,10 @@ public struct IntVec2
     public IntVec2 Copy()
     {
         return new IntVec2(this.X,this.Y);
+    }
+
+    public Vector3 ToVector3()
+    {
+        return new Vector3(X, Y);
     }
 }
