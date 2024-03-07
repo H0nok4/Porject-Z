@@ -90,6 +90,10 @@ public class PathMover
 
     public void SetPath(PawnPath path)
     {
+        //TODO:如果当前有正在移动中的路径,需要先移动到当前路径的最新一格再接着移动
+        //if (CurrentMovingPath is {Using:true} ) {
+        //    path.FindingPath.Insert(0, CurrentMovingPath.GetCurrentPosition());
+        //}
         CurrentMovingPath = path;
     }
 
@@ -106,8 +110,10 @@ public class PathMover
                 RegisterPawn.transform.position = Vector3.MoveTowards(RegisterPawn.transform.position,
                     currentNode.Pos.ToVector3(), RegisterPawn.MoveSpeed * Time.deltaTime);
             }
-            else
-            {
+            else {
+                //AllMap.GetMapDataByIndex(currentNode.MapDataIndex).GetSectionByPos(currentNode.Pos.X, currentNode.Pos.Y)
+                //    .RegisterThing(RegisterPawn);
+                RegisterPawn.Position = currentNode.Pos.Copy();
                 //TODO:后面可能有上楼梯或者使用传送门等到达其他位置的功能，需要在PathNode中标记并且在这里操作
                 CurrentMovingPath.CurMovingIndex++;
                 if (CurrentMovingPath.End)

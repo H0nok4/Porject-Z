@@ -28,21 +28,23 @@ public class MapController :  Singleton<MapController>
 
             var mapData = Map.AddMapData();
             mapData.TileMapObject = tilemap;
-            mapData.Sections = new Section[size.x, size.y];
-            BoundsInt bounds = tilemap.cellBounds; // ªÒ»° Tilemap µƒ±ﬂΩÁ∑∂Œß
+            mapData.Sections = new Section[size.x * size.y];
+            mapData.Width = size.x;
+            mapData.Height = size.y;
+            BoundsInt bounds = tilemap.cellBounds; // Ëé∑Âèñ Tilemap ÁöÑËæπÁïåËåÉÂõ¥
             int mapX = 0;
             int mapY = 0;
             for (int y = bounds.yMin; y < bounds.yMax; ++y) {
 
                 for (int x = bounds.xMin; x < bounds.xMax; ++x)
                 {
-                    Vector3Int cellPosition = new Vector3Int(x, y, 0); // ππ‘Ï√ø∏ˆµ•‘™∏ÒµƒŒª÷√œÚ¡ø
+                    Vector3Int cellPosition = new Vector3Int(x, y, 0); // ÊûÑÈÄ†ÊØè‰∏™ÂçïÂÖÉÊ†ºÁöÑ‰ΩçÁΩÆÂêëÈáè
 
-                    if (!tilemap.HasTile(cellPosition)) continue; // ≈–∂œµ±«∞µ•‘™∏Ò «∑ÒŒ™ø’
+                    if (!tilemap.HasTile(cellPosition)) continue; // Âà§Êñ≠ÂΩìÂâçÂçïÂÖÉÊ†ºÊòØÂê¶‰∏∫Á©∫
 
                     var tile = tilemap.GetTile<MapTile>(cellPosition);
                     if (tile == null) {
-                        Debug.LogError($"¥ÌŒÛ£¨‘⁄{cellPosition.x},{cellPosition.y},{0}Œª÷√√ª”–’“µΩTile");
+                        Debug.LogError($"ÈîôËØØÔºåÂú®{cellPosition.x},{cellPosition.y},{0}‰ΩçÁΩÆÊ≤°ÊúâÊâæÂà∞Tile");
                         Debug.Log(sb.ToString());
                         return;
                     }
@@ -52,24 +54,28 @@ public class MapController :  Singleton<MapController>
                     {
                         switch (tile.SectionType) {
                             case SectionType.Stair:
-                                mapData.Sections[mapX, mapY] = new StairSection()
-                                {
-                                    ParentMap = mapData, SectionType = tile.SectionType, Walkable = tile.IsWalkable,
-                                    MapIndex = i, Position = new IntVec2(mapX, mapY)
-                                };
+                                mapData.SetSection(new StairSection() {
+                                    ParentMap = mapData,
+                                    SectionType = tile.SectionType,
+                                    Walkable = tile.IsWalkable,
+                                    MapIndex = i,
+                                    Position = new IntVec2(mapX, mapY)
+                                }, mapX, mapY);
                                 break;
                             default:
-                                mapData.Sections[mapX, mapY] = new Section()
-                                {
-                                    ParentMap = mapData, SectionType = tile.SectionType, Walkable = tile.IsWalkable,
-                                    MapIndex = i, Position = new IntVec2(mapX, mapY)
-                                };
+                                mapData.SetSection(new Section() {
+                                    ParentMap = mapData,
+                                    SectionType = tile.SectionType,
+                                    Walkable = tile.IsWalkable,
+                                    MapIndex = i,
+                                    Position = new IntVec2(mapX, mapY)
+                                },mapX,mapY);
                                 break;
                         }
                     }
                     catch (Exception e)
                     {
-                        Debug.LogError($"≥ˆ¥ÌµƒŒª÷√ «£∫X={mapX},Y={mapY}");
+                        Debug.LogError($"Âá∫ÈîôÁöÑ‰ΩçÁΩÆÊòØÔºöX={mapX},Y={mapY}");
                         throw;
                     }
 
@@ -98,13 +104,13 @@ public class MapController :  Singleton<MapController>
             switch (type)
             {
                 case SectionType.Air:
-                    return "ø’";
+                    return "Á©∫";
                 case SectionType.Floor:
-                    return "µÿ";
+                    return "Âú∞";
                 case SectionType.Stair:
-                    return "Ã›";
+                    return "Ê¢Ø";
                 default:
-                    return "«Ω";
+                    return "Â¢ô";
             }
         }
     }

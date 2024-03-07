@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -12,24 +12,31 @@ public class MapData
 
     public MapDataHandleThingGameObjectManager ThingObjectManager;
 
-    public Section[,] Sections;
+    public Section[] Sections;
 
-    public int Size => Sections.GetLength(0) * Sections.GetLength(1);
+    public int Size => Width * Height;
 
-    public int Width => Sections.GetLength(0);
+    public int Width { get; set; }
 
-    public int Height => Sections.GetLength(1);
+    public int Height { get; set; }
 
     public List<IThing> HandleThings = new List<IThing>();
 
-    public IEnumerable<Section> EnumerableSections {
-        get {
-            for (int i = 0; i < Sections.GetLength(0); i++) {
-                for (int j = 0; j < Sections.GetLength(1); j++) {
-                    yield return Sections[i, j];
-                }
-            }
-        }
+
+    public Section GetSectionByPos(int x, int y) {
+        return Sections[y * Width + x];
+    }
+
+    public Section GetSectionByIndex(int index) {
+        return Sections[index];
+    }
+
+    public void RegisterThing(IThing thing) {
+        
+    }
+
+    public void SetSection(Section data,int x,int y) {
+        Sections[y * Width + x] = data;
     }
 
     public bool Visible
@@ -65,24 +72,19 @@ public class MapData
         HandleThings.Remove(thing);
     }
 
-    public Section IndexOf(int x, int y) => Sections[x, y];
-
-    public Section IndexOf(IntVec2 pos) => Sections[pos.X, pos.Y];
-
     public MapData() {
 
     }
 
     public Section GetSectionByPosition(IntVec2 targetPos)
     {
-        if (targetPos.X < 0 || targetPos.X >= Sections.GetLength(0) || targetPos.Y < 0 || targetPos.Y >= Sections.GetLength(1))
+        if (targetPos.X < 0 || targetPos.X >= Width || targetPos.Y < 0 || targetPos.Y >= Height)
         {
             return null;
         }
 
-        try
-        {
-            return Sections[targetPos.X, targetPos.Y];
+        try {
+            return GetSectionByPos(targetPos.X, targetPos.Y);
         }
         catch (Exception e)
         {

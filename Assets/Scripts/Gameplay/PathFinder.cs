@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -104,7 +104,7 @@ public static class PathFinder {
         void CreateResultPath(List<PathNode> path,PathNode end)
         {
             var node = end;
-            while (node != null)
+            while (node.Parent != null)
             {
                 path.Add(node);
                 node = node.Parent;
