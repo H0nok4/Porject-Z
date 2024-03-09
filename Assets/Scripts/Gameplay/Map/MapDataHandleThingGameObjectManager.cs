@@ -17,6 +17,6 @@ public class MapDataHandleThingGameObjectManager
 
     public MapDataHandleThingGameObjectManager(GameObject handleObject)
     {
-
+        HandleObject = handleObject;
     }
 }

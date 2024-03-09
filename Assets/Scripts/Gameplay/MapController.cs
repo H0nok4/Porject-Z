@@ -26,7 +26,7 @@ public class MapController :  Singleton<MapController>
 
             StringBuilder sb = new StringBuilder();
 
-            var mapData = Map.AddMapData();
+            var mapData = Map.AddMapData(tilemap.gameObject);
             mapData.TileMapObject = tilemap;
             mapData.Sections = new Section[size.x * size.y];
             mapData.Width = size.x;

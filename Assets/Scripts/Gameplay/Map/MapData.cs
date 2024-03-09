@@ -8,6 +8,8 @@ using UnityEngine.Tilemaps;
 /// </summary>
 public class MapData
 {
+    public int Index;
+
     public Tilemap TileMapObject;
 
     public MapDataHandleThingGameObjectManager ThingObjectManager;
@@ -20,8 +22,7 @@ public class MapData
 
     public int Height { get; set; }
 
-    public List<IThing> HandleThings = new List<IThing>();
-
+    public HashSet<IThing> HandleThings = new HashSet<IThing>();
 
     public Section GetSectionByPos(int x, int y) {
         return Sections[y * Width + x];
@@ -31,8 +32,15 @@ public class MapData
         return Sections[index];
     }
 
+    //TODO:Thing应该有一个自己的管理器，能够快速查到某样物品是否存在和所在位置
     public void RegisterThing(IThing thing) {
-        
+        if (HandleThings.Contains(thing))
+        {
+            return;
+        }
+
+        HandleThings.Add(thing);
+        ThingObjectManager.Register(thing.GameObject);
     }
 
     public void SetSection(Section data,int x,int y) {
@@ -53,27 +61,20 @@ public class MapData
         }
     }
 
-    //TODO:Thing应该有一个自己的管理器，能够快速查到某样物品是否存在和所在位置
-    public void RegisterThing(IThing thing,IntVec2 position)
-    {
-        //TODO:添加并且做一些操作，比如更新ThingGrid
-        HandleThings.Add(thing);
-        
-    }
-
     public void UnRegisterThing(IThing thing)
     {
         if (!HandleThings.Contains(thing))
         {
-
             return;
         }
         //TODO:删除并且做一些操作
         HandleThings.Remove(thing);
     }
 
-    public MapData() {
-
+    public MapData(int index,GameObject thingHandleGameObject)
+    {
+        Index = index;
+        ThingObjectManager = new MapDataHandleThingGameObjectManager(thingHandleGameObject);
     }
 
     public Section GetSectionByPosition(IntVec2 targetPos)

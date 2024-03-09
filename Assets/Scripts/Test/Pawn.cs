@@ -1,39 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class Pawn : MonoBehaviour,IThing
+public class Pawn : Thing_Unit
 {
-    public PathMover PathMover;
-
-    public PawnPath FindingPath;
-
-    private IntVec2 _position = IntVec2.Invalid;
-
-    private float _moveSpeed = 5f;
-
-    public float MoveSpeed => _moveSpeed;
-
-    public IntVec2 Position
-    {
-        get
-        {
-            return _position;
-        }
-        set
-        {
-            if (value == _position)
-            {
-                return;
-            }
-
-            _position.X = value.X;
-            _position.Y = value.Y;
-
-            transform.position = new Vector3(_position.X, _position.Y);
-        }
-    }
 
     private void Update()
     {
@@ -42,59 +14,38 @@ public class Pawn : MonoBehaviour,IThing
 
     public void Tick()
     {
-        //TODO:查看是否当前有寻路的
-        PathMover.Tick();
-    }
-
-    private void EnterPos() {
 
     }
 
-    private void ExitPos() {
-
-    }
-
-    public Pawn() {
-
-    }
-
-    private void Awake()
+    public Pawn(GameObject gameObject, MapData mapData, IntVec2 position) : base(gameObject, mapData, position)
     {
-        Init(new IntVec2(0,0),false,ThingType.Unit);
-    }
 
-    private void Init(IntVec2 position, bool isDestoryed, ThingType thingType)
-    {
-        Position = position;
-        IsDestoryed = isDestoryed;
-        ThingType = thingType;
-        PathMover = new PathMover(this);
     }
-
-    public bool IsDestoryed { get; set; }
-    public ThingType ThingType { get; set; }
 }
 
 public class PathMover
 {
-    public Pawn RegisterPawn;
+    public Thing_Unit RegisterPawn;
 
     public Map AllMap => MapController.Instance.Map;
 
     public PawnPath CurrentMovingPath;
 
-    public PathMover(Pawn pawn)
+    private Action _onComplete;
+
+    public PathMover(Thing_Unit pawn)
     {
         RegisterPawn = pawn;
     }
 
-    public void SetPath(PawnPath path)
+    public void SetPath(PawnPath path,Action onComplete = null)
     {
         //TODO:如果当前有正在移动中的路径,需要先移动到当前路径的最新一格再接着移动
         //if (CurrentMovingPath is {Using:true} ) {
         //    path.FindingPath.Insert(0, CurrentMovingPath.GetCurrentPosition());
         //}
         CurrentMovingPath = path;
+        _onComplete = onComplete;
     }
 
     public void Tick() {
@@ -105,28 +56,38 @@ public class PathMover
 
         //TODO:根据当前的路径点移动物体
         if (CurrentMovingPath.GetCurrentPosition() is {} currentNode) {
-            if (currentNode.FastDistance(RegisterPawn.transform.position) > Mathf.Epsilon) {
+            if (currentNode.FastDistance(RegisterPawn.GameObject.transform.position) > Mathf.Epsilon) {
                 //TODO:还没有重合,将Pawn朝目标点移动
-                RegisterPawn.transform.position = Vector3.MoveTowards(RegisterPawn.transform.position,
+                RegisterPawn.GameObject.transform.position = Vector3.MoveTowards(RegisterPawn.GameObject.transform.position,
                     currentNode.Pos.ToVector3(), RegisterPawn.MoveSpeed * Time.deltaTime);
             }
             else {
-                //AllMap.GetMapDataByIndex(currentNode.MapDataIndex).GetSectionByPos(currentNode.Pos.X, currentNode.Pos.Y)
-                //    .RegisterThing(RegisterPawn);
-                RegisterPawn.Position = currentNode.Pos.Copy();
+                
                 //TODO:后面可能有上楼梯或者使用传送门等到达其他位置的功能，需要在PathNode中标记并且在这里操作
+                TryEnterTile(currentNode);
                 CurrentMovingPath.CurMovingIndex++;
                 if (CurrentMovingPath.End)
                 {
                     CurrentMovingPath.Complete();
+                    _onComplete?.Invoke();
                 }
             }
         }
     }
 
-    public void TryEnterTile()
+    public void TryEnterTile(PathNode node)
     {
         //TODO:每次进入一个新的格子，需要发出事件
+
+        //TODO:可能从其他地图进来的
+
+        var preSection = RegisterPawn.MapData.GetSectionByPosition(RegisterPawn.Position);
+        preSection.UnRegisterThing(RegisterPawn);
+
+        var mapData = AllMap.GetMapDataByIndex(node.MapDataIndex);
+        RegisterPawn.Position = node.Pos.Copy();
+        var currentSection = mapData.GetSectionByPosition(node.Pos);
+        currentSection.RegisterThing(RegisterPawn);
     }
 }
 
