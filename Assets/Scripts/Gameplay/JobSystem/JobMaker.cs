@@ -19,4 +19,10 @@ public static class JobMaker {
 
         return job;
     }
+
+    public static void ReturnJob(Job job)
+    {
+        job.Reset();
+        SimplePool<Job>.Return(job);
+    }
 }

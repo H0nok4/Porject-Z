@@ -16,9 +16,22 @@ public class Work
 
     public Action InitAction;
 
+    public Action FinishedAction;
+
+    public bool InPool;
+
     public Thing_Unit GetActor()
     {
         return Unit;
     }
 
+    public void Clean()
+    {
+        if (FinishedAction == null)
+        {
+            return;
+        }
+
+        FinishedAction.Invoke();
+    }
 }

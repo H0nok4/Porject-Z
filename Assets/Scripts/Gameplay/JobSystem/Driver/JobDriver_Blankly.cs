@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 class JobDriver_Blankly : JobDriver{
@@ -25,5 +26,11 @@ class JobDriver_Blankly : JobDriver{
         };
         yield return finishWork;
 
+    }
+
+    public override bool TryMakeWorkReservations(bool errorOnFailed)
+    {
+        //不用预定
+        return true;
     }
 }

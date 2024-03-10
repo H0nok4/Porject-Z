@@ -21,8 +21,8 @@ public abstract class JobDriver
 
     private bool _canStartNextWork;
 
+    public bool Ended;
     public PathMover PathMover => Unit.PathMover;
-
     public MapData MapData => Unit.MapData;
 
     public int DelayWaitingTickCount;
@@ -31,11 +31,18 @@ public abstract class JobDriver
     {
         get
         {
+            if (Works == null)
+            {
+                return null;
+            }
+
             if (CurrentWorkIndex < 0 || CurrentWorkIndex >= Works.Count)
                 return null;
+
             return Works[CurrentWorkIndex];
         }
     }
+
 
     public void Tick()
     {
@@ -49,18 +56,29 @@ public abstract class JobDriver
         {
             if (CurrentWork.CompleteMode == WorkCompleteMode.Delay)
             {
-
-
                 if (DelayWaitingTickCount <= 0)
                 {
                     //TODO:等待完毕，进入下一个工作
                     CanStartNextWork();
+                    return;
                 }
+            }
+
+            if (_canStartNextWork)
+            {
+                TryStartNextWork();
+                return;
+            }
+
+            if (CurrentWork.TickAction != null) {
+                CurrentWork.TickAction.Invoke();
             }
         }
     }
 
     public abstract IEnumerable<Work> MakeWorks();
+
+    public abstract bool TryMakeWorkReservations(bool errorOnFailed);
 
     public void SetNextWork(Work work)
     {
@@ -70,9 +88,22 @@ public abstract class JobDriver
         }
     }
 
+    public void Clean()
+    {
+        if (CurrentWork != null)
+        {
+            CurrentWork.Clean();
+        }
+    }
+
     public void SetupWork()
     {
         //TODO:如果当前的工作完成了，设置新的工作
+        if (Works == null)
+        {
+            Works = new List<Work>();
+        }
+
         Works.Clear();
         foreach (var work in MakeWorks())
         {
@@ -86,7 +117,7 @@ public abstract class JobDriver
             Works.Add(work);
         }
 
-        CurrentWorkIndex = 0;
+        CurrentWorkIndex = -1;
     }
 
     public void CanStartNextWork()
@@ -97,9 +128,15 @@ public abstract class JobDriver
 
     private void TryStartNextWork()
     {
+
+        if (CurrentWork != null)
+        {
+            CurrentWork.Clean();
+        }
         if (NextWorkIndex >= 0)
         {
             CurrentWorkIndex = NextWorkIndex;
+            NextWorkIndex = -1;
         }
         else
         {
@@ -107,16 +144,61 @@ public abstract class JobDriver
         }
 
         _canStartNextWork = false;
-
         if (CurrentWork == null)
         {
             //TODO:没有工作了，当前的任务完成了
-            EndJob();
+            EndJob(JobEndCondition.Successed);
+            return;
+        }
+
+        DelayWaitingTickCount = CurrentWork.NeedWaitingTick;
+        if (CheckCurrentToilEndOrFail())
+        {
+            return;
+        }
+
+        var curWork = CurrentWork;
+        if (CurrentWork.InitAction != null) {
+            CurrentWork.InitAction.Invoke();
+        }
+
+
+        if (!Ended && CurrentWork.CompleteMode == WorkCompleteMode.Instant && CurrentWork == curWork)
+        {
+            CanStartNextWork();
         }
     }
 
-    private void EndJob()
+    public bool CheckCurrentToilEndOrFail()
     {
-        
+        //TODO:有一些工作可能会失败
+        return false;
+    }
+
+    private void EndJob(JobEndCondition condition)
+    {
+        if (Unit.JobTracker.Job != Job)
+        {
+            return;
+        }
+
+        Unit.JobTracker.EndCurrentJob(condition);
+    }
+
+    public void ClearWorks()
+    {
+        if (Works == null)
+        {
+            return;
+        }
+
+        foreach (var work in Works)
+        {
+            //TODO:后面可以用对象池返回到池子里
+            work.InPool = true;
+            SimplePool<Work>.Return(work);
+        }
+
+        Works.Clear();
     }
 }

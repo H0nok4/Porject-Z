@@ -9,4 +9,5 @@ public abstract class JobDefine
 {
     public abstract Type DriverClass { get; }
 
+    public bool CanSuspend = true;
 }

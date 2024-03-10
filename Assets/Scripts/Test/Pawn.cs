@@ -2,19 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Pawn : Thing_Unit
 {
+    //TODO:小人应该有体型，特性等额外的东西
 
-    private void Update()
+
+    public override void Tick()
     {
-        Tick();
-    }
+        PathMover.Tick();
 
-    public void Tick()
-    {
-
+        if (JobTracker != null)
+        {
+            JobTracker.JobTrackTick();
+        }
     }
 
     public Pawn(GameObject gameObject, MapData mapData, IntVec2 position) : base(gameObject, mapData, position)
