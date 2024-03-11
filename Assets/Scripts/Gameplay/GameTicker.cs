@@ -59,6 +59,18 @@ public class GameTicker : Singleton<GameTicker>
         }
     }
 
+    public void SetTimeSpeed(TimeSpeed speed)
+    {
+        _curTimeSpeed = speed;
+    }
+
+    public void Pause()
+    {
+        _prePauseTimeSpeed = _curTimeSpeed;
+        _curTimeSpeed = TimeSpeed.Paused;
+    }
+
+
     public float TickRateMultiplier {
         get {
             if (ForcedNormalSpeed) {

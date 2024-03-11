@@ -26,7 +26,7 @@ public abstract class Thing : IThing {
     }
 
 
-    private float _moveSpeed = 5f;
+    private float _moveSpeed = 10f;
     public float MoveSpeed => _moveSpeed;
 
     public bool IsDestoryed { get; set; }

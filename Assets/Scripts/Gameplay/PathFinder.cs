@@ -148,6 +148,8 @@ public static class PathFinder {
         var startPos = unit.MapData.GetSectionByPos(unit.Position);
         var queue = new Queue<PathNode>();
         queue.Enqueue(startPos.CreatePathNode());
+        var closeList = new HashSet<PathNode>(new PathNodeComparer());
+        closeList.Clear();
         while (queue.Count > 0)
         {
             var curNode = queue.Dequeue();
@@ -160,9 +162,12 @@ public static class PathFinder {
                         //必须要可以走的
                         continue;
                     }
-
-
                     var newNode = section.CreatePathNode();
+                    if (closeList.Contains(newNode))
+                    {
+                        continue;
+                    }
+                    
                     newNode.Length = curNode.Length + 1;
                     if (newNode.Length > maxLength)
                     {
@@ -176,6 +181,7 @@ public static class PathFinder {
             }
 
             result.Add(curNode);
+            closeList.Add(curNode);
         }
 
         return result;

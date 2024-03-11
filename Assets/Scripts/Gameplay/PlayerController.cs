@@ -19,6 +19,32 @@ public class PlayerController : Singleton<PlayerController>
             //TODO:按下右键
             TryFindPath();
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SetGameTickSpeed(TimeSpeed.Normal);
+        }else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SetGameTickSpeed(TimeSpeed.Fast);
+        }else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SetGameTickSpeed(TimeSpeed.Superfast);
+        }else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (GameTicker.Instance.Paused)
+            {
+                GameTicker.Instance.SetTimeSpeed(GameTicker.Instance._prePauseTimeSpeed);
+            }
+            else
+            {
+                GameTicker.Instance.Pause();
+            }
+        }
+    }
+
+    public void SetGameTickSpeed(TimeSpeed speed)
+    {
+        GameTicker.Instance.SetTimeSpeed(speed);
     }
 
     //TODO:临时，开始寻路
