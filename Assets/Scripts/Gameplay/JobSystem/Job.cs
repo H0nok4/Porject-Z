@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using UnityEngine;
 
@@ -15,6 +15,10 @@ public class Job
     /// 强制进行的工作，会一直做到结束
     /// </summary>
     public bool IsForce;
+
+    public JobTargetInfo InfoA;
+
+    public JobTargetInfo InfoB;
 
     public JobDriver MakeDriver(Thing_Unit unit)
     {

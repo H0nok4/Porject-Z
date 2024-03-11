@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Map
 {
-    //TODO:µØÍ¼ÓĞ¶à²ã£¬0Î»ÖÃÎªµØÃæÒ»²ã£¬1Î»ÖÃÎªµØÃæ¶ş²ã£¬ÒÔ´ËÀàÍÆ£¬Ã¿²ãµØÍ¼µÄ´óĞ¡ÊÇÒ»ÑùµÄ£¬ÉÏÏÂ²ã¾ÍÊÇÔÚÍ¬Ò»¸öÎ»ÖÃ·Å³ö¿Ú
+    //TODO:åœ°å›¾æœ‰å¤šå±‚ï¼Œ0ä½ç½®ä¸ºåœ°é¢ä¸€å±‚ï¼Œ1ä½ç½®ä¸ºåœ°é¢äºŒå±‚ï¼Œä»¥æ­¤ç±»æ¨ï¼Œæ¯å±‚åœ°å›¾çš„å¤§å°æ˜¯ä¸€æ ·çš„ï¼Œä¸Šä¸‹å±‚å°±æ˜¯åœ¨åŒä¸€ä¸ªä½ç½®æ”¾å‡ºå£
     private List<MapData> _mapDatas = new List<MapData>();
 
     public IEnumerable<MapData> MapDatas()
@@ -36,13 +36,13 @@ public class Map
     {
         if (layer < 0)
         {
-            Debug.LogError($"ÏëÈ¡µÄµØÍ¼²ã¼¶Ë÷ÒıĞ¡ÓÚ0£¬LayerIndex = {layer}");
+            Debug.LogError($"æƒ³å–çš„åœ°å›¾å±‚çº§ç´¢å¼•å°äº0ï¼ŒLayerIndex = {layer}");
             return null;
         }
 
         if (layer >= _mapDatas.Count)
         {
-            Debug.LogError($"ÏëÈ¡µÄµØÍ¼²ã¼¶Ë÷Òı´óÓÚµ±Ç°µØÍ¼×î¸ß²ãÊı£¬LayerIndex = {layer}£¬µ±Ç°×î¸ßµØÍ¼²ãÊı = {_mapDatas.Count}");
+            Debug.LogError($"æƒ³å–çš„åœ°å›¾å±‚çº§ç´¢å¼•å¤§äºå½“å‰åœ°å›¾æœ€é«˜å±‚æ•°ï¼ŒLayerIndex = {layer}ï¼Œå½“å‰æœ€é«˜åœ°å›¾å±‚æ•° = {_mapDatas.Count}");
             return null;
         }
 
@@ -50,12 +50,12 @@ public class Map
     }
 
 
-    public PathNode GetPathNodeByPawn(Pawn pawn)
+    public PathNode GetPathNodeByUnit(Thing_Unit pawn)
     {
 
         for (int i = 0; i < _mapDatas.Count; i++)
         {
-            //TODO:ÕÒµ½PawnµÄÎ»ÖÃ£¬·µ»Ø
+            //TODO:æ‰¾åˆ°Pawnçš„ä½ç½®ï¼Œè¿”å›
             if (_mapDatas[i].HandleThings.Contains(pawn))
             {
                 return new PathNode() { MapDataIndex = i,Pos = pawn.Position.Copy()};

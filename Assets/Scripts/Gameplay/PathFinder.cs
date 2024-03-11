@@ -16,7 +16,18 @@ public static class PathFinder {
             map = useMap;
         }
 
-        return AStarFindPath(map.GetPathNodeByPawn(pawn), targetPosition, map);
+        return AStarFindPath(map.GetPathNodeByUnit(pawn), targetPosition, map);
+    }
+
+    public static List<PathNode> AStarFindPath(Thing_Unit pawn, PathNode targetPosition, Map useMap = null) {
+        //TODO:A*寻路
+
+        Map map = MapController.Instance.Map;
+        if (useMap != null) {
+            map = useMap;
+        }
+
+        return AStarFindPath(map.GetPathNodeByUnit(pawn), targetPosition, map);
     }
 
     public static readonly List<IntVec2> DirVecList = new List<IntVec2>()
