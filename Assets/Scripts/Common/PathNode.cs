@@ -14,6 +14,8 @@ public class PathNode : IComparable<PathNode> {
 
     public PathNode Parent;
 
+    public int Length;//到当前的步数
+
     public int curCost;//从起始点到这个点的消耗
 
     public int targetCost;//从这个点到终点的消耗
@@ -40,6 +42,11 @@ public class PathNode : IComparable<PathNode> {
 
     public float FastDistance(Vector3 vec3) {
         return Vector3.Distance(vec3, new Vector3() {x = Pos.X, y = Pos.Y});
+    }
+
+    public Section ToSection()
+    {
+        return MapController.Instance.Map.GetMapDataByIndex(MapDataIndex).GetSectionByPosition(Pos);
     }
 
 }

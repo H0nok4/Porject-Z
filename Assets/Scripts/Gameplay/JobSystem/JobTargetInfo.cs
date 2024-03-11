@@ -11,5 +11,22 @@ public struct JobTargetInfo {
 
     public Thing_Unit Unit => Thing as Thing_Unit;
 
+    public bool IsValid
+    {
+        get
+        {
+            if (Thing != null)
+            {
+                return true;
+            }
+
+            if (Section != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+    }
 
 }

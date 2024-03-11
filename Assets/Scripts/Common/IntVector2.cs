@@ -68,4 +68,9 @@ public struct IntVec2
     {
         return new Vector3(X, Y);
     }
+
+    public override string ToString()
+    {
+        return $"(X = {X},Y = {Y})";
+    }
 }

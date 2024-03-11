@@ -185,6 +185,7 @@ public abstract class JobDriver
         Unit.JobTracker.EndCurrentJob(condition);
     }
 
+
     public void ClearWorks()
     {
         if (Works == null)
@@ -200,5 +201,11 @@ public abstract class JobDriver
         }
 
         Works.Clear();
+    }
+
+    public virtual void Event_PathMoveEnd() {
+        if (CurrentWork.CompleteMode == WorkCompleteMode.PathMoveEnd) {
+            CanStartNextWork();
+        }
     }
 }

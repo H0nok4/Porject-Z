@@ -28,6 +28,11 @@ public class MapData
         return Sections[y * Width + x];
     }
 
+    public Section GetSectionByPos(IntVec2 pos)
+    {
+        return Sections[pos.Y * Width + pos.X];
+    }
+
     public Section GetSectionByIndex(int index) {
         return Sections[index];
     }

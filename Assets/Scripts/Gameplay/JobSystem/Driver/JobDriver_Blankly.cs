@@ -24,6 +24,7 @@ class JobDriver_Blankly : JobDriver{
         {
             Debug.Log("发呆结束了");
         };
+        finishWork.CompleteMode = WorkCompleteMode.Instant;
         yield return finishWork;
 
     }

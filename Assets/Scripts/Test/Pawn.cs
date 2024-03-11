@@ -71,6 +71,7 @@ public class PathMover
                 {
                     CurrentMovingPath.Complete();
                     _onComplete?.Invoke();
+                    RegisterPawn.JobTracker.OnPathMoveEnd();
                 }
             }
         }

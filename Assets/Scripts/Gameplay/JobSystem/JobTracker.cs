@@ -129,6 +129,7 @@ public class ThingUnit_JobTracker
 
     public void EndCurrentJob(JobEndCondition condition,bool startNewWork = true,bool returnPool = true)
     {
+        Debug.LogWarning("结束当前的工作");
         CleanCurrentJob(returnPool);
         if (!startNewWork)
         {
@@ -160,6 +161,7 @@ public class ThingUnit_JobTracker
 
     public void CleanCurrentJob(bool canReturnPool = false)
     {
+        Debug.LogWarning("清除当前的工作信息");
         if (Job == null)
         {
             return;
@@ -231,8 +233,11 @@ public class ThingUnit_JobTracker
         return result;
     }
 
-    public void StartJob(Job job)
+    public void OnPathMoveEnd()
     {
-        
+        if (Job != null)
+        {
+            JobDriver.Event_PathMoveEnd();
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Assets.Scripts.Gameplay;
 using JetBrains.Annotations;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public static class PathFinder {
@@ -139,5 +140,44 @@ public static class PathFinder {
             return distance + (Math.Abs(endNode.MapDataIndex - node.MapDataIndex) * 20);//TODO:后面需要改成如果不在同一个平面上，需要对当前层向下或者向上的楼梯类位置加权移动
         }
 
+    }
+
+    public static List<PathNode> GetMoveableSectionByBFS(Thing_Unit unit,int maxLength)
+    {
+        var result = new List<PathNode>();
+        var startPos = unit.MapData.GetSectionByPos(unit.Position);
+        var queue = new Queue<PathNode>();
+        queue.Enqueue(startPos.CreatePathNode());
+        while (queue.Count > 0)
+        {
+            var curNode = queue.Dequeue();
+
+            var mapData = MapController.Instance.Map.GetMapDataByIndex(curNode.MapDataIndex);
+            foreach (var dir in DirVecList)
+            {
+                if (mapData.GetSectionByPosition(curNode.Pos + dir) is { } section) {
+                    if (!section.Walkable) {
+                        //必须要可以走的
+                        continue;
+                    }
+
+
+                    var newNode = section.CreatePathNode();
+                    newNode.Length = curNode.Length + 1;
+                    if (newNode.Length > maxLength)
+                    {
+                        continue;
+                    }
+
+                    newNode.Parent = curNode;
+                    queue.Enqueue(newNode);
+                    DebugDrawer.DrawBox(newNode.Pos);
+                }
+            }
+
+            result.Add(curNode);
+        }
+
+        return result;
     }
 }

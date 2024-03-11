@@ -20,6 +20,19 @@ public class Job
 
     public JobTargetInfo InfoB;
 
+    public JobTargetInfo GetTarget(JobTargetIndex index)
+    {
+        switch (index)
+        {
+            case JobTargetIndex.A:
+                return InfoA;
+            case JobTargetIndex.B:
+                return InfoB;
+            default:
+                return InfoA;
+        }
+    }
+
     public JobDriver MakeDriver(Thing_Unit unit)
     {
         JobDriver driver = (JobDriver)Activator.CreateInstance(JobDefine.DriverClass);
