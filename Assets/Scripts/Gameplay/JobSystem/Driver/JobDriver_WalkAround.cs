@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +22,10 @@ public class JobDriver_WalkAround : JobDriver {
     public override bool TryMakeWorkReservations(bool errorOnFailed)
     {
         //TODO:后面需要将目标点加到预定中
+        if (ReservationManager.Instance.Reserve(Unit, Job, Job.InfoA)) {
+            Debug.Log("工作-成功加入目标点到预订列表中");
+            return true;
+        }
         return true;
     }
 

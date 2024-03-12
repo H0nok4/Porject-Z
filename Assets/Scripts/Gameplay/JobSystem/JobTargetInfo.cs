@@ -29,4 +29,20 @@ public struct JobTargetInfo {
         }
     }
 
+    public static bool operator ==(JobTargetInfo left, JobTargetInfo right) {
+        if (left.Thing != null || right.Thing != null) {
+            return left.Thing == right.Thing;
+        }
+
+        if (left.Section != null || right.Section != null) {
+            return left.Section == right.Section;
+        }
+
+        return true;
+    }
+
+    public static bool operator !=(JobTargetInfo left, JobTargetInfo right) {
+        return !(left == right);
+    }
+
 }

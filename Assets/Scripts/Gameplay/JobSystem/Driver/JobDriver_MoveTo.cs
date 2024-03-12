@@ -11,13 +11,13 @@ public class JobDriver_MoveTo : JobDriver  {
         moveWork.CompleteMode = WorkCompleteMode.PathMoveEnd;
         moveWork.InitAction = delegate
         {
-            Debug.Log($"��ʼ�ƶ�߷");
+            Debug.Log($"开始移动叻");
         };
         yield return moveWork;
         var endWork = WorkMaker.MakeWork();
         endWork.InitAction = delegate
         {
-            Debug.Log("�ƶ�����߷");
+            Debug.Log("移动结束叻");
         };
         endWork.CompleteMode = WorkCompleteMode.Instant;
         yield return endWork;
@@ -25,7 +25,12 @@ public class JobDriver_MoveTo : JobDriver  {
 
     public override bool TryMakeWorkReservations(bool errorOnFailed) {
 
+        //TODO:将目标点加入到预定中
+        if (ReservationManager.Instance.Reserve(Unit,Job,Job.InfoA)) {
+            Debug.Log("工作-成功加入目标点到预订列表中");
+            return true;
+        }
 
-        return true;
+        return false;
     }
 }

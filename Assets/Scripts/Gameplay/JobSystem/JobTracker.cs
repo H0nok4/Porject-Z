@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -194,6 +194,10 @@ public class ThingUnit_JobTracker
 
         JobDriver.ClearWorks();
         JobDriver = null;
+    }
+
+    private void ClearJobReservation() {
+        ReservationManager.Instance.ClearReservationByJob(Unit, Job);
     }
 
     public bool CanStartNewJob(ThinkResult result) {
