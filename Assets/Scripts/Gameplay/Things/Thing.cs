@@ -25,12 +25,26 @@ public abstract class Thing : IThing {
         }
     }
 
+    private int _hp;
+
+    public virtual int HP
+    {
+        get
+        {
+            return _hp;
+        }
+        set
+        {
+            _hp = value;
+        }
+    }
+
 
     private float _moveSpeed = 10f;
     public float MoveSpeed => _moveSpeed;
 
     public bool IsDestoryed { get; set; }
-    public ThingType ThingType { get; set; }
+    public ThingCategory ThingType { get; set; }
     public MapData MapData { get; set; }
 
     protected Thing(GameObject gameObject, MapData mapData, IntVec2 position)
@@ -39,7 +53,6 @@ public abstract class Thing : IThing {
         Position = position.Copy();
         MapData = mapData;
         IsDestoryed = false;
-        ThingType = ThingType.Unit;
     }
 
 
@@ -47,5 +60,14 @@ public abstract class Thing : IThing {
 
     }
 
+    public virtual void PostMapInit()
+    {
+
+    }
+
+    public virtual void TakeDamage()
+    {
+
+    }
 
 }

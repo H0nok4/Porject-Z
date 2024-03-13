@@ -8,7 +8,7 @@ public interface IThing
     public GameObject GameObject { get; set; }
     public IntVec2 Position { get; set; }
     public bool IsDestoryed { get; set; }
-    public ThingType ThingType { get; set; }
+    public ThingCategory ThingType { get; set; }
     public MapData MapData { get; set; }
 
     public void Tick();

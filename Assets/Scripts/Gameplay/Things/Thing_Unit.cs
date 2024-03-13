@@ -24,6 +24,7 @@ public abstract class Thing_Unit : Thing {
         PathMover = new PathMover(this);
         JobThinker = new ThingUnit_JobThinker();
         JobThinker.ThinkTreeDefine = PawnThinkTree.Instance;
+        ThingType = ThingCategory.Unit;
         Spawn();
     }
 
