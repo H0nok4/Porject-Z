@@ -15,10 +15,10 @@ public abstract class Thing_Building : ThingWithComponent
         }
     }
 
-    public Thing_Building(ThingObject gameObject, MapData mapData, IntVec2 position) : base(gameObject, mapData, position)
+    public Thing_Building(Define_Thing buildDef,ThingObject gameObject, MapData mapData, IntVec2 position) : base(gameObject, mapData, position)
     {
         ThingType = ThingCategory.Building;
-
+        Def = buildDef;
         //TODO:根据配置刷新Sprite
     }
 

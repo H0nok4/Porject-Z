@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 public class ThingMapManager {
     //如果每一种建筑层级都为独立的,会导致有大量的空间浪费,而且目标还是做多层地图,更是重量级
@@ -15,7 +16,7 @@ public class ThingMapManager {
         _map = map;
         _thingMap = new List<Thing>[map.Size];
         for (int i = 0; i < map.Size; i++) {
-            _thingMap = new List<Thing>[2];//注册一个较小的初始大小
+            _thingMap[i] = new List<Thing>(2);//注册一个较小的初始大小
         }
     }
 
@@ -24,6 +25,10 @@ public class ThingMapManager {
         if (thing.Size.X == 1 && thing.Size.Y == 1) {
             //TODO:注册到位置
             RegisterThingAtCell(thing, thing.Position);
+        }
+        else
+        {
+            Debug.LogError("未实现，多格建筑的注册");
         }
     }
 
@@ -58,5 +63,18 @@ public class ThingMapManager {
     }
 
 
+    public bool InBound(IntVec2 pos)
+    {
+        if (pos.X < 0 || pos.Y < 0 )
+        {
+            return false;
+        }
 
+        if (pos.X >= _map.Width || pos.Y >= _map.Height)
+        {
+            return false;
+        }
+
+        return true;
+    }
 }

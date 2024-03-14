@@ -14,10 +14,13 @@ public class PlayerController : Singleton<PlayerController>
     public Pawn pawn;
     public void HandleInput()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(0))
         {
-            //TODO:按下右键
-            TryFindPath();
+            OnPlayerMouseButton0Down();    
+        }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            OnPlayerMouseButton1Down();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -42,6 +45,32 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
+    public void OnPlayerMouseButton0Down()
+    {
+        if (DesignatorManager.Instance.IsBuildingState)
+        {
+            //TODO:放置一个蓝图
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3Int cellPosition = MapController.Instance.Map.GetMapDataByIndex(0).TileMapObject.WorldToCell(mousePosition);
+            var int2Pos = new IntVec2(cellPosition.x, cellPosition.y);
+            DesignatorManager.Instance.PlaceFrameAt(int2Pos,MapController.Instance.Map.GetMapDataByIndex(0));
+        }
+    }
+
+    public void OnPlayerMouseButton1Down()
+    {
+        //TODO:如果当前处于建筑模式，退出建筑模式
+        if (DesignatorManager.Instance.IsBuildingState)
+        {
+            DesignatorManager.Instance.DesignatorType = DesignatorType.None;
+        }
+        else
+        {
+            //按下右键测试寻路
+            TryFindPath();
+        }
+    }
+
     public void SetGameTickSpeed(TimeSpeed speed)
     {
         GameTicker.Instance.SetTimeSpeed(speed);
@@ -50,6 +79,7 @@ public class PlayerController : Singleton<PlayerController>
     //TODO:临时，开始寻路
     public void TryFindPath()
     {
+        //TODO:后面需要改成分配给单位一个强制移动的Job
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int cellPosition = MapController.Instance.Map.GetMapDataByIndex(0).TileMapObject.WorldToCell(mousePosition);
         Debug.Log($"当前右键的位置为:X:{cellPosition.x} Y:{cellPosition.y}");

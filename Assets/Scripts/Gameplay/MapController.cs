@@ -26,11 +26,9 @@ public class MapController :  Singleton<MapController>
 
             StringBuilder sb = new StringBuilder();
 
-            var mapData = Map.AddMapData(tilemap.gameObject);
+            var mapData = Map.AddMapData(tilemap.gameObject,size.x,size.y);
             mapData.TileMapObject = tilemap;
             mapData.Sections = new Section[size.x * size.y];
-            mapData.Width = size.x;
-            mapData.Height = size.y;
             BoundsInt bounds = tilemap.cellBounds; // 获取 Tilemap 的边界范围
             int mapX = 0;
             int mapY = 0;

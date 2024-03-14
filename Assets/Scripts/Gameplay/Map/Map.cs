@@ -14,18 +14,18 @@ public class Map
             yield return mapData;
         }
     }
-    public MapData AddMapData()
+    public MapData AddMapData(int sizeX, int sizeY)
     {
-        MapData data = new MapData(_mapDatas.Count,null);
+        MapData data = new MapData(_mapDatas.Count,null,sizeX,sizeY);
 
         _mapDatas.Add(data);
 
         return data;
     }
 
-    public MapData AddMapData(GameObject handlerObject)
+    public MapData AddMapData(GameObject handlerObject,int sizeX,int sizeY)
     {
-        MapData data = new MapData(_mapDatas.Count, handlerObject);
+        MapData data = new MapData(_mapDatas.Count, handlerObject, sizeX, sizeY);
 
         _mapDatas.Add(data);
 

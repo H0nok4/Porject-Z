@@ -22,7 +22,6 @@ public class MapData
 
     public int Height { get; set; }
 
-    //TODO:后面还需要分层管理建筑,因为像电线之类的建筑可以放在其他建筑下,应该有一个索引来代表是哪一层,相同索引的建筑才会冲突
     public ThingMapManager ThingMap;
 
     public HashSet<IThing> HandleThings = new HashSet<IThing>();
@@ -40,7 +39,7 @@ public class MapData
         return Sections[index];
     }
 
-    //TODO:Thing应该有一个自己的管理器，能够快速查到某样物品是否存在和所在位置
+
     public void RegisterThing(IThing thing) {
         if (HandleThings.Contains(thing))
         {
@@ -49,6 +48,12 @@ public class MapData
 
         HandleThings.Add(thing);
         ThingObjectManager.Register(thing.GameObject);
+    }
+
+    public void RegisterThingMapPos(Thing thing)
+    {
+        //Thing应该有一个自己的管理器，能够快速查到某样物品是否存在和所在位置
+        ThingMap.RegisterThing(thing);
     }
 
     public void SetSection(Section data,int x,int y) {
@@ -79,11 +84,19 @@ public class MapData
         HandleThings.Remove(thing);
     }
 
-    public MapData(int index,GameObject thingHandleGameObject)
+    public void UnRegisterThingMapPos(Thing thing)
+    {
+        ThingMap.UnRegisterThing(thing);
+    }
+
+    public MapData(int index,GameObject thingHandleGameObject,int width,int height)
     {
         Index = index;
+        Width = width;
+        Height = height;
         ThingObjectManager = new MapDataHandleThingGameObjectManager(thingHandleGameObject);
         ThingMap = new ThingMapManager(this);
+
     }
 
     public Section GetSectionByPosition(IntVec2 targetPos)
