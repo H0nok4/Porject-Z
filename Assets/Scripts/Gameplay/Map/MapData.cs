@@ -22,6 +22,9 @@ public class MapData
 
     public int Height { get; set; }
 
+    //TODO:后面还需要分层管理建筑,因为像电线之类的建筑可以放在其他建筑下,应该有一个索引来代表是哪一层,相同索引的建筑才会冲突
+    public ThingMapManager ThingMap;
+
     public HashSet<IThing> HandleThings = new HashSet<IThing>();
 
     public Section GetSectionByPos(int x, int y) {
@@ -80,6 +83,7 @@ public class MapData
     {
         Index = index;
         ThingObjectManager = new MapDataHandleThingGameObjectManager(thingHandleGameObject);
+        ThingMap = new ThingMapManager(this);
     }
 
     public Section GetSectionByPosition(IntVec2 targetPos)
@@ -98,6 +102,10 @@ public class MapData
             throw;
         }
 
+    }
+
+    public int PosToIndex(IntVec2 pos) {
+        return (Width * pos.Y) + pos.X;
     }
 }
 

@@ -7,9 +7,17 @@ using Assets.Scripts.Gameplay;
 using UnityEngine;
 
 public abstract class Thing : IThing {
+    public Define_Thing Def;
     public ThingObject GameObject { get; set; }
 
     public IntVec2 _position;
+
+    public IntVec2 Size {
+        get {
+            return Def.Size;
+        }
+    }
+
     public IntVec2 Position {
         get {
             return _position;
