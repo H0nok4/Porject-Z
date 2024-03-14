@@ -4,25 +4,25 @@ using UnityEngine;
 
 public abstract class Thing_Building : ThingWithComponent
 {
-    //TODO:½¨ÖþÒ²·ÖÀàÐÍ£¬±ÈÈçÆÕÍ¨µÄÇ½±Ú²»ÐèÒªÆµ·±¸üÐÂ£¬µ«ÊÇÏñÅÚÌ¨ÒòÎªÐèÒª×Ô¶¯Ñ°ÕÒµÐÈËËùÒÔÐèÒª¼Óµ½TickÁÐ±íÖÐ¸üÐÂ
+    //TODO:å»ºç­‘ä¹Ÿåˆ†ç±»åž‹ï¼Œæ¯”å¦‚æ™®é€šçš„å¢™å£ä¸éœ€è¦é¢‘ç¹æ›´æ–°ï¼Œä½†æ˜¯åƒç‚®å°å› ä¸ºéœ€è¦è‡ªåŠ¨å¯»æ‰¾æ•Œäººæ‰€ä»¥éœ€è¦åŠ åˆ°Tickåˆ—è¡¨ä¸­æ›´æ–°
     public override int HP
     {
         set
         {
             int currentHP = HP;
             base.HP = value;
-            //TODO:½¨ÖþÑªÁ¿¸Ä±äÊÂ¼þ
+            //TODO:å»ºç­‘è¡€é‡æ”¹å˜äº‹ä»¶
         }
     }
 
-    public Thing_Building(GameObject gameObject, MapData mapData, IntVec2 position) : base(gameObject, mapData, position)
+    public Thing_Building(ThingObject gameObject, MapData mapData, IntVec2 position) : base(gameObject, mapData, position)
     {
         ThingType = ThingCategory.Building;
 
-        //TODO:¸ù¾ÝÅäÖÃË¢ÐÂSprite
+        //TODO:æ ¹æ®é…ç½®åˆ·æ–°Sprite
     }
 
-    //TODO:½¨Öþ·Ö²»ÐèÒªµç£¬ÐèÒªµç£¬²úµçµÄ£¬Í¨¹ýÐ¯´øµÄ×é¼þÀ´·Ö
+    //TODO:å»ºç­‘åˆ†ä¸éœ€è¦ç”µï¼Œéœ€è¦ç”µï¼Œäº§ç”µçš„ï¼Œé€šè¿‡æºå¸¦çš„ç»„ä»¶æ¥åˆ†
     //public ThingComponent_Power PowerComponent => GetComponent<ThingComponent_Power>();
 
 

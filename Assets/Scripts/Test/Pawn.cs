@@ -18,7 +18,7 @@ public class Pawn : Thing_Unit
         }
     }
 
-    public Pawn(GameObject gameObject, MapData mapData, IntVec2 position) : base(gameObject, mapData, position)
+    public Pawn(ThingObject gameObject, MapData mapData, IntVec2 position) : base(gameObject, mapData, position)
     {
 
     }
@@ -57,9 +57,9 @@ public class PathMover
 
         //TODO:根据当前的路径点移动物体
         if (CurrentMovingPath.GetCurrentPosition() is {} currentNode) {
-            if (currentNode.FastDistance(RegisterPawn.GameObject.transform.position) > Mathf.Epsilon) {
+            if (currentNode.FastDistance(RegisterPawn.GameObject.GO.transform.position) > Mathf.Epsilon) {
                 //TODO:还没有重合,将Pawn朝目标点移动
-                RegisterPawn.GameObject.transform.position = Vector3.MoveTowards(RegisterPawn.GameObject.transform.position,
+                RegisterPawn.GameObject.GO.transform.position = Vector3.MoveTowards(RegisterPawn.GameObject.GO.transform.position,
                     currentNode.Pos.ToVector3(), RegisterPawn.MoveSpeed * Time.deltaTime);
             }
             else {

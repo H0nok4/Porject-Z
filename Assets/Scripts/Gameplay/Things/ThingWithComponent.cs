@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +18,7 @@ public abstract class ThingWithComponent : Thing {
         }
     }
 
-    protected ThingWithComponent(GameObject gameObject, MapData mapData, IntVec2 position) : base(gameObject, mapData, position)
+    protected ThingWithComponent(ThingObject gameObject, MapData mapData, IntVec2 position) : base(gameObject, mapData, position)
     {
 
     }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +19,7 @@ public abstract class Thing_Unit : Thing {
 
     }
 
-    public Thing_Unit(GameObject gameObject, MapData mapData, IntVec2 position) : base(gameObject,mapData,position) {
+    public Thing_Unit(ThingObject gameObject, MapData mapData, IntVec2 position) : base(gameObject,mapData,position) {
         JobTracker = new ThingUnit_JobTracker(this);
         PathMover = new PathMover(this);
         JobThinker = new ThingUnit_JobThinker();

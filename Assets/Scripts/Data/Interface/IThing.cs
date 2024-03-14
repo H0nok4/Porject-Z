@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface IThing
 {
-    //TODO:建筑 物体 单位全部都是Obj
-    public GameObject GameObject { get; set; }
+    //TODO:寤虹瓚 鐗╀綋 鍗曚綅鍏ㄩ儴閮芥槸Obj
+    public ThingObject GameObject { get; set; }
     public IntVec2 Position { get; set; }
     public bool IsDestoryed { get; set; }
     public ThingCategory ThingType { get; set; }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,9 +9,9 @@ public class MapDataHandleThingGameObjectManager
 {
     public GameObject HandleObject;
 
-    public void Register(GameObject obj)
+    public void Register(ThingObject obj)
     {
-        obj.transform.parent = HandleObject.transform;
+        obj.GO.transform.parent = HandleObject.transform;
     }
 
 
