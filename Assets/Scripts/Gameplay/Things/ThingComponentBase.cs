@@ -30,27 +30,4 @@ public abstract class ThingComponentBase {
 
     }
 
-    /// <summary>
-    /// 原本觉得只会有物品用到，但是考虑到有的建筑可以储存物品，所以放在基类
-    /// </summary>
-    /// <param name="thing"></param>
-    public virtual void AbsorbStack(Thing thing)
-    {
-
-    }
-    /// <summary>
-    /// 原本觉得只会有物品用到，但是考虑到有的建筑可以储存物品，所以放在基类
-    /// </summary>
-    /// <param name="thing"></param>
-    public virtual void SplitOff(Thing thing)
-    {
-
-    }
-
-    public virtual bool AllowAbsorbStack(Thing thing)
-    {
-        return false;
-    }
-
-
 }

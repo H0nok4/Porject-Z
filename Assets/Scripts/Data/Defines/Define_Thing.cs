@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class Define_Thing : Define_Buildable
 {
+    public Type ThingClass;
+
     public ThingCategory Category;
 
     public bool Destroyable = true;
@@ -21,5 +23,9 @@ public class Define_Thing : Define_Buildable
 
     public Sprite FrameSprite;
 
+    public ItemProperties ItemProp;
+
+    public bool IsItem => ItemProp != null;
+    public bool MadeFromItem => ItemProp != null;
 
 }
