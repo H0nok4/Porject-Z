@@ -5,10 +5,12 @@ using UnityEngine;
 public class JobDriver_BuildFrame : JobDriver
 {
     public override IEnumerable<Work> MakeWorks() {
-        //TODO:½¨ÔìÒ»¸öÎ´Íê³ÉµÄ½¨Öş,Ê×ÏÈµÃÏÈ×ßµ½Ä¿±êÎ»ÖÃ
-        var moveTo = Work_MoveTo.MoveToCell()
-        //TODO:È»ºó²»¶Ï¼õÉÙ½¨ÖşµÄÊ£Óà¹¤×÷Á¿
-        //TODO:ÔÚÍê³Éºó,½«FrameÌæ»»³ÉÊµ¼Ê½¨Öş
+        //TODO:å»ºé€ ä¸€ä¸ªæœªå®Œæˆçš„å»ºç­‘,é¦–å…ˆå¾—å…ˆèµ°åˆ°ç›®æ ‡ä½ç½®
+        var moveTo = Work_MoveTo.MoveToCell(JobTargetIndex.A, PathMoveEndType.Touch);
+        yield return moveTo;
+        //TODO:ç„¶åä¸æ–­å‡å°‘å»ºç­‘çš„å‰©ä½™å·¥ä½œé‡
+
+        //TODO:åœ¨å®Œæˆå,å°†Frameæ›¿æ¢æˆå®é™…å»ºç­‘
     }
 
     public override bool TryMakeWorkReservations(bool errorOnFailed) {
