@@ -5,8 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Assets.Scripts.Gameplay;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
-public abstract class Thing : IThing {
+public abstract class Thing : IThing
+{
+
+
     public Define_Thing Def;
 
     /// <summary>
@@ -35,26 +39,26 @@ public abstract class Thing : IThing {
         get {
             return _position;
         }
-        set {
-            if (value == _position) {
-                return;
-            }
+    }
 
-            if (_mapData != null) {
-                _mapData.UnRegisterThing(this);
-                _mapData.UnRegisterThingMapPos(this);
-            }
-
-            _position.X = value.X;
-            _position.Y = value.Y;
-
-            if (_mapData != null) {
-                _mapData.RegisterThing(this);
-                _mapData.RegisterThingMapPos(this);
-            }
-
-            GameObject.SetPosition(_position);
+    public void SetPosition(IntVec2 pos, int mapDataIndex = -1)
+    {
+        if (mapDataIndex != -1 && _mapData != null && mapDataIndex != MapData.Index)
+        {
+            _mapData.UnRegisterThing(this);
+            _mapData.UnRegisterThingMapPos(this);
+            _mapData = MapData;
         }
+
+        _position.X = pos.X;
+        _position.Y = pos.Y;
+
+        if (_mapData != null) {
+            _mapData.RegisterThing(this);
+            _mapData.RegisterThingMapPos(this);
+        }
+
+        GameObject.SetPosition(_position);
     }
 
     private int _hp;
@@ -71,10 +75,16 @@ public abstract class Thing : IThing {
         }
     }
 
+    /// <summary>
+    /// 移动速度等于每60Tick/1秒能移动多少格，比如5的话等于12Tick就能走一格
+    /// </summary>
 
-    private float _moveSpeed = 10f;
+    private float _moveSpeed = 5f;
 
     public ThingOwner HoldingOwner;
+    /// <summary>
+    /// TODO：后面需要改成读配置
+    /// </summary>
     public float MoveSpeed => _moveSpeed;
 
     public bool IsDestroyed { get; set; }
@@ -122,7 +132,7 @@ public abstract class Thing : IThing {
     protected Thing(ThingObject gameObject, MapData mapData, IntVec2 position)
     {
         GameObject = gameObject;
-        Position = position.Copy();
+        _position = position.Copy();
         MapData = mapData;
         IsDestroyed = false;
     }

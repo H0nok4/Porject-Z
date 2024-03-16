@@ -6,20 +6,16 @@ public class PawnPath {
     /// <summary>
     /// 当前前往的格子索引
     /// </summary>
-    public int CurMovingIndex = 0;
-
-    /// <summary>
-    /// 是否正在寻路
-    /// </summary>
-    public bool Using;
+    public int CurMovingIndex;
 
     public bool End => CurMovingIndex == FindingPath.Count;
 
     public PathNode StartNode => Length > 0 ? FindingPath[0] : null;
     public int Length => FindingPath.Count;
 
-    public void Complete() {
-        Using = false;
+    public PawnPath(List<PathNode> findingPath) {
+        FindingPath = findingPath;
+        CurMovingIndex = 0;
     }
 
     public PathNode GetCurrentPosition() {

@@ -32,6 +32,8 @@ public class TimeSlower {
 
 public class GameTicker : Singleton<GameTicker>
 {
+    public const float TicksPerSecond = 60f;
+
     public int CurrentTick;
 
     private int _ticksThisFrame;
@@ -100,7 +102,7 @@ public class GameTicker : Singleton<GameTicker>
             if (TickRateMultiplier == 0f) {
                 return 0f;
             }
-            return 1f / (60f * TickRateMultiplier);
+            return 1f / (TicksPerSecond * TickRateMultiplier);
         }
     }
 

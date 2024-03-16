@@ -16,4 +16,6 @@ public abstract class Define_Buildable : BaseDefine{
     public int Workload;
 
     public IntVec2 Size = IntVec2.One;
+
+    public int MoveCost;
 }

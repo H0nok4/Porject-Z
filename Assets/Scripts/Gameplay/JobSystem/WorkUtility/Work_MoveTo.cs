@@ -11,14 +11,22 @@ public static class Work_MoveTo {
         moveWork.InitAction = delegate {
             var pawn = moveWork.Unit;
             Debug.Log($"开始行走，目标点为:{pawn.JobTracker.Job.InfoA.Section.Position}");
-            pawn.PathMover.CurrentMovingPath = new PawnPath() { FindingPath = PathFinder.AStarFindPath(pawn, pawn.JobTracker.Job.InfoA.Section.CreatePathNode()), Using = true }; 
+            //pawn.PathMover.CurrentMovingPath = new PawnPath() { FindingPath = PathFinder.AStarFindPath(pawn, pawn.JobTracker.Job.InfoA.Section.CreatePathNode()), Using = true }; 
+            pawn.PathMover.SetMoveTarget(pawn.JobTracker.Job.GetTarget(targetIndex).Section.CreatePathNode(), endType);
         };
         moveWork.CompleteMode = WorkCompleteMode.PathMoveEnd;
         return moveWork;
     }
 
-    public static Work MoveToThing(JobTargetIndex tagetIndex, PathMoveEndType endType) {
-        
-
+    public static Work MoveToThing(JobTargetIndex targetIndex, PathMoveEndType endType)
+    {
+        Work moveWork = WorkMaker.MakeWork();
+        moveWork.InitAction = delegate
+        {
+            var pawn = moveWork.Unit;
+            pawn.PathMover.SetMoveTarget(pawn.JobTracker.Job.GetTarget(targetIndex).Thing, endType);
+        };
+        moveWork.CompleteMode = WorkCompleteMode.PathMoveEnd;
+        return moveWork;
     }
 }
