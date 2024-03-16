@@ -14,7 +14,7 @@ public class Map
             yield return mapData;
         }
     }
-    public MapData AddMapData(int sizeX, int sizeY)
+    public MapData AddMapData(int sizeX = 1000, int sizeY = 1000)
     {
         MapData data = new MapData(_mapDatas.Count,null,sizeX,sizeY);
 

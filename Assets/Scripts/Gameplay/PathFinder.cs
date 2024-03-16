@@ -17,7 +17,7 @@ public static class PathFinder {
             map = useMap;
         }
 
-        return AStarFindPath(map.GetPathNodeByUnit(pawn), targetPosition, map);
+        return AStarFindPath(map.GetPathNodeByUnit(pawn), targetPosition,PathMoveEndType.InCell, map);
     }
 
     public static List<PathNode> AStarFindPath(Thing_Unit pawn, PathNode targetPosition, Map useMap = null) {
@@ -28,13 +28,31 @@ public static class PathFinder {
             map = useMap;
         }
 
-        return AStarFindPath(map.GetPathNodeByUnit(pawn), targetPosition, map);
+        return AStarFindPath(map.GetPathNodeByUnit(pawn), targetPosition,PathMoveEndType.InCell, map);
+    }
+
+    public static List<PathNode> AStarFindPath(Thing_Unit pawn, PathNode targetPosition, PathMoveEndType endType,
+        Map useMap = null) {
+        Map map = MapController.Instance.Map;
+        if (useMap != null) {
+            map = useMap;
+        }
+
+        return AStarFindPath(map.GetPathNodeByUnit(pawn), targetPosition,endType, map);
     }
 
     public static readonly List<IntVec2> DirVecList = new List<IntVec2>()
         { IntVec2.North, IntVec2.East, IntVec2.South, IntVec2.West };
 
-    public static List<PathNode> AStarFindPath(PathNode startPos, PathNode endPos, Map useMap = null) {
+    /// <summary>
+    /// 真正的寻路方法
+    /// </summary>
+    /// <param name="startPos"></param>
+    /// <param name="endPos"></param>
+    /// <param name="endType"></param>
+    /// <param name="useMap"></param>
+    /// <returns></returns>
+    public static List<PathNode> AStarFindPath(PathNode startPos, PathNode endPos,PathMoveEndType endType, Map useMap = null) {
         //A*寻路
         List<PathNode> result = SimplePool<List<PathNode>>.Get();
         result.Clear();
@@ -75,8 +93,10 @@ public static class PathFinder {
                     newNode.targetCost = GetTargetCost(newNode, endPos);
                     openList.Enqueue(newNode);
                     DebugDrawer.DrawBox(newNode.Pos);
-                    if (newNode.IsSameNode(endPos)) {
-                        //TODO:从这个Node的Parent开始找到一条路径到起始点
+
+                    //TODO:根据寻路的终止条件,有不同的终点类型
+                    if (endType == PathMoveEndType.InCell && newNode.IsSameNode(endPos)) {
+                        //从这个Node的Parent开始找到一条路径到起始点
                         CreateResultPath(result, newNode);
                         return result;
                     }
