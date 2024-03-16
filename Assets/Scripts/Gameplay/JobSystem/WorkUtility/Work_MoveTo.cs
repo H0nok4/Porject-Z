@@ -16,4 +16,9 @@ public static class Work_MoveTo {
         moveWork.CompleteMode = WorkCompleteMode.PathMoveEnd;
         return moveWork;
     }
+
+    public static Work MoveToThing(JobTargetIndex tagetIndex, PathMoveEndType endType) {
+        
+
+    }
 }
