@@ -35,7 +35,7 @@ public class Job
 
     public JobDriver MakeDriver(Thing_Unit unit)
     {
-        JobDriver driver = (JobDriver)Activator.CreateInstance(JobDefine.DriverClass);
+        JobDriver driver = (JobDriver)Activator.CreateInstance(JobDefine.DriverClass.ToType());
         if (driver == null) 
         {
             Debug.LogError("Job没有配置对应的Driver");

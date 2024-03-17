@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mono.Cecil;
 using UnityEditor.Rendering;
 using UnityEngine;
 
-public partial class DataTableManager : Singleton<DataTableManager> {
+public partial class DataTableManager : Singleton<DataTableManager>
+{
+
+    public JobDefineHandler JobDefineHandler;
+
     private GameObject _thingObject;
 
     public GameObject ThingObject {
@@ -37,5 +42,10 @@ public partial class DataTableManager : Singleton<DataTableManager> {
 
             return _mainPanel;
         }
+    }
+
+    public void Init()
+    {
+        JobDefineHandler = Resources.Load<JobDefineHandler>("Defines/JobDefineOf");
     }
 }

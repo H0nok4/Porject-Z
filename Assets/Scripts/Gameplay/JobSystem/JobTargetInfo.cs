@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 public struct JobTargetInfo {
     public Thing Thing;
 
@@ -11,6 +5,7 @@ public struct JobTargetInfo {
 
     public Thing_Unit Unit => Thing as Thing_Unit;
 
+    public Thing_Building Building => Thing as Thing_Building;
     public bool IsValid
     {
         get
@@ -29,6 +24,18 @@ public struct JobTargetInfo {
         }
     }
 
+    public JobTargetInfo(Thing t)
+    {
+        Thing = t;
+        Section = null;
+    }
+
+    public JobTargetInfo(Section section)
+    {
+        Thing = null;
+        Section = section;
+    }
+
     public static bool operator ==(JobTargetInfo left, JobTargetInfo right) {
         if (left.Thing != null || right.Thing != null) {
             return left.Thing == right.Thing;
@@ -45,4 +52,11 @@ public struct JobTargetInfo {
         return !(left == right);
     }
 
+    public static implicit operator JobTargetInfo(Thing t) {
+        return new JobTargetInfo(t);
+    }
+
+    public static implicit operator JobTargetInfo(Section s) {
+        return new JobTargetInfo(s);
+    }
 }

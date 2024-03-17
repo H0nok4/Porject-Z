@@ -41,8 +41,8 @@ public class Section
 
     }
 
-    public PathNode CreatePathNode()
+    public PosNode CreatePathNode()
     {
-        return new PathNode() { Pos = Position.Copy(), MapDataIndex = MapIndex };
+        return new PosNode() { Pos = Position.Copy(), MapDataIndex = MapIndex };
     }
 }

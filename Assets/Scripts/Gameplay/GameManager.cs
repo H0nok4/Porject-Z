@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DataTableManager.Instance.Init();
         MapController.Instance.InitMap(GameObject.Find("Grid"));
         PlayerController.Instance.pawn = new Pawn(new ThingObject(TestPawnObject), MapController.Instance.Map.GetMapDataByIndex(0), new IntVec2(0, 0));
         MapController.Instance.Map.GetMapDataByIndex(0).RegisterThing(PlayerController.Instance.pawn);

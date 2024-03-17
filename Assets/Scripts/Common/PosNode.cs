@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
-public class PathNode : IComparable<PathNode> {
+public class PosNode : IComparable<PosNode> {
     public int MapDataIndex;
 
     public IntVec2 Pos;
@@ -12,7 +12,7 @@ public class PathNode : IComparable<PathNode> {
 
     public bool IsEndPoint;
 
-    public PathNode Parent;
+    public PosNode Parent;
 
     public int Length;//到当前的步数
 
@@ -29,12 +29,12 @@ public class PathNode : IComparable<PathNode> {
         }
     }
 
-    public bool IsSameNode(PathNode other)
+    public bool IsSameNode(PosNode other)
     {
         return other.Pos == this.Pos && MapDataIndex == other.MapDataIndex;
     }
 
-    public int CompareTo(PathNode other)
+    public int CompareTo(PosNode other)
     {
         //这个接口用于寻路，比较消耗就可以了
         return totalCost.CompareTo(other.totalCost);
@@ -51,15 +51,15 @@ public class PathNode : IComparable<PathNode> {
 
 }
 
-public class PathNodeComparer : IEqualityComparer<PathNode>
+public class PathNodeComparer : IEqualityComparer<PosNode>
 {
-    public bool Equals(PathNode x, PathNode y)
+    public bool Equals(PosNode x, PosNode y)
     {
         if (x.GetType() != y.GetType()) return false;
         return x.IsSameNode(y);
     }
 
-    public int GetHashCode(PathNode obj)
+    public int GetHashCode(PosNode obj)
     {
         return HashCode.Combine(obj.MapDataIndex, obj.Pos);
     }

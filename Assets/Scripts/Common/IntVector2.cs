@@ -19,11 +19,19 @@ public struct IntVec2
 
     public static readonly IntVec2 North = new IntVec2(0, 1);
 
+    public static readonly IntVec2 NorthEast = new IntVec2(1, 1);
+
     public static readonly IntVec2 East = new IntVec2(1, 0);
+
+    public static readonly IntVec2 EastSouth = new IntVec2(1, -1);
 
     public static readonly IntVec2 South = new IntVec2(0, -1);
 
+    public static readonly IntVec2 SouthWest = new IntVec2(-1, -1);
+
     public static readonly IntVec2 West = new IntVec2(-1, 0);
+
+    public static readonly IntVec2 WestNorth = new IntVec2(-1, 1);
 
     public static readonly IntVec2 Invalid = new IntVec2(int.MinValue, int.MinValue);
 

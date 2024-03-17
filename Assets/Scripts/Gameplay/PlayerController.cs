@@ -94,14 +94,14 @@ public class PlayerController : Singleton<PlayerController>
 
     //private float _speed = 5;
 
-    //public IEnumerator MovePawn(Pawn pawn,List<PathNode> nodes)
+    //public IEnumerator MovePawn(Pawn pawn,List<PosNode> nodes)
     //{
     //    Debug.Log("开始寻路");
     //    int index = 0;
     //    while (index < nodes.Count)
     //    {
     //        //TODO:
-    //        PathNode targetWaypoint = nodes[index];
+    //        PosNode targetWaypoint = nodes[index];
     //        pawn.SetPosition(targetWaypoint.Pos.Copy()); = ;
     //        //TODO:先直接瞬移过去然后等待一会
 

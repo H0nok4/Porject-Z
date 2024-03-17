@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveTargetInfo
 {
-    public PathNode CellTarget;
+    public PosNode CellTarget;
 
     public Thing ThingTarget;
 
@@ -26,7 +26,7 @@ public class MoveTargetInfo
         }
     }
 
-    public PathNode MapNode
+    public PosNode MapNode
     {
         get
         {
@@ -41,7 +41,7 @@ public class MoveTargetInfo
 
     public PathMoveEndType EndType;
 
-    public MoveTargetInfo(PathNode cellTarget, Thing thingTarget, PathMoveEndType endType) {
+    public MoveTargetInfo(PosNode cellTarget, Thing thingTarget, PathMoveEndType endType) {
         CellTarget = cellTarget;
         ThingTarget = thingTarget;
         EndType = endType;
@@ -99,13 +99,13 @@ public class PathMover {
         IsMoving = true;
     }
 
-    public void SetMoveTarget(PathNode pathNode,PathMoveEndType endType)
+    public void SetMoveTarget(PosNode posNode,PathMoveEndType endType)
     {
-        if (_targetInfo != null && pathNode.Pos == _targetInfo.Position) {
+        if (_targetInfo != null && posNode.Pos == _targetInfo.Position) {
             //设置成相同的位置，如果正在移动的话就不需要更新
             return;
         }
-        SetMoveTarget(new MoveTargetInfo(pathNode, null, endType));
+        SetMoveTarget(new MoveTargetInfo(posNode, null, endType));
     }
 
     public void SetMoveTarget(Thing thing,PathMoveEndType endType)
@@ -182,10 +182,27 @@ public class PathMover {
             }
 
         }
+        
+        TweenUnit();
+    }
+
+    public void TweenUnit()
+    {
+        //TODO:如果下一格的位置为门，需要等待门完全打开才能进入
+
+        
+        MoveToNextPosTickLeft--;
+
+        if (MoveToNextPosTickLeft <= 0)
+        {
+            //TODO:已经走到下一格格子了
+            TryEnterTile(CurrentMovingPath.GetCurrentPosition());
+        }
         else
         {
-
-
+            float movePercent = 1 - (MoveToNextPosTickLeft / (float)MoveToNextPosTickTotal);
+            RegisterPawn.GameObject.GO.transform.position = Vector3.Lerp(RegisterPawn.Position.ToVector3(),
+                 CurrentMovingPath.GetCurrentPosition().Pos.ToVector3(), movePercent);
         }
     }
 
@@ -195,14 +212,15 @@ public class PathMover {
         if (IsMoving) {
             //TODO:下个移动点还是保持不变,所以时间也不需要变
             path.FindingPath.Insert(0, CurrentMovingPath.GetCurrentPosition());
+            CurrentMovingPath = path;
         }
-        else
-        {
-            //TODO:更新下一个位置，到下一个位置的总时间
-            var nextPos = path.GetCurrentPosition();
-            MoveToNextPosTickTotal = CalculateCostToNextPosition(nextPos.Pos);
-            MoveToNextPosTickLeft = MoveToNextPosTickTotal;
-        }
+
+        CurrentMovingPath = path;
+        //TODO:更新下一个位置，到下一个位置的总时间
+        var nextPos = path.GetCurrentPosition();
+        MoveToNextPosTickTotal = CalculateCostToNextPosition(nextPos.Pos);
+        MoveToNextPosTickLeft = MoveToNextPosTickTotal;
+        Debug.Log($"当前MoveTick需要：{MoveToNextPosTickTotal}");
 
     }
 
@@ -252,12 +270,24 @@ public class PathMover {
         return 1;
     }
 
-    public void TryEnterTile(PathNode node) {
+    public void TryEnterTile(PosNode node) {
         //TODO:每次进入一个新的格子，需要发出事件
 
         //TODO:可能从其他地图进来的
         RegisterPawn.SetPosition(node.Pos.Copy(), node.MapDataIndex);
 
+        //TODO:更新下一格的位置，如果下一格是门之类的需要等待打开门
+        CurrentMovingPath.CurMovingIndex++;
+        if (CurrentMovingPath.End) {
+            IsMoving = false;
+            RegisterPawn.JobTracker.OnPathMoveEnd();
 
+        }
+        else
+        {
+            MoveToNextPosTickTotal = CalculateCostToNextPosition(CurrentMovingPath.GetCurrentPosition().Pos);
+            MoveToNextPosTickLeft = MoveToNextPosTickTotal;
+            Debug.Log($"当前MoveTick需要：{MoveToNextPosTickTotal}");
+        }
     }
 }

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-//TODO:测试，后面需要用配置表生成工具生成
-public abstract class JobDefine
+[Serializable]
+public class JobDefine : BaseDefine
 {
-    public abstract Type DriverClass { get; }
+    public EditableType DriverClass;
 
     public bool CanSuspend = true;
 }

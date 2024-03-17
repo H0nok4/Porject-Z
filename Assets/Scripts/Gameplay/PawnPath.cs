@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 public class PawnPath {
-    public List<PathNode> FindingPath;
+    public List<PosNode> FindingPath;
 
     /// <summary>
     /// 当前前往的格子索引
@@ -10,15 +10,15 @@ public class PawnPath {
 
     public bool End => CurMovingIndex == FindingPath.Count;
 
-    public PathNode StartNode => Length > 0 ? FindingPath[0] : null;
+    public PosNode StartNode => Length > 0 ? FindingPath[0] : null;
     public int Length => FindingPath.Count;
 
-    public PawnPath(List<PathNode> findingPath) {
+    public PawnPath(List<PosNode> findingPath) {
         FindingPath = findingPath;
         CurMovingIndex = 0;
     }
 
-    public PathNode GetCurrentPosition() {
+    public PosNode GetCurrentPosition() {
         if (End) {
             return null;
         }
@@ -26,11 +26,11 @@ public class PawnPath {
         return FindingPath[CurMovingIndex];
     }
 
-    public PathNode GetNextPosition() {
+    public PosNode GetNextPosition() {
         if (End) {
             return null;
         }
 
-        return FindingPath[++CurMovingIndex];
+        return FindingPath[CurMovingIndex + 1];
     }
 }

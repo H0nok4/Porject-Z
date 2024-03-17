@@ -43,11 +43,19 @@ public abstract class Thing : IThing
 
     public void SetPosition(IntVec2 pos, int mapDataIndex = -1)
     {
-        if (mapDataIndex != -1 && _mapData != null && mapDataIndex != MapData.Index)
+        if (mapDataIndex != -1 && _mapData != null)
         {
-            _mapData.UnRegisterThing(this);
-            _mapData.UnRegisterThingMapPos(this);
-            _mapData = MapData;
+            if (mapDataIndex != MapData.Index)
+            {
+                _mapData.UnRegisterThing(this);
+                _mapData.UnRegisterThingMapPos(this);
+                _mapData = MapData;
+            }
+            else
+            {
+                _mapData.UnRegisterThingMapPos(this);
+            }
+
         }
 
         _position.X = pos.X;
@@ -79,7 +87,7 @@ public abstract class Thing : IThing
     /// 移动速度等于每60Tick/1秒能移动多少格，比如5的话等于12Tick就能走一格
     /// </summary>
 
-    private float _moveSpeed = 5f;
+    private float _moveSpeed = 1f;
 
     public ThingOwner HoldingOwner;
     /// <summary>
