@@ -13,10 +13,11 @@ public abstract class Thing_Unit : Thing {
 
     public ThingUnit_JobThinker JobThinker;
 
+    public ThingUnit_WorkSetting WorkSetting;
+
     public PathMover PathMover;
     public int TickPerMoveDiagonal => TicksPerMove(true);
     public int TickPerMoveCardinal => TicksPerMove(false);
-
     /// <summary>
     /// 最基础的移动一格需要多少Tick
     /// </summary>

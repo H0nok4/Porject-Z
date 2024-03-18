@@ -9,7 +9,10 @@ namespace Assets.Scripts.Gameplay.ThinkSystem.JobGiver {
     {
         public override ThinkResult GetResult(Thing_Unit unit)
         {
-            var workGiverList = unit.WorkSettings
+            var workGiverList = unit.WorkSetting.UsedWorkGivers;
+
+
+            return ThinkResult.NoJob;
         }
     }
 }

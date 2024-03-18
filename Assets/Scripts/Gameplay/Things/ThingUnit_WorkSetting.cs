@@ -9,4 +9,5 @@ public class ThingUnit_WorkSetting
     public Thing_Unit Unit;
 
     public List<WorkGiver> UsedWorkGivers = new List<WorkGiver>();
+
 }
