@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 public class SelectThingManager : Singleton<SelectThingManager> {
     //TODO:管理玩家选中的物体，分单选和多选
-    public List<object> SelectedObject;
+    public List<object> SelectedObject = new List<object>();
 
     public bool IsSelected(object thing)
     {

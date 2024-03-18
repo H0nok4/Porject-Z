@@ -10,7 +10,7 @@ public class DesignatorManager : Singleton<DesignatorManager> {
 
     public DesignatorType DesignatorType;
 
-    public Define_Thing BuildingDef = DataTableManager.Instance.TempWallDefine;
+    public Define_Thing BuildingDef = DataTableManager.Instance.ThingDefineHandler.WallFrame;
 
     public bool IsBuildingState {
         get {
@@ -22,9 +22,11 @@ public class DesignatorManager : Singleton<DesignatorManager> {
         if (!CanPlace(pos, map)) {
             return;
         }
-        var thingObject = GameObject.Instantiate(DataTableManager.Instance.ThingObject);
-        var frame = new Frame(BuildingDef, new ThingObject(thingObject), map, pos);
-        frame.GameObject.GO.transform.position = pos.ToVector3();
+
+        SpawnHelper.Spawn(BuildingDef, pos, map.Index);
+        //var thingObject = GameObject.Instantiate(DataTableManager.Instance.ThingObject);
+        //var frame = new Frame(BuildingDef, new ThingObject(thingObject), map, pos);
+        //frame.GameObject.GO.transform.position = pos.ToVector3();
     }
 
     public bool CanPlace(IntVec2 pos, MapData map) {

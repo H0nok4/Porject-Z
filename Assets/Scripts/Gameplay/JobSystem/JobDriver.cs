@@ -196,6 +196,7 @@ public abstract class JobDriver
         foreach (var work in Works)
         {
             //TODO:后面可以用对象池返回到池子里
+            work.Clean();
             work.InPool = true;
             SimplePool<Work>.Return(work);
         }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Assets.Scripts.Gameplay;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static UnityEngine.Rendering.DebugUI;
 
 public abstract class Thing : IThing
@@ -43,30 +44,32 @@ public abstract class Thing : IThing
 
     public void SetPosition(IntVec2 pos, int mapDataIndex = -1)
     {
-        if (mapDataIndex != -1 && _mapData != null)
+        if (Spawned)
         {
-            if (mapDataIndex != MapData.Index)
-            {
-                _mapData.UnRegisterThing(this);
-                _mapData.UnRegisterThingMapPos(this);
-                _mapData = MapData;
-            }
-            else
-            {
-                _mapData.UnRegisterThingMapPos(this);
-            }
+            if (mapDataIndex != -1 && _mapData != null) {
+                if (mapDataIndex != MapData.Index) {
+                    _mapData.UnRegisterThing(this);
+                    _mapData.UnRegisterThingMapPos(this);
+                    _mapData = MapData;
+                }
+                else {
+                    _mapData.UnRegisterThingMapPos(this);
+                }
 
+            }
         }
-
         _position.X = pos.X;
         _position.Y = pos.Y;
+        if (Spawned)
+        {
+            if (_mapData != null) {
+                _mapData.RegisterThing(this);
+                _mapData.RegisterThingMapPos(this);
+            }
 
-        if (_mapData != null) {
-            _mapData.RegisterThing(this);
-            _mapData.RegisterThingMapPos(this);
+            GameObject.SetPosition(_position);
         }
 
-        GameObject.SetPosition(_position);
     }
 
     private int _hp;
@@ -137,12 +140,57 @@ public abstract class Thing : IThing
         }
     }
 
-    protected Thing(ThingObject gameObject, MapData mapData, IntVec2 position)
+    /// <summary>
+    /// 生成物品到地图上的时候调用
+    /// </summary>
+    /// <param name="mapData"></param>
+    public virtual void SpawnSetup(MapData mapData)
     {
-        GameObject = gameObject;
-        _position = position.Copy();
-        MapData = mapData;
+        if (IsDestroyed)
+        {
+            if (HP <= 0 && Def.UseHitPoint)
+            {
+                HP = 1;
+            }
+        }
+
+        if (Spawned)
+        {
+            Debug.LogError("想要生成一个使用中的物体");
+            return;
+        }
+
+        if (!Def.IsFrame)
+        {
+            GameObject.SetSprite(Def.ThingSprite);
+        }
+
         IsDestroyed = false;
+        MapData = mapData;
+        SetPosition(_position);
+        MapController.Instance.Map.ListThings.Add(this);
+
+    }
+
+    /// <summary>
+    /// 摧毁物体的时候调用
+    /// </summary>
+    public virtual void DeSpawn()
+    {
+        if (IsDestroyed)
+        {
+            Debug.LogError("想要摧毁一个已经摧毁了的物体");
+            return;
+        }
+
+        if (!Spawned)
+        {
+            Debug.LogError("想要摧毁一个未生成的物体");
+            return;
+        }
+
+        MapController.Instance.Map.ListThings.Remvoe(this);
+        Destroy();
     }
 
 
@@ -179,6 +227,14 @@ public abstract class Thing : IThing
         if (spawned)
         {
             //TODO:摧毁物体，移除父物体等
+            if (HoldingOwner != null)
+            {
+                this.HoldingOwner.Remove(this);
+            }
+            _mapData.UnRegisterThing(this);
+            _mapData.UnRegisterThingMapPos(this);
+            UnityEngine.GameObject.Destroy(GameObject.GO);
+            GameObject = null;
         }
 
         //TODO:如果当前选中了该物体

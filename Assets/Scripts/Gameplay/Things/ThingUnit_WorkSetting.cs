@@ -10,4 +10,9 @@ public class ThingUnit_WorkSetting
 
     public List<WorkGiver> UsedWorkGivers = new List<WorkGiver>();
 
+    public ThingUnit_WorkSetting(Thing_Unit unit) {
+        Unit = unit;
+        UsedWorkGivers.Add(DataTableManager.Instance.WorkGiverDefineHandler.WorkGiverDefine_BuildFrame.WorkGiver);
+        //TODO:后面需要用配置初始化这个
+    }
 }

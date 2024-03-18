@@ -11,7 +11,7 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerController : Singleton<PlayerController>
 {
-    public Pawn pawn;
+    public Pawn PawnUnit;
     public void HandleInput()
     {
         if (Input.GetMouseButtonDown(0))

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 
 public class Work
 {
@@ -27,6 +28,13 @@ public class Work
 
     public void Clean()
     {
+        Unit = null;
+        CompleteMode = WorkCompleteMode.Instant;
+        NeedWaitingTick = 0;
+        TickAction = null;
+        InitAction = null;
+        FinishedAction = null;
+
         if (FinishedAction == null)
         {
             return;

@@ -7,6 +7,13 @@ public class Map
     //TODO:地图有多层，0位置为地面一层，1位置为地面二层，以此类推，每层地图的大小是一样的，上下层就是在同一个位置放出口
     private List<MapData> _mapDatas = new List<MapData>();
 
+    public ListThings ListThings;
+
+    public Map()
+    {
+        ListThings = new ListThings();
+    }
+
     public IEnumerable<MapData> MapDatas()
     {
         foreach (var mapData in _mapDatas)

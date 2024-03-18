@@ -13,4 +13,8 @@ public interface IThing
 
     public void Tick();
 
+    public void SpawnSetup(MapData mapData);
+
+    public void DeSpawn();
+
 }

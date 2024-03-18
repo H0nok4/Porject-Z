@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: WorkGiverDefineHandler
   m_EditorClassIdentifier: 
   WorkGiverDefine_BuildFrame:
-    Name: 
+    Name: BuildFrame
+    UniqueID: 7
     WorkGiverType:
-      TypeName: 
+      TypeName: WorkGiver_BuildFrame
     ScanThings: 1
     ScanSections: 0

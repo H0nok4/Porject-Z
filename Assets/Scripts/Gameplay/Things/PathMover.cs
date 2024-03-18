@@ -96,13 +96,15 @@ public class PathMover {
         var path = PathFinder.AStarFindPath(RegisterPawn, node, MoveTarget.EndType);
         StartPath(new PawnPath(path));
         //TODO:设置的时候更新一下路径
-        IsMoving = true;
+
     }
 
     public void SetMoveTarget(PosNode posNode,PathMoveEndType endType)
     {
         if (_targetInfo != null && posNode.Pos == _targetInfo.Position) {
             //设置成相同的位置，如果正在移动的话就不需要更新
+            //TODO:设置成相同的目标，如果正在移动的话就不需要更新
+            Debug.LogError("设置成了相同的目标");
             return;
         }
         SetMoveTarget(new MoveTargetInfo(posNode, null, endType));
@@ -113,6 +115,7 @@ public class PathMover {
         if (_targetInfo != null && thing == _targetInfo.ThingTarget && IsMoving)
         {
             //TODO:设置成相同的目标，如果正在移动的话就不需要更新
+            Debug.LogError("设置成了相同的目标");
             return;
         }
 
@@ -208,6 +211,8 @@ public class PathMover {
 
     public void StartPath(PawnPath path)
     {
+
+
         //TODO:
         if (IsMoving) {
             //TODO:下个移动点还是保持不变,所以时间也不需要变
@@ -216,12 +221,20 @@ public class PathMover {
         }
 
         CurrentMovingPath = path;
+
+        if (CurrentMovingPath.Length == 0) {
+            IsMoving = false;
+            RegisterPawn.JobTracker.OnPathMoveEnd();
+            return;
+        }
+
         //TODO:更新下一个位置，到下一个位置的总时间
         var nextPos = path.GetCurrentPosition();
         MoveToNextPosTickTotal = CalculateCostToNextPosition(nextPos.Pos);
         MoveToNextPosTickLeft = MoveToNextPosTickTotal;
         Debug.Log($"当前MoveTick需要：{MoveToNextPosTickTotal}");
 
+        IsMoving = true;
     }
 
     public int CalculateCostToNextPosition(IntVec2 position)

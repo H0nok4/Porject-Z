@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
+[Serializable]
 public class Define_Thing : Define_Buildable
 {
-    public Type ThingClass;
+    public EditableType ThingClass;
 
     public ThingCategory Category;
 
@@ -27,5 +28,11 @@ public class Define_Thing : Define_Buildable
 
     public bool IsItem => ItemProp != null;
     public bool MadeFromItem => ItemProp != null;
+
+    //TODO:临时，后面需要根据可以胜任的工作类型获得各个WorkGiver
+    [NonSerialized]
+    public List<WorkGiverDefine> WorkGiverDefineType;
+
+    public bool IsFrame;
 
 }

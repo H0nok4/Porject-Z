@@ -76,13 +76,16 @@ public static class PathFinder {
 
             foreach (var dir in DirVecList) {
                 //需要实现一个类似象棋中会被绊马脚的机制，防止直接田字格在右边或者上边有建筑走斜边看着像是穿过建筑物
-
-
                 if (mapData.GetSectionByPosition(node.Pos + dir) is { } section) {
 
                     if (!section.Walkable)
                     {
                         //必须要可以走的
+                        continue;
+                    }
+
+                    if (mapData.ThingMap.ThingsAt(section.Position).Any((thing)=>thing.Def.Passability == Traversability.Impassable))
+                    {
                         continue;
                     }
 

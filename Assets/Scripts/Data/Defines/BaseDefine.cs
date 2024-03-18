@@ -8,5 +8,5 @@ public class BaseDefine
 {
     public string Name;
 
-
+    public int UniqueID;
 }

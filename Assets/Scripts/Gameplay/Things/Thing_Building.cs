@@ -15,13 +15,6 @@ public abstract class Thing_Building : ThingWithComponent
         }
     }
 
-    public Thing_Building(Define_Thing buildDef,ThingObject gameObject, MapData mapData, IntVec2 position) : base(gameObject, mapData, position)
-    {
-        ThingType = ThingCategory.Building;
-        Def = buildDef;
-        //TODO:根据配置刷新Sprite
-    }
-
     //TODO:建筑分不需要电，需要电，产电的，通过携带的组件来分
     //public ThingComponent_Power PowerComponent => GetComponent<ThingComponent_Power>();
 

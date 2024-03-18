@@ -47,25 +47,30 @@ public abstract class Thing_Unit : Thing {
 
     public override void Tick()
     {
+        PathMover.Tick();
 
+        if (JobTracker != null) {
+            JobTracker.JobTrackTick();
+        }
     }
 
-    public Thing_Unit(ThingObject gameObject, MapData mapData, IntVec2 position) : base(gameObject,mapData,position) {
+    public override void SpawnSetup(MapData mapData)
+    {
+        base.SpawnSetup(mapData);
         JobTracker = new ThingUnit_JobTracker(this);
         PathMover = new PathMover(this);
         JobThinker = new ThingUnit_JobThinker();
         JobThinker.ThinkTreeDefine = PawnThinkTree.Instance;
         ThingType = ThingCategory.Unit;
-        Spawn();
-    }
+        WorkSetting = new ThingUnit_WorkSetting(this);
 
-    public void Spawn()
-    {
         GameTicker.Instance.RegisterThing(this);
     }
 
-    public void DeSpawn()
+
+    public override void DeSpawn()
     {
+        base.DeSpawn();
         GameTicker.Instance.UnRegisterThing(this);
     }
 }

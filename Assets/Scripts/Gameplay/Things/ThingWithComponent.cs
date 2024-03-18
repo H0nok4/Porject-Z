@@ -18,10 +18,4 @@ public abstract class ThingWithComponent : Thing {
         }
     }
 
-    protected ThingWithComponent(ThingObject gameObject, MapData mapData, IntVec2 position) : base(gameObject, mapData, position)
-    {
-
-    }
-
-
 }

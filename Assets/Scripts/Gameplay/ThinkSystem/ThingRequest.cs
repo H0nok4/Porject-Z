@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 public struct ThingRequest {
     //TODO:后期会将Things分类，加快查询的速度，比如建造工作只需要扫描需要被建造的Things就可以了
     public Define_Thing ThingDefine;
@@ -33,10 +35,47 @@ public struct ThingRequest {
         result.Group = group;
         return result;
     }
+
+    public override string ToString()
+    {
+        return $"Define = {ThingDefine},RequestGroup = {Group}";
+    }
+}
+
+public static class ThingRequestGroupHelper
+{
+    public static readonly ThingRequestGroup[] AllGroups;
+
+    static ThingRequestGroupHelper()
+    {
+        var values = Enum.GetValues(typeof(ThingRequestGroup));
+        AllGroups = new ThingRequestGroup[values.Length];
+        int index = 0;
+        foreach (object value in values) {
+            AllGroups[index] = (ThingRequestGroup)value;
+            index++;
+        }
+    }
+
+    public static bool Contains(this ThingRequestGroup group, Define_Thing define)
+    {
+        switch (group)
+        {
+            case ThingRequestGroup.Undefined:
+                return false;
+            case ThingRequestGroup.All:
+                return true;
+            case ThingRequestGroup.BuildingFrame:
+                return define.IsFrame;
+            default:
+                return false;
+        }
+    } 
 }
 
 public enum ThingRequestGroup
 {
-    Undefined,
+    Undefined = 0,
+    All = 1,
     BuildingFrame
 }
