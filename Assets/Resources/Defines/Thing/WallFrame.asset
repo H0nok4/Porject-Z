@@ -12,19 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a577fada13c4845b60aa6ed9fdb2f5, type: 3}
   m_Name: WallFrame
   m_EditorClassIdentifier: 
-  Name: 
-  UniqueID: 0
+  Name: WallFrame
   Passability: 0
-  MaxHitPoint: 0
-  Workload: 0
+  MaxHitPoint: 100
+  Workload: 60
   MoveCost: 0
   ThingClass:
-    TypeName: 
+    TypeName: Thing_Building_WallFrame
   Category: 0
   Destroyable: 1
   Rotatable: 1
   UseHitPoint: 0
   StackLimit: 1
   ThingSprite: {fileID: 0}
-  FrameSprite: {fileID: 0}
-  IsFrame: 0
+  FrameSprite: {fileID: 21300000, guid: fe7a2f7d3740a574ea78e2f799e172cc, type: 3}
+  IsFrame: 1

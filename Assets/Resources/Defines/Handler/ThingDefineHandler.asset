@@ -12,58 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31fbc491bb84444c837498827bc2dcc, type: 3}
   m_Name: ThingDefineHandler
   m_EditorClassIdentifier: 
-  WallFrame:
-    Name: WallFrame
-    UniqueID: 4
-    Passability: 0
-    MaxHitPoint: 100
-    Workload: 10
-    MoveCost: 0
-    ThingClass:
-      TypeName: Frame
-    Category: 3
-    Destroyable: 1
-    Rotatable: 1
-    UseHitPoint: 0
-    StackLimit: 1
-    ThingSprite: {fileID: 21300000, guid: 86b88799f599abe41ac0e0973ac1cc44, type: 3}
-    FrameSprite: {fileID: 21300000, guid: fe7a2f7d3740a574ea78e2f799e172cc, type: 3}
-    WorkGiverType: []
-    IsFrame: 1
-  Pawn:
-    Name: TestPawn
-    UniqueID: 5
-    Passability: 1
-    MaxHitPoint: 0
-    Workload: 0
-    MoveCost: 0
-    ThingClass:
-      TypeName: Pawn
-    Category: 0
-    Destroyable: 1
-    Rotatable: 1
-    UseHitPoint: 0
-    StackLimit: 1
-    ThingSprite: {fileID: 21300000, guid: 72466835e93e5634893007cf406950c7, type: 3}
-    FrameSprite: {fileID: 0}
-    WorkGiverType:
-    - TypeName: WorkGiver_BuildFrame
-    IsFrame: 0
-  WallInstance:
-    Name: Wall
-    UniqueID: 6
-    Passability: 2
-    MaxHitPoint: 100
-    Workload: 10
-    MoveCost: 0
-    ThingClass:
-      TypeName: Wall
-    Category: 3
-    Destroyable: 1
-    Rotatable: 1
-    UseHitPoint: 0
-    StackLimit: 1
-    ThingSprite: {fileID: 21300000, guid: 86b88799f599abe41ac0e0973ac1cc44, type: 3}
-    FrameSprite: {fileID: 0}
-    WorkGiverType: []
-    IsFrame: 0
+  WallFrame: {fileID: 11400000, guid: 91d0accde54e0d44e84d0cfbf4b50ea9, type: 2}
+  Pawn: {fileID: 11400000, guid: ceb69716e9ba21343b409aff0a126452, type: 2}
+  WallInstance: {fileID: 11400000, guid: b717c0c7eb9b212498538f6a516852db, type: 2}

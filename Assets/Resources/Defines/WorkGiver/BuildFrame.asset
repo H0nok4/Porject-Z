@@ -9,7 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8a33ca12b5179344990e1af82ba93c8, type: 3}
-  m_Name: WorkGiverDefineHandler
+  m_Script: {fileID: 11500000, guid: c05d79b7403d45741ad1f0a1653af328, type: 3}
+  m_Name: BuildFrame
   m_EditorClassIdentifier: 
-  WorkGiverDefine_BuildFrame: {fileID: 11400000, guid: 7c3c24fba627e70409cbac7aeee10da0, type: 2}
+  Name: BuildFrame
+  WorkGiverType:
+    TypeName: WorkGiver_BuildFrame
+  WorkTypeDefine: {fileID: 0}
+  ScanThings: 1
+  ScanSections: 0
