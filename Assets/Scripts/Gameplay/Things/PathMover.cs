@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -123,42 +123,7 @@ public class PathMover {
         SetMoveTarget(new MoveTargetInfo(null,thing, endType));
     }
 
-    //public void SetPath(PawnPath path, Action onComplete = null) {
-    //    //TODO:如果当前有正在移动中的路径,需要先移动到当前路径的最新一格再接着移动
-    //    //if (CurrentMovingPath is {Using:true} ) {
-    //    //    path.FindingPath.Insert(0, CurrentMovingPath.GetCurrentPosition());
-    //    //}
-    //    CurrentMovingPath = path;
-    //    _onComplete = onComplete;
-    //}
-
     public void Tick() {
-        //if (CurrentMovingPath is not { Using: true }) {
-        //    //没有正在移动的路径,返回
-        //    return;
-        //}
-
-        ////TODO:根据当前的路径点移动物体
-        //if (CurrentMovingPath.GetCurrentPosition() is { } currentNode) {
-        //    if (currentNode.FastDistance(RegisterPawn.GameObject.GO.transform.position) > Mathf.Epsilon) {
-        //        //TODO:还没有重合,将Pawn朝目标点移动
-        //        //TODO:需要换成Tick驱动
-        //        RegisterPawn.GameObject.GO.transform.position = Vector3.MoveTowards(RegisterPawn.GameObject.GO.transform.position,
-        //            currentNode.Pos.ToVector3(), RegisterPawn.MoveSpeed * Time.deltaTime);
-        //    }
-        //    else {
-
-        //        //TODO:后面可能有上楼梯或者使用传送门等到达其他位置的功能，需要在PathNode中标记并且在这里操作
-        //        TryEnterTile(currentNode);
-        //        CurrentMovingPath.CurMovingIndex++;
-        //        if (CurrentMovingPath.End) {
-        //            CurrentMovingPath.Complete();
-        //            _onComplete?.Invoke();
-        //            RegisterPawn.JobTracker.OnPathMoveEnd();
-        //        }
-        //    }
-        //}
-
         //移动已经结束勒
         if (!IsMoving)
         {

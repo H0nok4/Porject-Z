@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public enum DesignatorType {
     //TODO:测试用
@@ -24,9 +24,6 @@ public class DesignatorManager : Singleton<DesignatorManager> {
         }
 
         SpawnHelper.Spawn(BuildingDef, pos, map.Index);
-        //var thingObject = GameObject.Instantiate(DataTableManager.Instance.ThingObject);
-        //var frame = new Frame(BuildingDef, new ThingObject(thingObject), map, pos);
-        //frame.GameObject.GO.transform.position = pos.ToVector3();
     }
 
     public bool CanPlace(IntVec2 pos, MapData map) {
