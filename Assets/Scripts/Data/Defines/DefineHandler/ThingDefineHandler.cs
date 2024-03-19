@@ -1,8 +1,8 @@
-﻿
+
 
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ThingDefineHandler", menuName = "Define/Create ThingDefineHandler")]
+[CreateAssetMenu(fileName = "ThingDefineHandler", menuName = "Define Handler/Create ThingDefineHandler")]
 public class ThingDefineHandler : ScriptableObject
 {
     public Define_Thing WallFrame;

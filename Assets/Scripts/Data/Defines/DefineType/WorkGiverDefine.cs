@@ -1,6 +1,8 @@
-﻿using System;
+using System;
+using UnityEngine;
 
 [Serializable]
+[CreateAssetMenu(fileName = "New WorkGiverDefine", menuName = "Define/Create WorkGiverDefine")]
 public class WorkGiverDefine : BaseDefine
 {
     public EditableType WorkGiverType;

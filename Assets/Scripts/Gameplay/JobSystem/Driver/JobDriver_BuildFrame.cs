@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class JobDriver_BuildFrame : JobDriver {
-    private Frame frameBuilding => (Frame)Unit.JobTracker.Job.GetTarget(JobTargetIndex.A).Thing;
+    private Thing_Building_WallFrame ThingBuildingWallFrameBuilding => (Thing_Building_WallFrame)Unit.JobTracker.Job.GetTarget(JobTargetIndex.A).Thing;
     public override IEnumerable<Work> MakeWorks() {
         //TODO:建造一个未完成的建筑,首先得先走到目标位置
         var moveTo = Work_MoveTo.MoveToThing(JobTargetIndex.A, PathMoveEndType.Touch);
@@ -18,7 +18,7 @@ public class JobDriver_BuildFrame : JobDriver {
         work.TickAction = delegate
         {
             var unit = work.Unit;
-            var frame = frameBuilding;
+            var frame = ThingBuildingWallFrameBuilding;
             float buildWorkCount = 1;//TODO:后面跟单位的建造速度有关
             //TODO:建造建筑涨技能经验
 

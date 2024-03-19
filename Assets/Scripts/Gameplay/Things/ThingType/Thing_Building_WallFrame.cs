@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Frame : Thing_Building
+public class Thing_Building_WallFrame : Thing_Building
 {
     public int WorkToBuild = 10;
 
@@ -11,7 +11,7 @@ public class Frame : Thing_Building
     public override void SpawnSetup(MapData mapData)
     {
         base.SpawnSetup(mapData);
-        //TODO:将当前的贴图设置为def配置的Frame贴图
+        //TODO:灏嗗綋鍓嶇殑璐村浘璁剧疆涓篸ef閰嶇疆鐨凢rame璐村浘
         WorkToBuild = Def.Workload;
         GameObject.SetSprite(Def.FrameSprite);
     }

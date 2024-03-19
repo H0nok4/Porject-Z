@@ -9,7 +9,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public static class PathFinder {
-    public static List<PosNode> AStarFindPath(Pawn pawn, PosNode targetPos, Map useMap = null) {
+    public static List<PosNode> AStarFindPath(Thing_Unit_Pawn thingUnitPawn, PosNode targetPos, Map useMap = null) {
         //TODO:A*寻路
 
         Map map = MapController.Instance.Map;
@@ -17,7 +17,7 @@ public static class PathFinder {
             map = useMap;
         }
 
-        return AStarFindPath(map.GetPathNodeByUnit(pawn), targetPos,PathMoveEndType.InCell, map);
+        return AStarFindPath(map.GetPathNodeByUnit(thingUnitPawn), targetPos,PathMoveEndType.InCell, map);
     }
 
     public static List<PosNode> AStarFindPath(Thing_Unit pawn, PosNode targetPos, Map useMap = null) {
