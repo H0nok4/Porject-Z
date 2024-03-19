@@ -18,6 +18,7 @@ public class Thing_Building_WallFrame : Thing_Building
 
     public void CompleteBuild(Thing_Unit unit)
     {
+
         SpawnHelper.Spawn(DataTableManager.Instance.ThingDefineHandler.WallInstance, this.Position, this.MapData.Index);
         DeSpawn();
     }

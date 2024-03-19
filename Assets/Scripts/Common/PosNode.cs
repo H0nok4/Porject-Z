@@ -29,6 +29,8 @@ public class PosNode : IComparable<PosNode> {
         }
     }
 
+    public MapData MapData => MapController.Instance.Map.GetMapDataByIndex(MapDataIndex);
+
     public bool IsSameNode(PosNode other)
     {
         return other.Pos == this.Pos && MapDataIndex == other.MapDataIndex;

@@ -77,6 +77,7 @@ public class ThingUnit_JobTracker
                 //TODO:直接结束当前的工作,当前工作会保留的一些目标也需要清除，例如工作的时候会提示以预留给XX的那种
                 CleanCurrentJob();
             }
+
             return;
         }
         if (newJob == null)
@@ -149,7 +150,7 @@ public class ThingUnit_JobTracker
 
         if (Job != null)
         {
-            Debug.LogWarning("单位在有工作的情况下尝试开始新的工作");
+            Debug.LogWarning("单位在有工作的情况下尝试开始新的工作,需要打断");
         }
 
         var result = ThinkNextStep(out ThinkTreeDefine define);
