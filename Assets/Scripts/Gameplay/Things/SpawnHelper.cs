@@ -20,9 +20,11 @@ public static class SpawnHelper {
         {
             case WipeMode.Vanish:
                 //TODO:直接摧毁这个格子上的物体
+                WipeExistingThings(mapData.GetSectionByPosition(position).CreatePathNode(false),newThing.Rotation,newThing.Def,DestroyType.Vanish);
                 break;
             case WipeMode.Removal:
                 //TODO:尝试将这个格子上的物体移动到其他地方
+                TryRemovalThings();
                 break;
             case WipeMode.VanishOrRemoval:
 
@@ -40,7 +42,11 @@ public static class SpawnHelper {
         return newThing;
     }
 
-    public static void WipeExistingThings(PosNode node, Rotator rot, Define_Buildable thingDef, DestroyType destroyType)
+    private static void TryRemovalThings() {
+        
+    }
+
+    public static void WipeExistingThings(PosNode node, Rotation rot, Define_Buildable thingDef, DestroyType destroyType)
     {
         //TODO:后面物体可能会站多个格子，需要每个格子都判断
         foreach (var thing in node.MapData.ThingMap.ThingsAt(node.Pos))
@@ -52,7 +58,7 @@ public static class SpawnHelper {
         }
     }
 
-    private static bool SpawningWipes(Define_Buildable thingDef, Define_Thing def)
+    private static bool SpawningWipes(Define_Buildable thingDef, Define_Buildable def)
     {
         //TODO:根据配置类型来决定是否删除该位置的建筑，像是电线，壁灯之类的都可以跟其他建筑共存，
 

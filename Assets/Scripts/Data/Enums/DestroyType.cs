@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 public enum DestroyType
 {
     None,
+    Vanish,//抹除
     KillFinalize,//击杀
     Deconstruct,//取消建筑
     FailConstruction,//建筑失败

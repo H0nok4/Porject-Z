@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 public class Section
 {
@@ -41,8 +41,18 @@ public class Section
 
     }
 
-    public PosNode CreatePathNode()
+    private PosNode PosNodeInstance;
+
+    public PosNode CreatePathNode(bool findPath = true)
     {
-        return new PosNode() { Pos = Position.Copy(), MapDataIndex = MapIndex };
+        if (findPath) {
+            return new PosNode() { Pos = Position.Copy(), MapDataIndex = MapIndex };
+        }
+
+        if (PosNodeInstance == null) {
+            PosNodeInstance = new PosNode() {Pos = Position.Copy(), MapDataIndex = MapIndex};
+        }
+
+        return PosNodeInstance;
     }
 }

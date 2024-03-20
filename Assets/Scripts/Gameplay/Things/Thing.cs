@@ -15,16 +15,18 @@ public abstract class Thing : IThing
     public Define_Thing Def;
 
     /// <summary>
-    /// ÎïÆ·ÓµÓĞ¶îÍâµÄÅäÖÃ
+    /// ç‰©å“æ‹¥æœ‰é¢å¤–çš„é…ç½®
     /// </summary>
     public Define_Thing ItemDef;
     public ThingObject GameObject { get; set; }
 
     private IntVec2 _position;
 
+    private Rotation _rotation;
+
     private MapData _mapData;
 
-    public int Count = 1;//´ó²¿·ÖµÄÊıÁ¿¶¼Ä¬ÈÏÎª1£¬Ö»ÓĞÎïÆ·¿ÉÄÜ»á³¬¹ı1
+    public int Count = 1;//å¤§éƒ¨åˆ†çš„æ•°é‡éƒ½é»˜è®¤ä¸º1ï¼Œåªæœ‰ç‰©å“å¯èƒ½ä¼šè¶…è¿‡1
 
     public IntVec2 Size {
         get {
@@ -39,6 +41,15 @@ public abstract class Thing : IThing
     public IntVec2 Position {
         get {
             return _position;
+        }
+    }
+
+    public Rotation Rotation {
+        get {
+            return _rotation;
+        }
+        set {
+            _rotation = value;
         }
     }
 
@@ -87,14 +98,14 @@ public abstract class Thing : IThing
     }
 
     /// <summary>
-    /// ÒÆ¶¯ËÙ¶ÈµÈÓÚÃ¿60Tick/1ÃëÄÜÒÆ¶¯¶àÉÙ¸ñ£¬±ÈÈç5µÄ»°µÈÓÚ12Tick¾ÍÄÜ×ßÒ»¸ñ
+    /// ç§»åŠ¨é€Ÿåº¦ç­‰äºæ¯60Tick/1ç§’èƒ½ç§»åŠ¨å¤šå°‘æ ¼ï¼Œæ¯”å¦‚5çš„è¯ç­‰äº12Tickå°±èƒ½èµ°ä¸€æ ¼
     /// </summary>
 
     private float _moveSpeed = 1f;
 
     public ThingOwner HoldingOwner;
     /// <summary>
-    /// TODO£ººóÃæĞèÒª¸Ä³É¶ÁÅäÖÃ
+    /// TODOï¼šåé¢éœ€è¦æ”¹æˆè¯»é…ç½®
     /// </summary>
     public float MoveSpeed => _moveSpeed;
 
@@ -110,7 +121,7 @@ public abstract class Thing : IThing
 
         set
         {
-            //TODO:½øÈëÒ»¸öĞÂµØÍ¼²ã£¬ĞèÒª·´×¢²áÖ®Ç°µÄµØÍ¼£¬È»ºó×¢²áÏÖÔÚµÄµØÍ¼
+            //TODO:è¿›å…¥ä¸€ä¸ªæ–°åœ°å›¾å±‚ï¼Œéœ€è¦åæ³¨å†Œä¹‹å‰çš„åœ°å›¾ï¼Œç„¶åæ³¨å†Œç°åœ¨çš„åœ°å›¾
             if (_mapData != null)
             {
                 _mapData.UnRegisterThing(this);
@@ -134,14 +145,14 @@ public abstract class Thing : IThing
                 return false;
             }
 
-            //TODO:²é¿´Î»ÖÃÊÇ·ñÔÚµØÍ¼µÄºÏ·¨Î»ÖÃÉÏ
+            //TODO:æŸ¥çœ‹ä½ç½®æ˜¯å¦åœ¨åœ°å›¾çš„åˆæ³•ä½ç½®ä¸Š
 
             return true;
         }
     }
 
     /// <summary>
-    /// Éú³ÉÎïÆ·µ½µØÍ¼ÉÏµÄÊ±ºòµ÷ÓÃ
+    /// ç”Ÿæˆç‰©å“åˆ°åœ°å›¾ä¸Šçš„æ—¶å€™è°ƒç”¨
     /// </summary>
     /// <param name="mapData"></param>
     public virtual void SpawnSetup(MapData mapData)
@@ -156,7 +167,7 @@ public abstract class Thing : IThing
 
         if (Spawned)
         {
-            Debug.LogError("ÏëÒªÉú³ÉÒ»¸öÊ¹ÓÃÖĞµÄÎïÌå");
+            Debug.LogError("æƒ³è¦ç”Ÿæˆä¸€ä¸ªä½¿ç”¨ä¸­çš„ç‰©ä½“");
             return;
         }
 
@@ -168,24 +179,25 @@ public abstract class Thing : IThing
         IsDestroyed = false;
         MapData = mapData;
         SetPosition(_position);
+        Rotation = Rotation.Random;
         MapController.Instance.Map.ListThings.Add(this);
 
     }
 
     /// <summary>
-    /// ´İ»ÙÎïÌåµÄÊ±ºòµ÷ÓÃ
+    /// æ‘§æ¯ç‰©ä½“çš„æ—¶å€™è°ƒç”¨
     /// </summary>
     public virtual void DeSpawn()
     {
         if (IsDestroyed)
         {
-            Debug.LogError("ÏëÒª´İ»ÙÒ»¸öÒÑ¾­´İ»ÙÁËµÄÎïÌå");
+            Debug.LogError("æƒ³è¦æ‘§æ¯ä¸€ä¸ªå·²ç»æ‘§æ¯äº†çš„ç‰©ä½“");
             return;
         }
 
         if (!Spawned)
         {
-            Debug.LogError("ÏëÒª´İ»ÙÒ»¸öÎ´Éú³ÉµÄÎïÌå");
+            Debug.LogError("æƒ³è¦æ‘§æ¯ä¸€ä¸ªæœªç”Ÿæˆçš„ç‰©ä½“");
             return;
         }
 
@@ -212,21 +224,21 @@ public abstract class Thing : IThing
     {
         if (!Def.Destroyable)
         {
-            Debug.LogError("³¢ÊÔ´İ»ÙÒ»¸öÅäÖÃÎªÎŞ·¨´İ»ÙµÄÎïÌå");
+            Debug.LogError("å°è¯•æ‘§æ¯ä¸€ä¸ªé…ç½®ä¸ºæ— æ³•æ‘§æ¯çš„ç‰©ä½“");
             return;
         }
 
         if (IsDestroyed)
         {
-            Debug.LogError("³¢ÊÔ´İ»ÙÒ»¸öÒÑ¾­±»´İ»ÙµÄÎïÌå");
+            Debug.LogError("å°è¯•æ‘§æ¯ä¸€ä¸ªå·²ç»è¢«æ‘§æ¯çš„ç‰©ä½“");
             return;
         }
 
         bool spawned = Spawned;
-        //TODO:×÷ÎªÒÑ¾­Éú³ÉÔÚµØÍ¼ÉÏµÄÎïÌå£¬ĞèÒª¶îÍâ´¦ÀíÒ»ÏÂ´İ»ÙµÄÁ÷³Ì
+        //TODO:ä½œä¸ºå·²ç»ç”Ÿæˆåœ¨åœ°å›¾ä¸Šçš„ç‰©ä½“ï¼Œéœ€è¦é¢å¤–å¤„ç†ä¸€ä¸‹æ‘§æ¯çš„æµç¨‹
         if (spawned)
         {
-            //TODO:´İ»ÙÎïÌå£¬ÒÆ³ı¸¸ÎïÌåµÈ
+            //TODO:æ‘§æ¯ç‰©ä½“ï¼Œç§»é™¤çˆ¶ç‰©ä½“ç­‰
             if (HoldingOwner != null)
             {
                 this.HoldingOwner.Remove(this);
@@ -237,10 +249,10 @@ public abstract class Thing : IThing
             GameObject = null;
         }
 
-        //TODO:Èç¹ûµ±Ç°Ñ¡ÖĞÁË¸ÃÎïÌå
+        //TODO:å¦‚æœå½“å‰é€‰ä¸­äº†è¯¥ç‰©ä½“
         if (SelectThingManager.Instance.IsSelected(this))
         {
-            //TODO:È¡ÏûÑ¡ÖĞ
+            //TODO:å–æ¶ˆé€‰ä¸­
             SelectThingManager.Instance.DeSelecte(this);
         }
 
@@ -248,31 +260,31 @@ public abstract class Thing : IThing
 
 
     /// <summary>
-    /// Ô­±¾¾õµÃÖ»»áÓĞÎïÆ·ÓÃµ½£¬µ«ÊÇ¿¼ÂÇµ½ÓĞµÄ½¨Öş¿ÉÒÔ´¢´æÎïÆ·£¬ËùÒÔ·ÅÔÚ»ùÀà
+    /// åŸæœ¬è§‰å¾—åªä¼šæœ‰ç‰©å“ç”¨åˆ°ï¼Œä½†æ˜¯è€ƒè™‘åˆ°æœ‰çš„å»ºç­‘å¯ä»¥å‚¨å­˜ç‰©å“ï¼Œæ‰€ä»¥æ”¾åœ¨åŸºç±»
     /// </summary>
     /// <param name="thing"></param>
     public virtual void AbsorbStack(Thing thing) {
 
     }
     /// <summary>
-    /// Ô­±¾¾õµÃÖ»»áÓĞÎïÆ·ÓÃµ½£¬µ«ÊÇ¿¼ÂÇµ½ÓĞµÄ½¨Öş¿ÉÒÔ´¢´æÎïÆ·£¬ËùÒÔ·ÅÔÚ»ùÀà
+    /// åŸæœ¬è§‰å¾—åªä¼šæœ‰ç‰©å“ç”¨åˆ°ï¼Œä½†æ˜¯è€ƒè™‘åˆ°æœ‰çš„å»ºç­‘å¯ä»¥å‚¨å­˜ç‰©å“ï¼Œæ‰€ä»¥æ”¾åœ¨åŸºç±»
     /// </summary>
     /// <param name="thing"></param>
     public virtual Thing SplitOff(int count) {
         if (count <= 0)
         {
-            throw new ArgumentException($"²»ÔÊĞí·Ö¸î{count}¸öÊıÁ¿µÄÎïÆ·");
+            throw new ArgumentException($"ä¸å…è®¸åˆ†å‰²{count}ä¸ªæ•°é‡çš„ç‰©å“");
         }
 
         if (count >= Count)
         {
             if (count > Count)
             {
-                Debug.LogError($"ÏëÒª·ÖÀëÊıÁ¿Îª{count}¸öµÄÎïÆ·£¬µ«ÊÇÖ»ÓĞ{Count}¸ö");
+                Debug.LogError($"æƒ³è¦åˆ†ç¦»æ•°é‡ä¸º{count}ä¸ªçš„ç‰©å“ï¼Œä½†æ˜¯åªæœ‰{Count}ä¸ª");
                 //count = Count;
             }
 
-            //TODO:·Ö¸î³öËùÓĞµÄÎïÆ·£¬ÄÇ¸É´àÖ±½Ó°ÑÕâ¸ö¶ÔÏóÕû¸ö¸øÄãËãÁË
+            //TODO:åˆ†å‰²å‡ºæ‰€æœ‰çš„ç‰©å“ï¼Œé‚£å¹²è„†ç›´æ¥æŠŠè¿™ä¸ªå¯¹è±¡æ•´ä¸ªç»™ä½ ç®—äº†
             DespawnAndDeselect();
             //TODO:
             if (HoldingOwner.Contains(this))
@@ -283,19 +295,19 @@ public abstract class Thing : IThing
             return this;
         }
 
-        //TODO:ÊıÁ¿Ğ¡ÓÚµ±Ç°µÄÊıÁ¿£¬ĞèÒª´´½¨Ò»¸öĞÂµÄÎïÌå
+        //TODO:æ•°é‡å°äºå½“å‰çš„æ•°é‡ï¼Œéœ€è¦åˆ›å»ºä¸€ä¸ªæ–°çš„ç‰©ä½“
         var newThing = ThingMaker.MakeNewThing(Def, ItemDef);
         newThing.Count = count;
         Count -= count;
 
         if (Spawned)
         {
-            //TODO:ÔÚµØÍ¼ÉÏµÄÎïÆ·ĞèÒª¸üĞÂÊıÁ¿Ö®ÀàµÄ,ĞèÒª¸øµØÍ¼·¢³öÒ»¸öÊ±¼ä
-            Debug.LogError("Î´ÊµÏÖ-Ò»¸öÎïÆ··ÖÀë³öÒ»¸öĞÂµÄÎïÆ·£¬ĞèÒªË¢ĞÂµØÍ¼Êı¾İ");
+            //TODO:åœ¨åœ°å›¾ä¸Šçš„ç‰©å“éœ€è¦æ›´æ–°æ•°é‡ä¹‹ç±»çš„,éœ€è¦ç»™åœ°å›¾å‘å‡ºä¸€ä¸ªæ—¶é—´
+            Debug.LogError("æœªå®ç°-ä¸€ä¸ªç‰©å“åˆ†ç¦»å‡ºä¸€ä¸ªæ–°çš„ç‰©å“ï¼Œéœ€è¦åˆ·æ–°åœ°å›¾æ•°æ®");
         }
         if (Def.UseHitPoint)
         {
-            //TODO:·ÖÀë³öÀ´µÄÎïÆ·£¬ĞèÒª¼Ì³ĞÔ­ÎïÆ·µÄÑªÁ¿
+            //TODO:åˆ†ç¦»å‡ºæ¥çš„ç‰©å“ï¼Œéœ€è¦ç»§æ‰¿åŸç‰©å“çš„è¡€é‡
             newThing.HP = HP;
         }
         return newThing;
@@ -304,7 +316,7 @@ public abstract class Thing : IThing
 
     private void DespawnAndDeselect()
     {
-        //TODO:Èç¹ûµ±Ç°ÎïÆ·
+        //TODO:å¦‚æœå½“å‰ç‰©å“
     }
 
     public virtual bool AllowAbsorbStack(Thing thing) {
@@ -314,7 +326,7 @@ public abstract class Thing : IThing
 
     public void PostMake()
     {
-        //TODO:ºóĞø¿ÉÄÜĞèÒªÎªThingÌí¼ÓÒ»¸öUID
+        //TODO:åç»­å¯èƒ½éœ€è¦ä¸ºThingæ·»åŠ ä¸€ä¸ªUID
         if (Def.UseHitPoint)
         {
             HP = Def.MaxHitPoint;

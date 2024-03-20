@@ -5,9 +5,9 @@ using UnityEngine;
 
 
 /// <summary>
-/// »·ÊÀ½çÀïÃæÓĞ4ÖÖ³¯Ïò£¬°«ÈËÒªÈûÖ±½ÓÃ»ÓĞ³¯Ïò£¬²»¹ıÒòÎªĞèÒªÉä»÷£¬ËùÒÔ×îºÃ»¹ÊÇÓÃ4ÖÖ³¯ÏòµÄÉè¶¨£¨»òÕß8ÖÖ£¬µ«ÊÇÏà¶ÔÓ¦¾ÍĞèÒª¼ÓºÜ¶àÌùÍ¼£¬Ã»±ØÒª£¬×óÓÒ¿ÉÒÔ¾µÏñ¸´ÓÃ£¬¼ÓÉÏÏÂ¿ÉÒÔÈı¸öÌùÍ¼¶ÔÓ¦Ò»¸öµ¥Î»£¬
+/// ç¯ä¸–ç•Œé‡Œé¢æœ‰4ç§æœå‘ï¼ŒçŸ®äººè¦å¡ç›´æ¥æ²¡æœ‰æœå‘ï¼Œä¸è¿‡å› ä¸ºéœ€è¦å°„å‡»ï¼Œæ‰€ä»¥æœ€å¥½è¿˜æ˜¯ç”¨4ç§æœå‘çš„è®¾å®šï¼ˆæˆ–è€…8ç§ï¼Œä½†æ˜¯ç›¸å¯¹åº”å°±éœ€è¦åŠ å¾ˆå¤šè´´å›¾ï¼Œæ²¡å¿…è¦ï¼Œå·¦å³å¯ä»¥é•œåƒå¤ç”¨ï¼ŒåŠ ä¸Šä¸‹å¯ä»¥ä¸‰ä¸ªè´´å›¾å¯¹åº”ä¸€ä¸ªå•ä½ï¼Œ
 /// </summary>
-public struct Rotator : IEquatable<Rotator>
+public struct Rotation : IEquatable<Rotation>
 {
     private byte _rotatorValue;
 
@@ -67,17 +67,17 @@ public struct Rotator : IEquatable<Rotator>
         }
     }
 
-    public Rotator(int value)
+    public Rotation(int value)
     {
         _rotatorValue = (byte)MathUtility.PositiveMod(value, 4);
     }
 
-    public Rotator(byte value)
+    public Rotation(byte value)
     {
         _rotatorValue = (byte)MathUtility.PositiveMod(value, 4);
     }
 
-    public static Rotator Random => new Rotator(UnityEngine.Random.Range(0, 3));
+    public static Rotation Random => new Rotation(UnityEngine.Random.Range(0, 3));
 
     public void Rotate(RotationDirection dir)
     {
@@ -90,9 +90,9 @@ public struct Rotator : IEquatable<Rotator>
         {
             switch (_rotatorValue)
             {
-                case 0: return new IntVec2(0, 1);//³¯ÉÏ¿´
+                case 0: return new IntVec2(0, 1);//æœä¸Šçœ‹
                 case 1: return new IntVec2(1, 0);
-                case 2: return new IntVec2(0, -1);//³¯ÏÂ¿´
+                case 2: return new IntVec2(0, -1);//æœä¸‹çœ‹
                 case 3:return new IntVec2(-1, 0);
                 default:
                     return new IntVec2(0, 0);
@@ -100,14 +100,14 @@ public struct Rotator : IEquatable<Rotator>
         }
     }
 
-    public bool Equals(Rotator other)
+    public bool Equals(Rotation other)
     {
         return _rotatorValue == other._rotatorValue;
     }
 
     public override bool Equals(object obj)
     {
-        return obj is Rotator other && Equals(other);
+        return obj is Rotation other && Equals(other);
     }
 
     public override int GetHashCode()
