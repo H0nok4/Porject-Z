@@ -23,7 +23,7 @@ public class DesignatorManager : Singleton<DesignatorManager> {
             return;
         }
 
-        SpawnHelper.Spawn(BuildingDef, pos, map.Index);
+        SpawnHelper.Spawn(BuildingDef, new PosNode(){Pos = pos,MapDataIndex = map.Index});
     }
 
     public bool CanPlace(IntVec2 pos, MapData map) {
@@ -31,8 +31,14 @@ public class DesignatorManager : Singleton<DesignatorManager> {
             return false;
         }
 
-        if (map.ThingMap.ThingsListAt(pos).Count > 0) {
-            return false;
+        //TODO:需要判断，如果有其他的FrameThing就不能放置
+        var things = map.ThingMap.ThingsAt(pos);
+        foreach (var thing in things)
+        {
+            if (!SpawnHelper.SpawningWipes(BuildingDef,thing.Def))
+            {
+                return false;
+            }
         }
 
         return true;

@@ -15,6 +15,11 @@ public class MapDataHandleThingGameObjectManager
     }
 
 
+    public void UnRegister(ThingObject obj)
+    {
+        obj.GO.transform.parent = null;
+    }
+
     public MapDataHandleThingGameObjectManager(GameObject handleObject)
     {
         HandleObject = handleObject;

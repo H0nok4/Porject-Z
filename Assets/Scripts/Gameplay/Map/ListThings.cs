@@ -83,7 +83,7 @@ public sealed class ListThings
         }
     }
 
-    public void Remvoe(Thing thing)
+    public void Remove(Thing thing)
     {
         if (ListByDefine.TryGetValue(thing.Def,out var list))
         {

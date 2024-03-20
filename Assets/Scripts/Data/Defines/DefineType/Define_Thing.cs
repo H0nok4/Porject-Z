@@ -36,4 +36,5 @@ public class Define_Thing : Define_Buildable
 
     public bool IsFrame;
 
+    public Define_Buildable entityBuildDef;
 }

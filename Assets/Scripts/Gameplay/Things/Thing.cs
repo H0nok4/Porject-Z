@@ -20,7 +20,7 @@ public abstract class Thing : IThing
     public Define_Thing ItemDef;
     public ThingObject GameObject { get; set; }
 
-    private IntVec2 _position;
+    private PosNode _position;
 
     private Rotation _rotation;
 
@@ -38,7 +38,7 @@ public abstract class Thing : IThing
         }
     }
 
-    public IntVec2 Position {
+    public PosNode Position {
         get {
             return _position;
         }
@@ -53,13 +53,13 @@ public abstract class Thing : IThing
         }
     }
 
-    public void SetPosition(IntVec2 pos, int mapDataIndex = -1)
+    public void SetPosition(IntVec2 pos, int mapDataIndex)
     {
         if (Spawned)
         {
             if (mapDataIndex != -1 && _mapData != null) {
                 if (mapDataIndex != MapData.Index) {
-                    _mapData.UnRegisterThing(this);
+                    _mapData.UnRegisterThingHandle(this);
                     _mapData.UnRegisterThingMapPos(this);
                     _mapData = MapData;
                 }
@@ -69,12 +69,21 @@ public abstract class Thing : IThing
 
             }
         }
-        _position.X = pos.X;
-        _position.Y = pos.Y;
+
+        if (_position != null)
+        {
+            _position.Pos.X = pos.X;
+            _position.Pos.Y = pos.Y;
+        }
+        else
+        {
+            _position = new PosNode() { Pos = pos, MapDataIndex = mapDataIndex };
+        }
+
         if (Spawned)
         {
             if (_mapData != null) {
-                _mapData.RegisterThing(this);
+                _mapData.RegisterThingHandle(this);
                 _mapData.RegisterThingMapPos(this);
             }
 
@@ -124,13 +133,13 @@ public abstract class Thing : IThing
             //TODO:进入一个新地图层，需要反注册之前的地图，然后注册现在的地图
             if (_mapData != null)
             {
-                _mapData.UnRegisterThing(this);
+                _mapData.UnRegisterThingHandle(this);
                 _mapData.UnRegisterThingMapPos(this);
             }
             _mapData = value;
             if (_mapData != null)
             {
-                _mapData.RegisterThing(this);
+                _mapData.RegisterThingHandle(this);
                 _mapData.RegisterThingMapPos(this);
             }
         }
@@ -138,17 +147,8 @@ public abstract class Thing : IThing
 
     public bool Spawned
     {
-        get
-        {
-            if (MapData == null)
-            {
-                return false;
-            }
-
-            //TODO:查看位置是否在地图的合法位置上
-
-            return true;
-        }
+        get;
+        set;
     }
 
     /// <summary>
@@ -178,14 +178,16 @@ public abstract class Thing : IThing
 
         IsDestroyed = false;
         MapData = mapData;
-        SetPosition(_position);
+        SetPosition(_position.Pos,mapData.Index);
         Rotation = Rotation.Random;
         MapController.Instance.Map.ListThings.Add(this);
+
+        Spawned = true;
 
     }
 
     /// <summary>
-    /// 摧毁物体的时候调用
+    /// 摧毁物体的时候调用，只是删除地图上的物体，但是不会真正摧毁
     /// </summary>
     public virtual void DeSpawn()
     {
@@ -201,8 +203,11 @@ public abstract class Thing : IThing
             return;
         }
 
-        MapController.Instance.Map.ListThings.Remvoe(this);
-        Destroy();
+        MapData.UnRegisterThingHandle(this);
+        MapData.UnRegisterThingMapPos(this);
+        MapController.Instance.Map.ListThings.Remove(this);
+        Spawned = false;
+        //Destroy();
     }
 
 
@@ -243,7 +248,7 @@ public abstract class Thing : IThing
             {
                 this.HoldingOwner.Remove(this);
             }
-            _mapData.UnRegisterThing(this);
+            _mapData.UnRegisterThingHandle(this);
             _mapData.UnRegisterThingMapPos(this);
             UnityEngine.GameObject.Destroy(GameObject.GO);
             GameObject = null;
@@ -255,6 +260,8 @@ public abstract class Thing : IThing
             //TODO:取消选中
             SelectThingManager.Instance.DeSelecte(this);
         }
+
+        GameTicker.Instance.UnRegisterThing(this);
 
     }
 
@@ -333,4 +340,43 @@ public abstract class Thing : IThing
         }
     }
 
+    public virtual bool CanStackWith(Thing thing)
+    {
+        if (IsDestroyed || thing.IsDestroyed)
+        {
+            return false;
+        }
+
+        if (this.Def.Category != ThingCategory.Item || thing.Def.Category != ThingCategory.Item)
+        {
+            return false;
+        }
+
+        return this.Def == thing.Def;
+    }
+
+    public bool TryStackWith(Thing placeThing)
+    {
+        if (!CanStackWith(placeThing))
+        {
+            return false;
+        }
+
+        int num = ThingUtility.GetCanStackNum(this, placeThing);
+
+        Count += num;
+        placeThing.Count -= num;
+
+        //TODO:触发物品变动事件
+
+        if (placeThing.Count <= 0)
+        {
+            //合并的物品数量为0，删除
+            placeThing.Destroy();
+            return true;
+        }
+
+        //没合并完
+        return false;
+    }
 }

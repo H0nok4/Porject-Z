@@ -24,7 +24,7 @@ public class MapData
 
     public ThingMapManager ThingMap;
 
-    public HashSet<IThing> HandleThings = new HashSet<IThing>();
+    public HashSet<Thing> HandleThings = new HashSet<Thing>();
 
     public Section GetSectionByPos(int x, int y) {
         return Sections[y * Width + x];
@@ -40,7 +40,7 @@ public class MapData
     }
 
 
-    public void RegisterThing(IThing thing) {
+    public void RegisterThingHandle(Thing thing) {
         if (HandleThings.Contains(thing))
         {
             return;
@@ -74,7 +74,7 @@ public class MapData
         }
     }
 
-    public void UnRegisterThing(IThing thing)
+    public void UnRegisterThingHandle(Thing thing)
     {
         if (!HandleThings.Contains(thing))
         {
@@ -82,6 +82,7 @@ public class MapData
         }
         //TODO:删除并且做一些操作
         HandleThings.Remove(thing);
+        ThingObjectManager.UnRegister(thing.GameObject);
     }
 
     public void UnRegisterThingMapPos(Thing thing)

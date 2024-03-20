@@ -9,8 +9,8 @@ public class ThingObject {
         SpriteRenderer = go.GetComponentInChildren<SpriteRenderer>();
     }
 
-    public void SetPosition(IntVec2 pos) {
-        GO.transform.localPosition = pos.ToVector3();
+    public void SetPosition(PosNode pos) {
+        GO.transform.localPosition = pos.Pos.ToVector3();
     }
 
     public void SetSprite(Sprite sprite) {

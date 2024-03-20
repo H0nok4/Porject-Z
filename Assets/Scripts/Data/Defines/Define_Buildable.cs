@@ -18,4 +18,6 @@ public abstract class Define_Buildable : BaseDefine{
     public IntVec2 Size = IntVec2.One;
 
     public int MoveCost;
+
+    public Define_Thing blueprintDef;
 }

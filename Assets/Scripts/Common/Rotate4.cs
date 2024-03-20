@@ -100,6 +100,8 @@ public struct Rotation : IEquatable<Rotation>
         }
     }
 
+    public static Rotation North => new Rotation(0);
+
     public bool Equals(Rotation other)
     {
         return _rotatorValue == other._rotatorValue;
