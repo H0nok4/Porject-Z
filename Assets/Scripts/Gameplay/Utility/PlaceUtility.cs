@@ -36,23 +36,23 @@ public static class PlaceUtility
                     placeCount = placeThing.Count;
                     if (!TryFindPlaceNear(pos,rotation,placeThing,allowStack : true,out PosNode bestPos,validator))
                     {
-                        //ÕÒ²»µ½µØ·½·ÅÁË
+                        //æ‰¾ä¸åˆ°åœ°æ–¹æ”¾äº†
                         return false;
                     }
 
                     if (TryPlaceThingDirect(placeThing,bestPos,out placedThing,rotation,onPlaceAction))
                     {
-                        //ÔÚÕÒµ½µÄÎ»ÖÃ·ÅÏÂÎïÆ·
+                        //åœ¨æ‰¾åˆ°çš„ä½ç½®æ”¾ä¸‹ç‰©å“
                         return true;
                     }
                 } while (placeThing.Count != placeCount);
 
-                Debug.LogError($"ÔÚ{pos.Pos}Î»ÖÃÒÔ{placeMode}µÄÄ£Ê½·ÅÖÃÎïÆ·Ê§°Ü");
+                Debug.LogError($"åœ¨{pos.Pos}ä½ç½®ä»¥{placeMode}çš„æ¨¡å¼æ”¾ç½®ç‰©å“å¤±è´¥");
                 placedThing = null;
                 return false;
                 break;
             default:
-                Debug.LogError($"ÒâÁÏÖ®ÍâµÄ´íÎó£¬ÔÚ{pos.Pos}Î»ÖÃÒÔ{placeMode}µÄÄ£Ê½·ÅÖÃÎïÆ·Ê§°Ü");
+                Debug.LogError($"æ„æ–™ä¹‹å¤–çš„é”™è¯¯ï¼Œåœ¨{pos.Pos}ä½ç½®ä»¥{placeMode}çš„æ¨¡å¼æ”¾ç½®ç‰©å“å¤±è´¥");
                 placedThing = null;
                 return false;
         }
@@ -60,10 +60,10 @@ public static class PlaceUtility
 
     private static bool TryFindPlaceNear(PosNode startPos, Rotation rotation, Thing placeThing, bool allowStack, out PosNode resultPos, Predicate<PosNode> validator)
     {
-        //TODO:·ÅÖÃÓÅÏÈ¼¶ Í¬Àà¶Ñµş > ÔÚÈİÆ÷ÖĞ¶Ñµş > ¿ÕÎ»ÖÃ
+        //TODO:æ”¾ç½®ä¼˜å…ˆçº§ åŒç±»å †å  > åœ¨å®¹å™¨ä¸­å †å  > ç©ºä½ç½®
         PlaceSpotPriority priority = PlaceSpotPriority.Unusable;
         resultPos = startPos;
-        //TODO:Ê¹ÓÃBFSÕÒµ½ÖÜÎ§µÄ¿ÉÒÔÊ¹ÓÃµÄÎ»ÖÃ
+        //TODO:ä½¿ç”¨BFSæ‰¾åˆ°å‘¨å›´çš„å¯ä»¥ä½¿ç”¨çš„ä½ç½®
         var walkablePos = GetWalkablePosByBFS(placeThing,MinPalcePriorityFindRadius);
         for (int i = 0; i < walkablePos.Count; i++)
         {
@@ -87,7 +87,7 @@ public static class PlaceUtility
             return true;
         }
 
-        //½üµÄÃ»ÕÒµ½£¬À©´ó·¶Î§
+        //è¿‘çš„æ²¡æ‰¾åˆ°ï¼Œæ‰©å¤§èŒƒå›´
         var mediumWalkablePos = GetWalkablePosByBFS(placeThing, MediumPlacePriorityFindRadius);
         for (int i = 0; i < mediumWalkablePos.Count; i++) {
             var pos = mediumWalkablePos[i];
@@ -134,27 +134,27 @@ public static class PlaceUtility
 
     private static PlaceSpotPriority GetPlaceSpotPriorityAt(PosNode pos, Rotation rotation, Thing placeThing, PosNode startPos, bool allowStack, Predicate<PosNode> validator)
     {
-        //·ÅÖÃÓÅÏÈ¼¶ Í¬Àà¶Ñµş > ÔÚÈİÆ÷ÖĞ¶Ñµş > ¿ÕÎ»ÖÃ
+        //æ”¾ç½®ä¼˜å…ˆçº§ åŒç±»å †å  > åœ¨å®¹å™¨ä¸­å †å  > ç©ºä½ç½®
         if (!pos.InBound() || !pos.IsWalkable())
         {
             return PlaceSpotPriority.Unusable;
         }
 
-        //TODO£ºThingºóÃæ»áÕ¼¶à¸ö¸ñ×Ó£¬ĞèÒªÅĞ¶ÏÊÇ·ñÈ«²¿ÔÚµØÍ¼·¶Î§ÄÚ
+        //TODOï¼šThingåé¢ä¼šå å¤šä¸ªæ ¼å­ï¼Œéœ€è¦åˆ¤æ–­æ˜¯å¦å…¨éƒ¨åœ¨åœ°å›¾èŒƒå›´å†…
 
         if (validator != null && !validator(pos))
         {
             return PlaceSpotPriority.Unusable;
         }
 
-        //TODO:¿ªÊ¼ÅĞ¶ÏÓÅÏÈ¼¶
+        //TODO:å¼€å§‹åˆ¤æ–­ä¼˜å…ˆçº§
 
         return PlaceSpotPriority.Unusable;
     }
 
     public static List<PosNode> GetWalkablePosByBFS(Thing thing, int maxLength) {
         var result = new List<PosNode>();
-        var startPos = thing.MapData.GetSectionByPos(thing.Position);
+        var startPos = thing.MapData.GetSectionByPos(thing.Position.Pos);
         var queue = new Queue<PosNode>();
         queue.Enqueue(startPos.CreatePathNode());
         var closeList = new HashSet<PosNode>(new PathNodeComparer());
@@ -166,7 +166,7 @@ public static class PlaceUtility
             foreach (var dir in PathFinder.DirVecList) {
                 if (mapData.GetSectionByPosition(curNode.Pos + dir) is { } section) {
                     if (!section.Walkable) {
-                        //±ØĞëÒª¿ÉÒÔ×ßµÄ
+                        //å¿…é¡»è¦å¯ä»¥èµ°çš„
                         continue;
                     }
                     var newNode = section.CreatePathNode();
@@ -198,8 +198,8 @@ public static class PlaceUtility
         placedThing = null;
         helperThingList.Clear();
         helperThingList.AddRange(pos.MapData.ThingMap.ThingsListAt(pos.Pos));
-        helperThingList.Sort((thingA, thingB) => thingB.Count.CompareTo(thingA.Count));//ÊıÁ¿ÓÉ´óµ½Ğ¡ÅÅ
-        //ÏàÍ¬µÄÎïÆ·,¶ÑµşÊıÁ¿´óÓÚ1µÄ²ÅÄÜ¶Ñµş
+        helperThingList.Sort((thingA, thingB) => thingB.Count.CompareTo(thingA.Count));//æ•°é‡ç”±å¤§åˆ°å°æ’
+        //ç›¸åŒçš„ç‰©å“,å †å æ•°é‡å¤§äº1çš„æ‰èƒ½å †å 
         if (placeThing.Def.StackLimit > 1)
         {
             for (int i = 0; i < helperThingList.Count; i++)
@@ -207,16 +207,16 @@ public static class PlaceUtility
                 var thing = helperThingList[i];
                 if (placeThing.CanStackWith(thing))
                 {
-                    //³¢ÊÔ¶Ñµş£¬¶àÓàµÄ»¹ÒªÖØĞÂÕÒµØ·½·Å
+                    //å°è¯•å †å ï¼Œå¤šä½™çš„è¿˜è¦é‡æ–°æ‰¾åœ°æ–¹æ”¾
                     int beforeStackCount = placeThing.Count;
                     if (thing.TryStackWith(placeThing))
                     {
-                        //ºÏ²¢ÍêÁË£¬½á¹û¾ÍÊÇµ±Ç°µÄÎïÆ·
+                        //åˆå¹¶å®Œäº†ï¼Œç»“æœå°±æ˜¯å½“å‰çš„ç‰©å“
                         placeThing = thing;
                         onPlaceAction?.Invoke(thing,beforeStackCount);
                     }
 
-                    //ÊıÁ¿±ä¶¯ÁË£¬ËµÃ÷ÓĞÒ»²¿·Ö³É¹¦ºÏ²¢½øÈ¥ÁË
+                    //æ•°é‡å˜åŠ¨äº†ï¼Œè¯´æ˜æœ‰ä¸€éƒ¨åˆ†æˆåŠŸåˆå¹¶è¿›å»äº†
                     if (onPlaceAction != null && beforeStackCount != thing.Count)
                     {
                         onPlaceAction.Invoke(thing,beforeStackCount - placeThing.Count);
@@ -243,7 +243,7 @@ public static class PlaceUtility
 
         for (int i = 0; i < maxThingInPosCount; i++)
         {
-            //³¢ÊÔ½«ÎïÌå·Ö¸î·ÅÈë¸ñ×ÓÖĞ
+            //å°è¯•å°†ç‰©ä½“åˆ†å‰²æ”¾å…¥æ ¼å­ä¸­
             if (SplitAndSpawnOneStackOnPos(placeThing,pos,out placedThing,onPlaceAction,rotation))
             {
                 return true;
@@ -253,7 +253,7 @@ public static class PlaceUtility
     }
 
     /// <summary>
-    /// ·ÅÒ»×éÎïÆ·µ½Î»ÖÃÉÏ
+    /// æ”¾ä¸€ç»„ç‰©å“åˆ°ä½ç½®ä¸Š
     /// </summary>
     /// <param name="placeThing"></param>
     /// <param name="pos"></param>
@@ -266,9 +266,9 @@ public static class PlaceUtility
         Thing splitThing = (placeThing.Count <= placeThing.Def.StackLimit)
             ? placeThing
             : placeThing.SplitOff(placeThing.Def.StackLimit);
-        resultThing = SpawnHelper.Spawn(splitThing, pos);
+        resultThing = SpawnHelper.Spawn(splitThing, pos,placeThing.Rotation);
         onPlaceAction?.Invoke(splitThing,splitThing.Count);
-        //ÒòÎªSplitOffÈç¹ûÊıÁ¿²»¹»µÄ»°£¬»áÖ±½Ó·µ»Ø¸ÃÎïÌå£¬ËùÒÔÕâÀïÅĞ¶ÏÊÇ·ñÏàµÈ£¬Èç¹ûÏàµÈµÄ»°ËµÃ÷·ÖÍêÁË
+        //å› ä¸ºSplitOffå¦‚æœæ•°é‡ä¸å¤Ÿçš„è¯ï¼Œä¼šç›´æ¥è¿”å›è¯¥ç‰©ä½“ï¼Œæ‰€ä»¥è¿™é‡Œåˆ¤æ–­æ˜¯å¦ç›¸ç­‰ï¼Œå¦‚æœç›¸ç­‰çš„è¯è¯´æ˜åˆ†å®Œäº†
         return splitThing == placeThing;
     }
 

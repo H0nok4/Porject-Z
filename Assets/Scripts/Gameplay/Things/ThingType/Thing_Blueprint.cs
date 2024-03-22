@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// À¶Í¼ºÍ½¨ÖşÆ½¼¶
+/// è“å›¾å’Œå»ºç­‘å¹³çº§
 /// </summary>
 public abstract class Blueprint : ThingWithComponent   
 {
     /// <summary>
-    /// À¶Í¼½×¶Î¾Í¿ÉÒÔÖ±½Ó¿´µ½×ÜµÄ¹¤×÷Á¿
+    /// è“å›¾é˜¶æ®µå°±å¯ä»¥ç›´æ¥çœ‹åˆ°æ€»çš„å·¥ä½œé‡
     /// </summary>
     public abstract float WorkTotal { get; }
 
-    public virtual bool TryReplaceWithSolidThing(Thing_Unit_Pawn worker, out Thing createdThing, out bool jobEnd)
-    {
+    public virtual bool TryReplaceWithSolidThing(Thing_Unit_Pawn worker, out Thing createdThing, out bool jobEnd) {
+        jobEnd = false;
         if (BuildUtility.FirstBlockingThing(this,worker) != null)
         {
-            //TODO:ÓĞ¶«Î÷×èµ²£¬²»ÄÜ½¨Ôì
+            //TODO:æœ‰ä¸œè¥¿é˜»æŒ¡ï¼Œä¸èƒ½å»ºé€ 
             worker.JobTracker.EndCurrentJob(JobEndCondition.Incompletable);
             createdThing = null;
             jobEnd = true;
@@ -25,8 +25,12 @@ public abstract class Blueprint : ThingWithComponent
 
         createdThing = MakeSolidThing(out var shouldSelect);
         SpawnHelper.WipeExistingThings(Position,Rotation,createdThing.Def,DestroyType.Deconstruct);
-        //TODO:ºóÃæĞèÒª¸ø½¨Öş¸½ÉÏ¹¤×÷Ğ¡ÈËµÄÕóÓª
-        Thing spawnedThing = SpawnHelper.Spawn(createdThing, Position);
+        //TODO:åé¢éœ€è¦ç»™å»ºç­‘é™„ä¸Šå·¥ä½œå°äººçš„é˜µè¥
+        Thing spawnedThing = SpawnHelper.Spawn(createdThing, Position,createdThing.Rotation);
+        if (spawnedThing != null) {
+            //TODO:å¦‚æœé€‰æ‹©äº†è“å›¾,åœ¨è“å›¾å»ºé€ å¥½çš„æ—¶å€™å¯ä»¥ç›´æ¥åœ¨é€‰ä¸­å»ºé€ å¥½çš„å»ºç­‘
+        }
+
         return true;
     }
 

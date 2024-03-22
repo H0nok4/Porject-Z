@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +8,13 @@ using UnityEngine;
 public class Blueprint_Install : Blueprint{
     //TODO:安装类型的蓝图
     public override float WorkTotal { get; }
+    protected override Thing MakeSolidThing(out bool shouldSelect) {
+        throw new NotImplementedException();
+    }
+
+    public override List<DefineThingClassCount> NeedResources() {
+        throw new NotImplementedException();
+    }
 
     public Thing MinifiedThing;//已经拆卸下来的建筑
 

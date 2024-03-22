@@ -269,7 +269,7 @@ public static class PathFinder {
     public static List<PosNode> GetMoveableSectionByBFS(Thing_Unit unit,int maxLength)
     {
         var result = new List<PosNode>();
-        var startPos = unit.MapData.GetSectionByPos(unit.Position);
+        var startPos = unit.MapData.GetSectionByPos(unit.Position.Pos);
         var queue = new Queue<PosNode>();
         queue.Enqueue(startPos.CreatePathNode());
         var closeList = new HashSet<PosNode>(new PathNodeComparer());

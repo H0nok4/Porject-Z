@@ -65,7 +65,7 @@ public class Map
             //TODO:找到Pawn的位置，返回
             if (_mapDatas[i].HandleThings.Contains(pawn))
             {
-                return new PosNode() { MapDataIndex = i,Pos = pawn.Position.Copy()};
+                return new PosNode() { MapDataIndex = i,Pos = pawn.Position.Pos.Copy()};
             }
         }
 

@@ -8,13 +8,13 @@ public class MoveTargetInfo
 
     public Thing ThingTarget;
 
-    public IntVec2 Position
+    public PosNode Position
     {
         get
         {
             if (CellTarget != null)
             {
-                return CellTarget.Pos;
+                return CellTarget;
             }
 
             if (ThingTarget.Spawned)
@@ -22,7 +22,7 @@ public class MoveTargetInfo
                 return ThingTarget.Position;
             }
 
-            return IntVec2.Invalid;
+            return null;
         }
     }
 
@@ -32,7 +32,7 @@ public class MoveTargetInfo
         {
             if (IsTrackThing)
             {
-                return ThingTarget.MapData.GetSectionByPosition(ThingTarget.Position).CreatePathNode();
+                return ThingTarget.MapData.GetSectionByPosition(ThingTarget.Position.Pos).CreatePathNode();
             }
 
             return CellTarget;
@@ -101,7 +101,7 @@ public class PathMover {
 
     public void SetMoveTarget(PosNode posNode,PathMoveEndType endType)
     {
-        if (_targetInfo != null && posNode.Pos == _targetInfo.Position) {
+        if (_targetInfo != null && posNode == _targetInfo.Position) {
             //设置成相同的位置，如果正在移动的话就不需要更新
             //TODO:设置成相同的目标，如果正在移动的话就不需要更新
             Debug.LogError("设置成了相同的目标");
@@ -142,7 +142,8 @@ public class PathMover {
             if (GameTicker.Instance.CurrentTick - PreRefreshTargetThingPositionTick >= 60)
             {
                 //TODO:暂定每秒更新一次
-                if (PreTargetThingPosition != MoveTarget.Position)
+                //TODO:后面还是要换成PosNode,因为可能会有上楼下楼Pos不变但是MapDataIndex改变的情况
+                if (PreTargetThingPosition != MoveTarget.Position.Pos)
                 {
                     //TODO:更新路径
 
@@ -169,7 +170,7 @@ public class PathMover {
         else
         {
             float movePercent = 1 - (MoveToNextPosTickLeft / (float)MoveToNextPosTickTotal);
-            RegisterPawn.GameObject.GO.transform.position = Vector3.Lerp(RegisterPawn.Position.ToVector3(),
+            RegisterPawn.GameObject.GO.transform.position = Vector3.Lerp(RegisterPawn.Position.Pos.ToVector3(),
                  CurrentMovingPath.GetCurrentPosition().Pos.ToVector3(), movePercent);
         }
     }
@@ -210,7 +211,7 @@ public class PathMover {
     public int CalculateCostToNextPosition(Thing_Unit unit, IntVec2 position)
     {
         //TODO:根据速度，地形计算到下一个位置的时间
-        var baseMoveTick = (unit.Position.X != position.X && unit.Position.Y != position.Y) ? unit.TickPerMoveDiagonal : unit.TickPerMoveCardinal;
+        var baseMoveTick = (unit.Position.Pos.X != position.X && unit.Position.Pos.Y != position.Y) ? unit.TickPerMoveDiagonal : unit.TickPerMoveCardinal;
         //TODO:根据不同的地形会有不同的移速惩罚，对应就是加移动的Tick数量
         var moveToNextCelloFactor = GetMoveFactorAt(position);
         //TODO:格子上的物品，建筑会增加固定的移动Tick

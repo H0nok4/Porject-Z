@@ -1,4 +1,4 @@
-﻿
+
 
 /// <summary>
 /// 所有的建筑的框架都是一类的，只是有范围大小的区别
@@ -17,7 +17,7 @@ public class Thing_Building_Frame : Thing_Building {
 
     public void CompleteBuild(Thing_Unit unit) {
         //TODO:需要设置建筑的拥有派系
-        SpawnHelper.Spawn(this.Def, new PosNode() { Pos = this.Position, MapDataIndex = this.MapData.Index });
+        SpawnHelper.Spawn(this.Def, this.Position);
         DeSpawn();
     }
 }

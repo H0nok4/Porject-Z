@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class JobDriver_BuildFrame : JobDriver {
-    private Thing_Building_WallFrame ThingBuildingWallFrameBuilding => (Thing_Building_WallFrame)Unit.JobTracker.Job.GetTarget(JobTargetIndex.A).Thing;
+    private Thing_Building_Frame ThingBuildingWallFrameBuilding => (Thing_Building_Frame)Unit.JobTracker.Job.GetTarget(JobTargetIndex.A).Thing;
     public override IEnumerable<Work> MakeWorks() {
         //DONE:建造一个未完成的建筑,首先得先走到目标位置
         var moveTo = Work_MoveTo.MoveToThing(JobTargetIndex.A, PathMoveEndType.Touch);

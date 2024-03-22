@@ -24,7 +24,7 @@ public class ThingMapManager {
         //TODO:thing的大小可能不止1格,如果为多格的话,需要每一格都注册到对应的位置
         if (thing.Size.X == 1 && thing.Size.Y == 1) {
             //TODO:注册到位置
-            RegisterThingAtCell(thing, thing.Position);
+            RegisterThingAtCell(thing, thing.Position.Pos);
         }
         else
         {
@@ -34,7 +34,7 @@ public class ThingMapManager {
 
     public void UnRegisterThing(Thing thing) {
         if (thing.Size.X == 1 && thing.Size.Y == 1) {
-            UnRegisterThingAtCell(thing,thing.Position);
+            UnRegisterThingAtCell(thing,thing.Position.Pos);
         }
     }
 

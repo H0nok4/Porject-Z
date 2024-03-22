@@ -10,7 +10,7 @@ public static class SpawnHelper
     private static List<Thing> _helper = new List<Thing>();
     public static Thing Spawn(Define_Thing define, PosNode node)
     {
-        return Spawn(ThingMaker.MakeNewThing(define),node);
+        return Spawn(ThingMaker.MakeNewThing(define),node,Rotation.North);
     }
 
     public static Thing Spawn(Thing newThing, PosNode node,Rotation rot, WipeMode wipeMode = WipeMode.Vanish)

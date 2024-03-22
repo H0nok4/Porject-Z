@@ -7,7 +7,7 @@ public static class BuildUtility
 {
     public static bool CanBuild(Thing building, Thing_Unit unit, bool checkSkill = true, bool forced = false)
     {
-        //TODO:ºóÃæĞèÒªÅĞ¶Ïµ¥Î»ÊÇ·ñÂú×ã½¨ÖşÒªÇóÖ®ÀàµÄ
+        //TODO:åé¢éœ€è¦åˆ¤æ–­å•ä½æ˜¯å¦æ»¡è¶³å»ºç­‘è¦æ±‚ä¹‹ç±»çš„
 
         return true;
     }
@@ -15,8 +15,8 @@ public static class BuildUtility
     public static Thing FirstBlockingThing(Thing buildingThing,Thing_Unit_Pawn builder)
     {
         Thing miniOrRebuildThing = ((buildingThing is not Blueprint b) ? null : MiniToInstallOrBuildingToReinstall(b));
-        //TODO:½¨ÖşºóÃæ»áÕ¼ÓÃ¶à¸ö¸ñ×Ó£¬ĞèÒªÃ¿¸ö¸ñ×Ó¶¼ÅĞ¶Ï
-        List<Thing> thingList = buildingThing.MapData.ThingMap.ThingsListAt(buildingThing.Position);
+        //TODO:å»ºç­‘åé¢ä¼šå ç”¨å¤šä¸ªæ ¼å­ï¼Œéœ€è¦æ¯ä¸ªæ ¼å­éƒ½åˆ¤æ–­
+        List<Thing> thingList = buildingThing.MapData.ThingMap.ThingsListAt(buildingThing.Position.Pos);
         foreach (var thing in thingList)
         {
             if (BuildingBlocked(buildingThing,thing))
@@ -65,7 +65,7 @@ public static class BuildUtility
 
     private static Thing MiniToInstallOrBuildingToReinstall(Blueprint blueprint)
     {
-        //TODO:Èç¹ûÕâ¸ö½¨ÖşÊÇ¿ÉÒÔ²ğĞ¶À´ÖØĞÂ°²×°µÄ£¬¾Í¿ÉÒÔ³¢ÊÔÖØĞÂ°²×°
+        //TODO:å¦‚æœè¿™ä¸ªå»ºç­‘æ˜¯å¯ä»¥æ‹†å¸æ¥é‡æ–°å®‰è£…çš„ï¼Œå°±å¯ä»¥å°è¯•é‡æ–°å®‰è£…
         if (blueprint is Blueprint_Install installThing)
         {
             return installThing.MiniToInstallOrBuildingToReinstall;
