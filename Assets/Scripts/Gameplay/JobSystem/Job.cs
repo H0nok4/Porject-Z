@@ -16,6 +16,10 @@ public class Job
     /// </summary>
     public bool IsForce;
 
+    public int Count;
+
+    public HaulMode HaulMode;
+
     public JobTargetInfo InfoA;
 
     public JobTargetInfo InfoB;
@@ -56,4 +60,15 @@ public class Job
         IsForce = false;
     }
 
+    public void SetTarget(JobTargetIndex index, JobTargetInfo info)
+    {
+        if (index== JobTargetIndex.A)
+        {
+            InfoA = info;
+        }
+        else
+        {
+            InfoB = info;
+        }
+    }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public abstract class Thing_Unit : Thing {
+public abstract class Thing_Unit : Thing , IThingHolder {
     private const int MaxTickPerMove = 600;
 
     public ThingUnit_JobTracker JobTracker;
@@ -72,5 +72,37 @@ public abstract class Thing_Unit : Thing {
     {
         base.DeSpawn();
         GameTicker.Instance.UnRegisterThing(this);
+    }
+
+    public IThingHolder Parent
+    {
+        get
+        {
+            return base.ParentHolder;
+        }
+    }
+
+
+    public void GetChildren(List<IThingHolder> outChildren)
+    {
+        //TODO:例如角色可能会有背包，身上的装备烂，手上携带的东西
+
+    }
+
+    public ThingOwner GetHoldingThing()
+    {
+        return null;
+    }
+
+
+    public bool IsInside(Thing thing)
+    {
+        //TODO:目前只有单格大小的物体，后续加入体积设定后需要重新做
+        if (Position.MapDataIndex != thing.Position.MapDataIndex)
+        {
+            return false;
+        }
+
+        return this.Position.Pos.X == thing.Position.Pos.X && this.Position.Pos.Y == thing.Position.Pos.Y;
     }
 }

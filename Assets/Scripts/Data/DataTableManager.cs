@@ -15,6 +15,21 @@ public partial class DataTableManager : Singleton<DataTableManager>
 
     private GameObject _thingObject;
 
+    private Sprite _frameSprite;
+
+    public Sprite FrameSprite
+    {
+        get
+        {
+            if (_frameSprite == null)
+            {
+                _frameSprite = Resources.Load<Sprite>("Sprite/GeneralFrame");
+            }
+
+            return _frameSprite;
+        }
+    }
+
     public GameObject ThingObject {
         get {
             if (_thingObject == null) {
@@ -24,6 +39,8 @@ public partial class DataTableManager : Singleton<DataTableManager>
             return _thingObject;
         }
     }
+
+
 
 
     private MainPanel _mainPanel;

@@ -5,8 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 蓝图和建筑平级
 /// </summary>
-public abstract class Blueprint : ThingWithComponent   
-{
+public abstract class Blueprint : ThingWithComponent ,IBuildable {
     /// <summary>
     /// 蓝图阶段就可以直接看到总的工作量
     /// </summary>
@@ -23,7 +22,7 @@ public abstract class Blueprint : ThingWithComponent
             return false;
         }
 
-        createdThing = MakeSolidThing(out var shouldSelect);
+        createdThing = MakeSolidThing();
         SpawnHelper.WipeExistingThings(Position,Rotation,createdThing.Def,DestroyType.Deconstruct);
         //TODO:后面需要给建筑附上工作小人的阵营
         Thing spawnedThing = SpawnHelper.Spawn(createdThing, Position,createdThing.Rotation);
@@ -31,12 +30,18 @@ public abstract class Blueprint : ThingWithComponent
             //TODO:如果选择了蓝图,在蓝图建造好的时候可以直接在选中建造好的建筑
         }
 
+        Destroy();
         return true;
     }
 
-    protected abstract Thing MakeSolidThing(out bool shouldSelect);
+    protected abstract Thing MakeSolidThing();
 
-    public abstract List<DefineThingClassCount> NeedResources();
+    public abstract IReadOnlyList<DefineThingClassCount> NeedResources();
 
+    public abstract Define_Thing EntityDefineToBuildComplete();
 
+    public override void SpawnSetup(MapData mapData)
+    {
+        base.SpawnSetup(mapData);
+    }
 }

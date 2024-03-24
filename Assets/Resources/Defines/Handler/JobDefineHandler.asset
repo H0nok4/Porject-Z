@@ -12,6 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04850af35da94b043a03988e196a1486, type: 3}
   m_Name: JobDefineHandler
   m_EditorClassIdentifier: 
-  BlanklyDefine: {fileID: 11400000, guid: 2920fbbddf6afae4ca69cd4824af7ebb, type: 2}
-  BuildFrame: {fileID: 11400000, guid: 03a2bc506eeddb84d85c6a414d447213, type: 2}
-  WalkAround: {fileID: 11400000, guid: d5dba5739de9b3a4992b3b76b2181f25, type: 2}
+  BlanklyDefine:
+    Name: BlankJobDefine
+    DriverClass:
+      TypeName: JobDriver_Blankly
+    CanSuspend: 1
+  BuildFrame:
+    Name: BuildJobDefine
+    DriverClass:
+      TypeName: JobDriver_BuildFrame
+    CanSuspend: 1
+  WalkAround:
+    Name: WalkAroundJobDefine
+    DriverClass:
+      TypeName: JobDriver_WalkAround
+    CanSuspend: 1
+  HaulToCell:
+    Name: 
+    DriverClass:
+      TypeName: 
+    CanSuspend: 1
+  ImmediatelyBuildBlueprintToFrame:
+    Name: ImmediatelyBuildBlueprintToFrame
+    DriverClass:
+      TypeName: JobDriver_ImmediatelyBuildBlueprintToFrame
+    CanSuspend: 1

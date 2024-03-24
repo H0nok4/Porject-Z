@@ -91,13 +91,11 @@ public static class SpawnHelper
         //TODO:根据配置类型来决定是否删除该位置的建筑，像是电线，壁灯之类的都可以跟其他建筑共存，
         var wantPlaceThingDef = (Define_Thing)thingDef;
         var existThingDef = (Define_Thing)def;
-        if (wantPlaceThingDef.Category == ThingCategory.Building && wantPlaceThingDef.IsFrame)
-        {
-            if (existThingDef.Category == ThingCategory.Building && wantPlaceThingDef.IsFrame)
-                return true;
-            return false;
-        }
+        //if (wantPlaceThingDef.Category == ThingCategory.Building && wantPlaceThingDef.IsFrame)
+        //{
 
-        return true;
+        //}
+
+        return false;
     }
 }

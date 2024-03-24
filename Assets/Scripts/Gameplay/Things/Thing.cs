@@ -8,12 +8,10 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.Rendering.DebugUI;
 
-public abstract class Thing : IThing
-{
+public abstract class Thing : IThing {
 
 
     public Define_Thing Def;
-
     /// <summary>
     /// 物品拥有额外的配置
     /// </summary>
@@ -39,7 +37,8 @@ public abstract class Thing : IThing
     }
 
     public PosNode Position {
-        get {
+        get
+        {
             return _position;
         }
     }
@@ -66,7 +65,6 @@ public abstract class Thing : IThing
                 else {
                     _mapData.UnRegisterThingMapPos(this);
                 }
-
             }
         }
 
@@ -113,6 +111,17 @@ public abstract class Thing : IThing
     private float _moveSpeed = 1f;
 
     public ThingOwner HoldingOwner;
+
+    public IThingHolder ParentHolder {
+        get {
+            if (HoldingOwner == null) {
+                return null;
+            }
+
+            return HoldingOwner.Owner;
+        }
+    }
+
     /// <summary>
     /// TODO：后面需要改成读配置
     /// </summary>
@@ -131,16 +140,21 @@ public abstract class Thing : IThing
         set
         {
             //TODO:进入一个新地图层，需要反注册之前的地图，然后注册现在的地图
-            if (_mapData != null)
+            if (Spawned)
             {
-                _mapData.UnRegisterThingHandle(this);
-                _mapData.UnRegisterThingMapPos(this);
+                if (_mapData != null) {
+                    _mapData.UnRegisterThingHandle(this);
+                    _mapData.UnRegisterThingMapPos(this);
+                }
             }
+
             _mapData = value;
-            if (_mapData != null)
+            if (Spawned)
             {
-                _mapData.RegisterThingHandle(this);
-                _mapData.RegisterThingMapPos(this);
+                if (_mapData != null) {
+                    _mapData.RegisterThingHandle(this);
+                    _mapData.RegisterThingMapPos(this);
+                }
             }
         }
     }
@@ -149,6 +163,21 @@ public abstract class Thing : IThing
     {
         get;
         set;
+    }
+
+    public PosNode PositionHeld
+    {
+        get
+        {
+            //TODO:如果在地上，则直接返回位置
+            if (Spawned)
+            {
+                return Position;
+            }
+            //TODO:可能在单位的背包中
+
+            return ((Thing)HoldingOwner.Owner).PositionHeld;
+        }
     }
 
     /// <summary>
@@ -178,12 +207,14 @@ public abstract class Thing : IThing
 
         IsDestroyed = false;
         MapData = mapData;
-        SetPosition(_position.Pos,mapData.Index);
-        Rotation = Rotation.Random;
         MapController.Instance.Map.ListThings.Add(this);
+        MapData.RegisterThingHandle(this);
+        MapData.RegisterThingMapPos(this);
+        Rotation = Rotation.Random;
 
         Spawned = true;
 
+        SetPosition(_position.Pos, mapData.Index);
     }
 
     /// <summary>
@@ -263,6 +294,7 @@ public abstract class Thing : IThing
 
         GameTicker.Instance.UnRegisterThing(this);
 
+        IsDestroyed = true;
     }
 
 
@@ -379,4 +411,6 @@ public abstract class Thing : IThing
         //没合并完
         return false;
     }
+
+
 }

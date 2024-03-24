@@ -56,7 +56,8 @@ public class ReservationManager : Singleton<ReservationManager> {
 
         for (int i = 0; i < Reservations.Count; i++) {
             var reservation = Reservations[i];
-            if (reservation.Unit == unit || reservation.TargetInfo == targetInfo) {
+            if (reservation.TargetInfo == targetInfo && reservation.Unit != unit) {
+
                 return false;
             }
         }

@@ -27,6 +27,15 @@ public static class JobMaker {
         job.InfoA = info;
         return job;
     }
+
+    public static Job MakeJob(JobDefine define, JobTargetInfo infoA, JobTargetInfo infoB)
+    {
+        Job job = MakeJob();
+        job.JobDefine = define;
+        job.InfoA = infoA;
+        job.InfoB = infoB;
+        return job;
+    }
     public static void ReturnJob(Job job)
     {
         job.Reset();

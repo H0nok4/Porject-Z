@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.Init();
         UIManager.Instance.Show(DataTableManager.Instance.MainPanel);
         //TestPawn.Init(0, new IntVec2(0, 0), false, ThingType.Unit);
+        Application.targetFrameRate = 60;//TODO:先默认60帧节省资源，后面需要搞成TPS越高FPS越低
     }
 
     // Update is called once per frame

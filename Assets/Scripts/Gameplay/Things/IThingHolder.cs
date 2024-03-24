@@ -7,5 +7,5 @@ public interface IThingHolder {
 
     void GetChildren(List<IThingHolder> outChildren);
 
-    ThingOwner GetOwner();
+    ThingOwner GetHoldingThing();
 }

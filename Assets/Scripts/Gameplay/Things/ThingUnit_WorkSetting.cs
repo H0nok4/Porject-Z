@@ -13,6 +13,7 @@ public class ThingUnit_WorkSetting
     public ThingUnit_WorkSetting(Thing_Unit unit) {
         Unit = unit;
         UsedWorkGivers.Add(DataTableManager.Instance.WorkGiverDefineHandler.WorkGiverDefine_BuildFrame.WorkGiver);
+        UsedWorkGivers.Add(DataTableManager.Instance.WorkGiverDefineHandler.WorkGiverDefine_DeliverResourceToBlueprint.WorkGiver);
         //TODO:后面需要用配置初始化这个
     }
 }

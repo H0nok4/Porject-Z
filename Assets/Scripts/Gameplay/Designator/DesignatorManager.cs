@@ -10,7 +10,7 @@ public class DesignatorManager : Singleton<DesignatorManager> {
 
     public DesignatorType DesignatorType;
 
-    public Define_Thing BuildingDef = DataTableManager.Instance.ThingDefineHandler.WallFrame;
+    public Define_Thing BuildingDef = DataTableManager.Instance.ThingDefineHandler.WallInstance;
 
     public bool IsBuildingState {
         get {
@@ -24,6 +24,16 @@ public class DesignatorManager : Singleton<DesignatorManager> {
         }
 
         SpawnHelper.Spawn(BuildingDef, new PosNode(){Pos = pos,MapDataIndex = map.Index});
+    }
+
+    public void PlaceBlueprintAt(IntVec2 pos, MapData map)
+    {
+        if (!CanPlace(pos, map)) {
+            return;
+        }
+
+        ThingUtility.CreateBlueprintDefToThingDef(BuildingDef);
+        SpawnHelper.Spawn(BuildingDef.BlueprintDef, new PosNode() { Pos = pos, MapDataIndex = map.Index });
     }
 
     public bool CanPlace(IntVec2 pos, MapData map) {

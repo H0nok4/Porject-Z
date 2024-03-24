@@ -9,7 +9,7 @@ public class JobGiver_WalkAround : ThinkNode_JobGiver {
         Job walkAroundJob = JobMaker.MakeJob(DataTableManager.Instance.JobDefineHandler.WalkAround);
         var canWalkSection = PathFinder.GetMoveableSectionByBFS(unit,5);
         walkAroundJob.InfoA = new JobTargetInfo()
-            { Section = canWalkSection[UnityEngine.Random.Range(1, canWalkSection.Count)].ToSection() };
+            { Position = canWalkSection[UnityEngine.Random.Range(1, canWalkSection.Count)] };
         return walkAroundJob;
     }
 }

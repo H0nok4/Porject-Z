@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 [Serializable]
-[CreateAssetMenu(fileName = "New ThingDefine", menuName = "Define/Create ThingDefine")]
 public class Define_Thing : Define_Buildable
 {
     public EditableType ThingClass;
@@ -15,20 +14,17 @@ public class Define_Thing : Define_Buildable
 
     public bool Destroyable = true;
 
-    public bool Rotatable = true;
-
     public bool UseHitPoint;
 
     public int StackLimit = 1;
-
-    public Sprite ThingSprite;
-
-    public Sprite FrameSprite;
 
     public ItemProperties ItemProp;
 
     public bool IsItem => ItemProp != null;
     public bool MadeFromItem => ItemProp != null;
+    //是否能够被搬运
+    public bool EverHaulable;
+
 
     //TODO:临时，后面需要根据可以胜任的工作类型获得各个WorkGiver
     [NonSerialized]
@@ -36,5 +32,33 @@ public class Define_Thing : Define_Buildable
 
     public bool IsFrame;
 
-    public Define_Buildable entityBuildDef;
+    public bool IsBlueprint;
+
+    private Define_Thing _blueprintDefInstance;
+
+    public Define_Thing BlueprintDef {
+        get {
+            if (_blueprintDefInstance == null)
+                ThingUtility.CreateBlueprintDefToThingDef(this);
+
+            return _blueprintDefInstance;
+        }
+        set => _blueprintDefInstance = value;
+    }
+
+    private Define_Thing _frameDefInstance;
+    public Define_Thing FrameDef {
+        get {
+            if (_frameDefInstance == null)
+            {
+                ThingUtility.CreateFrameDefToThingDef(this);
+            }
+
+
+            return _frameDefInstance;
+        }
+        set => _frameDefInstance = value;
+    }
+
+
 }

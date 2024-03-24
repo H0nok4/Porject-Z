@@ -58,7 +58,7 @@ public static class PlaceUtility
         }
     }
 
-    private static bool TryFindPlaceNear(PosNode startPos, Rotation rotation, Thing placeThing, bool allowStack, out PosNode resultPos, Predicate<PosNode> validator)
+    public static bool TryFindPlaceNear(PosNode startPos, Rotation rotation, Thing placeThing, bool allowStack, out PosNode resultPos, Predicate<PosNode> validator)
     {
         //TODO:放置优先级 同类堆叠 > 在容器中堆叠 > 空位置
         PlaceSpotPriority priority = PlaceSpotPriority.Unusable;

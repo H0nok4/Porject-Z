@@ -3,5 +3,6 @@
     None,
     Unit,
     Item,
-    Building
+    Building,
+    Mirage
 }

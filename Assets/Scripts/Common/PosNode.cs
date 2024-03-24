@@ -91,6 +91,31 @@ public class PosNode : IComparable<PosNode> {
 
         return true;
     }
+
+    public PosNode DeepCopy()
+    {
+        return new PosNode() { Pos = this.Pos.Copy(), MapDataIndex = MapDataIndex };
+    }
+
+    public bool Standable()
+    {
+        if (!MapData.GetSectionByPosition(Pos).Walkable)
+        {
+            return false;
+        }
+
+        foreach (var thing in MapData.ThingMap.ThingsAt(Pos)) {
+            if (thing.Def.Category == ThingCategory.Building)
+            {
+                if (!thing.Def.IsFrame && thing.Def.Passability == Traversability.Impassable)
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
 }
 
 public class PathNodeComparer : IEqualityComparer<PosNode>

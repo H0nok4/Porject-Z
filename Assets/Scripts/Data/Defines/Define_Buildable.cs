@@ -15,9 +15,37 @@ public abstract class Define_Buildable : BaseDefine{
 
     public int Workload;
 
+    public bool Rotatable = true;
+
     public IntVec2 Size = IntVec2.One;
 
     public int MoveCost;
 
-    public Define_Thing blueprintDef;
+    public Sprite BlueprintSprite;
+
+    public Sprite ThingSprite;
+
+    public Sprite FrameSprite;
+
+    [NonSerialized]
+    public Define_Thing EntityBuildDef;
+
+    [SerializeField]
+    private List<DefineThingClassCount> _costThing;
+    public IReadOnlyList<DefineThingClassCount> CostList
+    {
+        get
+        {
+            if (_costThing == null)
+            {
+                _costThing = new List<DefineThingClassCount>();
+            }
+
+            return _costThing;
+        }
+    }
+
+    public bool Selectable;
+
+
 }

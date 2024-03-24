@@ -1,7 +1,7 @@
 public struct JobTargetInfo {
     public Thing Thing;
 
-    public Section Section;
+    public PosNode Position;
 
     public Thing_Unit Unit => Thing as Thing_Unit;
 
@@ -15,7 +15,7 @@ public struct JobTargetInfo {
                 return true;
             }
 
-            if (Section != null)
+            if (Position != null)
             {
                 return true;
             }
@@ -27,13 +27,13 @@ public struct JobTargetInfo {
     public JobTargetInfo(Thing t)
     {
         Thing = t;
-        Section = null;
+        Position = null;
     }
 
-    public JobTargetInfo(Section section)
+    public JobTargetInfo(PosNode position)
     {
         Thing = null;
-        Section = section;
+        Position = position;
     }
 
     public static bool operator ==(JobTargetInfo left, JobTargetInfo right) {
@@ -41,8 +41,8 @@ public struct JobTargetInfo {
             return left.Thing == right.Thing;
         }
 
-        if (left.Section != null || right.Section != null) {
-            return left.Section == right.Section;
+        if (left.Position != null || right.Position != null) {
+            return left.Position == right.Position;
         }
 
         return true;
@@ -52,11 +52,11 @@ public struct JobTargetInfo {
         return !(left == right);
     }
 
-    public static implicit operator JobTargetInfo(Thing t) {
-        return new JobTargetInfo(t);
+    public static implicit operator JobTargetInfo(Thing target) {
+        return new JobTargetInfo(target);
     }
 
-    public static implicit operator JobTargetInfo(Section s) {
-        return new JobTargetInfo(s);
+    public static implicit operator JobTargetInfo(PosNode pos) {
+        return new JobTargetInfo(pos);
     }
 }

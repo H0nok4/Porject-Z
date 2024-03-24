@@ -9,7 +9,7 @@ public class WorkGiver_BuildFrame : WorkGiver_Scanner
 
     public override Job JobOnThing(Thing_Unit unit, Thing thing, bool forced = false)
     {
-        if (thing is not Thing_Building_WallFrame frame)
+        if (thing is not Thing_Building_Frame frame)
         {
             return null;
         }

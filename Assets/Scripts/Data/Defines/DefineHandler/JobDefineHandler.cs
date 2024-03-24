@@ -10,4 +10,8 @@ public class JobDefineHandler : ScriptableObject
     public JobDefine BuildFrame;
 
     public JobDefine WalkAround;
+
+    public JobDefine HaulToCell;
+
+    public JobDefine ImmediatelyBuildBlueprintToFrame;
 }

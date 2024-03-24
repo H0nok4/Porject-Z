@@ -53,7 +53,7 @@ public class PlayerController : Singleton<PlayerController>
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int cellPosition = MapController.Instance.Map.GetMapDataByIndex(0).TileMapObject.WorldToCell(mousePosition);
             var int2Pos = new IntVec2(cellPosition.x, cellPosition.y);
-            DesignatorManager.Instance.PlaceFrameAt(int2Pos,MapController.Instance.Map.GetMapDataByIndex(0));
+            DesignatorManager.Instance.PlaceBlueprintAt(int2Pos,MapController.Instance.Map.GetMapDataByIndex(0));
         }
     }
 

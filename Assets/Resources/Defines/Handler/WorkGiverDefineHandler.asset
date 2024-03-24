@@ -12,4 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8a33ca12b5179344990e1af82ba93c8, type: 3}
   m_Name: WorkGiverDefineHandler
   m_EditorClassIdentifier: 
-  WorkGiverDefine_BuildFrame: {fileID: 11400000, guid: 7c3c24fba627e70409cbac7aeee10da0, type: 2}
+  WorkGiverDefine_BuildFrame:
+    Name: BuildFrame
+    WorkGiverType:
+      TypeName: WorkGiver_BuildFrame
+    WorkTypeDefine:
+      Name: 
+    ScanThings: 1
+    ScanSections: 0
+  WorkGiverDefine_DeliverResourceToBlueprint:
+    Name: DeliverResourceToBlueprint
+    WorkGiverType:
+      TypeName: WorkGiver_DeliverResourceToBlueprint
+    WorkTypeDefine:
+      Name: 
+    ScanThings: 1
+    ScanSections: 0

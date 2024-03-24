@@ -67,6 +67,8 @@ public static class ThingRequestGroupHelper
                 return true;
             case ThingRequestGroup.BuildingFrame:
                 return define.IsFrame;
+            case ThingRequestGroup.BuildingBlueprint:
+                return define.IsBlueprint;
             default:
                 return false;
         }
@@ -77,5 +79,6 @@ public enum ThingRequestGroup
 {
     Undefined = 0,
     All = 1,
-    BuildingFrame
+    BuildingFrame,
+    BuildingBlueprint,
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public static class BuildUtility
@@ -36,14 +37,14 @@ public static class BuildUtility
         }
 
         Define_Thing buildingThingDef = (buildingThing is Blueprint) ? buildingThing.Def :
-            (!(buildingThing is Thing_Building_Frame)) ? buildingThing.Def.blueprintDef :
-            buildingThing.Def.entityBuildDef.blueprintDef;
+            (!(buildingThing is Thing_Building_Frame)) ? buildingThing.Def.BlueprintDef :
+            buildingThing.Def.EntityBuildDef.BlueprintDef;
         if (buildingThing.Def.Category == ThingCategory.Building && SpawnHelper.SpawningWipes(buildingThingDef,existThing.Def))
         {
             return true;
         }
 
-        Define_Thing buildingEntityDefing = buildingThingDef.entityBuildDef as Define_Thing;
+        Define_Thing buildingEntityDefing = buildingThingDef.EntityBuildDef as Define_Thing;
         if (buildingEntityDefing != null)
         {
             if (existThing.Def.Category == ThingCategory.Item)
@@ -52,10 +53,11 @@ public static class BuildUtility
             }
         }
 
-        if (existThing.Def.Category == ThingCategory.Unit || (existThing.Def.Category == ThingCategory.Item && buildingThingDef.entityBuildDef.Passability == Traversability.Impassable))
+        if (existThing.Def.Category == ThingCategory.Unit || (existThing.Def.Category == ThingCategory.Item && buildingThingDef.EntityBuildDef.Passability == Traversability.Impassable))
         {
             return true;
         }
+
 
 
         return false;
@@ -66,10 +68,31 @@ public static class BuildUtility
     private static Thing MiniToInstallOrBuildingToReinstall(Blueprint blueprint)
     {
         //TODO:如果这个建筑是可以拆卸来重新安装的，就可以尝试重新安装
-        if (blueprint is Blueprint_Install installThing)
+        //if (blueprint is Blueprint_Install installThing)
+        //{
+        //    return installThing.MiniToInstallOrBuildingToReinstall;
+        //}
+
+        return null;
+    }
+
+    public static Job HandleBlockingThingJob(Blueprint blueprint, Thing_Unit unit, bool forced)
+    {
+        var blockThing = FirstBlockingThing(blueprint, (Thing_Unit_Pawn)unit);
+        if (blockThing == null)
         {
-            return installThing.MiniToInstallOrBuildingToReinstall;
+            return null;
         }
+        //TODO:如果是物品，需要搬离
+        if (blockThing.Def.Category == ThingCategory.Item)
+        {
+            if (HaulUtility.CanHaulAside(unit,blockThing,out PosNode haulResultNode))
+            {
+                return HaulUtility.HaulAsideJobFor(unit,blockThing);
+            }
+        }
+        //TODO:其他的后面处理
+
 
         return null;
     }
