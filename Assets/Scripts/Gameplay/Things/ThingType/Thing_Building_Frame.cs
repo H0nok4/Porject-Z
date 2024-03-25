@@ -12,7 +12,7 @@ public class Thing_Building_Frame : Thing_Building, IBuildable {
     public override void SpawnSetup(MapData mapData) {
         base.SpawnSetup(mapData);
         //TODO:将当前的贴图设置为def配置的Frame贴图
-        WorkToBuild = Def.Workload;
+        WorkToBuild = EntityDefineToBuildComplete().Workload;
         GameObject.SetSprite(Def.FrameSprite);
     }
 

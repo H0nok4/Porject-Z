@@ -50,6 +50,7 @@ public static class ThingUtility {
         baseFrameDef.Name = thingDef.Name;
         baseFrameDef.Passability = thingDef.Passability;
         baseFrameDef.Rotatable = thingDef.Rotatable;
+        baseFrameDef.Workload = thingDef.Workload;
         if (thingDef.IsBlueprint)
         {
             baseFrameDef.EntityBuildDef = thingDef.EntityBuildDef;

@@ -281,6 +281,7 @@ public abstract class Thing : IThing {
             }
             _mapData.UnRegisterThingHandle(this);
             _mapData.UnRegisterThingMapPos(this);
+            MapController.Instance.Map.ListThings.Remove(this);
             UnityEngine.GameObject.Destroy(GameObject.GO);
             GameObject = null;
         }
