@@ -12,27 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90dbc646613141e4ab60a46b376e010d, type: 3}
   m_Name: FloorTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: fda6174a667d17b41b5e5ad62d21a845, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Transform:
-    e00: 1
-    e01: 0
-    e02: 0
-    e03: 0
-    e10: 0
-    e11: 1
-    e12: 0
-    e13: 0
-    e20: 0
-    e21: 0
-    e22: 1
-    e23: 0
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 1
-  m_InstancedGameObject: {fileID: 0}
-  m_Flags: 1
-  m_ColliderType: 1
+  m_DefaultSprite: {fileID: 21300000, guid: fda6174a667d17b41b5e5ad62d21a845, type: 3}
+  m_DefaultGameObject: {fileID: 0}
+  m_DefaultColliderType: 1
+  m_TilingRules: []
   IsWalkable: 1
   SectionType: 1

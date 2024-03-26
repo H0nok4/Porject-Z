@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class MapTile : Tile
+public class MapTile : RuleTile
 {
 
     //TODO:每块Tile有当前的类型
