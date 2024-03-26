@@ -35,7 +35,7 @@ MonoBehaviour:
     IsBlueprint: 0
   WallInstance:
     Name: Wall
-    Passability: 0
+    Passability: 2
     MaxHitPoint: 100
     Workload: 60
     Rotatable: 1
