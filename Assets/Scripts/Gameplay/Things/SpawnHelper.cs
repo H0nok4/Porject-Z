@@ -8,9 +8,9 @@ public static class SpawnHelper
 {
 
     private static List<Thing> _helper = new List<Thing>();
-    public static Thing Spawn(Define_Thing define, PosNode node)
+    public static Thing Spawn(ThingBuildableDefine thingBuildableDefine, PosNode node)
     {
-        return Spawn(ThingMaker.MakeNewThing(define),node,Rotation.North);
+        return Spawn(ThingMaker.MakeNewThing(thingBuildableDefine),node,Rotation.North);
     }
 
     public static Thing Spawn(Thing newThing, PosNode node,Rotation rot, WipeMode wipeMode = WipeMode.Vanish)
@@ -48,7 +48,7 @@ public static class SpawnHelper
         return newThing;
     }
 
-    private static void TryRemovalThings(PosNode node, Rotation rot, Define_Buildable mainDef, DestroyType destroyType) {
+    private static void TryRemovalThings(PosNode node, Rotation rot, BuildableDefine mainDef, DestroyType destroyType) {
         //TODO:后面物体可能会站多个格子，需要每个格子都判断
         foreach (var thing in node.MapData.ThingMap.ThingsAt(node.Pos)) {
             if (!SpawningWipes(mainDef, thing.Def)) {
@@ -71,7 +71,7 @@ public static class SpawnHelper
         }
     }
 
-    public static void WipeExistingThings(PosNode node, Rotation rot, Define_Buildable thingDef, DestroyType destroyType)
+    public static void WipeExistingThings(PosNode node, Rotation rot, BuildableDefine thingDef, DestroyType destroyType)
     {
         //TODO:后面物体可能会站多个格子，需要每个格子都判断
         _helper.Clear();
@@ -86,11 +86,11 @@ public static class SpawnHelper
         _helper.Clear();
     }
 
-    public static bool SpawningWipes(Define_Buildable thingDef, Define_Buildable def)
+    public static bool SpawningWipes(BuildableDefine thingDef, BuildableDefine def)
     {
         //TODO:根据配置类型来决定是否删除该位置的建筑，像是电线，壁灯之类的都可以跟其他建筑共存，
-        var wantPlaceThingDef = (Define_Thing)thingDef;
-        var existThingDef = (Define_Thing)def;
+        var wantPlaceThingDef = (ThingBuildableDefine)thingDef;
+        var existThingDef = (ThingBuildableDefine)def;
         //if (wantPlaceThingDef.Category == ThingCategory.Building && wantPlaceThingDef.IsFrame)
         //{
 

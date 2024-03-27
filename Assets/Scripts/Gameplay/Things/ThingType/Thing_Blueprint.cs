@@ -38,7 +38,7 @@ public abstract class Blueprint : ThingWithComponent ,IBuildable {
 
     public abstract IReadOnlyList<DefineThingClassCount> NeedResources();
 
-    public abstract Define_Thing EntityDefineToBuildComplete();
+    public abstract ThingBuildableDefine EntityDefineToBuildComplete();
 
     public override void SpawnSetup(MapData mapData)
     {

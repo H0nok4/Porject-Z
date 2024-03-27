@@ -11,11 +11,11 @@ using static UnityEngine.Rendering.DebugUI;
 public abstract class Thing : IThing {
 
 
-    public Define_Thing Def;
+    public ThingBuildableDefine Def;
     /// <summary>
     /// 物品拥有额外的配置
     /// </summary>
-    public Define_Thing ItemDef;
+    public ThingBuildableDefine ItemDef;
     public ThingObject GameObject { get; set; }
 
     private PosNode _position;

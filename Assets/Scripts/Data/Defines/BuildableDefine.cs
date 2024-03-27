@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public abstract class Define_Buildable : BaseDefine{
+public abstract class BuildableDefine : BaseDefine{
     /// <summary>
     /// 看是否可以通过
     /// </summary>
@@ -28,7 +28,7 @@ public abstract class Define_Buildable : BaseDefine{
     public Sprite FrameSprite;
 
     [NonSerialized]
-    public Define_Thing EntityBuildDef;
+    public ThingBuildableDefine EntityBuildDef;
 
     [SerializeField]
     private List<DefineThingClassCount> _costThing;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 [Serializable]
-public class Define_Thing : Define_Buildable
+public class ThingBuildableDefine : BuildableDefine
 {
     public EditableType ThingClass;
 
@@ -34,9 +34,9 @@ public class Define_Thing : Define_Buildable
 
     public bool IsBlueprint;
 
-    private Define_Thing _blueprintDefInstance;
+    private ThingBuildableDefine _blueprintDefInstance;
 
-    public Define_Thing BlueprintDef {
+    public ThingBuildableDefine BlueprintDef {
         get {
             if (_blueprintDefInstance == null)
                 ThingUtility.CreateBlueprintDefToThingDef(this);
@@ -46,8 +46,8 @@ public class Define_Thing : Define_Buildable
         set => _blueprintDefInstance = value;
     }
 
-    private Define_Thing _frameDefInstance;
-    public Define_Thing FrameDef {
+    private ThingBuildableDefine _frameDefInstance;
+    public ThingBuildableDefine FrameDef {
         get {
             if (_frameDefInstance == null)
             {

@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ThingDefineHandler", menuName = "Define Handler/Create ThingDefineHandler")]
 public class ThingDefineHandler : ScriptableObject
 {
-    public Define_Thing Pawn;
+    public ThingBuildableDefine Pawn;
 
-    public Define_Thing WallInstance;
+    public ThingBuildableDefine WallInstance;
 }

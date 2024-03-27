@@ -36,15 +36,15 @@ public static class BuildUtility
             return false;
         }
 
-        Define_Thing buildingThingDef = (buildingThing is Blueprint) ? buildingThing.Def :
+        ThingBuildableDefine buildingDef = (buildingThing is Blueprint) ? buildingThing.Def :
             (!(buildingThing is Thing_Building_Frame)) ? buildingThing.Def.BlueprintDef :
             buildingThing.Def.EntityBuildDef.BlueprintDef;
-        if (buildingThing.Def.Category == ThingCategory.Building && SpawnHelper.SpawningWipes(buildingThingDef,existThing.Def))
+        if (buildingThing.Def.Category == ThingCategory.Building && SpawnHelper.SpawningWipes(buildingDef,existThing.Def))
         {
             return true;
         }
 
-        Define_Thing buildingEntityDefing = buildingThingDef.EntityBuildDef as Define_Thing;
+        ThingBuildableDefine buildingEntityDefing = buildingDef.EntityBuildDef as ThingBuildableDefine;
         if (buildingEntityDefing != null)
         {
             if (existThing.Def.Category == ThingCategory.Item)
@@ -53,7 +53,7 @@ public static class BuildUtility
             }
         }
 
-        if (existThing.Def.Category == ThingCategory.Unit || (existThing.Def.Category == ThingCategory.Item && buildingThingDef.EntityBuildDef.Passability == Traversability.Impassable))
+        if (existThing.Def.Category == ThingCategory.Unit || (existThing.Def.Category == ThingCategory.Item && buildingDef.EntityBuildDef.Passability == Traversability.Impassable))
         {
             return true;
         }

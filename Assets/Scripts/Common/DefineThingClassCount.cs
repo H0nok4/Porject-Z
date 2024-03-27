@@ -10,7 +10,7 @@ public class DefineThingClassCount
     public string DefineName;
 
     [NonSerialized]
-    public Define_Thing Def;
+    public ThingBuildableDefine Def;
 
     public int Count;
 }
