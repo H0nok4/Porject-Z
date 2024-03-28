@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public abstract class Need
 {
@@ -44,6 +44,8 @@ public abstract class Need
             return false;
         }
     }
+
+    public abstract void Tick();
 
     public Need()
     {
