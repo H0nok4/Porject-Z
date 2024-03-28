@@ -45,7 +45,7 @@ public abstract class Need
         }
     }
 
-    public abstract void Tick();
+    public abstract void Tick(int interval);
 
     public Need()
     {
