@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPokeGirlAttributeBaseDefine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<PokeGirlAttributeBaseDefine>
+		<ID>1</ID>
+		<SkillPointNum>8</SkillPointNum>
+		<MaxHpBase>100</MaxHpBase>
+		<AttackBase>10</AttackBase>
+		<DefenseBase>10</DefenseBase>
+		<SpAttackBase>10</SpAttackBase>
+		<SpDefenseBase>10</SpDefenseBase>
+		<SpeedBase>10</SpeedBase>
+		<CriticalChanceBase>0.05</CriticalChanceBase>
+		<CriticalDamageBase>0.5</CriticalDamageBase>
+		<InjuryReductionRateBase>0.1</InjuryReductionRateBase>
+		<InjuryDamageBase>0.1</InjuryDamageBase>
+		<MaxHpGrow>5</MaxHpGrow>
+		<AttackGrow>5</AttackGrow>
+		<DefenseGrow>5</DefenseGrow>
+		<SpAttackGrow>5</SpAttackGrow>
+		<SpDefenseGrow>5</SpDefenseGrow>
+		<SpeedGrow>1</SpeedGrow>
+	</PokeGirlAttributeBaseDefine>
+	<PokeGirlAttributeBaseDefine>
+		<ID>2</ID>
+		<SkillPointNum>10</SkillPointNum>
+		<MaxHpBase>110</MaxHpBase>
+		<AttackBase>10</AttackBase>
+		<DefenseBase>10</DefenseBase>
+		<SpAttackBase>10</SpAttackBase>
+		<SpDefenseBase>10</SpDefenseBase>
+		<SpeedBase>10</SpeedBase>
+		<CriticalChanceBase>0.05</CriticalChanceBase>
+		<CriticalDamageBase>0.5</CriticalDamageBase>
+		<InjuryReductionRateBase>0.1</InjuryReductionRateBase>
+		<InjuryDamageBase>0</InjuryDamageBase>
+		<MaxHpGrow>5</MaxHpGrow>
+		<AttackGrow>5</AttackGrow>
+		<DefenseGrow>4</DefenseGrow>
+		<SpAttackGrow>5</SpAttackGrow>
+		<SpDefenseGrow>5</SpDefenseGrow>
+		<SpeedGrow>1</SpeedGrow>
+	</PokeGirlAttributeBaseDefine>
+</ArrayOfPokeGirlAttributeBaseDefine>

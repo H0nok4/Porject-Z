@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfNPCBaseDefine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<NPCBaseDefine>
+		<ID>1</ID>
+		<Name>测试NPC1</Name>
+		<BattlePartyID>
+			<int>1</int>
+			<int>1</int>
+		</BattlePartyID>
+		<BattlePartyLevel>
+			<int>1</int>
+			<int>2</int>
+		</BattlePartyLevel>
+	</NPCBaseDefine>
+	<NPCBaseDefine>
+		<ID>2</ID>
+		<Name>测试NPC2</Name>
+		<BattlePartyID>
+			<int>1</int>
+			<int>1</int>
+		</BattlePartyID>
+		<BattlePartyLevel>
+			<int>1</int>
+			<int>2</int>
+		</BattlePartyLevel>
+	</NPCBaseDefine>
+	<NPCBaseDefine>
+		<ID>3</ID>
+		<Name>默认的空值</Name>
+		<BattlePartyID>
+			<int>1</int>
+			<int>1</int>
+		</BattlePartyID>
+		<BattlePartyLevel>
+			<int>1</int>
+			<int>2</int>
+		</BattlePartyLevel>
+	</NPCBaseDefine>
+</ArrayOfNPCBaseDefine>

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfSkillBaseDefine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<SkillBaseDefine>
+		<ID>1</ID>
+		<SkillName>打击</SkillName>
+		<SkillType>Physics</SkillType>
+		<SkillDes>一次基础的物理打击</SkillDes>
+		<SkillTargetType>Other</SkillTargetType>
+		<SkillLearnTag>All</SkillLearnTag>
+		<Cost>2</Cost>
+		<LevelLimit>1</LevelLimit>
+		<SkillActions>
+			<int>1</int>
+		</SkillActions>
+		<TimeLineData>Skill_001</TimeLineData>
+	</SkillBaseDefine>
+	<SkillBaseDefine>
+		<ID>2</ID>
+		<SkillName>心灵打击</SkillName>
+		<SkillType>Psyche</SkillType>
+		<SkillDes>一次基础的心灵打击</SkillDes>
+		<SkillTargetType>Other</SkillTargetType>
+		<SkillLearnTag>All</SkillLearnTag>
+		<Cost>2</Cost>
+		<LevelLimit>1</LevelLimit>
+		<SkillActions>
+			<int>2</int>
+		</SkillActions>
+		<TimeLineData>Skill_002</TimeLineData>
+	</SkillBaseDefine>
+</ArrayOfSkillBaseDefine>

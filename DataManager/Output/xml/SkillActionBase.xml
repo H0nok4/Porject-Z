@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfSkillActionBaseDefine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<SkillActionBaseDefine>
+		<ID>1</ID>
+		<ActionName>打击</ActionName>
+		<ActionTarget>Target</ActionTarget>
+		<ActionType>Damage</ActionType>
+		<ActionValueTarget>
+			<SkillActionTarget>User</SkillActionTarget>
+		</ActionValueTarget>
+		<ActionValueOperateType>
+			<ValueOperateType>Mul</ValueOperateType>
+		</ActionValueOperateType>
+		<ActionValueRelateUnitType>
+			<ValueRelateUnit>Atk</ValueRelateUnit>
+		</ActionValueRelateUnitType>
+		<Value>
+			<float>0.5</float>
+		</Value>
+		<DifferentValueOperateType />
+		<AdditionClassName />
+	</SkillActionBaseDefine>
+	<SkillActionBaseDefine>
+		<ID>2</ID>
+		<ActionName>心灵打击</ActionName>
+		<ActionTarget>Target</ActionTarget>
+		<ActionType>Damage</ActionType>
+		<ActionValueTarget>
+			<SkillActionTarget>User</SkillActionTarget>
+		</ActionValueTarget>
+		<ActionValueOperateType>
+			<ValueOperateType>Mul</ValueOperateType>
+		</ActionValueOperateType>
+		<ActionValueRelateUnitType>
+			<ValueRelateUnit>Atk</ValueRelateUnit>
+		</ActionValueRelateUnitType>
+		<Value>
+			<float>2</float>
+		</Value>
+		<DifferentValueOperateType />
+		<AdditionClassName />
+	</SkillActionBaseDefine>
+	<SkillActionBaseDefine>
+		<ID>3</ID>
+		<ActionName>对目标恢复</ActionName>
+		<ActionTarget>Target</ActionTarget>
+		<ActionType>Heal</ActionType>
+		<ActionValueTarget>
+			<SkillActionTarget>User</SkillActionTarget>
+		</ActionValueTarget>
+		<ActionValueOperateType>
+			<ValueOperateType>Mul</ValueOperateType>
+		</ActionValueOperateType>
+		<ActionValueRelateUnitType>
+			<ValueRelateUnit>SpAtk</ValueRelateUnit>
+		</ActionValueRelateUnitType>
+		<Value>
+			<float>3</float>
+		</Value>
+		<DifferentValueOperateType />
+		<AdditionClassName />
+	</SkillActionBaseDefine>
+	<SkillActionBaseDefine>
+		<ID>4</ID>
+		<ActionName>对使用者恢复</ActionName>
+		<ActionTarget>User</ActionTarget>
+		<ActionType>Heal</ActionType>
+		<ActionValueTarget>
+			<SkillActionTarget>User</SkillActionTarget>
+		</ActionValueTarget>
+		<ActionValueOperateType>
+			<ValueOperateType>Mul</ValueOperateType>
+		</ActionValueOperateType>
+		<ActionValueRelateUnitType>
+			<ValueRelateUnit>SpAtk</ValueRelateUnit>
+		</ActionValueRelateUnitType>
+		<Value>
+			<float>3</float>
+		</Value>
+		<DifferentValueOperateType />
+		<AdditionClassName />
+	</SkillActionBaseDefine>
+	<SkillActionBaseDefine>
+		<ID>5</ID>
+		<ActionName>自残</ActionName>
+		<ActionTarget>User</ActionTarget>
+		<ActionType>Damage</ActionType>
+		<ActionValueTarget>
+			<SkillActionTarget>User</SkillActionTarget>
+		</ActionValueTarget>
+		<ActionValueOperateType>
+			<ValueOperateType>Mul</ValueOperateType>
+		</ActionValueOperateType>
+		<ActionValueRelateUnitType>
+			<ValueRelateUnit>Atk</ValueRelateUnit>
+		</ActionValueRelateUnitType>
+		<Value>
+			<float>2</float>
+		</Value>
+		<DifferentValueOperateType />
+		<AdditionClassName />
+	</SkillActionBaseDefine>
+	<SkillActionBaseDefine>
+		<ID>6</ID>
+		<ActionName>添加BUFF1</ActionName>
+		<ActionTarget>Target</ActionTarget>
+		<ActionType>AddBuff</ActionType>
+		<ActionValueTarget>
+			<SkillActionTarget>User</SkillActionTarget>
+		</ActionValueTarget>
+		<ActionValueOperateType>
+			<ValueOperateType>Mul</ValueOperateType>
+		</ActionValueOperateType>
+		<ActionValueRelateUnitType>
+			<ValueRelateUnit>Atk</ValueRelateUnit>
+		</ActionValueRelateUnitType>
+		<Value>
+			<float>10</float>
+		</Value>
+		<DifferentValueOperateType />
+		<AdditionClassName />
+	</SkillActionBaseDefine>
+</ArrayOfSkillActionBaseDefine>

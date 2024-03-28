@@ -1,0 +1,11 @@
+*,,,,,,,,,
+int32,string,SkillActionTarget,SkillActionType,SkillActionTarget[],ValueOperateType[],ValueRelateUnit[],float[],ValueOperateType[],string
+ID,ActionName,ActionTarget,ActionType,ActionValueTarget,ActionValueOperateType,ActionValueRelateUnitType,Value,DifferentValueOperateType,AdditionClassName
+ID,效果名称（相当于备注）,技能效果目标,技能效果类型,技能效果生效的值的计算对象,技能效果生效的值的类型,技能效果生效的值关连角色的属性类型,技能效果值(根据不同的效果类型有不同的规则),多个值之间的计算方式,额外生效的类名，可以通过反射创建出来，根据不同的技能效果创建不同的基类然后调用不同的虚方法来实现一些复杂的技能效果
+,,,,User,,,,,
+1,打击,Target,Damage,,Mul,Atk,0.5,,
+2,心灵打击,Target,Damage,,Mul,Atk,2,,
+3,对目标恢复,Target,Heal,,Mul,SpAtk,3,,
+4,对使用者恢复,User,Heal,,Mul,SpAtk,3,,
+5,自残,User,Damage,,Mul,Atk,2,,
+6,添加BUFF1,Target,AddBuff,,Mul,Atk,10,,

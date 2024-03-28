@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPokeGirlBaseDefine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<PokeGirlBaseDefine>
+		<ID>1</ID>
+		<Name>测试001</Name>
+		<Describe>这是用来测试的001号角色</Describe>
+		<AttributeID>1</AttributeID>
+		<LearnableSkillTags>
+			<SkillLearnTag>All</SkillLearnTag>
+		</LearnableSkillTags>
+	</PokeGirlBaseDefine>
+	<PokeGirlBaseDefine>
+		<ID>2</ID>
+		<Name>Test002</Name>
+		<Describe>这是用来测试的001号角色</Describe>
+		<AttributeID>2</AttributeID>
+		<LearnableSkillTags>
+			<SkillLearnTag>All</SkillLearnTag>
+		</LearnableSkillTags>
+	</PokeGirlBaseDefine>
+	<PokeGirlBaseDefine>
+		<ID>3</ID>
+		<Name>默认的空值</Name>
+		<Describe>这个不是默认的空值</Describe>
+		<AttributeID>1</AttributeID>
+		<LearnableSkillTags>
+			<SkillLearnTag>All</SkillLearnTag>
+		</LearnableSkillTags>
+	</PokeGirlBaseDefine>
+</ArrayOfPokeGirlBaseDefine>

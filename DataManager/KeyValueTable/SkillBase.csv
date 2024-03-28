@@ -1,0 +1,7 @@
+*,,
+int32,string,SkillType
+ID,SkillName,SkillType
+ID,技能名称,技能类型
+,,
+1,打击,Physics
+2,心灵打击,Psyche

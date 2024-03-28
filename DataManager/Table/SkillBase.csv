@@ -1,0 +1,7 @@
+*,,,,,,,,,
+int32,string,SkillType,string,SkillTargetType,SkillLearnTag,int32,int32,int32[],string
+ID,SkillName,SkillType,SkillDes,SkillTargetType,SkillLearnTag,Cost,LevelLimit,SkillActions,TimeLineData
+ID,技能名称,技能类型,技能描述,技能的目标类型,可学习技能的类型,使用技能的消耗,技能的学习等级条件,技能的效果ID,技能的TimelineData名称
+,,,,,All,0,1,,
+1,打击,Physics,一次基础的物理打击,Other,,2,,1,Skill_001
+2,心灵打击,Psyche,一次基础的心灵打击,Other,,2,,2,Skill_002
