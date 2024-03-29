@@ -28,7 +28,7 @@ public class Thing_Building_Frame : Thing_Building, IBuildable {
         return new List<DefineThingClassCount>();
     }
 
-    public ThingBuildableDefine EntityDefineToBuildComplete()
+    public ThingDefine EntityDefineToBuildComplete()
     {
         return Def.EntityBuildDef;
     }

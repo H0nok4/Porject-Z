@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConfigType;
 using UnityEngine;
 
 [Serializable]
-public class ThingBuildableDefine : BuildableDefine
+public class ThingDefine : BuildableDefine
 {
     public EditableType ThingClass;
 
@@ -34,9 +35,9 @@ public class ThingBuildableDefine : BuildableDefine
 
     public bool IsBlueprint;
 
-    private ThingBuildableDefine _blueprintDefInstance;
+    private ThingDefine _blueprintDefInstance;
 
-    public ThingBuildableDefine BlueprintDef {
+    public ThingDefine BlueprintDef {
         get {
             if (_blueprintDefInstance == null)
                 ThingUtility.CreateBlueprintDefToThingDef(this);
@@ -46,8 +47,8 @@ public class ThingBuildableDefine : BuildableDefine
         set => _blueprintDefInstance = value;
     }
 
-    private ThingBuildableDefine _frameDefInstance;
-    public ThingBuildableDefine FrameDef {
+    private ThingDefine _frameDefInstance;
+    public ThingDefine FrameDef {
         get {
             if (_frameDefInstance == null)
             {

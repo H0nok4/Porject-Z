@@ -20,7 +20,7 @@ public class WallTile : MapTile
         }
 
         var instance = ScriptableObject.CreateInstance<WallTile>();
-        instance.SectionType = SectionType.Wall;
+        instance.SectionType = ConfigType.SectionType.Wall;
         instance.IsWalkable = false;
         AssetDatabase.CreateAsset(instance, path);
     }

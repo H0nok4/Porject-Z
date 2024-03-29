@@ -18,7 +18,7 @@ public class AirTile : MapTile
         }
 
         var instance = ScriptableObject.CreateInstance<AirTile>();
-        instance.SectionType = SectionType.Air;
+        instance.SectionType = ConfigType.SectionType.Air;
         AssetDatabase.CreateAsset(instance, path);
     }
 #endif

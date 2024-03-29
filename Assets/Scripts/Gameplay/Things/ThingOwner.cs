@@ -105,7 +105,7 @@ public abstract class ThingOwner : IList<Thing>
         return item.HoldingOwner == this;
     }
 
-    public bool Contains(ThingBuildableDefine def)
+    public bool Contains(ThingDefine def)
     {
         return Contains(def, 1);
     }
@@ -116,7 +116,7 @@ public abstract class ThingOwner : IList<Thing>
     /// <param name="def"></param>
     /// <param name="minCount">大于等于这个数值的才会判断为已拥有</param>
     /// <returns></returns>
-    public bool Contains(ThingBuildableDefine def, int minCount)
+    public bool Contains(ThingDefine def, int minCount)
     {
         if (minCount <= 0)
         {

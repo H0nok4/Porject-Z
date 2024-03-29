@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConfigType;
 
 public abstract class ThingComponentBase {
     //TODO:Thing可以使用的组件，拥有的不同的组件构成了Thing的功能

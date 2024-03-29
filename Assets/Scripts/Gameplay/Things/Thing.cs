@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Assets.Scripts.Gameplay;
+using ConfigType;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.Rendering.DebugUI;
@@ -11,11 +12,11 @@ using static UnityEngine.Rendering.DebugUI;
 public abstract class Thing : IThing {
 
 
-    public ThingBuildableDefine Def;
+    public ThingDefine Def;
     /// <summary>
     /// 物品拥有额外的配置
     /// </summary>
-    public ThingBuildableDefine ItemDef;
+    public ThingDefine ItemDef;
     public ThingObject GameObject { get; set; }
 
     private PosNode _position;

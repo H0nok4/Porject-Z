@@ -1,5 +1,5 @@
 using System;
-using JetBrains.Annotations;
+using ConfigType;
 using UnityEngine;
 
 public class MoveTargetInfo

@@ -3,7 +3,7 @@ using System;
 
 public struct ThingRequest {
     //TODO:后期会将Things分类，加快查询的速度，比如建造工作只需要扫描需要被建造的Things就可以了
-    public ThingBuildableDefine ThingBuildableDefine;
+    public ThingDefine ThingDefine;
 
     public ThingRequestGroup Group;
 
@@ -11,7 +11,7 @@ public struct ThingRequest {
     {
         get
         {
-            if (ThingBuildableDefine == null)
+            if (ThingDefine == null)
             {
                 return Group == ThingRequestGroup.Undefined;
             }
@@ -20,10 +20,10 @@ public struct ThingRequest {
         }
     }
 
-    public static ThingRequest ForDefine(ThingBuildableDefine thingBuildableDefine)
+    public static ThingRequest ForDefine(ThingDefine thingDefine)
     {
         ThingRequest result = default(ThingRequest);
-        result.ThingBuildableDefine = thingBuildableDefine;
+        result.ThingDefine = thingDefine;
         result.Group = ThingRequestGroup.Undefined;
         return result;
     }
@@ -31,14 +31,14 @@ public struct ThingRequest {
     public static ThingRequest ForGroup(ThingRequestGroup group)
     {
         ThingRequest result = default(ThingRequest);
-        result.ThingBuildableDefine = null;
+        result.ThingDefine = null;
         result.Group = group;
         return result;
     }
 
     public override string ToString()
     {
-        return $"Define = {ThingBuildableDefine},RequestGroup = {Group}";
+        return $"Define = {ThingDefine},RequestGroup = {Group}";
     }
 }
 
@@ -57,7 +57,7 @@ public static class ThingRequestGroupHelper
         }
     }
 
-    public static bool Contains(this ThingRequestGroup group, ThingBuildableDefine thingBuildableDefine)
+    public static bool Contains(this ThingRequestGroup group, ThingDefine thingDefine)
     {
         switch (group)
         {
@@ -66,9 +66,9 @@ public static class ThingRequestGroupHelper
             case ThingRequestGroup.All:
                 return true;
             case ThingRequestGroup.BuildingFrame:
-                return thingBuildableDefine.IsFrame;
+                return thingDefine.IsFrame;
             case ThingRequestGroup.BuildingBlueprint:
-                return thingBuildableDefine.IsBlueprint;
+                return thingDefine.IsBlueprint;
             default:
                 return false;
         }

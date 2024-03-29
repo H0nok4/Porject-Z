@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ConfigType;
 using UnityEngine;
 
 /// <summary>
@@ -38,7 +39,7 @@ public abstract class Blueprint : ThingWithComponent ,IBuildable {
 
     public abstract IReadOnlyList<DefineThingClassCount> NeedResources();
 
-    public abstract ThingBuildableDefine EntityDefineToBuildComplete();
+    public abstract ThingDefine EntityDefineToBuildComplete();
 
     public override void SpawnSetup(MapData mapData)
     {

@@ -13,7 +13,7 @@ public class Thing_Blueprint_Building : Blueprint {
         return Def.EntityBuildDef.CostList;
     }
 
-    public override ThingBuildableDefine EntityDefineToBuildComplete()
+    public override ThingDefine EntityDefineToBuildComplete()
     {
         return Def.EntityBuildDef;
     }

@@ -1,5 +1,6 @@
 
 using System;
+using ConfigType;
 using UnityEngine;
 
 public class Job

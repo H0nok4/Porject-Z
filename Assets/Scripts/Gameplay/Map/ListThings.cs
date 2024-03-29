@@ -6,8 +6,8 @@ using UnityEngine;
 
 public sealed class ListThings
 {
-    public Dictionary<ThingBuildableDefine, List<Thing>> ListByDefine =
-        new Dictionary<ThingBuildableDefine, List<Thing>>(DefineThingComparer.Instance);
+    public Dictionary<ThingDefine, List<Thing>> ListByDefine =
+        new Dictionary<ThingDefine, List<Thing>>(DefineThingComparer.Instance);
 
     public List<Thing>[] ListByGroup;
 
@@ -26,16 +26,16 @@ public sealed class ListThings
         return ThingsMatching(ThingRequest.ForGroup(group));
     }
 
-    public List<Thing> GetThingsByThingDefine(ThingBuildableDefine thingBuildableDefine)
+    public List<Thing> GetThingsByThingDefine(ThingDefine thingDefine)
     {
-        return ThingsMatching(ThingRequest.ForDefine(thingBuildableDefine));
+        return ThingsMatching(ThingRequest.ForDefine(thingDefine));
     }
 
     public List<Thing> ThingsMatching(ThingRequest request)
     {
-        if (request.ThingBuildableDefine != null)
+        if (request.ThingDefine != null)
         {
-            if (ListByDefine.TryGetValue(request.ThingBuildableDefine,out List<Thing> things))
+            if (ListByDefine.TryGetValue(request.ThingDefine,out List<Thing> things))
             {
                 return things;
             }
@@ -112,10 +112,10 @@ public sealed class ListThings
     }
 }
 
-public class DefineThingComparer : IEqualityComparer<ThingBuildableDefine> {
+public class DefineThingComparer : IEqualityComparer<ThingDefine> {
     public static readonly DefineThingComparer Instance = new DefineThingComparer();
 
-    public bool Equals(ThingBuildableDefine x, ThingBuildableDefine y) {
+    public bool Equals(ThingDefine x, ThingDefine y) {
         if (x == null && y == null) {
             return true;
         }
@@ -125,7 +125,7 @@ public class DefineThingComparer : IEqualityComparer<ThingBuildableDefine> {
         return x.UniqueID == y.UniqueID;
     }
 
-    public int GetHashCode(ThingBuildableDefine obj) {
+    public int GetHashCode(ThingDefine obj) {
         return obj.GetHashCode();
     }
 }

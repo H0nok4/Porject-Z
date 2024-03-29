@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConfigType;
 
 public static class ReserveUtility {
     public static bool CanReserve(this Thing_Unit unit, JobTargetInfo target, bool ignoreOtherReservations = false)

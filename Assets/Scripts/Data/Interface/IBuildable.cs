@@ -3,5 +3,5 @@
 public interface IBuildable {
     IReadOnlyList<DefineThingClassCount> NeedResources();
 
-    ThingBuildableDefine EntityDefineToBuildComplete();
+    ThingDefine EntityDefineToBuildComplete();
 }

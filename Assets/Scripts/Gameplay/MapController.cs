@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using Assets.Scripts.Gameplay.Data;
+using ConfigType;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 

@@ -18,7 +18,7 @@ public class FloorTile : MapTile
         }
 
         var instance = ScriptableObject.CreateInstance<FloorTile>();
-        instance.SectionType = SectionType.Floor;
+        instance.SectionType = ConfigType.SectionType.Floor;
         AssetDatabase.CreateAsset(instance, path);
     }
 #endif

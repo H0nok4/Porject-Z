@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConfigType;
 using UnityEngine;
 
 public abstract class BuildableDefine : BaseDefine{
@@ -28,7 +29,7 @@ public abstract class BuildableDefine : BaseDefine{
     public Sprite FrameSprite;
 
     [NonSerialized]
-    public ThingBuildableDefine EntityBuildDef;
+    public ThingDefine EntityBuildDef;
 
     [SerializeField]
     private List<DefineThingClassCount> _costThing;

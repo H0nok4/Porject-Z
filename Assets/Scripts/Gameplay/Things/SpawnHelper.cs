@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ConfigType;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -8,9 +9,9 @@ public static class SpawnHelper
 {
 
     private static List<Thing> _helper = new List<Thing>();
-    public static Thing Spawn(ThingBuildableDefine thingBuildableDefine, PosNode node)
+    public static Thing Spawn(ThingDefine thingDefine, PosNode node)
     {
-        return Spawn(ThingMaker.MakeNewThing(thingBuildableDefine),node,Rotation.North);
+        return Spawn(ThingMaker.MakeNewThing(thingDefine),node,Rotation.North);
     }
 
     public static Thing Spawn(Thing newThing, PosNode node,Rotation rot, WipeMode wipeMode = WipeMode.Vanish)
@@ -89,8 +90,8 @@ public static class SpawnHelper
     public static bool SpawningWipes(BuildableDefine thingDef, BuildableDefine def)
     {
         //TODO:根据配置类型来决定是否删除该位置的建筑，像是电线，壁灯之类的都可以跟其他建筑共存，
-        var wantPlaceThingDef = (ThingBuildableDefine)thingDef;
-        var existThingDef = (ThingBuildableDefine)def;
+        var wantPlaceThingDef = (ThingDefine)thingDef;
+        var existThingDef = (ThingDefine)def;
         //if (wantPlaceThingDef.Category == ThingCategory.Building && wantPlaceThingDef.IsFrame)
         //{
 

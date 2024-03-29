@@ -1,4 +1,6 @@
 ﻿
+using ConfigType;
+
 public static class Work_Build {
     public static Work BuildBlueprintToFrameIfNeed(JobTargetIndex blueprintIndex) {
         Work work = WorkMaker.MakeWork();

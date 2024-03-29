@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ConfigType;
 using UnityEngine;
 using UnityEngine.Rendering;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
@@ -36,7 +37,7 @@ public static class BuildUtility
             return false;
         }
 
-        ThingBuildableDefine buildingDef = (buildingThing is Blueprint) ? buildingThing.Def :
+        ThingDefine buildingDef = (buildingThing is Blueprint) ? buildingThing.Def :
             (!(buildingThing is Thing_Building_Frame)) ? buildingThing.Def.BlueprintDef :
             buildingThing.Def.EntityBuildDef.BlueprintDef;
         if (buildingThing.Def.Category == ThingCategory.Building && SpawnHelper.SpawningWipes(buildingDef,existThing.Def))
@@ -44,7 +45,7 @@ public static class BuildUtility
             return true;
         }
 
-        ThingBuildableDefine buildingEntityDefing = buildingDef.EntityBuildDef as ThingBuildableDefine;
+        ThingDefine buildingEntityDefing = buildingDef.EntityBuildDef as ThingDefine;
         if (buildingEntityDefing != null)
         {
             if (existThing.Def.Category == ThingCategory.Item)

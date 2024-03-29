@@ -10,7 +10,7 @@ public class DesignatorManager : Singleton<DesignatorManager> {
 
     public DesignatorType DesignatorType;
 
-    public ThingBuildableDefine BuildingDef = DataTableManager.Instance.ThingDefineHandler.WallInstance;
+    public ThingDefine BuildingDef = DataTableManager.Instance.ThingDefineHandler.WallInstance;
 
     public bool IsBuildingState {
         get {

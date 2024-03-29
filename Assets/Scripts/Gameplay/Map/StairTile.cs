@@ -20,7 +20,7 @@ public class StairTile : MapTile
         }
 
         var instance = ScriptableObject.CreateInstance<StairTile>();
-        instance.SectionType = SectionType.Stair;
+        instance.SectionType = ConfigType.SectionType.Stair;
         AssetDatabase.CreateAsset(instance, path);
     }
 #endif

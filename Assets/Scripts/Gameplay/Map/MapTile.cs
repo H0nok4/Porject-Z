@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ConfigType;
 
 #if UNITY_EDITOR
 using UnityEditor;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConfigType;
 using UnityEngine;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
@@ -16,8 +17,8 @@ public static class ThingUtility {
     /// 因为所有Frame都为一个类，所以可以直接创建Frame配置
     /// </summary>
     /// <returns></returns>
-    private static ThingBuildableDefine BaseFrameDef() {
-        return new ThingBuildableDefine() {
+    private static ThingDefine BaseFrameDef() {
+        return new ThingDefine() {
             IsFrame = true,
             //ThingClass = new EditableType(){TypeName = "Thing_Building_Frame" },
             UseHitPoint = true,
@@ -29,9 +30,9 @@ public static class ThingUtility {
     };
     }
 
-    private static ThingBuildableDefine BaseBlueprintDef()
+    private static ThingDefine BaseBlueprintDef()
     {
-        return new ThingBuildableDefine()
+        return new ThingDefine()
         {
             IsBlueprint = true,
             Category = ThingCategory.Mirage,
@@ -41,7 +42,7 @@ public static class ThingUtility {
         };
     }
 
-    public static void CreateFrameDefToThingDef(ThingBuildableDefine def)
+    public static void CreateFrameDefToThingDef(ThingDefine def)
     {
         Debug.Log("创建了一个Frame配置");
         var baseFrameDef = BaseFrameDef();
@@ -63,16 +64,16 @@ public static class ThingUtility {
         def.FrameDef = baseFrameDef;
     }
 
-    public static void CreateBlueprintDefToThingDef(ThingBuildableDefine thingBuildableDefineBuildable)
+    public static void CreateBlueprintDefToThingDef(ThingDefine thingDefine)
     {
         Debug.Log("创建了一个蓝图配置");
         var baseBlueprintDef = BaseBlueprintDef();
-        baseBlueprintDef.Size = thingBuildableDefineBuildable.Size;
-        baseBlueprintDef.Name = thingBuildableDefineBuildable.Name;
-        baseBlueprintDef.Rotatable = thingBuildableDefineBuildable.Rotatable;
+        baseBlueprintDef.Size = thingDefine.Size;
+        baseBlueprintDef.Name = thingDefine.Name;
+        baseBlueprintDef.Rotatable = thingDefine.Rotatable;
         baseBlueprintDef.ThingClass = new EditableType() { TypeName = "Thing_Blueprint_Building" };
-        baseBlueprintDef.ThingSprite = thingBuildableDefineBuildable.BlueprintSprite;
-        baseBlueprintDef.EntityBuildDef = thingBuildableDefineBuildable;
-        thingBuildableDefineBuildable.BlueprintDef = baseBlueprintDef;
+        baseBlueprintDef.ThingSprite = thingDefine.BlueprintSprite;
+        baseBlueprintDef.EntityBuildDef = thingDefine;
+        thingDefine.BlueprintDef = baseBlueprintDef;
     }
 }
