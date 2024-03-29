@@ -36,7 +36,7 @@ public static class HaulUtility {
             return null;
         }
 
-        Job haulJob = JobMaker.MakeJob(DataTableManager.Instance.JobDefineHandler.HaulToCell, haulThing, haulPos);
+        Job haulJob = JobMaker.MakeJob(DataManager.Instance.GetJobDefineByID(5), haulThing, haulPos);
         haulJob.Count = 10000;
         haulJob.HaulMode = HaulMode.ToCell;
         return haulJob;

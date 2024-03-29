@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConfigType;
+
 public class WorkGiver_BuildFrame : WorkGiver_Scanner
 {
     public override ThingRequest ThingRequest => ThingRequest.ForGroup(ThingRequestGroup.BuildingFrame);
@@ -25,7 +27,7 @@ public class WorkGiver_BuildFrame : WorkGiver_Scanner
             return null;
         }
 
-        return JobMaker.MakeJob(DataTableManager.Instance.JobDefineHandler.BuildFrame, frame);
+        return JobMaker.MakeJob(DataManager.Instance.GetJobDefineByID(2), frame);
 
     }
 }

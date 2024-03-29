@@ -7,9 +7,6 @@ using UnityEngine;
 public partial class DataTableManager : Singleton<DataTableManager>
 {
 
-    public JobDefineHandler JobDefineHandler;
-
-    public WorkGiverDefineHandler WorkGiverDefineHandler;
 
     public ThingDefineHandler ThingDefineHandler;
 
@@ -60,8 +57,6 @@ public partial class DataTableManager : Singleton<DataTableManager>
 
     public void Init()
     {
-        JobDefineHandler = Resources.Load<JobDefineHandler>("Defines/Handler/JobDefineHandler");
-        WorkGiverDefineHandler = Resources.Load<WorkGiverDefineHandler>("Defines/Handler/WorkGiverDefineHandler");
         ThingDefineHandler = Resources.Load<ThingDefineHandler>("Defines/Handler/ThingDefineHandler");
     }
 }

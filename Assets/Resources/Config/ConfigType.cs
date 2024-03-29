@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace ConfigType
 {
+    [Serializable]
     public class EditableType
     {
         public string TypeName;
@@ -174,7 +175,15 @@ namespace ConfigType
         Delay
     }
 
-    public class WorkGiverDefineDefine
+    public partial class JobDefine
+    {
+        public int ID; // ID 
+        public string Name; //  
+        public ConfigType.EditableType DriverClass; // DriverClass 
+        public bool CanSuspend; // 可以中断 
+    }
+
+    public partial class WorkGiverDefine
     {
         public int ID; // ID 
         public string Name; //  

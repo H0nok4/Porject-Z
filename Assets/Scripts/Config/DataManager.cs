@@ -6,27 +6,42 @@ namespace ConfigType
 {
     public partial class DataManager : Singleton<DataManager>
     {
-        public List<WorkGiverDefineDefine> WorkGiverDefineDefineList = new List<WorkGiverDefineDefine>();
-        public Dictionary<int, WorkGiverDefineDefine> WorkGiverDefineDefineDic = new Dictionary<int, WorkGiverDefineDefine>();
-        public WorkGiverDefineDefine GetWorkGiverDefineDefineByID(int ID)
+        public List<JobDefine> JobDefineList = new List<JobDefine>();
+        public Dictionary<int, JobDefine> JobDefineDic = new Dictionary<int, JobDefine>();
+        public JobDefine GetJobDefineByID(int ID)
         {
-            return WorkGiverDefineDefineDic[ID];
+            return JobDefineDic[ID];
+        }
+
+        public List<WorkGiverDefine> WorkGiverDefineList = new List<WorkGiverDefine>();
+        public Dictionary<int, WorkGiverDefine> WorkGiverDefineDic = new Dictionary<int, WorkGiverDefine>();
+        public WorkGiverDefine GetWorkGiverDefineByID(int ID)
+        {
+            return WorkGiverDefineDic[ID];
         }
 
         public void InitConfigs()
         {
             string ConfigPath = "Assets/Resources/Config/xml/";
-            FileStream WorkGiverDefineStream = File.OpenRead(ConfigPath + "WorkGiverDefine.xml");
-            XmlSerializer WorkGiverDefineDefineserializer = new XmlSerializer(typeof(List<WorkGiverDefineDefine>));
-            WorkGiverDefineDefineList = (List<WorkGiverDefineDefine>)WorkGiverDefineDefineserializer.Deserialize(WorkGiverDefineStream);
+            FileStream JobStream = File.OpenRead(ConfigPath + "Job.xml");
+            XmlSerializer JobDefineserializer = new XmlSerializer(typeof(List<JobDefine>));
+            JobDefineList = (List<JobDefine>)JobDefineserializer.Deserialize(JobStream);
+            FileStream WorkGiverStream = File.OpenRead(ConfigPath + "WorkGiver.xml");
+            XmlSerializer WorkGiverDefineserializer = new XmlSerializer(typeof(List<WorkGiverDefine>));
+            WorkGiverDefineList = (List<WorkGiverDefine>)WorkGiverDefineserializer.Deserialize(WorkGiverStream);
             InitDictionary();
         }
 
         public void InitDictionary()
         {
-            foreach (var i in WorkGiverDefineDefineList)
+            foreach (var i in JobDefineList)
             {
-                WorkGiverDefineDefineDic.Add(i.ID, i);
+                JobDefineDic.Add(i.ID, i);
+            }
+
+            foreach (var i in WorkGiverDefineList)
+            {
+                WorkGiverDefineDic.Add(i.ID, i);
             }
         }
     }

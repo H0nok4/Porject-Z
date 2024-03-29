@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfWorkGiverDefine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<WorkGiverDefine>
+		<ID>1</ID>
+		<Name>BuildFrame</Name>
+		<WorkGiverType>
+			<TypeName>WorkGiver_BuildFrame</TypeName>
+		</WorkGiverType>
+		<WorkTypeID>0</WorkTypeID>
+		<ScanThings>true</ScanThings>
+		<ScanSections>false</ScanSections>
+	</WorkGiverDefine>
+	<WorkGiverDefine>
+		<ID>2</ID>
+		<Name>DeliverResourceToBlueprint</Name>
+		<WorkGiverType>
+			<TypeName>WorkGiver_DeliverResourceToBlueprint</TypeName>
+		</WorkGiverType>
+		<WorkTypeID>0</WorkTypeID>
+		<ScanThings>true</ScanThings>
+		<ScanSections>false</ScanSections>
+	</WorkGiverDefine>
+</ArrayOfWorkGiverDefine>

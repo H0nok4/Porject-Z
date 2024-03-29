@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ConfigType;
 using UI;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         DataTableManager.Instance.Init();
+        DataManager.Instance.InitConfigs();
         MapController.Instance.InitMap(GameObject.Find("Grid"));
         PlayerController.Instance.ThingUnitPawnUnit = (Thing_Unit_Pawn)SpawnHelper.Spawn(DataTableManager.Instance.ThingDefineHandler.Pawn, new PosNode(){Pos = new IntVec2(0,0),MapDataIndex = 0}); 
         //MapController.Instance.Map.GetMapDataByIndex(0).RegisterThingHandle(PlayerController.Instance.PawnUnit);

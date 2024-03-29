@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters;
 using System.Text;
 using System.Threading.Tasks;
+using ConfigType;
 
 public class WorkGiver_DeliverResourceToBlueprint : WorkGiver_DeliverResourceTo
 {
@@ -50,7 +51,7 @@ public class WorkGiver_DeliverResourceToBlueprint : WorkGiver_DeliverResourceTo
 
         if (build is Blueprint bluePrint && bluePrint.NeedResources().Count == 0)
         {
-            Job job = JobMaker.MakeJob(DataTableManager.Instance.JobDefineHandler.ImmediatelyBuildBlueprintToFrame);
+            Job job = JobMaker.MakeJob(DataManager.Instance.GetJobDefineByID(4));
             job.InfoA = bluePrint;
             return job;
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConfigType;
 
 public class ThingUnit_WorkSetting
 {
@@ -12,8 +13,10 @@ public class ThingUnit_WorkSetting
 
     public ThingUnit_WorkSetting(Thing_Unit unit) {
         Unit = unit;
-        UsedWorkGivers.Add(DataTableManager.Instance.WorkGiverDefineHandler.WorkGiverDefine_BuildFrame.WorkGiver);
-        UsedWorkGivers.Add(DataTableManager.Instance.WorkGiverDefineHandler.WorkGiverDefine_DeliverResourceToBlueprint.WorkGiver);
+        foreach (var workGiverDefine in DataManager.Instance.WorkGiverDefineList)
+        {
+            UsedWorkGivers.Add(workGiverDefine.WorkGiver);
+        }
         //TODO:后面需要用配置初始化这个
     }
 }

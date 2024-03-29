@@ -1,5 +1,6 @@
 ﻿using System;
 
+[Serializable]
 public class EditableType {
     public string TypeName;
 

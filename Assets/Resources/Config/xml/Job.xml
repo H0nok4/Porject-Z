@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfJobDefine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<JobDefine>
+		<ID>1</ID>
+		<Name>BlankJobDefine</Name>
+		<DriverClass>
+			<TypeName>JobDriver_Blankly</TypeName>
+		</DriverClass>
+		<CanSuspend>true</CanSuspend>
+	</JobDefine>
+	<JobDefine>
+		<ID>2</ID>
+		<Name>BuildJobDefine</Name>
+		<DriverClass>
+			<TypeName>JobDriver_BuildFrame</TypeName>
+		</DriverClass>
+		<CanSuspend>true</CanSuspend>
+	</JobDefine>
+	<JobDefine>
+		<ID>3</ID>
+		<Name>WalkAroundJobDefine</Name>
+		<DriverClass>
+			<TypeName>JobDriver_WalkAround</TypeName>
+		</DriverClass>
+		<CanSuspend>true</CanSuspend>
+	</JobDefine>
+	<JobDefine>
+		<ID>4</ID>
+		<Name>ImmediatelyBuildBlueprintToFrame</Name>
+		<DriverClass>
+			<TypeName>JobDriver_ImmediatelyBuildBlueprintToFrame</TypeName>
+		</DriverClass>
+		<CanSuspend>true</CanSuspend>
+	</JobDefine>
+	<JobDefine>
+		<ID>5</ID>
+		<Name>HaulToCell</Name>
+		<DriverClass />
+		<CanSuspend>true</CanSuspend>
+	</JobDefine>
+</ArrayOfJobDefine>

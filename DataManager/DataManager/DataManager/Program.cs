@@ -451,7 +451,7 @@ namespace CsvParser {
 
                 // 生成类
                 ClassDeclarationSyntax classDecl = SyntaxFactory.ClassDeclaration(className + "Define")
-                    .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)))
+                    .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword),SyntaxFactory.Token(SyntaxKind.PartialKeyword)))
                     .WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(properties))
                     .WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed);
 
