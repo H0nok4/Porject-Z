@@ -4,6 +4,15 @@ using System.Linq;
 
 namespace ConfigType
 {
+    public class EditableType
+    {
+        public string TypeName;
+        public Type ToType()
+        {
+            return Type.GetType(TypeName);
+        }
+    }
+
     public enum DestroyType
     {
         None,
@@ -163,5 +172,15 @@ namespace ConfigType
         PathMoveEnd,
         Instant,
         Delay
+    }
+
+    public class WorkGiverDefineDefine
+    {
+        public int ID; // ID 
+        public string Name; //  
+        public ConfigType.EditableType WorkGiverType; // WorkGiverType 
+        public int WorkTypeID; // WorkTypeID 
+        public bool ScanThings; // 扫描物体 
+        public bool ScanSections; // 扫描格子 
     }
 }

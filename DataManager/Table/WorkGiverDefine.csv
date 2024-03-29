@@ -1,0 +1,7 @@
+*,,,,,
+int32,string,Type,int32,bool,bool
+ID,Name,WorkGiverType,WorkTypeID,ScanThings,ScanSections
+ID,,WorkGiverType,WorkTypeID,扫描物体,扫描格子
+,,,0,TRUE,FALSE
+1,BuildFrame,WorkGiver_BuildFrame,,,
+2,DeliverResourceToBlueprint,WorkGiver_DeliverResourceToBlueprint,,,

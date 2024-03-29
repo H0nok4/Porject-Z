@@ -1,4 +1,5 @@
 using System;
+using ConfigType;
 using UnityEngine;
 
 [Serializable]

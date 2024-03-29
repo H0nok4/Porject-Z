@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -387,6 +388,16 @@ namespace CsvParser {
 
             var namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName("ConfigType"));
 
+            var generatorType = CSharpSyntaxTree.ParseText(File.ReadAllText("DataManager\\DataManager\\GeneratorType.cs"));
+
+            foreach (var syntaxNode in generatorType.GetRoot().ChildNodes())
+            {
+                if (syntaxNode is ClassDeclarationSyntax classSyntax)
+                {
+                    Console.WriteLine("Config加入一个GeneratorType中的Class");
+                    namespaceDeclaration = namespaceDeclaration.AddMembers(classSyntax);
+                }
+            }
 
             //所有的枚举类型声明
             foreach (var enumKVP in EnumTypes) {
@@ -593,6 +604,12 @@ namespace CsvParser {
                         return Enum.Parse(type, "0");
                     }
                     return Enum.Parse(type, value);
+                }else if (type.Name == "EditableType")
+                {
+                    var editType = Activator.CreateInstance(type);
+                    var field = type.GetField("TypeName");
+                    field.SetValue(editType,value);
+                    return editType;
                 }
                 else if (type.GetGenericTypeDefinition() == typeof(List<>)) {
                     //列表类型
@@ -645,6 +662,8 @@ namespace CsvParser {
                     return SyntaxFactory.ParseTypeName("List<bool>");
                 case "string[]":
                     return SyntaxFactory.ParseTypeName("List<string>");
+                case "type":
+                    return SyntaxFactory.ParseTypeName("ConfigType.EditableType");
                 default:
                     //TODO:枚举类型或者枚举类型数组
                     Console.WriteLine($"可能时枚举类型或者枚举数组，type = {type},EnumTypesCount = {EnumTypes.Count}");
