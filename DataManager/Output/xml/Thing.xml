@@ -6,13 +6,22 @@
 		<ThingClass>
 			<TypeName>Thing_Unit_Pawn</TypeName>
 		</ThingClass>
-		<Passability>OnlyThrough</Passability>
 		<Category>None</Category>
 		<Destroyable>true</Destroyable>
 		<UseHitPoint>true</UseHitPoint>
 		<StackLimit>1</StackLimit>
+		<MaxHitPoint>100</MaxHitPoint>
 		<EverHaulable>false</EverHaulable>
+		<Rotatable>true</Rotatable>
 		<WorkGiverDefineTypeID />
+		<Passability>OnlyThrough</Passability>
+		<MoveCost>0</MoveCost>
+		<SizeX>1</SizeX>
+		<SizeY>1</SizeY>
+		<BlueprintSpritePath />
+		<ThingSpritePath />
+		<FrameSprite>Sprite/GeneralFrame</FrameSprite>
+		<Workload>60</Workload>
 		<BuildCostThingID />
 		<BuildCostThingNum />
 	</ThingDefine>
@@ -22,13 +31,22 @@
 		<ThingClass>
 			<TypeName>Thing_Building_Wall</TypeName>
 		</ThingClass>
-		<Passability>Impassable</Passability>
 		<Category>None</Category>
 		<Destroyable>true</Destroyable>
 		<UseHitPoint>true</UseHitPoint>
 		<StackLimit>1</StackLimit>
+		<MaxHitPoint>100</MaxHitPoint>
 		<EverHaulable>false</EverHaulable>
+		<Rotatable>true</Rotatable>
 		<WorkGiverDefineTypeID />
+		<Passability>Impassable</Passability>
+		<MoveCost>0</MoveCost>
+		<SizeX>1</SizeX>
+		<SizeY>1</SizeY>
+		<BlueprintSpritePath />
+		<ThingSpritePath />
+		<FrameSprite>Sprite/GeneralFrame</FrameSprite>
+		<Workload>60</Workload>
 		<BuildCostThingID />
 		<BuildCostThingNum />
 	</ThingDefine>
@@ -38,13 +56,22 @@
 		<ThingClass>
 			<TypeName>TestItemClass</TypeName>
 		</ThingClass>
-		<Passability>OnlyThrough</Passability>
 		<Category>None</Category>
 		<Destroyable>true</Destroyable>
 		<UseHitPoint>true</UseHitPoint>
 		<StackLimit>100</StackLimit>
+		<MaxHitPoint>100</MaxHitPoint>
 		<EverHaulable>false</EverHaulable>
+		<Rotatable>true</Rotatable>
 		<WorkGiverDefineTypeID />
+		<Passability>OnlyThrough</Passability>
+		<MoveCost>0</MoveCost>
+		<SizeX>1</SizeX>
+		<SizeY>1</SizeY>
+		<BlueprintSpritePath />
+		<ThingSpritePath />
+		<FrameSprite>Sprite/GeneralFrame</FrameSprite>
+		<Workload>60</Workload>
 		<BuildCostThingID />
 		<BuildCostThingNum />
 	</ThingDefine>

@@ -38,7 +38,7 @@ public static class SpawnHelper
                 break;
         }
         //TODO:如果是物品，需要判断该位置是否已经有其他物品了，或者同类物品堆叠，如果堆叠数量超过上限，需要使用BFS找到最近的一个空位置放置超过上限的东西
-        newThing.GameObject = new ThingObject(Object.Instantiate(DataTableManager.Instance.ThingObject));
+        newThing.GameObject = new ThingObject(Object.Instantiate(DataManager.Instance.ThingObject));
         newThing.SetPosition(node.Pos,node.MapDataIndex);
         if (newThing.HoldingOwner != null)
         {
@@ -49,7 +49,7 @@ public static class SpawnHelper
         return newThing;
     }
 
-    private static void TryRemovalThings(PosNode node, Rotation rot, BuildableDefine mainDef, DestroyType destroyType) {
+    private static void TryRemovalThings(PosNode node, Rotation rot, ThingDefine mainDef, DestroyType destroyType) {
         //TODO:后面物体可能会站多个格子，需要每个格子都判断
         foreach (var thing in node.MapData.ThingMap.ThingsAt(node.Pos)) {
             if (!SpawningWipes(mainDef, thing.Def)) {
@@ -72,7 +72,7 @@ public static class SpawnHelper
         }
     }
 
-    public static void WipeExistingThings(PosNode node, Rotation rot, BuildableDefine thingDef, DestroyType destroyType)
+    public static void WipeExistingThings(PosNode node, Rotation rot, ThingDefine thingDef, DestroyType destroyType)
     {
         //TODO:后面物体可能会站多个格子，需要每个格子都判断
         _helper.Clear();
@@ -87,11 +87,11 @@ public static class SpawnHelper
         _helper.Clear();
     }
 
-    public static bool SpawningWipes(BuildableDefine thingDef, BuildableDefine def)
+    public static bool SpawningWipes(ThingDefine thingDef, ThingDefine def)
     {
         //TODO:根据配置类型来决定是否删除该位置的建筑，像是电线，壁灯之类的都可以跟其他建筑共存，
-        var wantPlaceThingDef = (ThingDefine)thingDef;
-        var existThingDef = (ThingDefine)def;
+        var wantPlaceThingDef = thingDef;
+        var existThingDef = def;
         //if (wantPlaceThingDef.Category == ThingCategory.Building && wantPlaceThingDef.IsFrame)
         //{
 

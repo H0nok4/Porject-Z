@@ -1,3 +1,4 @@
+using ConfigType;
 using UnityEngine;
 
 public enum DesignatorType {
@@ -10,7 +11,7 @@ public class DesignatorManager : Singleton<DesignatorManager> {
 
     public DesignatorType DesignatorType;
 
-    public ThingDefine BuildingDef = DataTableManager.Instance.ThingDefineHandler.WallInstance;
+    public ThingDefine BuildingDef = DataManager.Instance.ThingDefineHandler.WallInstance;
 
     public bool IsBuildingState {
         get {

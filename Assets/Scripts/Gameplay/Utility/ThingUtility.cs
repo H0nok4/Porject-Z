@@ -26,7 +26,7 @@ public static class ThingUtility {
             Category = ThingCategory.Building,
             Destroyable = true,
             ThingClass = new EditableType(){TypeName = "Thing_Building_Frame" },
-            FrameSprite = DataTableManager.Instance.FrameSprite,
+            FrameSprite = DataManager.Instance.FrameSprite,
     };
     }
 

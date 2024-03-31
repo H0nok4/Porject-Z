@@ -13,7 +13,7 @@ public class ThingUnit_WorkSetting
 
     public ThingUnit_WorkSetting(Thing_Unit unit) {
         Unit = unit;
-        foreach (var workGiverDefine in DataManager.Instance.WorkGiverDefineList)
+        foreach (var workGiverDefine in ConfigType.DataManager.Instance.WorkGiverDefineList)
         {
             UsedWorkGivers.Add(workGiverDefine.WorkGiver);
         }

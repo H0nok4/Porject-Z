@@ -51,7 +51,7 @@ public class WorkGiver_DeliverResourceToBlueprint : WorkGiver_DeliverResourceTo
 
         if (build is Blueprint bluePrint && bluePrint.NeedResources().Count == 0)
         {
-            Job job = JobMaker.MakeJob(DataManager.Instance.GetJobDefineByID(4));
+            Job job = JobMaker.MakeJob(ConfigType.DataManager.Instance.GetJobDefineByID(4));
             job.InfoA = bluePrint;
             return job;
         }

@@ -8,7 +8,7 @@ using ConfigType;
 public class JobGiver_Blankly : ThinkNode_JobGiver {
     public override Job TryGiveJob(Thing_Unit unit)
     {
-        Job blanklyJob = JobMaker.MakeJob(DataManager.Instance.GetJobDefineByID(1));
+        Job blanklyJob = JobMaker.MakeJob(ConfigType.DataManager.Instance.GetJobDefineByID(1));
         return blanklyJob;
     }
 }

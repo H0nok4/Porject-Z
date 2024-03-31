@@ -194,13 +194,22 @@ namespace ConfigType
         public int ID; // ID 
         public string Name; //  
         public ConfigType.EditableType ThingClass; // 物体使用的类 
-        public Traversability Passability; // 是否可通行性 
         public ThingCategory Category; // 类型 
         public bool Destroyable; // 是否可以被摧毁 
         public bool UseHitPoint; // 是否使用血量 
         public int StackLimit; // 堆叠限制数量 
+        public int MaxHitPoint; // 血量上限 
         public bool EverHaulable; // 是否能够被搬运 
+        public bool Rotatable; // 是否可以旋转 
         public List<int> WorkGiverDefineTypeID; // 使用的WorkGiverDefine的ID列表 
+        public Traversability Passability; // 是否可通行性 
+        public int MoveCost; // 在移动时所添加的额外消耗 
+        public int SizeX; // 大小的宽度 
+        public int SizeY; // 大小的高度 
+        public string BlueprintSpritePath; // 作为蓝图存在时显示的图片路径 
+        public string ThingSpritePath; // 作为物体存在时显示的图片路径 
+        public string FrameSprite; // 作为结构存在时显示的图片路径 
+        public int Workload; // 建筑建造的工作量 
         public List<int> BuildCostThingID; // 如果是建筑的建筑消耗物品ID列表 
         public List<int> BuildCostThingNum; // 如果是建筑的建筑消耗物品数量列表 
     }

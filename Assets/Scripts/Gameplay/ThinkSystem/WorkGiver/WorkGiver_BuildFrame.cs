@@ -27,7 +27,7 @@ public class WorkGiver_BuildFrame : WorkGiver_Scanner
             return null;
         }
 
-        return JobMaker.MakeJob(DataManager.Instance.GetJobDefineByID(2), frame);
+        return JobMaker.MakeJob(ConfigType.DataManager.Instance.GetJobDefineByID(2), frame);
 
     }
 }
