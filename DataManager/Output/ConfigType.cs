@@ -200,6 +200,9 @@ namespace ConfigType
         public bool UseHitPoint; // 是否使用血量 
         public int StackLimit; // 堆叠限制数量 
         public bool EverHaulable; // 是否能够被搬运 
+        public List<int> WorkGiverDefineTypeID; // 使用的WorkGiverDefine的ID列表 
+        public List<int> BuildCostThingID; // 如果是建筑的建筑消耗物品ID列表 
+        public List<int> BuildCostThingNum; // 如果是建筑的建筑消耗物品数量列表 
     }
 
     public partial class WorkGiverDefine

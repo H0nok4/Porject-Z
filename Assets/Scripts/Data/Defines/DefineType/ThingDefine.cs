@@ -19,10 +19,10 @@ public class ThingDefine : BuildableDefine
 
     public int StackLimit = 1;
 
-    public ItemProperties ItemProp;
+    //public ItemProperties ItemProp;
 
-    public bool IsItem => ItemProp != null;
-    public bool MadeFromItem => ItemProp != null;
+    //public bool IsItem => ItemProp != null;
+    //public bool MadeFromItem => ItemProp != null;
     //是否能够被搬运
     public bool EverHaulable;
 

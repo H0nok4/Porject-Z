@@ -12,6 +12,9 @@
 		<UseHitPoint>true</UseHitPoint>
 		<StackLimit>1</StackLimit>
 		<EverHaulable>false</EverHaulable>
+		<WorkGiverDefineTypeID />
+		<BuildCostThingID />
+		<BuildCostThingNum />
 	</ThingDefine>
 	<ThingDefine>
 		<ID>2</ID>
@@ -25,6 +28,9 @@
 		<UseHitPoint>true</UseHitPoint>
 		<StackLimit>1</StackLimit>
 		<EverHaulable>false</EverHaulable>
+		<WorkGiverDefineTypeID />
+		<BuildCostThingID />
+		<BuildCostThingNum />
 	</ThingDefine>
 	<ThingDefine>
 		<ID>200</ID>
@@ -38,5 +44,8 @@
 		<UseHitPoint>true</UseHitPoint>
 		<StackLimit>100</StackLimit>
 		<EverHaulable>false</EverHaulable>
+		<WorkGiverDefineTypeID />
+		<BuildCostThingID />
+		<BuildCostThingNum />
 	</ThingDefine>
 </ArrayOfThingDefine>
