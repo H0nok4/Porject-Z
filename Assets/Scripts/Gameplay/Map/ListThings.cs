@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ConfigType;
 using JetBrains.Annotations;
 using UnityEngine;
 

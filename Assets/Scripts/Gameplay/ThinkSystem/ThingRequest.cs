@@ -1,5 +1,6 @@
 ﻿
 using System;
+using ConfigType;
 
 public struct ThingRequest {
     //TODO:后期会将Things分类，加快查询的速度，比如建造工作只需要扫描需要被建造的Things就可以了

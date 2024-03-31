@@ -7,22 +7,19 @@ using UnityEngine;
 
 namespace ConfigType
 {
-    public partial class DataManager : Singleton<DataManager> {
-
-
-        public ThingDefineHandler ThingDefineHandler;
+    public partial class DataManager : Singleton<DataManager>
+    {
+        private Dictionary<string, Sprite> _spriteCacheDic = new Dictionary<string, Sprite>();
 
         private GameObject _thingObject;
 
         private Sprite _frameSprite;
 
+        public string FrameSpritePath = "Sprite/GeneralFrame";
+
         public Sprite FrameSprite {
             get {
-                if (_frameSprite == null) {
-                    _frameSprite = Resources.Load<Sprite>("Sprite/GeneralFrame");
-                }
-
-                return _frameSprite;
+                return GetSpriteByPath(FrameSpritePath);
             }
         }
 
@@ -52,7 +49,26 @@ namespace ConfigType
         }
 
         public void Init() {
-            ThingDefineHandler = Resources.Load<ThingDefineHandler>("Defines/Handler/ThingDefineHandler");
+
+        }
+
+        public Sprite GetSpriteByPath(string path)
+        {
+            if (_spriteCacheDic.ContainsKey(path))
+            {
+                return _spriteCacheDic[path];
+            }
+
+            var sprite = Resources.Load<Sprite>(path);
+
+            if (sprite != null)
+            {
+                _spriteCacheDic.Add(path,sprite);
+                return sprite;
+            }
+
+            Debug.LogError($"找不到对应路径的Sprite,使用的路径为:{path}");
+            return null;
         }
     }
 

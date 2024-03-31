@@ -19,11 +19,12 @@
 		<SizeX>1</SizeX>
 		<SizeY>1</SizeY>
 		<BlueprintSpritePath />
-		<ThingSpritePath />
-		<FrameSprite>Sprite/GeneralFrame</FrameSprite>
+		<ThingSpritePath>Sprite/PlayerTest</ThingSpritePath>
+		<FrameSpritePath>Sprite/GeneralFrame</FrameSpritePath>
 		<Workload>60</Workload>
 		<BuildCostThingID />
 		<BuildCostThingNum />
+		<Selectable>true</Selectable>
 	</ThingDefine>
 	<ThingDefine>
 		<ID>2</ID>
@@ -43,12 +44,13 @@
 		<MoveCost>0</MoveCost>
 		<SizeX>1</SizeX>
 		<SizeY>1</SizeY>
-		<BlueprintSpritePath />
-		<ThingSpritePath />
-		<FrameSprite>Sprite/GeneralFrame</FrameSprite>
+		<BlueprintSpritePath>Sprite/Barricade_Blueprint</BlueprintSpritePath>
+		<ThingSpritePath>Sprite/Barricade</ThingSpritePath>
+		<FrameSpritePath>Sprite/GeneralFrame</FrameSpritePath>
 		<Workload>60</Workload>
 		<BuildCostThingID />
 		<BuildCostThingNum />
+		<Selectable>true</Selectable>
 	</ThingDefine>
 	<ThingDefine>
 		<ID>200</ID>
@@ -70,9 +72,10 @@
 		<SizeY>1</SizeY>
 		<BlueprintSpritePath />
 		<ThingSpritePath />
-		<FrameSprite>Sprite/GeneralFrame</FrameSprite>
+		<FrameSpritePath>Sprite/GeneralFrame</FrameSpritePath>
 		<Workload>60</Workload>
 		<BuildCostThingID />
 		<BuildCostThingNum />
+		<Selectable>true</Selectable>
 	</ThingDefine>
 </ArrayOfThingDefine>

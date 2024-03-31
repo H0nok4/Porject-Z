@@ -208,10 +208,11 @@ namespace ConfigType
         public int SizeY; // 大小的高度 
         public string BlueprintSpritePath; // 作为蓝图存在时显示的图片路径 
         public string ThingSpritePath; // 作为物体存在时显示的图片路径 
-        public string FrameSprite; // 作为结构存在时显示的图片路径 
+        public string FrameSpritePath; // 作为结构存在时显示的图片路径 
         public int Workload; // 建筑建造的工作量 
         public List<int> BuildCostThingID; // 如果是建筑的建筑消耗物品ID列表 
         public List<int> BuildCostThingNum; // 如果是建筑的建筑消耗物品数量列表 
+        public bool Selectable; // 物体是否可以被选中 
     }
 
     public partial class WorkGiverDefine

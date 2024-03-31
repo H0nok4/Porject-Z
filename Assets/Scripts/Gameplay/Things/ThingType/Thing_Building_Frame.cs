@@ -1,6 +1,8 @@
 
 
 using System.Collections.Generic;
+using ConfigType;
+
 /// <summary>
 /// 所有的建筑的框架都是一类的，只是有范围大小的区别
 /// </summary>
@@ -19,7 +21,8 @@ public class Thing_Building_Frame : Thing_Building, IBuildable {
     public void CompleteBuild(Thing_Unit unit) {
         //TODO:需要设置建筑的拥有派系
         SpawnHelper.Spawn(this.EntityDefineToBuildComplete(), this.Position);
-        DeSpawn();
+        //DeSpawn();
+        Destroy();
     }
 
     public IReadOnlyList<DefineThingClassCount> NeedResources()

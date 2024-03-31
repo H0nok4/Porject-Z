@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
         DataManager.Instance.Init();
         ConfigType.DataManager.Instance.InitConfigs();
         MapController.Instance.InitMap(GameObject.Find("Grid"));
-        PlayerController.Instance.ThingUnitPawnUnit = (Thing_Unit_Pawn)SpawnHelper.Spawn(DataManager.Instance.ThingDefineHandler.Pawn, new PosNode(){Pos = new IntVec2(0,0),MapDataIndex = 0}); 
+        PlayerController.Instance.ThingUnitPawnUnit = (Thing_Unit_Pawn)SpawnHelper.Spawn(DataManager.Instance.GetThingDefineByID(1), new PosNode(){Pos = new IntVec2(0,0),MapDataIndex = 0}); 
         //MapController.Instance.Map.GetMapDataByIndex(0).RegisterThingHandle(PlayerController.Instance.PawnUnit);
         UIManager.Instance.Init();
         UIManager.Instance.Show(DataManager.Instance.MainPanel);

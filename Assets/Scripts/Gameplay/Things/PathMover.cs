@@ -238,7 +238,7 @@ public class PathMover {
         return result;
     }
 
-    private int GetThingMoveCost(BuildableDefine thing)
+    private int GetThingMoveCost(ThingDefine thing)
     {
         return thing.MoveCost;
     }

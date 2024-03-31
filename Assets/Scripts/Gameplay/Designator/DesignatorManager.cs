@@ -11,7 +11,7 @@ public class DesignatorManager : Singleton<DesignatorManager> {
 
     public DesignatorType DesignatorType;
 
-    public ThingDefine BuildingDef = DataManager.Instance.ThingDefineHandler.WallInstance;
+    public ThingDefine BuildingDef = DataManager.Instance.GetThingDefineByID(2);
 
     public bool IsBuildingState {
         get {

@@ -26,7 +26,7 @@ public static class ThingUtility {
             Category = ThingCategory.Building,
             Destroyable = true,
             ThingClass = new EditableType(){TypeName = "Thing_Building_Frame" },
-            FrameSprite = DataManager.Instance.FrameSprite,
+            FrameSpritePath = DataManager.Instance.FrameSpritePath,
     };
     }
 
@@ -38,7 +38,7 @@ public static class ThingUtility {
             Category = ThingCategory.Mirage,
             ThingClass = new EditableType(){TypeName = "Thing_Blueprint_Building" },
             Selectable = true,
-            
+            Destroyable = true,
         };
     }
 
@@ -47,7 +47,8 @@ public static class ThingUtility {
         Debug.Log("创建了一个Frame配置");
         var baseFrameDef = BaseFrameDef();
         //TODO:Frame点击的时候还是需要一些建成之后的建筑的信息，比如名称，工作量之类的
-        baseFrameDef.Size = def.Size;
+        baseFrameDef.SizeX = def.SizeX;
+        baseFrameDef.SizeY = def.SizeY;
         baseFrameDef.Name = def.Name;
         baseFrameDef.Passability = def.Passability;
         baseFrameDef.Rotatable = def.Rotatable;
@@ -68,11 +69,12 @@ public static class ThingUtility {
     {
         Debug.Log("创建了一个蓝图配置");
         var baseBlueprintDef = BaseBlueprintDef();
-        baseBlueprintDef.Size = thingDefine.Size;
+        baseBlueprintDef.SizeX = thingDefine.SizeX;
+        baseBlueprintDef.SizeY = thingDefine.SizeY;
         baseBlueprintDef.Name = thingDefine.Name;
         baseBlueprintDef.Rotatable = thingDefine.Rotatable;
         baseBlueprintDef.ThingClass = new EditableType() { TypeName = "Thing_Blueprint_Building" };
-        baseBlueprintDef.ThingSprite = thingDefine.BlueprintSprite;
+        baseBlueprintDef.ThingSpritePath = thingDefine.BlueprintSpritePath;
         baseBlueprintDef.EntityBuildDef = thingDefine;
         thingDefine.BlueprintDef = baseBlueprintDef;
     }
