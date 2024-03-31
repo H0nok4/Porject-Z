@@ -1,0 +1,6 @@
+*,,
+int32,string,Type
+ID,Name,ThingClass
+ID,,物体使用的类
+,,
+1,TestItem,TestItemClass

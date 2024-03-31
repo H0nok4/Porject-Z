@@ -8,9 +8,15 @@ namespace ConfigType
     public class EditableType
     {
         public string TypeName;
+        private Type _typeInstance;
         public Type ToType()
         {
-            return Type.GetType(TypeName);
+            if (_typeInstance == null)
+            {
+                _typeInstance = Type.GetType(TypeName);
+            }
+
+            return _typeInstance;
         }
     }
 
@@ -181,6 +187,14 @@ namespace ConfigType
         public string Name; //  
         public ConfigType.EditableType DriverClass; // DriverClass 
         public bool CanSuspend; // 可以中断 
+    }
+
+    public partial class ThingDefine
+    {
+        public int ID; // ID 
+        public string Name; //  
+        public ConfigType.EditableType ThingClass; // 物体使用的类 
+        public Traversability Passability; // 是否可通行性 
     }
 
     public partial class WorkGiverDefine

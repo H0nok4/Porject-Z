@@ -1,0 +1,7 @@
+*,,,
+int32,string,Type,Traversability
+ID,Name,ThingClass,Passability
+ID,,物体使用的类,是否可通行性
+,,,OnlyThrough
+1,Pawn,Thing_Unit_Pawn,
+2,Wall,Thing_Building_Wall,Impassable

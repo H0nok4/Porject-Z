@@ -4,7 +4,14 @@
 public class EditableType {
     public string TypeName;
 
+    private Type _typeInstance;
+
     public Type ToType() {
-        return Type.GetType(TypeName);
+        if (_typeInstance == null)
+        {
+            _typeInstance = Type.GetType(TypeName);
+        }
+
+        return _typeInstance;
     }
 }

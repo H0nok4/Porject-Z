@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfThingDefine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<ThingDefine>
+		<ID>1</ID>
+		<Name>Pawn</Name>
+		<ThingClass>
+			<TypeName>Thing_Unit_Pawn</TypeName>
+		</ThingClass>
+		<Passability>OnlyThrough</Passability>
+	</ThingDefine>
+	<ThingDefine>
+		<ID>2</ID>
+		<Name>Wall</Name>
+		<ThingClass>
+			<TypeName>Thing_Building_Wall</TypeName>
+		</ThingClass>
+		<Passability>Impassable</Passability>
+	</ThingDefine>
+	<ThingDefine>
+		<ID>1</ID>
+		<Name>TestItem</Name>
+		<ThingClass>
+			<TypeName>TestItemClass</TypeName>
+		</ThingClass>
+		<Passability>OnlyThrough</Passability>
+	</ThingDefine>
+</ArrayOfThingDefine>

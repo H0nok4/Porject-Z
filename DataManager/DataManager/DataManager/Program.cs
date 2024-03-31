@@ -29,6 +29,10 @@ namespace CsvParser {
         static void Main(string[] args) {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
+            ReadAllCSV();
+
+            //整理主表和子表
+            SetMainFileAndChildren();
             //校验CSV表的主键
             VerifyCSV();
 
@@ -48,11 +52,47 @@ namespace CsvParser {
             GenerateDataManagerScriptFile();
         }
 
+        private static void ReadAllCSV()
+        {
+            foreach (var file in Directory.GetFiles(_csvDir, "*.csv")) {
+                //需要分格名称
+                var csvFileInstance = CSVFile.ReadCSVFile(file);
+                csvFiles.Add(csvFileInstance);
+            }
+        }
+
+        private static void SetMainFileAndChildren()
+        {
+            //先筛选出有主表的，然后选出主表
+            List<CSVFile> hasMainFile = new List<CSVFile>();
+            foreach (var csvFile in csvFiles)
+            {
+                var splitName = csvFile.FileName.Split("_");
+                var mainFileName = splitName[0];
+
+                if (splitName.Length > 1)
+                {
+                    if (csvFiles.Find((file) => file.FileName == mainFileName) is { } mainFile)
+                    {
+                        csvFile.Parent = mainFile;
+                        mainFile.Children.Add(csvFile);
+                        Console.WriteLine($"找到一个有主表的子表，主表名称为：{mainFileName},子表名称为:{csvFile.FileName}");
+                    }
+                    hasMainFile.Add(csvFile);
+                }
+            }
+
+            foreach (var csvFile in hasMainFile)
+            {
+                csvFiles.Remove(csvFile);
+            }
+        }
+
         private static void GenerateKeyValueTable()
         {
-            //TODO:Enum表
+            //Enum表
             GenerateEnums();
-            //TODO:Localization表
+            //Localization表
             GenerateLocalization();
         }
 
@@ -116,16 +156,12 @@ namespace CsvParser {
         /// </summary>
         private static void VerifyCSV()
         {
-            foreach (var file in Directory.GetFiles(_csvDir, "*.csv"))
+            foreach (var csvFile in csvFiles)
             {
-                var csvFileInstance = CSVFile.ReadCSVFile(file);
-                csvFiles.Add(csvFileInstance);
-
-                if (!ValidateKeyData(csvFileInstance,out int position))
-                {
-                    Console.WriteLine(csvFileInstance.FileName + $"的主键有重复的，请检查，位置为{position}");
+                if (!ValidateKeyData(csvFile, out int position)) {
+                    Console.WriteLine(csvFile.FileName + $"的主键有重复的，请检查，位置为{position}");
+                    throw new InvalidDataException("有重复的主键");
                 }
-
             }
 
             bool ValidateKeyData(CSVFile csvFile,out int position)
@@ -160,6 +196,37 @@ namespace CsvParser {
                     }
 
                     uniqueKeys.Add(key);
+                }
+
+                if (csvFile.Children.Count > 0)
+                {
+                    //开始校验子表
+                    foreach (var child in csvFile.Children)
+                    {
+                        for (int i = 5; i < child.Data.Count; i++) {
+                            List<string> rowData = child.Data[i];
+                            string key = string.Empty;
+
+                            if (child.SingleKey) {
+                                // 如果只有一个键列，则直接取对应列的数据作为键值
+                                key = rowData[child.Key];
+                            }
+                            else {
+                                // 如果有多个键列，则将所有键列的数据拼接成一个字符串作为键值
+                                foreach (int keyIndex in child.Keys) {
+                                    key += rowData[keyIndex];
+                                }
+                            }
+
+                            if (uniqueKeys.Contains(key)) {
+                                // 如果存在重复的键值，则校验失败
+                                position = i;
+                                return false;
+                            }
+
+                            uniqueKeys.Add(key);
+                        }
+                    }
                 }
 
                 // 所有键值都是唯一的，校验通过
@@ -270,7 +337,7 @@ namespace CsvParser {
                 classDeclaration = classDeclaration.AddMembers(listField,dictionaryField,methodDeclaration);
             }
 
-            //TODO：将XML文件反序列化成数据并且赋值给对应的字段方法
+            //将XML文件反序列化成数据并且赋值给对应的字段方法
             var serializerMethodDeclaration = SyntaxFactory.MethodDeclaration(SyntaxFactory.ParseTypeName("void"), "InitConfigs")
                 .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)))
                 .WithBody(SyntaxFactory.Block(GenerateSerializerCode()));
@@ -503,10 +570,10 @@ namespace CsvParser {
 
                 Assembly assembly = Assembly.Load(ms.ToArray());
 
-                foreach (string csvFile in Directory.GetFiles(_csvDir, "*.csv")) {
-                    var csvFileInstance = CSVFile.ReadCSVFile(csvFile);
+                foreach (CSVFile csvFile in csvFiles) {
+
                     //读取CSV文件，然后再在ConfigType.cs中找到对应的类，然后生成对应的数据
-                    string className = Path.GetFileNameWithoutExtension(csvFile);
+                    string className = csvFile.FileName;
 
                     Type classType = assembly.GetType("ConfigType." + NameToDefine(className));
 
@@ -515,24 +582,24 @@ namespace CsvParser {
                     {
                         var listType = typeof(List<>).MakeGenericType(classType);
                         var listObj = Activator.CreateInstance(listType);
-                        for (int i = 5; i < csvFileInstance.Data.Count; i++) {
+                        for (int i = 5; i < csvFile.Data.Count; i++) {
                             //每一行都代表一个实例
                             object instance = Activator.CreateInstance(classType);
-                            var typeName = csvFileInstance.Data[2];
+                            var typeName = csvFile.PropertyName;
                             for (int j = 0; j < typeName.Count; j++) {
                                 FieldInfo property = classType.GetField(typeName[j]);
-                                if (!string.IsNullOrEmpty(csvFileInstance.Data[i][j]))
+                                if (!string.IsNullOrEmpty(csvFile.Data[i][j]))
                                 {
                                     //有填值，用填的值
-                                    property.SetValue(instance, ConverPropertyType(csvFileInstance.Data[i][j], property.FieldType));
+                                    property.SetValue(instance, ConverPropertyType(csvFile.Data[i][j], property.FieldType));
       
                                 }
                                 else
                                 {
                                     //没填值，尝试用默认值
-                                    if (!string.IsNullOrEmpty(csvFileInstance.Data[4][j])) {
+                                    if (!string.IsNullOrEmpty(csvFile.Data[4][j])) {
                                         //使用默认值
-                                        property.SetValue(instance, ConverPropertyType(csvFileInstance.Data[4][j], property.FieldType));
+                                        property.SetValue(instance, ConverPropertyType(csvFile.Data[4][j], property.FieldType));
                                     }
                                     else
                                     {
@@ -554,6 +621,51 @@ namespace CsvParser {
                             MethodInfo addMethod = listType.GetMethod("Add");
                             addMethod.Invoke(listObj,  new object?[]{ instance });
        
+                        }
+
+                        //主表生成完了，尝试生成子表
+                        if (csvFile.Children.Count > 0)
+                        {
+                            Console.WriteLine("有子表，开始额外添加子表的数据");
+                            foreach (var child in csvFile.Children)
+                            {
+                                //规则:主表有的，子表不一定有，子表没有的就用主表的默认值
+                                for (int i = 5; i < child.Data.Count; i++) {
+                                    //每一行都代表一个实例
+                                    object instance = Activator.CreateInstance(classType);
+                                    var typeName = child.Parent.PropertyName;
+                                    for (int j = 0; j < typeName.Count; j++) {
+                                        FieldInfo property = classType.GetField(typeName[j]);
+                                        if (child.GetValueByPropertyName(typeName[j],i,out string propertyStr) && !string.IsNullOrEmpty(propertyStr))
+                                        {
+                                            //有填值，用填的值
+                                            property.SetValue(instance, ConverPropertyType(propertyStr, property.FieldType));
+                                        }
+                                        else
+                                        {
+                                            //TODO:子表没有这个属性或者没填值，尝试用父表默认值
+                                            if (!string.IsNullOrEmpty(csvFile.Data[4][j])) {
+                                                //使用默认值
+                                                property.SetValue(instance, ConverPropertyType(csvFile.Data[4][j], property.FieldType));
+                                            }
+                                            else {
+                                                if (property.FieldType == typeof(string)) {
+                                                    property.SetValue(instance, string.Empty);
+                                                }
+                                                else {
+                                                    object defaultValue = Activator.CreateInstance(property.FieldType);
+                                                    property.SetValue(instance, defaultValue);
+                                                }
+
+                                            }
+                                        }
+                                    }
+
+                                    MethodInfo addMethod = listType.GetMethod("Add");
+                                    addMethod.Invoke(listObj, new object?[] { instance });
+
+                                }
+                            }
                         }
 
                         //序列化后写入文件
@@ -665,7 +777,7 @@ namespace CsvParser {
                 case "type":
                     return SyntaxFactory.ParseTypeName("ConfigType.EditableType");
                 default:
-                    //TODO:枚举类型或者枚举类型数组
+                    //枚举类型或者枚举类型数组
                     Console.WriteLine($"可能时枚举类型或者枚举数组，type = {type},EnumTypesCount = {EnumTypes.Count}");
                     if (type.EndsWith("[]"))
                     {
@@ -693,6 +805,8 @@ namespace CsvParser {
 
     public class CSVFile
     {
+        public CSVFile Parent;
+
         public string FileName;
 
         public List<List<string>> Data = new List<List<string>>();
@@ -700,9 +814,17 @@ namespace CsvParser {
         public List<int> Keys;
 
         /// <summary>
+        /// 备注:子表暂时分一层就够了，不会继续往下找
+        /// </summary>
+        public List<CSVFile> Children = new List<CSVFile>();
+        /// <summary>
         /// 大部分表都是单个主键，所以弄个方法方便点
         /// </summary>
         public int Key => Keys[0];
+
+        public List<string> PropertyName => Data[2];
+
+        public List<string> DefaultValue => Data[4];
 
         public bool HasKey => Keys.Count > 0;
 
@@ -716,6 +838,23 @@ namespace CsvParser {
         public List<string> GetRow(int sheet, int row)
         {
             return Data[row];
+        }
+
+
+
+        public bool GetValueByPropertyName(string propertyTypeName,int dataIndex, out string value)
+        {
+            for (int i = 0; i < PropertyName.Count; i++)
+            {
+                if (PropertyName[i] == propertyTypeName)
+                {
+                    value = Data[dataIndex][i];
+                    return true;
+                }
+            }
+
+            value = null;
+            return false;
         }
 
         public static CSVFile ReadCSVFile(string path)
