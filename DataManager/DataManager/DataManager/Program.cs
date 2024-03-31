@@ -643,19 +643,29 @@ namespace CsvParser {
                                         }
                                         else
                                         {
-                                            //TODO:子表没有这个属性或者没填值，尝试用父表默认值
-                                            if (!string.IsNullOrEmpty(csvFile.Data[4][j])) {
+                                            //TODO:子表没有这个属性或者没填值，先尝试用子表的默认值，如果也没有，尝试用父表默认值
+                                            if (child.GetValueByPropertyName(typeName[j], 4, out string childDefaultValue) && !string.IsNullOrEmpty(childDefaultValue)){
                                                 //使用默认值
-                                                property.SetValue(instance, ConverPropertyType(csvFile.Data[4][j], property.FieldType));
+                                                property.SetValue(instance, ConverPropertyType(childDefaultValue, property.FieldType));
                                             }
                                             else {
-                                                if (property.FieldType == typeof(string)) {
-                                                    property.SetValue(instance, string.Empty);
+                                                //TODO:尝试用父表的默认值
+                                                if (!string.IsNullOrEmpty(csvFile.Data[4][j]))
+                                                {
+                                                    property.SetValue(instance, ConverPropertyType(csvFile.Data[4][j], property.FieldType));
                                                 }
-                                                else {
-                                                    object defaultValue = Activator.CreateInstance(property.FieldType);
-                                                    property.SetValue(instance, defaultValue);
+                                                else
+                                                {
+                                                    //都没有，用默认值
+                                                    if (property.FieldType == typeof(string)) {
+                                                        property.SetValue(instance, string.Empty);
+                                                    }
+                                                    else {
+                                                        object defaultValue = Activator.CreateInstance(property.FieldType);
+                                                        property.SetValue(instance, defaultValue);
+                                                    }
                                                 }
+
 
                                             }
                                         }

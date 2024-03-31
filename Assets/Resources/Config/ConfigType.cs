@@ -195,6 +195,11 @@ namespace ConfigType
         public string Name; //  
         public ConfigType.EditableType ThingClass; // 物体使用的类 
         public Traversability Passability; // 是否可通行性 
+        public ThingCategory Category; // 类型 
+        public bool Destroyable; // 是否可以被摧毁 
+        public bool UseHitPoint; // 是否使用血量 
+        public int StackLimit; // 堆叠限制数量 
+        public bool EverHaulable; // 是否能够被搬运 
     }
 
     public partial class WorkGiverDefine

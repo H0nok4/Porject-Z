@@ -1,0 +1,3 @@
+文件结构:
+首先DataManager文件夹下面放着的是配表工具的核心代码
+KeyValueTable中放着的是键值对表，目前不支持随意增加，如果要增加的话得去改DataManager的代码，目前只支持新增枚举类型在Enum.csv中，还有多语言在Localization中

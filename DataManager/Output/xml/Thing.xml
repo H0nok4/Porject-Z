@@ -7,6 +7,11 @@
 			<TypeName>Thing_Unit_Pawn</TypeName>
 		</ThingClass>
 		<Passability>OnlyThrough</Passability>
+		<Category>None</Category>
+		<Destroyable>true</Destroyable>
+		<UseHitPoint>true</UseHitPoint>
+		<StackLimit>1</StackLimit>
+		<EverHaulable>false</EverHaulable>
 	</ThingDefine>
 	<ThingDefine>
 		<ID>2</ID>
@@ -15,13 +20,23 @@
 			<TypeName>Thing_Building_Wall</TypeName>
 		</ThingClass>
 		<Passability>Impassable</Passability>
+		<Category>None</Category>
+		<Destroyable>true</Destroyable>
+		<UseHitPoint>true</UseHitPoint>
+		<StackLimit>1</StackLimit>
+		<EverHaulable>false</EverHaulable>
 	</ThingDefine>
 	<ThingDefine>
-		<ID>1</ID>
+		<ID>200</ID>
 		<Name>TestItem</Name>
 		<ThingClass>
 			<TypeName>TestItemClass</TypeName>
 		</ThingClass>
 		<Passability>OnlyThrough</Passability>
+		<Category>None</Category>
+		<Destroyable>true</Destroyable>
+		<UseHitPoint>true</UseHitPoint>
+		<StackLimit>100</StackLimit>
+		<EverHaulable>false</EverHaulable>
 	</ThingDefine>
 </ArrayOfThingDefine>

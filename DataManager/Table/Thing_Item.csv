@@ -1,6 +1,6 @@
-*,,
-int32,string,Type
-ID,Name,ThingClass
-ID,,物体使用的类
-,,
-1,TestItem,TestItemClass
+*,,,
+int32,string,Type,int32
+ID,Name,ThingClass,StackLimit
+ID,,物体使用的类,堆叠限制数量
+,,,100
+200,TestItem,TestItemClass,

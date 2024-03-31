@@ -1,7 +1,7 @@
-*,,,
-int32,string,Type,Traversability
-ID,Name,ThingClass,Passability
-ID,,物体使用的类,是否可通行性
-,,,OnlyThrough
-1,Pawn,Thing_Unit_Pawn,
-2,Wall,Thing_Building_Wall,Impassable
+*,,,,,,,,
+int32,string,Type,Traversability,ThingCategory,bool,bool,int32,bool
+ID,Name,ThingClass,Passability,Category,Destroyable,UseHitPoint,StackLimit,EverHaulable
+ID,,物体使用的类,是否可通行性,类型,是否可以被摧毁,是否使用血量,堆叠限制数量,是否能够被搬运
+,,,OnlyThrough,None,TRUE,TRUE,1,FALSE
+1,Pawn,Thing_Unit_Pawn,,,,,,
+2,Wall,Thing_Building_Wall,Impassable,,,,,
