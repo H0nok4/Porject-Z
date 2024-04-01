@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface IThingHolder {
-    IThingHolder Parent { get; }
+    IThingHolder ParentOwner { get; }
 
     void GetChildren(List<IThingHolder> outChildren);
 

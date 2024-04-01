@@ -6,8 +6,7 @@ using ConfigType;
 /// <summary>
 /// 所有的建筑的框架都是一类的，只是有范围大小的区别
 /// </summary>
-public class Thing_Building_Frame : Thing_Building, IBuildable
-{
+public class Thing_Building_Frame : Thing_Building, IBuildable, IThingHolder {
     public ThingOwner ResourcesContainer;
 
     public int WorkToBuild = 10;
@@ -42,5 +41,15 @@ public class Thing_Building_Frame : Thing_Building, IBuildable
     public ThingDefine EntityDefineToBuildComplete()
     {
         return Def.EntityBuildDef;
+    }
+
+    public void GetChildren(List<IThingHolder> outChildren)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public ThingOwner GetHoldingThing()
+    {
+        return ResourcesContainer;
     }
 }

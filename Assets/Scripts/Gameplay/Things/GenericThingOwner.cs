@@ -8,6 +8,17 @@ using UnityEngine;
 
 public class ThingOwner<T> : ThingOwner where T : Thing
 {
+    public ThingOwner() {
+    }
+
+    public ThingOwner(IThingHolder owner)
+        : base(owner) {
+    }
+
+    public ThingOwner(IThingHolder owner, bool oneStackOnly)
+        : base(owner, oneStackOnly) {
+    }
+
     private List<T> _things = new List<T>();
 
     public override Thing GetAt(int index)

@@ -79,7 +79,7 @@ public abstract class Thing_Unit : ThingWithComponent , IThingHolder {
     {
         get
         {
-            return base.ParentHolder;
+            return base.ParentOwner;
         }
     }
 

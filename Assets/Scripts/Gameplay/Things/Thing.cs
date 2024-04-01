@@ -113,7 +113,7 @@ public abstract class Thing : IThing {
 
     public ThingOwner HoldingOwner;
 
-    public IThingHolder ParentHolder {
+    public IThingHolder ParentOwner {
         get {
             if (HoldingOwner == null) {
                 return null;
@@ -314,7 +314,7 @@ public abstract class Thing : IThing {
 
         if (Def.UseHitPoint)
         {
-            HP = Mathf.CeilToInt((HP * Count + thing.HP * absorbCount) / (float)(Count + absorbCount))
+            HP = Mathf.CeilToInt((HP * Count + thing.HP * absorbCount) / (float)(Count + absorbCount));
         }
 
         Count += absorbCount;
@@ -441,6 +441,8 @@ public abstract class Thing : IThing {
         //没合并完
         return false;
     }
+
+
 
 
 }

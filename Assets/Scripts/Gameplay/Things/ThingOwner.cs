@@ -25,6 +25,11 @@ public abstract class ThingOwner : IList<Thing>
         Owner = owner;
     }
 
+    public ThingOwner(IThingHolder owner, bool oneStackOnly)
+        : this(owner) {
+        _maxStacks = (oneStackOnly ? 1 : 999999);
+    }
+
     /// <summary>
     /// 背包中的食物之类的可能会过期，所以需要Tick一下
     /// </summary>
