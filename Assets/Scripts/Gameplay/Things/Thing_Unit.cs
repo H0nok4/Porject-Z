@@ -7,7 +7,7 @@ using ConfigType;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public abstract class Thing_Unit : Thing , IThingHolder {
+public abstract class Thing_Unit : ThingWithComponent , IThingHolder {
     private const int MaxTickPerMove = 600;
 
     public ThingUnit_JobTracker JobTracker;

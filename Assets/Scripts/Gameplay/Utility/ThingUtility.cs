@@ -78,4 +78,14 @@ public static class ThingUtility {
         baseBlueprintDef.EntityBuildDef = thingDefine;
         thingDefine.BlueprintDef = baseBlueprintDef;
     }
+
+    public static int TryAbsorbNum(Thing main, Thing other, bool respectStackLimit)
+    {
+        if (respectStackLimit)
+        {
+            return Math.Min((main.Def.StackLimit - main.Count), other.Count);
+        }
+
+        return other.Count;
+    }
 }

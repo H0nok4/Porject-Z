@@ -6,10 +6,18 @@ using ConfigType;
 /// <summary>
 /// 所有的建筑的框架都是一类的，只是有范围大小的区别
 /// </summary>
-public class Thing_Building_Frame : Thing_Building, IBuildable {
+public class Thing_Building_Frame : Thing_Building, IBuildable
+{
+    public ThingOwner ResourcesContainer;
+
     public int WorkToBuild = 10;
 
     public float CurrentWorkCount = 0;
+
+    public Thing_Building_Frame()
+    {
+        ResourcesContainer = new ThingOwner<Thing>(this);
+    }
 
     public override void SpawnSetup(MapData mapData) {
         base.SpawnSetup(mapData);

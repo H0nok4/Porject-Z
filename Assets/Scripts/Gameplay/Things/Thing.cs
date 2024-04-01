@@ -301,12 +301,40 @@ public abstract class Thing : IThing {
 
 
     /// <summary>
-    /// 原本觉得只会有物品用到，但是考虑到有的建筑可以储存物品，所以放在基类
+    /// 尝试把其他的物品数量合并到该物品上
     /// </summary>
     /// <param name="thing"></param>
-    public virtual void AbsorbStack(Thing thing) {
+    public virtual bool TryAbsorbStack(Thing thing,bool respectStackLimit) {
+        if (!CanStackWith(thing))
+        {
+            return false;
+        }
 
+        int absorbCount = ThingUtility.TryAbsorbNum(this, thing, respectStackLimit);
+
+        if (Def.UseHitPoint)
+        {
+            HP = Mathf.CeilToInt((HP * Count + thing.HP * absorbCount) / (float)(Count + absorbCount))
+        }
+
+        Count += absorbCount;
+        thing.Count -= absorbCount;
+
+        //TODO:发出数量改变的事件
+        if (Spawned)
+        {
+            //TODO:需要刷新数量文本
+        }
+
+        if (thing.Count <= 0)
+        {
+            thing.Destroy();
+            return true;
+        }
+
+        return false;
     }
+
     /// <summary>
     /// 原本觉得只会有物品用到，但是考虑到有的建筑可以储存物品，所以放在基类
     /// </summary>

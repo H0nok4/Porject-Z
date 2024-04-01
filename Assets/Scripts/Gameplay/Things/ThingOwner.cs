@@ -10,6 +10,10 @@ public abstract class ThingOwner : IList<Thing>
 {
     //TODO:可以管理一系列的物体，可以用作背包或者发射仓之类的
     public IThingHolder Owner;
+    /// <summary>
+    /// 可以容纳的最大组数
+    /// </summary>
+    protected int _maxStacks = 999999;
 
     public ThingOwner()
     {
@@ -50,14 +54,13 @@ public abstract class ThingOwner : IList<Thing>
 
     public abstract Thing GetAt(int index);
 
-    public abstract bool TryAdd(Thing thing, int count, bool canMerge = true);
+    public abstract int TryAdd(Thing addThing, int count, bool canMerge = true);
 
-    public abstract bool TryAdd(Thing thing, bool canMerge = true);
+    public abstract bool TryAdd(Thing addThing, bool canMerge = true);
 
     public abstract int IndexOf(Thing thing);
 
     public abstract bool Remove(Thing thing);
-
 
     public Thing Take(Thing thing, int count)
     {
@@ -152,6 +155,46 @@ public abstract class ThingOwner : IList<Thing>
         {
             array[i + arrayIndex] = GetAt(i);
         }
+    }
+
+    public bool CanAcceptAnyOf(Thing thing, bool canMerge = true)
+    {
+        return GetCanAcceptCount(thing, canMerge) > 0;
+    }
+
+    public virtual int GetCanAcceptCount(Thing item, bool canMerge = true) {
+        if (item == null || item.Count == 0) {
+            return 0;
+        }
+
+        if (_maxStacks == 999999) {
+            return item.Count;
+        }
+
+        int result = 0;
+
+        if (Count < _maxStacks) {
+            result += (_maxStacks - Count) * item.Def.StackLimit;
+        }
+
+        if (result >= item.Count) {
+            return Mathf.Min(result, item.Count);
+        }
+
+        //可以合并，尝试合并到当前的
+        if (canMerge) {
+            for (int i = 0; i < Count; i++) {
+                Thing thing = GetAt(i);
+                if (thing.Count < thing.Def.StackLimit && thing.CanStackWith(item)) {
+                    result += (thing.Def.StackLimit - thing.Count);
+                    if (result >= item.Count) {
+                        return Math.Min(result, item.Count);
+                    }
+                }
+            }
+        }
+
+        return Math.Min(result, item.Count);
     }
 
     public void Insert(int index, Thing item) {
