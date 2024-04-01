@@ -193,6 +193,7 @@ namespace ConfigType
     {
         public int ID; // ID 
         public string Name; //  
+        public string Describe; //  
         public ConfigType.EditableType ThingClass; // 物体使用的类 
         public ThingCategory Category; // 类型 
         public bool Destroyable; // 是否可以被摧毁 

@@ -3,6 +3,7 @@
 	<ThingDefine>
 		<ID>1</ID>
 		<Name>Pawn</Name>
+		<Describe />
 		<ThingClass>
 			<TypeName>Thing_Unit_Pawn</TypeName>
 		</ThingClass>
@@ -29,6 +30,7 @@
 	<ThingDefine>
 		<ID>2</ID>
 		<Name>Wall</Name>
+		<Describe />
 		<ThingClass>
 			<TypeName>Thing_Building_Wall</TypeName>
 		</ThingClass>
@@ -55,15 +57,66 @@
 	<ThingDefine>
 		<ID>200</ID>
 		<Name>TestItem</Name>
+		<Describe />
 		<ThingClass>
 			<TypeName>TestItemClass</TypeName>
 		</ThingClass>
-		<Category>None</Category>
+		<Category>Item</Category>
 		<Destroyable>true</Destroyable>
 		<UseHitPoint>true</UseHitPoint>
 		<StackLimit>100</StackLimit>
 		<MaxHitPoint>100</MaxHitPoint>
-		<EverHaulable>false</EverHaulable>
+		<EverHaulable>true</EverHaulable>
+		<Rotatable>true</Rotatable>
+		<WorkGiverDefineTypeID />
+		<Passability>OnlyThrough</Passability>
+		<MoveCost>0</MoveCost>
+		<SizeX>1</SizeX>
+		<SizeY>1</SizeY>
+		<BlueprintSpritePath />
+		<ThingSpritePath />
+		<FrameSpritePath>Sprite/GeneralFrame</FrameSpritePath>
+		<Workload>60</Workload>
+		<BuildCostThingID />
+		<BuildCostThingNum />
+		<Selectable>true</Selectable>
+	</ThingDefine>
+	<ThingDefine>
+		<ID>201</ID>
+		<Name>Wood</Name>
+		<Describe>在现代有着广泛应用的材料</Describe>
+		<ThingClass />
+		<Category>Item</Category>
+		<Destroyable>true</Destroyable>
+		<UseHitPoint>true</UseHitPoint>
+		<StackLimit>100</StackLimit>
+		<MaxHitPoint>100</MaxHitPoint>
+		<EverHaulable>true</EverHaulable>
+		<Rotatable>true</Rotatable>
+		<WorkGiverDefineTypeID />
+		<Passability>OnlyThrough</Passability>
+		<MoveCost>0</MoveCost>
+		<SizeX>1</SizeX>
+		<SizeY>1</SizeY>
+		<BlueprintSpritePath />
+		<ThingSpritePath />
+		<FrameSpritePath>Sprite/GeneralFrame</FrameSpritePath>
+		<Workload>60</Workload>
+		<BuildCostThingID />
+		<BuildCostThingNum />
+		<Selectable>true</Selectable>
+	</ThingDefine>
+	<ThingDefine>
+		<ID>202</ID>
+		<Name>Iron</Name>
+		<Describe>在现代有着广泛应用的材料</Describe>
+		<ThingClass />
+		<Category>Item</Category>
+		<Destroyable>true</Destroyable>
+		<UseHitPoint>true</UseHitPoint>
+		<StackLimit>100</StackLimit>
+		<MaxHitPoint>100</MaxHitPoint>
+		<EverHaulable>true</EverHaulable>
 		<Rotatable>true</Rotatable>
 		<WorkGiverDefineTypeID />
 		<Passability>OnlyThrough</Passability>
