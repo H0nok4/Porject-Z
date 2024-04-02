@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 public class ThingOwner<T> : ThingOwner where T : Thing
@@ -144,14 +145,25 @@ public class ThingOwner<T> : ThingOwner where T : Thing
         return true;
     }
 
-    public override int IndexOf(Thing thing)
-    {
-        throw new NotImplementedException();
+    public override int IndexOf(Thing thing) {
+        if (!(thing is T item)) {
+            return -1;
+        }
+        return _things.IndexOf(item);
     }
 
     public override bool Remove(Thing thing)
     {
-        throw new NotImplementedException();
+        if (!Contains(thing)) {
+            return false;
+        }
+
+        if (thing.HoldingOwner == this) {
+            thing.HoldingOwner = null;
+        }
+
+        _things.Remove((T) thing);
+        return true;
     }
 
     public override int Count => _things.Count;

@@ -32,10 +32,22 @@ public class Thing_Building_Frame : Thing_Building, IBuildable, IThingHolder {
         Destroy();
     }
 
+    private List<DefineThingClassCount> _needResources;
+
     public IReadOnlyList<DefineThingClassCount> NeedResources()
     {
+        _needResources.Clear();
+        var entityNeedResources = Def.EntityBuildDef.CostList;
         //TODO:目前还没有物品设定，后续在做
-        return new List<DefineThingClassCount>();
+        foreach (var defineThingClassCount in entityNeedResources) {
+            int stackCount = ResourcesContainer.GetStackCountByDef(defineThingClassCount.Def);
+            if (stackCount < defineThingClassCount.Count) {
+                _needResources.Add(new DefineThingClassCount(){Def = defineThingClassCount.Def,Count = stackCount});
+            }
+        }
+
+
+        return _needResources;
     }
 
     public ThingDefine EntityDefineToBuildComplete()

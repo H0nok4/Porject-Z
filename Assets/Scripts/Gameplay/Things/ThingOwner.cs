@@ -5,13 +5,13 @@ using ConfigType;
 using UnityEngine;
 
 
-//TODO:»¹ĞèÒªÒ»¸ö·ºĞÍµÄThingOwner
+//TODO:è¿˜éœ€è¦ä¸€ä¸ªæ³›å‹çš„ThingOwner
 public abstract class ThingOwner : IList<Thing>
 {
-    //TODO:¿ÉÒÔ¹ÜÀíÒ»ÏµÁĞµÄÎïÌå£¬¿ÉÒÔÓÃ×÷±³°ü»òÕß·¢Éä²ÖÖ®ÀàµÄ
+    //TODO:å¯ä»¥ç®¡ç†ä¸€ç³»åˆ—çš„ç‰©ä½“ï¼Œå¯ä»¥ç”¨ä½œèƒŒåŒ…æˆ–è€…å‘å°„ä»“ä¹‹ç±»çš„
     public IThingHolder Owner;
     /// <summary>
-    /// ¿ÉÒÔÈİÄÉµÄ×î´ó×éÊı
+    /// å¯ä»¥å®¹çº³çš„æœ€å¤§ç»„æ•°
     /// </summary>
     protected int _maxStacks = 999999;
 
@@ -31,15 +31,15 @@ public abstract class ThingOwner : IList<Thing>
     }
 
     /// <summary>
-    /// ±³°üÖĞµÄÊ³ÎïÖ®ÀàµÄ¿ÉÄÜ»á¹ıÆÚ£¬ËùÒÔĞèÒªTickÒ»ÏÂ
+    /// èƒŒåŒ…ä¸­çš„é£Ÿç‰©ä¹‹ç±»çš„å¯èƒ½ä¼šè¿‡æœŸï¼Œæ‰€ä»¥éœ€è¦Tickä¸€ä¸‹
     /// </summary>
     public void ThingOwnerTick(bool removeIfDestroyed)
     {
-        //±éÀú¶¼ĞèÒª´ÓºóÍùÇ°
+        //éå†éƒ½éœ€è¦ä»åå¾€å‰
         for (int i = Count - 1; i >= 0; i--)
         {
             Thing item = GetAt(i);
-            //TODO:ÓĞµÄÎïÆ·¿ÉÄÜ²»ĞèÒªTick£¬ĞèÒªÌø¹ıÀ´½ÚÊ¡Ê±¼ä
+            //TODO:æœ‰çš„ç‰©å“å¯èƒ½ä¸éœ€è¦Tickï¼Œéœ€è¦è·³è¿‡æ¥èŠ‚çœæ—¶é—´
             item.Tick();
             if (item.IsDestroyed && removeIfDestroyed)
             {
@@ -71,19 +71,19 @@ public abstract class ThingOwner : IList<Thing>
     {
         if (!Contains(thing))
         {
-            Debug.LogError("ÏëÒªÈ¡³ö²»ÔÚ¿â´æÖĞµÄÎïÆ·");
+            Debug.LogError("æƒ³è¦å–å‡ºä¸åœ¨åº“å­˜ä¸­çš„ç‰©å“");
             return null;
         }
 
         if (count > thing.Count)
         {
-            Debug.LogError($"ÏëÒªÈ¡³öÊıÁ¿Îª{count}¸öµÄÎïÆ·£¬µ«ÊÇÖ»ÓĞ{thing.Count}¸ö");
+            Debug.LogError($"æƒ³è¦å–å‡ºæ•°é‡ä¸º{count}ä¸ªçš„ç‰©å“ï¼Œä½†æ˜¯åªæœ‰{thing.Count}ä¸ª");
             count = thing.Count;
         }
 
         if (count == thing.Count)
         {
-            //TODO:È¡³öµÄÍ¬Ê±ĞèÒªÒÆ³ı
+            //TODO:å–å‡ºçš„åŒæ—¶éœ€è¦ç§»é™¤
             Remove(thing);
             return thing;
         }
@@ -99,7 +99,7 @@ public abstract class ThingOwner : IList<Thing>
 
     public void Clear()
     {
-        //Á´±í´ÓºóÍùÇ°ÇåÀí
+        //é“¾è¡¨ä»åå¾€å‰æ¸…ç†
         for (int i = Count - 1; i >= 0; i--)
         {
             Remove(GetAt(i));
@@ -120,16 +120,16 @@ public abstract class ThingOwner : IList<Thing>
     }
 
     /// <summary>
-    /// ÅĞ¶ÏÊÇ·ñÓµÓĞÄ³ÖÖÅäÖÃµÄÎïÌå
+    /// åˆ¤æ–­æ˜¯å¦æ‹¥æœ‰æŸç§é…ç½®çš„ç‰©ä½“
     /// </summary>
     /// <param name="def"></param>
-    /// <param name="minCount">´óÓÚµÈÓÚÕâ¸öÊıÖµµÄ²Å»áÅĞ¶ÏÎªÒÑÓµÓĞ</param>
+    /// <param name="minCount">å¤§äºç­‰äºè¿™ä¸ªæ•°å€¼çš„æ‰ä¼šåˆ¤æ–­ä¸ºå·²æ‹¥æœ‰</param>
     /// <returns></returns>
     public bool Contains(ThingDefine def, int minCount)
     {
         if (minCount <= 0)
         {
-            //³£ÀíÉÏÀ´Ëµ²»Ó¦¸ÃÓĞÕâÖÖÇé¿ö
+            //å¸¸ç†ä¸Šæ¥è¯´ä¸åº”è¯¥æœ‰è¿™ç§æƒ…å†µ
             return true;
         }
 
@@ -139,7 +139,7 @@ public abstract class ThingOwner : IList<Thing>
             var thing = GetAt(i);
             if (thing.Def == def)
             {
-                //ÀÛ¼ÆÊıÁ¿
+                //ç´¯è®¡æ•°é‡
                 totalCount += thing.Count;
             }
 
@@ -186,7 +186,7 @@ public abstract class ThingOwner : IList<Thing>
             return Mathf.Min(result, item.Count);
         }
 
-        //¿ÉÒÔºÏ²¢£¬³¢ÊÔºÏ²¢µ½µ±Ç°µÄ
+        //å¯ä»¥åˆå¹¶ï¼Œå°è¯•åˆå¹¶åˆ°å½“å‰çš„
         if (canMerge) {
             for (int i = 0; i < Count; i++) {
                 Thing thing = GetAt(i);
@@ -203,20 +203,20 @@ public abstract class ThingOwner : IList<Thing>
     }
 
     public void Insert(int index, Thing item) {
-        throw new InvalidOperationException("²»ÔÊĞí²åÈë");
+        throw new InvalidOperationException("ä¸å…è®¸æ’å…¥");
     }
 
     public void RemoveAt(int index) {
         if (index < 0 || index >= Count)
         {
-            Debug.LogError($"ÏëÒªÒÆ³ıµÄË÷Òı´óÓÚThingOwner³ÖÓĞµÄÎïÆ·ÊıÁ¿£¬µ±Ç°ÎïÆ·ÊıÁ¿Îª:{Count},ÏëÒªÒÆ³ıµÄÎ»ÖÃÎª:{index}");
+            Debug.LogError($"æƒ³è¦ç§»é™¤çš„ç´¢å¼•å¤§äºThingOwneræŒæœ‰çš„ç‰©å“æ•°é‡ï¼Œå½“å‰ç‰©å“æ•°é‡ä¸º:{Count},æƒ³è¦ç§»é™¤çš„ä½ç½®ä¸º:{index}");
             return;
         }
 
         Remove(GetAt(index));
     }
     /// <summary>
-    /// Ö¸µÄÊÇ¿â´æÖÖÀà
+    /// æŒ‡çš„æ˜¯åº“å­˜ç§ç±»
     /// </summary>
     public abstract int Count { get; }
 
@@ -234,5 +234,16 @@ public abstract class ThingOwner : IList<Thing>
         for (int i = 0; i < Count; i++) {
             yield return GetAt(i);
         }
+    }
+
+    public int GetStackCountByDef(ThingDefine def) {
+        foreach (var thing in this) {
+            if (thing.Def.ID == def.ID) {
+                //TODO:åŒä¸€ä¸ªç‰©å“ï¼Œåˆ¤æ–­æœ‰å¤šå°‘åœ¨èº«ä¸Š
+                return thing.Count;
+            }
+        }
+
+        return 0;
     }
 }

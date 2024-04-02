@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization.Formatters;
@@ -64,7 +64,8 @@ public class WorkGiver_DeliverResourceToBlueprint : WorkGiver_DeliverResourceTo
         MissingResources.Clear();
         foreach (var defineCount in build.NeedResources())
         {
-            //TODO:现在没有材料设计，后面做了物品再添加
+            //TODO:找到地图上存在的允许互动的同类物品运过去
+
         }
 
         return null;
