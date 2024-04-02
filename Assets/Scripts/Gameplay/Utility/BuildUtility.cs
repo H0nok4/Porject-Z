@@ -97,4 +97,17 @@ public static class BuildUtility
 
         return null;
     }
+
+    public static int GetNeedItemCount(IBuildable thing, ThingDefine defineCountDef)
+    {
+        foreach (var needResources in thing.NeedResources())
+        {
+            if (needResources.Def.ID == defineCountDef.ID)
+            {
+                return needResources.Count;
+            }
+        }
+
+        return 0;
+    }
 }

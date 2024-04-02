@@ -70,6 +70,8 @@ public static class ThingRequestGroupHelper
                 return thingDefine.IsFrame;
             case ThingRequestGroup.BuildingBlueprint:
                 return thingDefine.IsBlueprint;
+            case ThingRequestGroup.Item:
+                return thingDefine.Category == ThingCategory.Item;
             default:
                 return false;
         }
@@ -82,4 +84,5 @@ public enum ThingRequestGroup
     All = 1,
     BuildingFrame,
     BuildingBlueprint,
+    Item
 }

@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections.Generic;
 using ConfigType;
 using UnityEngine;
 
@@ -24,6 +25,8 @@ public class Job
     public JobTargetInfo InfoA;
 
     public JobTargetInfo InfoB;
+
+    public List<JobTargetInfo> InfoQueueA;
 
     public JobTargetInfo GetTarget(JobTargetIndex index)
     {

@@ -7,8 +7,8 @@ using UnityEngine;
 
 public sealed class ListThings
 {
-    public Dictionary<ThingDefine, List<Thing>> ListByDefine =
-        new Dictionary<ThingDefine, List<Thing>>(DefineThingComparer.Instance);
+    public Dictionary<int, List<Thing>> ListByDefine =
+        new Dictionary<int, List<Thing>>();
 
     public List<Thing>[] ListByGroup;
 
@@ -36,7 +36,7 @@ public sealed class ListThings
     {
         if (request.ThingDefine != null)
         {
-            if (ListByDefine.TryGetValue(request.ThingDefine,out List<Thing> things))
+            if (ListByDefine.TryGetValue(request.ThingDefine.ID,out List<Thing> things))
             {
                 return things;
             }
@@ -60,10 +60,10 @@ public sealed class ListThings
 
     public void Add(Thing thing)
     {
-        if (!ListByDefine.TryGetValue(thing.Def,out var list))
+        if (!ListByDefine.TryGetValue(thing.Def.ID,out var list))
         {
             list = new List<Thing>();
-            ListByDefine.Add(thing.Def,list);
+            ListByDefine.Add(thing.Def.ID,list);
         }
 
         list.Add(thing);
@@ -86,7 +86,7 @@ public sealed class ListThings
 
     public void Remove(Thing thing)
     {
-        if (ListByDefine.TryGetValue(thing.Def,out var list))
+        if (ListByDefine.TryGetValue(thing.Def.ID,out var list))
         {
             list.Remove(thing);
         }
@@ -123,7 +123,7 @@ public class DefineThingComparer : IEqualityComparer<ThingDefine> {
         if (x == null || y == null) {
             return false;
         }
-        return x.UniqueID == y.UniqueID;
+        return x.ID == y.ID;
     }
 
     public int GetHashCode(ThingDefine obj) {
