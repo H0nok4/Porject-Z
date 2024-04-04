@@ -74,14 +74,30 @@ public class WorkGiver_DeliverResourceToBlueprint : WorkGiver_DeliverResourceTo
                 Debug.Log($"当前有{avaliableItemCount}个物品");
                 var haulToContainerJob = JobMaker.MakeJob(DataManager.Instance.GetJobDefineByID(6));
                 haulToContainerJob.InfoA = exitsThing[0];
-                //TODO:首先，可能会有多个需要资源的建筑，能的话就一趟拿完，尽量拿齐之后按顺序把资源放到蓝图那边
+                exitsThing.RemoveAt(0);
+                haulToContainerJob.InfoQueueA = new List<JobTargetInfo>();
+                for (int i = 0; i < exitsThing.Count; i++)
+                {
+                    haulToContainerJob.InfoQueueA.Add(exitsThing[i]);
+                }
+                haulToContainerJob.InfoB = (Thing)build;
+                //TODO:可能会有多个需要资源的建筑，能的话就一趟拿完，尽量拿齐之后按顺序把资源放到蓝图那边
                 var needResourcesBuilding =
                     FindNearbyNeeders(unit, defineCount, build, avaliableItemCount, out int needItemNum);
 
                 needResourcesBuilding.Add((Thing)build);
-
+                haulToContainerJob.Count = defineCount.Count;
+                haulToContainerJob.HaulMode = HaulMode.ToContainer;
+                return haulToContainerJob;
             }
 
+            MissingResources.Add(defineCount);
+
+        }
+
+        if (MissingResources.Count > 0)
+        {
+            Debug.LogError("没有找到材料来建造");
         }
 
         return null;

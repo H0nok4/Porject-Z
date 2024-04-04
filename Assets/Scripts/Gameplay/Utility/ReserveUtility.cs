@@ -42,4 +42,15 @@ public static class ReserveUtility {
 
         return ReservationManager.Instance.Reserve(unit, job, getTarget);
     }
+
+    public static void ReserveAsManyAsPossible(this Thing_Unit unit, List<JobTargetInfo> getTarget, Job job) {
+        if (!unit.Spawned) {
+            return;
+        }
+
+        foreach (var jobTargetInfo in getTarget)
+        {
+            ReservationManager.Instance.Reserve(unit, job, jobTargetInfo);
+        }
+    }
 }

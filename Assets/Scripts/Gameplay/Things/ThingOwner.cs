@@ -49,9 +49,7 @@ public abstract class ThingOwner : IList<Thing>
     }
 
 
-
-
-    Thing IList<Thing>.this[int index]
+    public Thing this[int index]
     {
         get => GetAt(index);
         set => throw new System.NotImplementedException();
