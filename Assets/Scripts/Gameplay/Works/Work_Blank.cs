@@ -13,6 +13,14 @@ public static class WorkMaker {
         return work;
     }
 
+    public static Work MakeWork(string name)
+    {
+        Work work = SimplePool<Work>.Get();
+        work.DebugName = name;
+        work.InPool = false;
+        return work;
+    }
+
     public static void ReturnWork(Work work)
     {
         work.InPool = true;

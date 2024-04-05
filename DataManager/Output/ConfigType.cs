@@ -59,7 +59,8 @@ namespace ConfigType
     public enum JobTargetIndex
     {
         A,
-        B
+        B,
+        C
     }
 
     public enum JoyStageType

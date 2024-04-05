@@ -8,6 +8,8 @@ using Unity.VisualScripting;
 
 public class Work
 {
+    public string DebugName { get; set; }
+
     public Thing_Unit Unit;
 
     public WorkCompleteMode CompleteMode = WorkCompleteMode.Instant;

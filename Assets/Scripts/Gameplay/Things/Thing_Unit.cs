@@ -16,6 +16,8 @@ public abstract class Thing_Unit : ThingWithComponent , IThingHolder {
 
     public ThingUnit_WorkSetting WorkSetting;
 
+    public ThingUnit_CarryTracker CarryTracker;
+
     public PathMover PathMover;
     public int TickPerMoveDiagonal => TicksPerMove(true);
     public int TickPerMoveCardinal => TicksPerMove(false);
@@ -64,6 +66,7 @@ public abstract class Thing_Unit : ThingWithComponent , IThingHolder {
         JobThinker.ThinkTreeDefine = PawnThinkTree.Instance;
         ThingType = ThingCategory.Unit;
         WorkSetting = new ThingUnit_WorkSetting(this);
+        CarryTracker = new ThingUnit_CarryTracker(this);
 
         GameTicker.Instance.RegisterThing(this);
     }
@@ -82,6 +85,9 @@ public abstract class Thing_Unit : ThingWithComponent , IThingHolder {
             return base.ParentOwner;
         }
     }
+
+    public bool IsDead { get; set; }
+    public bool IsDown { get; set; }
 
 
     public void GetChildren(List<IThingHolder> outChildren)
