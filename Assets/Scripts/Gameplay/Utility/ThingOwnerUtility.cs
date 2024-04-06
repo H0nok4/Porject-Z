@@ -32,4 +32,22 @@ public static class ThingOwnerUtility {
             }
         }
     }
+
+    public static ThingOwner TryGetThingOwner(this Thing thing) {
+        IThingHolder holder = thing as IThingHolder;
+        ThingWithComponent thingWithComponent = thing as ThingWithComponent;
+        if (holder != null)
+        {
+            ThingOwner currentHeldThing = holder.GetCurrentHoldingThings();
+            if (currentHeldThing != null)
+            {
+                return currentHeldThing;
+            }
+        }
+
+        //TODO:尝试从Component中找到ThingOwner
+
+
+        return null;
+    }
 }

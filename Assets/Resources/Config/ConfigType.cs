@@ -58,6 +58,7 @@ namespace ConfigType
 
     public enum JobTargetIndex
     {
+        None,
         A,
         B,
         C

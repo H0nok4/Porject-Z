@@ -66,26 +66,30 @@ public class WorkGiver_DeliverResourceToBlueprint : WorkGiver_DeliverResourceTo
         foreach (var defineCount in build.NeedResources())
         {
             //TODO:找到地图上存在的允许互动的同类物品运过去
-            var exitsThing = MapController.Instance.Map.ListThings.GetThingsByThingDefine(defineCount.Def);
+            var exitsThing = new List<Thing>();
+            exitsThing.AddRange(MapController.Instance.Map.ListThings.GetThingsByThingDefine(defineCount.Def));
             if (exitsThing.Count > 0)
             {
                 //TODO:先暂时直接获取所有物品数量来测试
                 int avaliableItemCount = exitsThing.Sum((thing) => thing.Count);
                 Debug.Log($"当前有{avaliableItemCount}个物品");
                 var haulToContainerJob = JobMaker.MakeJob(DataManager.Instance.GetJobDefineByID(6));
-                haulToContainerJob.InfoA = exitsThing[0];
+                haulToContainerJob.SetTarget(JobTargetIndex.A,exitsThing[0]);
                 exitsThing.RemoveAt(0);
-                haulToContainerJob.InfoQueueA = new List<JobTargetInfo>();
-                for (int i = 0; i < exitsThing.Count; i++)
-                {
-                    haulToContainerJob.InfoQueueA.Add(exitsThing[i]);
-                }
-                haulToContainerJob.InfoB = (Thing)build;
+                //haulToContainerJob.InfoQueueA = new List<JobTargetInfo>();
+                //for (int i = 0; i < exitsThing.Count; i++)
+                //{
+                //    haulToContainerJob.InfoQueueA.Add(exitsThing[i]);
+                //}
+                haulToContainerJob.SetTarget(JobTargetIndex.B,(Thing)build);
+
                 //TODO:可能会有多个需要资源的建筑，能的话就一趟拿完，尽量拿齐之后按顺序把资源放到蓝图那边
                 var needResourcesBuilding =
                     FindNearbyNeeders(unit, defineCount, build, avaliableItemCount, out int needItemNum);
 
                 needResourcesBuilding.Add((Thing)build);
+
+                haulToContainerJob.InfoC = (Thing)build;
                 haulToContainerJob.Count = defineCount.Count;
                 haulToContainerJob.HaulMode = HaulMode.ToContainer;
                 return haulToContainerJob;

@@ -4,7 +4,8 @@ using UnityEngine;
 public enum DesignatorType {
     //TODO:测试用
     None,
-    Building
+    Building,
+    Placing
 }
 public class DesignatorManager : Singleton<DesignatorManager> {
     //TODO:后面需要重构成通用的，目前多用于测试
@@ -13,9 +14,19 @@ public class DesignatorManager : Singleton<DesignatorManager> {
 
     public ThingDefine BuildingDef = DataManager.Instance.GetThingDefineByID(2);
 
+    public ThingDefine PlacingDef = DataManager.Instance.GetThingDefineByID(202);
+
     public bool IsBuildingState {
         get {
             return DesignatorType == DesignatorType.Building && BuildingDef != null;
+        }
+    }
+
+    public bool IsPlacingState
+    {
+        get
+        {
+            return DesignatorType == DesignatorType.Placing && PlacingDef != null;
         }
     }
 
@@ -35,6 +46,16 @@ public class DesignatorManager : Singleton<DesignatorManager> {
 
         ThingUtility.CreateBlueprintDefToThingDef(BuildingDef);
         SpawnHelper.Spawn(BuildingDef.BlueprintDef, new PosNode() { Pos = pos, MapDataIndex = map.Index });
+    }
+
+    public void PlaceThing(IntVec2 pos, MapData map)
+    {
+        if (!CanPlace(pos,map))
+        {
+            return;
+        }
+
+        SpawnHelper.Spawn(PlacingDef, new PosNode() { Pos = pos, MapDataIndex = map.Index },100);
     }
 
     public bool CanPlace(IntVec2 pos, MapData map) {

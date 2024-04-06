@@ -8,3 +8,4 @@ ID,,DriverClass,ø…“‘÷–∂œ
 3,WalkAroundJobDefine,JobDriver_WalkAround,
 4,ImmediatelyBuildBlueprintToFrame,JobDriver_ImmediatelyBuildBlueprintToFrame,
 5,HaulToCell,,
+6,HaulToContainer,JobDriver_HaulToContainer,

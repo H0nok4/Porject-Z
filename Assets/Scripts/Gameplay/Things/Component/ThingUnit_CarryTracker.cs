@@ -35,7 +35,7 @@ public class ThingUnit_CarryTracker : IThingHolder
 
     public void GetChildren(List<IThingHolder> outChildren)
     {
-        ThingOwnerUtility.GetThingHolderFromThings(outChildren, GetHoldingThing());
+        ThingOwnerUtility.GetThingHolderFromThings(outChildren, GetCurrentHoldingThings());
     }
 
     /// <summary>
@@ -61,7 +61,7 @@ public class ThingUnit_CarryTracker : IThingHolder
         return def.StackLimit;
     }
 
-    public ThingOwner GetHoldingThing()
+    public ThingOwner GetCurrentHoldingThings()
     {
         return ThingContainer;
     }

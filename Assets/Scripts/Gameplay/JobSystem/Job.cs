@@ -26,6 +26,8 @@ public class Job
 
     public JobTargetInfo InfoB;
 
+    public JobTargetInfo InfoC;
+
     public List<JobTargetInfo> InfoQueueA;
 
     public JobTargetInfo GetTarget(JobTargetIndex index)
@@ -36,6 +38,8 @@ public class Job
                 return InfoA;
             case JobTargetIndex.B:
                 return InfoB;
+            case JobTargetIndex.C:
+                return InfoC;
             default:
                 return InfoA;
         }
@@ -66,13 +70,19 @@ public class Job
 
     public void SetTarget(JobTargetIndex index, JobTargetInfo info)
     {
-        if (index== JobTargetIndex.A)
+        switch (index)
         {
-            InfoA = info;
-        }
-        else
-        {
-            InfoB = info;
+            case JobTargetIndex.A:
+                InfoA = info;
+                break; 
+            case JobTargetIndex.B:
+                InfoB = info;
+                break;
+            case JobTargetIndex.C:
+                InfoC = info;
+                break;
+            default:
+                    break;
         }
     }
 }

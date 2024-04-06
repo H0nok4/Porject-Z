@@ -356,7 +356,7 @@ public abstract class Thing : IThing {
             //TODO:分割出所有的物品，那干脆直接把这个对象整个给你算了
             DespawnAndDeselect();
             //TODO:
-            if (HoldingOwner.Contains(this))
+            if (HoldingOwner != null)
             {
                 HoldingOwner.Remove(this);
             }
@@ -441,7 +441,6 @@ public abstract class Thing : IThing {
         //没合并完
         return false;
     }
-
 
 
 

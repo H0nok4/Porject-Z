@@ -37,7 +37,7 @@ public static class Work_Haul {
         {
             var unit = work.Unit;
             var targetThing = unit.JobTracker.Job.GetTarget(JobTargetIndex.B);
-            work.Unit.PathMover.StartPath(new PawnPath(PathFinder.AStarFindPath(unit, targetThing.Position,PathMoveEndType.Touch)));
+            work.Unit.PathMover.StartPath(new PawnPath(PathFinder.AStarFindPath(unit, targetThing.Thing.Position,PathMoveEndType.Touch)));
         };
         //TODO:添加失败条件
         work.CompleteMode = WorkCompleteMode.PathMoveEnd;
@@ -91,7 +91,7 @@ public static class Work_Haul {
         return work;
     }
 
-    public static Work PutHauledThingIntoContainer(JobTargetIndex jobTargetIndex, JobTargetIndex jobTargetIndex1)
+    public static Work PutHauledThingIntoContainer(JobTargetIndex containerIndex, JobTargetIndex reversContainerIndex, Action onGive = null)
     {
         Work work = WorkMaker.MakeWork();
         work.InitAction = delegate
@@ -102,6 +102,48 @@ public static class Work_Haul {
             {
                 Debug.LogError("有搬运物体的工作但是单位没有拿物体");
             }
-        }
+            else
+            {
+                var thing = curJob.GetTarget(containerIndex).Thing;
+                var thingOwner = thing.TryGetThingOwner();
+                if (thingOwner != null)
+                {
+                    int unitCarryNum = unit.CarryTracker.CarriedThing.Count;
+                    if (thing is IBuildable build)
+                    {
+                        unitCarryNum =
+                            Mathf.Min(BuildUtility.GetNeedItemCount(build, unit.CarryTracker.CarriedThing.Def),
+                                unitCarryNum);
+                        if (reversContainerIndex != JobTargetIndex.None)
+                        {
+                            var reversContainer = curJob.GetTarget(reversContainerIndex).Thing;
+                            if (reversContainer != null && reversContainer != thing)
+                            {
+                                int reversContainerThingNeedCount =
+                                    BuildUtility.GetNeedItemCount((IBuildable)reversContainer,
+                                        unit.CarryTracker.CarriedThing.Def);
+                                unitCarryNum = Mathf.Min(unitCarryNum,
+                                    unit.CarryTracker.CarriedThing.Count - reversContainerThingNeedCount);
+                            }
+                        }
+                    }
+
+                    var carriedThing = unit.CarryTracker.CarriedThing;
+                    int addNum =
+                        unit.CarryTracker.ThingContainer.TryGiveToOtherContainer(carriedThing, thingOwner,
+                            unitCarryNum);
+                    if (addNum != 0)
+                    {
+                        //TODO:转移成功,需要发送事件
+                    }
+                }
+                else
+                {
+                    Debug.LogError("无法将物品搬运到容器中");
+                }
+            }
+
+        };
+        return work;
     }
 }

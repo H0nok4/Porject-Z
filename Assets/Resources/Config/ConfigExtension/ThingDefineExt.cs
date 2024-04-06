@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Sirenix.Utilities;
 using UnityEngine;
 
 namespace ConfigType {
@@ -76,7 +77,7 @@ namespace ConfigType {
         {
             get
             {
-                if (_costList == null)
+                if (_costList == null || (_costList.IsNullOrEmpty() && (BuildCostThingID.Count != 0 || BuildCostThingNum.Count != 0)))
                 {
                     _costList = new List<DefineThingClassCount>();
                     for (int i = 0; i < BuildCostThingID.Count; i++)

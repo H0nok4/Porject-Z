@@ -48,6 +48,11 @@ public static class ReserveUtility {
             return;
         }
 
+        if (getTarget == null)
+        {
+            return;
+        }
+
         foreach (var jobTargetInfo in getTarget)
         {
             ReservationManager.Instance.Reserve(unit, job, jobTargetInfo);

@@ -55,16 +55,20 @@ public class PlayerController : Singleton<PlayerController>
             Vector3Int cellPosition = MapController.Instance.Map.GetMapDataByIndex(0).TileMapObject.WorldToCell(mousePosition);
             var int2Pos = new IntVec2(cellPosition.x, cellPosition.y);
             DesignatorManager.Instance.PlaceBlueprintAt(int2Pos,MapController.Instance.Map.GetMapDataByIndex(0));
+        }else if (DesignatorManager.Instance.IsPlacingState)
+        {
+            //TODO:先放置100个木头
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3Int cellPosition = MapController.Instance.Map.GetMapDataByIndex(0).TileMapObject.WorldToCell(mousePosition);
+            var int2Pos = new IntVec2(cellPosition.x, cellPosition.y);
+            DesignatorManager.Instance.PlaceThing(int2Pos, MapController.Instance.Map.GetMapDataByIndex(0));
         }
     }
 
     public void OnPlayerMouseButton1Down()
     {
         //TODO:如果当前处于建筑模式，退出建筑模式
-        if (DesignatorManager.Instance.IsBuildingState)
-        {
-            DesignatorManager.Instance.DesignatorType = DesignatorType.None;
-        }
+        DesignatorManager.Instance.DesignatorType = DesignatorType.None;
         //else
         //{
         //    //按下右键测试寻路

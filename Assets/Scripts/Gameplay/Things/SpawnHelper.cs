@@ -14,6 +14,11 @@ public static class SpawnHelper
         return Spawn(ThingMaker.MakeNewThing(thingDefine),node,Rotation.North);
     }
 
+    public static Thing Spawn(ThingDefine thingDefine, PosNode node, int count)
+    {
+        return Spawn(ThingMaker.MakeNewThing(thingDefine, count), node, Rotation.North);
+    }
+
     public static Thing Spawn(Thing newThing, PosNode node,Rotation rot, WipeMode wipeMode = WipeMode.Vanish)
     {
         var mapData = node.MapData;

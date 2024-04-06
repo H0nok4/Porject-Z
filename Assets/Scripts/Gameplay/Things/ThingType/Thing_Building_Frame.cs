@@ -36,6 +36,11 @@ public class Thing_Building_Frame : Thing_Building, IBuildable, IThingHolder {
 
     public IReadOnlyList<DefineThingClassCount> NeedResources()
     {
+        if (_needResources == null)
+        {
+            _needResources = new List<DefineThingClassCount>();
+        }
+
         _needResources.Clear();
         var entityNeedResources = Def.EntityBuildDef.CostList;
         //TODO:目前还没有物品设定，后续在做
@@ -60,7 +65,7 @@ public class Thing_Building_Frame : Thing_Building, IBuildable, IThingHolder {
         throw new System.NotImplementedException();
     }
 
-    public ThingOwner GetHoldingThing()
+    public ThingOwner GetCurrentHoldingThings()
     {
         return ResourcesContainer;
     }

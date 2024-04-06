@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
+using UnityEditor;
 using UnityEngine;
 
-public class ThingOwner<T> : ThingOwner where T : Thing
-{
+public class ThingOwner<T> : ThingOwner where T : Thing {
     public ThingOwner() {
     }
 
@@ -22,48 +22,39 @@ public class ThingOwner<T> : ThingOwner where T : Thing
 
     private List<T> _things = new List<T>();
 
-    public override Thing GetAt(int index)
-    {
+    public override Thing GetAt(int index) {
         return _things[index];
     }
 
-    public override int TryAdd(Thing addThing, int count, bool canMerge = true)
-    {
-        if (count <= 0)
-        {
+    public override int TryAdd(Thing addThing, int count, bool canMerge = true) {
+        if (count <= 0) {
             return 0;
         }
-        if (addThing == null)
-        {
+        if (addThing == null) {
             return 0;
         }
 
-        if (Contains(addThing))
-        {
+        if (Contains(addThing)) {
             Debug.LogWarning("尝试重复添加物体");
             return 0;
         }
 
-        if (addThing.HoldingOwner != null)
-        {
+        if (addThing.HoldingOwner != null) {
             Debug.LogWarning("尝试添加一个已经有持有者的物品");
             return 0;
         }
 
-        if (!CanAcceptAnyOf(addThing,canMerge))
-        {
+        if (!CanAcceptAnyOf(addThing, canMerge)) {
             return 0;
         }
 
         int currentCount = addThing.Count;
         int splitCount = Math.Min(currentCount, count);
         Thing splitThing = addThing.SplitOff(splitCount);
-        if (!TryAdd((T)splitThing,canMerge))
-        {
-            if (splitThing != addThing)
-            {
+        if (!TryAdd((T)splitThing, canMerge)) {
+            if (splitThing != addThing) {
                 int result = currentCount - addThing.Count - splitThing.Count;
-                addThing.TryAbsorbStack(splitThing,false);
+                addThing.TryAbsorbStack(splitThing, false);
                 return result;
             }
 
@@ -75,16 +66,13 @@ public class ThingOwner<T> : ThingOwner where T : Thing
 
 
 
-    public override bool TryAdd(Thing addThing, bool canMerge = true)
-    {
-        if (addThing == null)
-        {
-            
+    public override bool TryAdd(Thing addThing, bool canMerge = true) {
+        if (addThing == null) {
+
             return false;
         }
 
-        if (!(addThing is T item))
-        {
+        if (!(addThing is T item)) {
             return false;
         }
 
@@ -102,39 +90,32 @@ public class ThingOwner<T> : ThingOwner where T : Thing
             return false;
         }
 
-        if (canMerge)
-        {
+        if (canMerge) {
             //尝试合并进去
-            for (int i = 0; i < _things.Count; i++)
-            {
+            for (int i = 0; i < _things.Count; i++) {
                 T hadThing = _things[i];
-                if (!hadThing.CanStackWith(addThing))
-                {
+                if (!hadThing.CanStackWith(addThing)) {
                     continue;
                 }
 
                 int canAddNum = Math.Min(addThing.Count, hadThing.Def.StackLimit - hadThing.Count);
 
-                if (canAddNum > 0)
-                {
+                if (canAddNum > 0) {
                     Thing splitThing = addThing.SplitOff(canAddNum);
                     int curHadNum = hadThing.Count;
                     hadThing.TryAbsorbStack(addThing, true);
-                    if (hadThing.Count > curHadNum)
-                    {
+                    if (hadThing.Count > curHadNum) {
                         //TODO:增加了数量,需要发出事件
                     }
 
-                    if (addThing.IsDestroyed || addThing.Count == 0)
-                    {
+                    if (addThing.IsDestroyed || addThing.Count == 0) {
                         return true;
                     }
                 }
             }
         }
 
-        if (Count >= _maxStacks)
-        {
+        if (Count >= _maxStacks) {
             return false;
         }
         //直接添加进来
@@ -152,8 +133,7 @@ public class ThingOwner<T> : ThingOwner where T : Thing
         return _things.IndexOf(item);
     }
 
-    public override bool Remove(Thing thing)
-    {
+    public override bool Remove(Thing thing) {
         if (!Contains(thing)) {
             return false;
         }
@@ -162,9 +142,81 @@ public class ThingOwner<T> : ThingOwner where T : Thing
             thing.HoldingOwner = null;
         }
 
-        _things.Remove((T) thing);
+        _things.Remove((T)thing);
         return true;
     }
 
     public override int Count => _things.Count;
+
+    public bool TryGiveToOtherContainer(Thing item, ThingOwner otherContainer, bool canMergeWithExitsThing = true) {
+        return TryGiveToOtherContainer(item, otherContainer, item.Count, canMergeWithExitsThing) == item.Count;
+    }
+
+    public int TryGiveToOtherContainer(Thing item, ThingOwner otherContainer, int count, bool canMergeWithExitsThing = true) {
+        return TryGiveToOtherContainer(item, otherContainer, item.Count, out Thing _, canMergeWithExitsThing);
+    }
+
+    public int TryGiveToOtherContainer(Thing item, ThingOwner otherContainer, int count, out Thing resultItem,
+        bool canMergeWithExitsThing = true) {
+        //TODO:尝试将物品存入ThingOwner中
+        if (!Contains(item)) {
+            Debug.LogError("想要转移不属于自己的物品给别的容器");
+            resultItem = null;
+            return 0;
+        }
+
+        if (otherContainer == this && count > 0) {
+            resultItem = item;
+            return item.Count;
+        }
+
+        if (!otherContainer.CanAcceptAnyOf(item, canMergeWithExitsThing)) {
+            resultItem = null;
+            return 0;
+        }
+
+        if (count <= 0) {
+            resultItem = null;
+            return 0;
+        }
+
+        if (Owner is MapData || otherContainer is MapData)
+        {
+            resultItem = null;
+            return 0;
+        }
+
+        var canGiveToNum = Mathf.Min(item.Count, count);
+        Thing giveThing = item.SplitOff(canGiveToNum);
+        if (Contains(giveThing))
+        {
+            //如果全部都给别人了,就移除该物体
+            Remove(giveThing);
+        }
+
+        if (otherContainer.TryAdd(giveThing,canMergeWithExitsThing))
+        {
+            resultItem = giveThing;
+            return giveThing.Count;
+        }
+        //没有添加成功
+        resultItem = null;
+        if (!otherContainer.Contains(resultItem) && resultItem.Count > 0 && !resultItem.IsDestroyed)
+        {
+            //当前剩余的数量
+            int remainNum = canGiveToNum - giveThing.Count;
+            //是分离出来的物体
+            if (item != giveThing)
+            {
+                //合并进去
+                item.TryAbsorbStack(giveThing, false);
+                return remainNum;
+            }
+            //不是分离的,说明把item直接转移了,再把它加回去
+            TryAdd(giveThing, false);
+            return remainNum;
+        }
+
+        return item.Count;
+    }
 }

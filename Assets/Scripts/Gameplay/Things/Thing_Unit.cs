@@ -96,7 +96,7 @@ public abstract class Thing_Unit : ThingWithComponent , IThingHolder {
 
     }
 
-    public ThingOwner GetHoldingThing()
+    public ThingOwner GetCurrentHoldingThings()
     {
         return null;
     }

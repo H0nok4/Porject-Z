@@ -38,4 +38,12 @@
 		<DriverClass />
 		<CanSuspend>true</CanSuspend>
 	</JobDefine>
+	<JobDefine>
+		<ID>6</ID>
+		<Name>HaulToContainer</Name>
+		<DriverClass>
+			<TypeName>JobDriver_HaulToContainer</TypeName>
+		</DriverClass>
+		<CanSuspend>true</CanSuspend>
+	</JobDefine>
 </ArrayOfJobDefine>
