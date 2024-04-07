@@ -85,16 +85,18 @@ public class PathMover {
 
     private void SetMoveTarget(MoveTargetInfo target)
     {
-        
+
         _targetInfo = target;
         if (IsMoving) {
             //TODO:当前有正在行进的路线，需要
 
         }
 
-        var node = MoveTarget.MapNode;
-        var path = PathFinder.AStarFindPath(RegisterPawn, node, MoveTarget.EndType);
+        var node = target.MapNode;
+
+        var path = PathFinder.AStarFindPath(RegisterPawn, node, target.EndType);
         StartPath(new PawnPath(path));
+
         //TODO:设置的时候更新一下路径
 
     }
@@ -130,13 +132,13 @@ public class PathMover {
             return;
         }
 
-        if (MoveTarget == null || CurrentMovingPath == null)
+        if (MoveTarget == null && CurrentMovingPath == null)
         {
             Debug.LogError("移动未结束，但是没有目标");
             return;
         }
 
-        if (MoveTarget.IsTrackThing)
+        if (MoveTarget is { IsTrackThing: true })
         {
             //TODO:追踪一个Thing，需要不断检查Thing的位置是否变动，虽然不一定每一帧都要更新位置
             if (GameTicker.Instance.CurrentTick - PreRefreshTargetThingPositionTick >= 60)
@@ -177,8 +179,6 @@ public class PathMover {
 
     public void StartPath(PawnPath path)
     {
-
-
         //TODO:
         if (IsMoving) {
             //TODO:下个移动点还是保持不变,所以时间也不需要变
@@ -259,8 +259,8 @@ public class PathMover {
         CurrentMovingPath.CurMovingIndex++;
         if (CurrentMovingPath.End) {
             IsMoving = false;
+            _targetInfo = null;
             RegisterPawn.JobTracker.OnPathMoveEnd();
-
         }
         else
         {

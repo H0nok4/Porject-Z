@@ -16,4 +16,11 @@ public class ThingObject {
     public void SetSprite(Sprite sprite) {
         SpriteRenderer.sprite = sprite;
     }
+
+    public void Dispose()
+    {
+        //TODO:后面可以用对象池管理
+        SpriteRenderer = null;
+        GameObject.Destroy(this.GO);
+    }
 }

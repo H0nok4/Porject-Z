@@ -239,6 +239,7 @@ public abstract class Thing : IThing {
         MapData.UnRegisterThingMapPos(this);
         MapController.Instance.Map.ListThings.Remove(this);
         Spawned = false;
+        GameObject.Dispose();
         //Destroy();
     }
 
@@ -386,6 +387,10 @@ public abstract class Thing : IThing {
     private void DespawnAndDeselect()
     {
         //TODO:如果当前物品
+        if (Spawned)
+        {
+            DeSpawn();
+        }
     }
 
     public virtual bool AllowAbsorbStack(Thing thing) {
