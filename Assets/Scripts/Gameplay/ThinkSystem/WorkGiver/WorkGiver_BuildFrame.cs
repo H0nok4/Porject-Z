@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +17,9 @@ public class WorkGiver_BuildFrame : WorkGiver_Scanner
         }
 
         //TODO:后面Frame需要材料来建造的时候，需要加上已经放进去的材料是否足够
+        if (frame.NeedResources().Count != 0) {
+            return null;
+        }
 
         //TODO:可能有人站在建筑上，到时候得判断建筑位置上是否有人
 

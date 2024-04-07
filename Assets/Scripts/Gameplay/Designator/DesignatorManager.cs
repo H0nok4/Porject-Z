@@ -55,7 +55,7 @@ public class DesignatorManager : Singleton<DesignatorManager> {
             return;
         }
 
-        SpawnHelper.Spawn(PlacingDef, new PosNode() { Pos = pos, MapDataIndex = map.Index },100);
+        SpawnHelper.Spawn(PlacingDef, new PosNode() { Pos = pos, MapDataIndex = map.Index },9);
     }
 
     public bool CanPlace(IntVec2 pos, MapData map) {

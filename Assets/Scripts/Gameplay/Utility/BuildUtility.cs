@@ -77,9 +77,9 @@ public static class BuildUtility
         return null;
     }
 
-    public static Job HandleBlockingThingJob(Blueprint blueprint, Thing_Unit unit, bool forced)
+    public static Job HandleBlockingThingJob(IBuildable blueprint, Thing_Unit unit, bool forced)
     {
-        var blockThing = FirstBlockingThing(blueprint, (Thing_Unit_Pawn)unit);
+        var blockThing = FirstBlockingThing((Thing)blueprint, (Thing_Unit_Pawn)unit);
         if (blockThing == null)
         {
             return null;
