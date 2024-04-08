@@ -20,4 +20,14 @@
 		<ScanThings>true</ScanThings>
 		<ScanSections>false</ScanSections>
 	</WorkGiverDefine>
+	<WorkGiverDefine>
+		<ID>3</ID>
+		<Name>DeliverResourceToFrame</Name>
+		<WorkGiverType>
+			<TypeName>WorkGiver_DeliverResourceToFrame</TypeName>
+		</WorkGiverType>
+		<WorkTypeID>0</WorkTypeID>
+		<ScanThings>true</ScanThings>
+		<ScanSections>false</ScanSections>
+	</WorkGiverDefine>
 </ArrayOfWorkGiverDefine>

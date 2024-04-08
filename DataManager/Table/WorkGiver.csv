@@ -5,3 +5,4 @@ ID,,WorkGiverType,WorkTypeID,扫描物体,扫描格子
 ,,,0,TRUE,FALSE
 1,BuildFrame,WorkGiver_BuildFrame,,,
 2,DeliverResourceToBlueprint,WorkGiver_DeliverResourceToBlueprint,,,
+3,DeliverResourceToFrame,WorkGiver_DeliverResourceToFrame,,,

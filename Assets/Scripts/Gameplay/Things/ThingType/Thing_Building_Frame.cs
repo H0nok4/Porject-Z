@@ -47,7 +47,7 @@ public class Thing_Building_Frame : Thing_Building, IBuildable, IThingHolder {
         foreach (var defineThingClassCount in entityNeedResources) {
             int stackCount = ResourcesContainer.GetStackCountByDef(defineThingClassCount.Def);
             if (stackCount < defineThingClassCount.Count) {
-                _needResources.Add(new DefineThingClassCount(){Def = defineThingClassCount.Def,Count = stackCount});
+                _needResources.Add(new DefineThingClassCount(){Def = defineThingClassCount.Def,Count = defineThingClassCount.Count - stackCount});
             }
         }
 
