@@ -10,6 +10,7 @@ public class Job
     public JobDefine JobDefine;
     public string Name { get; }
 
+
     public JobDriver CurrentDriver;
 
     public ThinkNode JobFromThinkNode;
@@ -30,6 +31,7 @@ public class Job
 
     public List<JobTargetInfo> InfoQueueA;
 
+    public List<JobTargetInfo> InfoQueueB;
     public JobTargetInfo GetTarget(JobTargetIndex index)
     {
         switch (index)

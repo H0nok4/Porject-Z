@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ConfigType;
+using Mono.Cecil.Cil;
 using UnityEngine;
 
 public abstract class WorkGiver_DeliverResourceTo : WorkGiver_Scanner {
@@ -24,18 +25,22 @@ public abstract class WorkGiver_DeliverResourceTo : WorkGiver_Scanner {
                 var haulToContainerJob = JobMaker.MakeJob(DataManager.Instance.GetJobDefineByID(6));
                 haulToContainerJob.SetTarget(JobTargetIndex.A, exitsThing[0]);
                 exitsThing.RemoveAt(0);
-                //haulToContainerJob.InfoQueueA = new List<JobTargetInfo>();
-                //for (int i = 0; i < exitsThing.Count; i++)
-                //{
-                //    haulToContainerJob.InfoQueueA.Add(exitsThing[i]);
-                //}
+                haulToContainerJob.InfoQueueA = new List<JobTargetInfo>();
+                for (int i = 0; i < exitsThing.Count; i++) {
+                    haulToContainerJob.InfoQueueA.Add(exitsThing[i]);
+                }
                 haulToContainerJob.SetTarget(JobTargetIndex.B, (Thing)build);
-
                 //TODO:可能会有多个需要资源的建筑，能的话就一趟拿完，尽量拿齐之后按顺序把资源放到蓝图那边
                 var needResourcesBuilding =
                     FindNearbyNeeders(unit, defineCount, build, avaliableItemCount, out int needItemNum);
-
                 needResourcesBuilding.Add((Thing)build);
+                haulToContainerJob.InfoQueueB = new List<JobTargetInfo>();
+                if (needResourcesBuilding.Count > 0) {
+                    //TODO:后面可以根据与目标建筑的距离顺序来建造
+                }
+
+
+
 
                 haulToContainerJob.InfoC = (Thing)build;
                 haulToContainerJob.Count = defineCount.Count;
