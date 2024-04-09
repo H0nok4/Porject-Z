@@ -198,7 +198,7 @@ public class PathMover {
         var nextPos = path.GetCurrentPosition();
         MoveToNextPosTickTotal = CalculateCostToNextPosition(nextPos.Pos);
         MoveToNextPosTickLeft = MoveToNextPosTickTotal;
-        Debug.Log($"当前MoveTick需要：{MoveToNextPosTickTotal}");
+        //Debug.Log($"当前MoveTick需要：{MoveToNextPosTickTotal}");
 
         IsMoving = true;
     }

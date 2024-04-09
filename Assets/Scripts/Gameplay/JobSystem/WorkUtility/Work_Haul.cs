@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using ConfigType;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 
@@ -149,8 +151,31 @@ public static class Work_Haul {
 
     public static Work JumpToExtraHaulThingIfPossible(Work goToWork,JobTargetIndex jobTargetIndex) {
         Work extraWork = WorkMaker.MakeWork();
-        extraWork.InitAction = () => {
-
+        extraWork.InitAction = () =>
+        {
+            var unit = extraWork.Unit;
+            var curJob = unit.JobTracker.Job;
+            var inQueueTarget = curJob.GetTargetList(jobTargetIndex);
+            if (!inQueueTarget.IsNullOrEmpty() && curJob.Count > 0)
+            {
+                if (unit.CarryTracker.CarriedThing == null)
+                {
+                    Debug.LogError("当前没有拿着东西,按理说走到这里的话手上应该有东西的");
+                }
+                else if(unit.CarryTracker.GetThingSpaceCountByDef(unit.CarryTracker.CarriedThing.Def) > 0)
+                {
+                    //TODO:如果可以拿得动队列中的东西,则设置为目标然后走过去拿
+                    for (int i = 0; i < inQueueTarget.Count; i++)
+                    {
+                        if (inQueueTarget[i].Thing.Def.ID == unit.Def.ID)
+                        {
+                            curJob.SetTarget(jobTargetIndex, inQueueTarget[i]);
+                            inQueueTarget.RemoveAt(i);
+                            unit.JobTracker.JobDriver.JumpToWork(goToWork);
+                        }
+                    }
+                }
+            }
         };
 
         return extraWork;

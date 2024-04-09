@@ -210,4 +210,15 @@ public abstract class JobDriver
             CanStartNextWork();
         }
     }
+
+    public void JumpToWork(Work targetWork)
+    {
+        if (targetWork == null)
+        {
+            Debug.LogError("想要跳转岛不存在的工作");
+            return;
+        }
+        SetNextWork(targetWork);
+        CanStartNextWork();
+    }
 }

@@ -9,7 +9,7 @@ public class JobDriver_HaulToContainer : JobDriver
     {
         Work goToThingWork = Work_MoveTo.MoveToThing(JobTargetIndex.A, PathMoveEndType.Touch);
         Work haulThingWork = Work_Haul.StartCarryThing(JobTargetIndex.A);
-        Work addedExtraHaulThingWork = Work_Haul.ExtraHaulThingIfPossible(JobTargetIndex.A);
+        Work addedExtraHaulThingWork = Work_Haul.JumpToExtraHaulThingIfPossible(goToThingWork,JobTargetIndex.A);
         Work carryThingToContainerWork = Work_Haul.CarryThingToContainer();
         yield return goToThingWork;
         yield return haulThingWork;
@@ -34,7 +34,7 @@ public class JobDriver_HaulToContainer : JobDriver
             return false;
         }
         //TODO:后面做一次性拿多个建筑物的材料时，需要把队列中的物体都加进来
-        Unit.ReserveAsManyAsPossible(Job.InfoQueueA, Job);
+        Unit.ReserveAsManyAsPossible(Job.InfoListA, Job);
         return true;
     }
 }

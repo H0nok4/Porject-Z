@@ -29,9 +29,9 @@ public class Job
 
     public JobTargetInfo InfoC;
 
-    public List<JobTargetInfo> InfoQueueA;
+    public List<JobTargetInfo> InfoListA;
 
-    public List<JobTargetInfo> InfoQueueB;
+    public List<JobTargetInfo> InfoListB;
     public JobTargetInfo GetTarget(JobTargetIndex index)
     {
         switch (index)
@@ -86,5 +86,18 @@ public class Job
             default:
                     break;
         }
+    }
+
+    public List<JobTargetInfo> GetTargetList(JobTargetIndex index)
+    {
+        switch (index)
+        {
+            case JobTargetIndex.A:
+                return InfoListA;
+            case JobTargetIndex.B:
+                return InfoListB;
+        }
+
+        return null;
     }
 }
