@@ -9,16 +9,17 @@ public class JobDriver_HaulToContainer : JobDriver
     {
         Work goToThingWork = Work_MoveTo.MoveToThing(JobTargetIndex.A, PathMoveEndType.Touch);
         Work haulThingWork = Work_Haul.StartCarryThing(JobTargetIndex.A);
+        Work addedExtraHaulThingWork = Work_Haul.ExtraHaulThingIfPossible(JobTargetIndex.A);
         Work carryThingToContainerWork = Work_Haul.CarryThingToContainer();
         yield return goToThingWork;
         yield return haulThingWork;
         yield return carryThingToContainerWork;
-        //TODO:·Å½øÈİÆ÷ÖĞĞèÒªÊ±¼ä£¬ËùÒÔ¿ÉÒÔÓĞÒ»¸öµÈ´ıµÄÊ±¼ä
+        //TODO:æ”¾è¿›å®¹å™¨ä¸­éœ€è¦æ—¶é—´ï¼Œæ‰€ä»¥å¯ä»¥æœ‰ä¸€ä¸ªç­‰å¾…çš„æ—¶é—´
 
         yield return Work_Build.BuildBlueprintToFrameIfNeed(JobTargetIndex.B,JobTargetIndex.C);
-        //TODO:°ÑÊÖÉÏµÄ¶«Î÷·Å½øÈ¥
+        //TODO:æŠŠæ‰‹ä¸Šçš„ä¸œè¥¿æ”¾è¿›å»
         yield return Work_Haul.PutHauledThingIntoContainer(JobTargetIndex.B, JobTargetIndex.C);
-        //TODO:Ö®ºó×ö³É¿ÉÒÔ°´Ë³Ğò·ÅÈë¶à¸öÎïÌåµÄÊ±ºò£¬ĞèÒªÕÒµ½ÏÂÒ»¸ö·ÅÈëµÄÄ¿±ê
+        //TODO:ä¹‹ååšæˆå¯ä»¥æŒ‰é¡ºåºæ”¾å…¥å¤šä¸ªç‰©ä½“çš„æ—¶å€™ï¼Œéœ€è¦æ‰¾åˆ°ä¸‹ä¸€ä¸ªæ”¾å…¥çš„ç›®æ ‡
     }
 
     public override bool TryMakeWorkReservations(bool errorOnFailed)
@@ -32,7 +33,7 @@ public class JobDriver_HaulToContainer : JobDriver
         {
             return false;
         }
-        //TODO:ºóÃæ×öÒ»´ÎĞÔÄÃ¶à¸ö½¨ÖşÎïµÄ²ÄÁÏÊ±£¬ĞèÒª°Ñ¶ÓÁĞÖĞµÄÎïÌå¶¼¼Ó½øÀ´
+        //TODO:åé¢åšä¸€æ¬¡æ€§æ‹¿å¤šä¸ªå»ºç­‘ç‰©çš„ææ–™æ—¶ï¼Œéœ€è¦æŠŠé˜Ÿåˆ—ä¸­çš„ç‰©ä½“éƒ½åŠ è¿›æ¥
         Unit.ReserveAsManyAsPossible(Job.InfoQueueA, Job);
         return true;
     }

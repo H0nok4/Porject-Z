@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -145,5 +145,14 @@ public static class Work_Haul {
 
         };
         return work;
+    }
+
+    public static Work JumpToExtraHaulThingIfPossible(Work goToWork,JobTargetIndex jobTargetIndex) {
+        Work extraWork = WorkMaker.MakeWork();
+        extraWork.InitAction = () => {
+
+        };
+
+        return extraWork;
     }
 }

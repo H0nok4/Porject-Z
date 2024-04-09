@@ -35,12 +35,17 @@ public abstract class WorkGiver_DeliverResourceTo : WorkGiver_Scanner {
                     FindNearbyNeeders(unit, defineCount, build, avaliableItemCount, out int needItemNum);
                 needResourcesBuilding.Add((Thing)build);
                 haulToContainerJob.InfoQueueB = new List<JobTargetInfo>();
+                int totalNeedCount = 0;
                 if (needResourcesBuilding.Count > 0) {
                     //TODO:后面可以根据与目标建筑的距离顺序来建造
+                    foreach (var sameNeedBuilding in needResourcesBuilding) {
+                        var needCount = BuildUtility.GetNeedItemCount((IBuildable)sameNeedBuilding, defineCount.Def);
+                        totalNeedCount += needCount;
+                        if (totalNeedCount <= avaliableItemCount) {
+                            haulToContainerJob.InfoQueueB.Add(sameNeedBuilding);
+                        }
+                    }
                 }
-
-
-
 
                 haulToContainerJob.InfoC = (Thing)build;
                 haulToContainerJob.Count = defineCount.Count;
