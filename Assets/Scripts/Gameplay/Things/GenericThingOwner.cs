@@ -153,7 +153,7 @@ public class ThingOwner<T> : ThingOwner where T : Thing {
     }
 
     public int TryGiveToOtherContainer(Thing item, ThingOwner otherContainer, int count, bool canMergeWithExitsThing = true) {
-        return TryGiveToOtherContainer(item, otherContainer, item.Count, out Thing _, canMergeWithExitsThing);
+        return TryGiveToOtherContainer(item, otherContainer, count, out Thing _, canMergeWithExitsThing);
     }
 
     public int TryGiveToOtherContainer(Thing item, ThingOwner otherContainer, int count, out Thing resultItem,
@@ -188,18 +188,26 @@ public class ThingOwner<T> : ThingOwner where T : Thing {
 
         var canGiveToNum = Mathf.Min(item.Count, count);
         Thing giveThing = item.SplitOff(canGiveToNum);
+
         if (Contains(giveThing))
         {
             //如果全部都给别人了,就移除该物体
+            Debug.Log("把材料都给别人了");
             Remove(giveThing);
+        }
+        else
+        {
+            Debug.Log($"给出去了{giveThing.Count}个材料,还剩{item.Count}个材料");
         }
 
         if (otherContainer.TryAdd(giveThing,canMergeWithExitsThing))
         {
             resultItem = giveThing;
+            Debug.Log($"成功给出");
             return giveThing.Count;
         }
         //没有添加成功
+        Debug.Log($"给出失败了,需要放回自己身上");
         resultItem = null;
         if (!otherContainer.Contains(resultItem) && resultItem.Count > 0 && !resultItem.IsDestroyed)
         {

@@ -132,9 +132,7 @@ public static class Work_Haul {
                     }
 
                     var carriedThing = unit.CarryTracker.CarriedThing;
-                    int addNum =
-                        unit.CarryTracker.ThingContainer.TryGiveToOtherContainer(carriedThing, thingOwner,
-                            unitCarryNum);
+                    int addNum = unit.CarryTracker.ThingContainer.TryGiveToOtherContainer(carriedThing, thingOwner, unitCarryNum);
                     if (addNum != 0)
                     {
                         //TODO:转移成功,需要发送事件
@@ -180,5 +178,36 @@ public static class Work_Haul {
         };
 
         return extraWork;
+    }
+
+    public static Work JumpToExtraHaulToContainerIfPossible(Work carryThingToContainerWork, JobTargetIndex jobTargetIndex)
+    {
+        Work work = WorkMaker.MakeWork();
+        work.InitAction = () =>
+        {
+            var unit = work.Unit;
+            var curJob = unit.JobTracker.Job;
+            var targets = curJob.GetTargetList(jobTargetIndex);
+            if (!targets.IsNullOrEmpty() && unit.CarryTracker.CarriedThing is { Count: > 0 })
+            {
+                //var carriedThingNum = unit.CarryTracker.CarriedThing.Count;
+                for (int i = 0; i < targets.Count; i++)
+                {
+                    var needResources = ((IBuildable)targets[i].Thing).NeedResources();
+                    foreach (var needThing in needResources)
+                    {
+                        if (needThing.Def.ID == unit.CarryTracker.CarriedThing.Def.ID)
+                        {
+                            curJob.SetTarget(jobTargetIndex, targets[i]);
+                            targets.RemoveAt(i);
+                            unit.JobTracker.JobDriver.JumpToWork(carryThingToContainerWork);
+                            return;
+                        }
+                    }
+                }
+            }
+        };
+
+        return work;
     }
 }

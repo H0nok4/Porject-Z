@@ -33,7 +33,7 @@ public abstract class WorkGiver_DeliverResourceTo : WorkGiver_Scanner {
                 //TODO:可能会有多个需要资源的建筑，能的话就一趟拿完，尽量拿齐之后按顺序把资源放到蓝图那边
                 var needResourcesBuilding =
                     FindNearbyNeeders(unit, defineCount, build, avaliableItemCount, out int needItemNum);
-                needResourcesBuilding.Add((Thing)build);
+                needResourcesBuilding.Remove((Thing)build);
                 haulToContainerJob.InfoListB = new List<JobTargetInfo>();
                 int totalNeedCount = 0;
                 if (needResourcesBuilding.Count > 0) {
@@ -48,7 +48,7 @@ public abstract class WorkGiver_DeliverResourceTo : WorkGiver_Scanner {
                 }
 
                 haulToContainerJob.InfoC = (Thing)build;
-                haulToContainerJob.Count = defineCount.Count;
+                haulToContainerJob.Count = needItemNum;
                 haulToContainerJob.HaulMode = HaulMode.ToContainer;
                 return haulToContainerJob;
             }
@@ -72,6 +72,10 @@ public abstract class WorkGiver_DeliverResourceTo : WorkGiver_Scanner {
         foreach (var thing in allThing) {
             if (needItemCount >= avaliableItemCount) {
                 break;
+            }
+
+            if (thing == build) {
+                continue;
             }
 
             if (!(thing is Blueprint blueprint)) {

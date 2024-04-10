@@ -21,6 +21,7 @@ public class JobDriver_HaulToContainer : JobDriver
         //TODO:把手上的东西放进去
         yield return Work_Haul.PutHauledThingIntoContainer(JobTargetIndex.B, JobTargetIndex.C);
         //TODO:之后做成可以按顺序放入多个物体的时候，需要找到下一个放入的目标
+        yield return Work_Haul.JumpToExtraHaulToContainerIfPossible(carryThingToContainerWork, JobTargetIndex.B);
     }
 
     public override bool TryMakeWorkReservations(bool errorOnFailed)
