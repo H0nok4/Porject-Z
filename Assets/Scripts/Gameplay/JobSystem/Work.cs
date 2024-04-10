@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +29,7 @@ public class Work
         return Unit;
     }
 
-    public void Clean()
+    public void ClearAll()
     {
         Unit = null;
         CompleteMode = WorkCompleteMode.Instant;
@@ -40,6 +40,14 @@ public class Work
 
         if (FinishedAction == null)
         {
+            return;
+        }
+
+        FinishedAction.Invoke();
+    }
+
+    public void Clean() {
+        if (FinishedAction == null) {
             return;
         }
 

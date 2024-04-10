@@ -13,6 +13,7 @@ public class JobDriver_HaulToContainer : JobDriver
         Work carryThingToContainerWork = Work_Haul.CarryThingToContainer();
         yield return goToThingWork;
         yield return haulThingWork;
+        yield return addedExtraHaulThingWork;
         yield return carryThingToContainerWork;
         //TODO:放进容器中需要时间，所以可以有一个等待的时间
 

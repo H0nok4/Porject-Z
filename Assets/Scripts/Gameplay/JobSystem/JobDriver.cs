@@ -1,4 +1,4 @@
-﻿
+
 
 using System.Collections.Generic;
 using ConfigType;
@@ -93,7 +93,7 @@ public abstract class JobDriver
     {
         if (CurrentWork != null)
         {
-            CurrentWork.Clean();
+            CurrentWork.ClearAll();
         }
     }
 
@@ -197,7 +197,7 @@ public abstract class JobDriver
         foreach (var work in Works)
         {
             //TODO:后面可以用对象池返回到池子里
-            work.Clean();
+            work.ClearAll();
             work.InPool = true;
             SimplePool<Work>.Return(work);
         }

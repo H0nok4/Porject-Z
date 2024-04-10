@@ -83,7 +83,8 @@ public static class Work_Haul {
                     //TODO:可能需要拿多个物体才能凑齐
                     //if (carryNum < stackNum)
                     //{
-                        
+                    curJob.Count -= carryNum;
+
                     //}
                 }
 
@@ -167,7 +168,7 @@ public static class Work_Haul {
                     //TODO:如果可以拿得动队列中的东西,则设置为目标然后走过去拿
                     for (int i = 0; i < inQueueTarget.Count; i++)
                     {
-                        if (inQueueTarget[i].Thing.Def.ID == unit.Def.ID)
+                        if (inQueueTarget[i].Thing.Def.ID == unit.CarryTracker.CarriedThing.Def.ID)
                         {
                             curJob.SetTarget(jobTargetIndex, inQueueTarget[i]);
                             inQueueTarget.RemoveAt(i);
