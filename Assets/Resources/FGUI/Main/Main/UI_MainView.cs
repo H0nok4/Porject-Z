@@ -8,8 +8,8 @@ namespace Main
     public partial class UI_MainView : GComponent
     {
         public Controller m_CtrlShowThingDes;
+        public GComponent m_BtnBuildWall;
         public GComponent m_BtnPlaceThing;
-        public GComponent m_BtnPlaceThing_2;
         public GList m_ListMainSelection;
         public GComponent m_ComThingDes;
         public const string URL = "ui://0kazkhhcc0f50";
@@ -24,10 +24,10 @@ namespace Main
             base.ConstructFromXML(xml);
 
             m_CtrlShowThingDes = GetControllerAt(0);
-            m_BtnPlaceThing = (GComponent)GetChildAt(0);
-            m_BtnPlaceThing_2 = (GComponent)GetChildAt(1);
-            m_ListMainSelection = (GList)GetChildAt(2);
-            m_ComThingDes = (GComponent)GetChildAt(3);
+            m_BtnBuildWall = (GComponent)GetChildAt(0);
+            m_BtnPlaceThing = (GComponent)GetChildAt(1);
+            m_ListMainSelection = (GList)GetChildAt(3);
+            m_ComThingDes = (GComponent)GetChildAt(4);
         }
     }
 }

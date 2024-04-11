@@ -1,23 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using FairyGUI;
+using Main;
 using UI;
 using UnityEngine;
 
-public class MainPanel : UIPanel
+[View("Main","MainView")]
+public class MainPanel : FGUIBase
 {
-    public BtnBuildWall BtnBuildWall;
-    public BtnPlacingThing BtnPlacingThing;
-
-    public override void InitInstance()
-    {
-        BtnBuildWall = (BtnBuildWall)GetUIComponentAtChildIndex(0);
-        BtnPlacingThing = (BtnPlacingThing)GetUIComponentAtChildIndex(1);
-    }
-
+    public UI_MainView _main;
     public override void OnShow()
     {
-        BtnBuildWall.OnClick = OnClickBtnBuildWall;
-        BtnPlacingThing.OnClick = OnClickBtnPlacingThing;
+        _main.m_BtnPlaceThing.onClick.Set(OnClickBtnPlacingThing);
+        _main.m_BtnBuildWall.onClick.Set(OnClickBtnBuildWall);
+        _main.m_CtrlShowThingDes.SetSelectedIndex(0);
     }
 
     private void OnClickBtnBuildWall()
@@ -29,5 +25,11 @@ public class MainPanel : UIPanel
     private void OnClickBtnPlacingThing()
     {
         DesignatorManager.Instance.DesignatorType = DesignatorType.Placing;
+    }
+
+    public override void Bind(GComponent component)
+    {
+        base.Bind(component);
+        _main = (UI_MainView) component;
     }
 }

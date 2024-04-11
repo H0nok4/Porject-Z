@@ -7,7 +7,7 @@ using UnityEngine;
 namespace UI
 {
     public class UIManager : MonoSingleton<UIManager> {
-        public readonly List<UIPanel> UIStack = new List<UIPanel>();
+        public readonly List<UIBase> UIStack = new List<UIBase>();
         public Canvas UICanvas;
 
         public void Init() {
@@ -18,34 +18,68 @@ namespace UI
 
         }
 
-        public void Show(UIPanel uiPanel) {
-            var panelObject = GameObject.Instantiate(uiPanel, Vector3.zero, Quaternion.identity);
-            
-            if (UIStack.Count > 0) {
-                var topPanel = UIStack.Last();
-                topPanel.Hide();
+        public UIBase Show(Type uiPanelType)
+        {
+            var viewAttribute = uiPanelType.GetCustomAttributes(true)
+                .First((type) => type.GetType() == typeof(ViewAttribute)) as ViewAttribute;
+            if (viewAttribute == null)
+            {
+                Debug.LogError("打开的UIPanel没有ViewAttribute");
+                return null;
             }
-            UIStack.Add(panelObject);
-            panelObject.Show();
 
-            panelObject.Rect.SetParent(UICanvas.transform);
-            panelObject.Rect.localPosition = Vector3.zero;
+            var view = (UIBase) Activator.CreateInstance(uiPanelType);
+
+            view.Initialize(viewAttribute);
+
+            UIStack.Add(view);
+
+            OpenUI(view);
+
+            return view;
+            //var panelObject = GameObject.Instantiate(uiPanel, Vector3.zero, Quaternion.identity);
+            
+            //if (UIStack.Count > 0) {
+            //    var topPanel = UIStack.Last();
+            //    topPanel.Hide();
+            //}
+            //UIStack.Add(panelObject);
+            //panelObject.Show();
+
+            //panelObject.Rect.SetParent(UICanvas.transform);
+            //panelObject.Rect.localPosition = Vector3.zero;
+        }
+
+        private void OpenUI(UIBase uiBase)
+        {
+            if (!uiBase.IsActive)
+            {
+                uiBase.Show();
+            }
+        }
+
+        private void CloseUI(UIBase uiBase)
+        {
+            if (uiBase.IsActive)
+            {
+                uiBase.Hide();
+            }
         }
 
         public void CloseCurrent() {
             if (UIStack.Count > 0) {
                 var topPanel = UIStack[^1];
                 UIStack.RemoveAt(UIStack.Count - 1);
-                topPanel.Hide();
+                CloseUI(topPanel);
             }
 
             if (UIStack.Count > 0) {
                 var topPanel = UIStack[^1];
-                topPanel.Show();
+                OpenUI(topPanel);
             }
         }
 
-        public T Find<T>() where T : UIPanel
+        public T Find<T>() where T : UIBase
         {
             foreach (var uiPanel in UIStack)
             {

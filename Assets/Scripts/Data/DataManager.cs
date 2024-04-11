@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mono.Cecil;
@@ -38,15 +39,7 @@ namespace ConfigType
 
         private MainPanel _mainPanel;
 
-        public MainPanel MainPanel {
-            get {
-                if (_mainPanel == null) {
-                    _mainPanel = Resources.Load<MainPanel>("UIGameObject/MainPanel");
-                }
-
-                return _mainPanel;
-            }
-        }
+        public Type MainPanelType => typeof(MainPanel);
 
         public void Init() {
 
