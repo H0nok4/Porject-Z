@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="0kazkhhc">
+  <resources>
+    <component id="c0f50" name="MainView.xml" path="/" exported="true"/>
+    <component id="f1nd1" name="BtnBuildWall.xml" path="/component/"/>
+    <component id="f1nd2" name="BtnPlaceThing.xml" path="/component/"/>
+    <component id="f1nd3" name="ComThingDes.xml" path="/component/"/>
+  </resources>
+  <publish name="" genCode="true"/>
+</packageDescription>
