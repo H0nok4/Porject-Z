@@ -50,7 +50,7 @@ public sealed class ListThings
             return ListByGroup[(int)request.Group] ?? _emptyList;
         }
 
-        throw new InvalidOperationException($"´íÎóµÄThingRequest¶ÔÏó + {request}");
+        throw new InvalidOperationException($"é”™è¯¯çš„ThingRequestå¯¹è±¡ + {request}");
     }
 
     public bool Contains(Thing thing)

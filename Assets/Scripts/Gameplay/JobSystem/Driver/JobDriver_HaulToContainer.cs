@@ -14,13 +14,14 @@ public class JobDriver_HaulToContainer : JobDriver
         yield return goToThingWork;
         yield return haulThingWork;
         yield return addedExtraHaulThingWork;
+        //TODO：按顺序放多个建筑的材料，最后建造的时候可以把顺序倒过来建造
         yield return carryThingToContainerWork;
         //TODO:放进容器中需要时间，所以可以有一个等待的时间
 
         yield return Work_Build.BuildBlueprintToFrameIfNeed(JobTargetIndex.B,JobTargetIndex.C);
-        //TODO:把手上的东西放进去
+        //把手上的东西放进去
         yield return Work_Haul.PutHauledThingIntoContainer(JobTargetIndex.B, JobTargetIndex.C);
-        //TODO:之后做成可以按顺序放入多个物体的时候，需要找到下一个放入的目标
+        //之后做成可以按顺序放入多个物体的时候，需要找到下一个放入的目标
         yield return Work_Haul.JumpToExtraHaulToContainerIfPossible(carryThingToContainerWork, JobTargetIndex.B);
     }
 
