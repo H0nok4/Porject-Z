@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="94,58">
+  <displayList>
+    <graph id="n7_mk93" name="n7" xy="0,0" size="94,58" type="rect"/>
+    <text id="n8_mk93" name="n8" xy="16,10" size="60,39" fontSize="28" text="物品"/>
+  </displayList>
+</component>

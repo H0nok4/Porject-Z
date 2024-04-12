@@ -2,9 +2,11 @@
 <packageDescription id="0kazkhhc">
   <resources>
     <component id="c0f50" name="MainView.xml" path="/" exported="true"/>
-    <component id="f1nd1" name="BtnBuildWall.xml" path="/component/"/>
-    <component id="f1nd2" name="BtnPlaceThing.xml" path="/component/"/>
-    <component id="f1nd3" name="ComThingDes.xml" path="/component/"/>
+    <component id="f1nd1" name="BtnBuildWall.xml" path="/component/" exported="true"/>
+    <component id="f1nd2" name="BtnPlaceThing.xml" path="/component/" exported="true"/>
+    <component id="f1nd3" name="ComThingDes.xml" path="/component/" exported="true"/>
+    <component id="mk935" name="BtnThingBag.xml" path="/component/" exported="true"/>
+    <component id="mk936" name="ComBuildNeedResource.xml" path="/component/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

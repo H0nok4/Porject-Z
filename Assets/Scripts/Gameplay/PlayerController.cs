@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Assets.Scripts.Gameplay;
 using ConfigType;
+using UI;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using static UnityEngine.RuleTile.TilingRuleOutput;
@@ -62,6 +63,17 @@ public class PlayerController : Singleton<PlayerController>
             Vector3Int cellPosition = MapController.Instance.Map.GetMapDataByIndex(0).TileMapObject.WorldToCell(mousePosition);
             var int2Pos = new IntVec2(cellPosition.x, cellPosition.y);
             DesignatorManager.Instance.PlaceThing(int2Pos, MapController.Instance.Map.GetMapDataByIndex(0));
+        }
+        else {
+            //TODO：点击的话，看看该位置是否有可以点击的物体，然后选中其中一个刷新到UI上
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3Int cellPosition = MapController.Instance.Map.GetMapDataByIndex(0).TileMapObject.WorldToCell(mousePosition);
+            var things = MapController.Instance.Map.GetMapDataByIndex(0).ThingMap
+                .ThingsListAt(new IntVec2(cellPosition.x, cellPosition.y));
+            var ui = UIManager.Instance.Find<MainPanel>();
+            if (ui != null && things.Count > 0) {
+                ui.SetCurTrackedThing(things[0])
+            }
         }
     }
 

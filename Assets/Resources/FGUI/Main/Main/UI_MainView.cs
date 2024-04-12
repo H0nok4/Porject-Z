@@ -11,7 +11,7 @@ namespace Main
         public GComponent m_BtnBuildWall;
         public GComponent m_BtnPlaceThing;
         public GList m_ListMainSelection;
-        public GComponent m_ComThingDes;
+        public UI_ComThingDes m_ComThingDes;
         public const string URL = "ui://0kazkhhcc0f50";
 
         public static UI_MainView CreateInstance()
@@ -27,7 +27,7 @@ namespace Main
             m_BtnBuildWall = (GComponent)GetChildAt(0);
             m_BtnPlaceThing = (GComponent)GetChildAt(1);
             m_ListMainSelection = (GList)GetChildAt(3);
-            m_ComThingDes = (GComponent)GetChildAt(4);
+            m_ComThingDes = (UI_ComThingDes)GetChildAt(4);
         }
     }
 }

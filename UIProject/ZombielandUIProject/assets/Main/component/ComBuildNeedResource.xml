@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="105,39">
+  <displayList>
+    <text id="n10_mk93" name="n10" xy="0,0" size="105,39" fontSize="28" vars="true" text="{name=XX}:{cur=0}/{max=10}"/>
+  </displayList>
+</component>

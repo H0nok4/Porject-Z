@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FairyGUI;
 
 namespace UI {
-    public abstract class UIBase
+    public abstract class ViewBase
     {
         public int ID;
         public bool IsDestroyed { get; set; }

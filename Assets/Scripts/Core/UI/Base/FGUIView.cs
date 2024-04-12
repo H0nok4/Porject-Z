@@ -7,15 +7,15 @@ using FairyGUI;
 using UnityEngine;
 
 namespace UI {
-    public class FGUIBase : UIBase
+    public class FGUIView : ViewBase
     {
 
         public class FGUIWindow : Window
         {
-            public FGUIBase BaseView { get; }
+            public FGUIView ViewView { get; }
 
-            public FGUIWindow(FGUIBase baseView) {
-                BaseView = baseView;
+            public FGUIWindow(FGUIView viewView) {
+                ViewView = viewView;
                 fairyBatching = true;
             }
 
@@ -24,17 +24,17 @@ namespace UI {
                 base.OnInit();
                 if (contentPane == null)
                 {
-                    contentPane = (GComponent)UIPackage.CreateObject(BaseView.PackageName, BaseView.ComponentName);
+                    contentPane = (GComponent)UIPackage.CreateObject(ViewView.PackageName, ViewView.ComponentName);
 
                     if (contentPane == null)
                     {
-                        Debug.LogError($"ContentPanel创建失败,Name = {BaseView.PackageAndComponentName}");
+                        Debug.LogError($"ContentPanel创建失败,Name = {ViewView.PackageAndComponentName}");
                         return;
                     }
 
                     AdaptToScreen();
 
-                    BaseView.Bind(contentPane);
+                    ViewView.Bind(contentPane);
                 }
             }
 

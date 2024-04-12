@@ -7,7 +7,7 @@ using UnityEngine;
 namespace UI
 {
     public class UIManager : MonoSingleton<UIManager> {
-        public readonly List<UIBase> UIStack = new List<UIBase>();
+        public readonly List<ViewBase> UIStack = new List<ViewBase>();
         public Canvas UICanvas;
 
         public void Init() {
@@ -18,17 +18,17 @@ namespace UI
 
         }
 
-        public UIBase Show(Type uiPanelType)
+        public ViewBase Show(Type uiPanelType)
         {
             var viewAttribute = uiPanelType.GetCustomAttributes(true)
                 .First((type) => type.GetType() == typeof(ViewAttribute)) as ViewAttribute;
             if (viewAttribute == null)
             {
-                Debug.LogError("打开的UIPanel没有ViewAttribute");
+                Debug.LogError("鎵撳紑鐨刄IPanel娌℃湁ViewAttribute");
                 return null;
             }
 
-            var view = (UIBase) Activator.CreateInstance(uiPanelType);
+            var view = (ViewBase) Activator.CreateInstance(uiPanelType);
 
             view.Initialize(viewAttribute);
 
@@ -50,19 +50,19 @@ namespace UI
             //panelObject.Rect.localPosition = Vector3.zero;
         }
 
-        private void OpenUI(UIBase uiBase)
+        private void OpenUI(ViewBase viewBase)
         {
-            if (!uiBase.IsActive)
+            if (!viewBase.IsActive)
             {
-                uiBase.Show();
+                viewBase.Show();
             }
         }
 
-        private void CloseUI(UIBase uiBase)
+        private void CloseUI(ViewBase viewBase)
         {
-            if (uiBase.IsActive)
+            if (viewBase.IsActive)
             {
-                uiBase.Hide();
+                viewBase.Hide();
             }
         }
 
@@ -79,7 +79,7 @@ namespace UI
             }
         }
 
-        public T Find<T>() where T : UIBase
+        public T Find<T>() where T : ViewBase
         {
             foreach (var uiPanel in UIStack)
             {
@@ -90,7 +90,11 @@ namespace UI
             }
 
             return null;
-        } 
+        }
+
+        //public T Find<T>() where T : FGUIView {
+
+        //}
 
     }
 
