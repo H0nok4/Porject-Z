@@ -10,7 +10,7 @@
     <text id="n9_mk93" name="n9" xy="4,61" size="124,39" fontSize="28" text="所需材料:">
       <gearDisplay controller="CtrlThingType" pages="2,3"/>
     </text>
-    <list id="n11_mk93" name="n11" xy="4,101" size="442,168" layout="flow_hz" overflow="scroll" defaultItem="ui://0kazkhhcmk936">
+    <list id="n11_mk93" name="ListNeedResources" xy="4,101" size="442,168" layout="flow_hz" overflow="scroll" defaultItem="ui://0kazkhhcmk936">
       <gearDisplay controller="CtrlThingType" pages="2,3"/>
     </list>
   </displayList>

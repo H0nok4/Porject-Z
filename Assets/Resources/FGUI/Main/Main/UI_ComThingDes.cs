@@ -9,6 +9,7 @@ namespace Main
     {
         public Controller m_CtrlThingType;
         public GTextField m_TxtName;
+        public GList m_ListNeedResources;
         public const string URL = "ui://0kazkhhcf1nd3";
 
         public static UI_ComThingDes CreateInstance()
@@ -22,6 +23,7 @@ namespace Main
 
             m_CtrlThingType = GetControllerAt(0);
             m_TxtName = (GTextField)GetChildAt(1);
+            m_ListNeedResources = (GList)GetChildAt(4);
         }
     }
 }

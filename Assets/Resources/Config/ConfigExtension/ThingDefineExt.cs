@@ -83,7 +83,7 @@ namespace ConfigType {
                     for (int i = 0; i < BuildCostThingID.Count; i++)
                     {
                         var thingDef = DataManager.Instance.GetThingDefineByID(BuildCostThingID[i]);
-                        _costList.Add(new DefineThingClassCount(){Def = thingDef,Count = BuildCostThingNum[i],DefineName = thingDef.Name});
+                        _costList.Add(new DefineThingClassCount(){Def = thingDef,Count = BuildCostThingNum[i]});
                     }
                 }
 

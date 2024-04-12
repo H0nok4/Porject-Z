@@ -72,7 +72,7 @@ public class PlayerController : Singleton<PlayerController>
                 .ThingsListAt(new IntVec2(cellPosition.x, cellPosition.y));
             var ui = UIManager.Instance.Find<MainPanel>();
             if (ui != null && things.Count > 0) {
-                ui.SetCurTrackedThing(things[0])
+                ui.SetCurTrackedThing(things[0]);
             }
         }
     }

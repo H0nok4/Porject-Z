@@ -8,8 +8,6 @@ using ConfigType;
 [Serializable]
 public class DefineThingClassCount
 {
-    public string DefineName;
-
     [NonSerialized]
     public ThingDefine Def;
 
