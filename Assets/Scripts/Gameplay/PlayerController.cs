@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Assets.Scripts.Gameplay;
 using ConfigType;
+using FairyGUI;
 using UI;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -16,8 +17,23 @@ public class PlayerController : Singleton<PlayerController>
     public Thing_Unit_Pawn ThingUnitPawnUnit;
     public void HandleInput()
     {
+
+
+
+
         if (Input.GetMouseButtonDown(0))
         {
+            var inputGetMouseDownPosition = Input.mousePosition;
+            var hitTest = Stage.inst.HitTest(new Vector2(inputGetMouseDownPosition.x,
+                Screen.height - inputGetMouseDownPosition.y),true);
+            if (hitTest != null && hitTest is not Stage)
+            {
+                GameInputContext.Instance.HitUI = true;
+            }
+            else
+            {
+                GameInputContext.Instance.HitUI = false;
+            }
             OnPlayerMouseButton0Down();    
         }
         else if (Input.GetMouseButtonDown(1))
@@ -47,6 +63,12 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
+    public void Update()
+    {
+        GameInputContext.Instance.Clear();
+        HandleInput();
+    }
+
     public void OnPlayerMouseButton0Down()
     {
         if (DesignatorManager.Instance.IsBuildingState)
@@ -70,10 +92,22 @@ public class PlayerController : Singleton<PlayerController>
             Vector3Int cellPosition = MapController.Instance.Map.GetMapDataByIndex(0).TileMapObject.WorldToCell(mousePosition);
             var things = MapController.Instance.Map.GetMapDataByIndex(0).ThingMap
                 .ThingsListAt(new IntVec2(cellPosition.x, cellPosition.y));
-            var ui = UIManager.Instance.Find<MainPanel>();
-            if (ui != null && things.Count > 0) {
-                ui.SetCurTrackedThing(things[0]);
+
+
+
+            if (!GameInputContext.Instance.HitUI)
+            {
+                var ui = UIManager.Instance.Find<MainPanel>();
+                if (ui != null && things.Count > 0) {
+                    GameInputContext.Instance.AddEvent(new UIEvent(UIEventID.OnClickMapThing, things[0]));
+                    ui.SetCurTrackedThing(things[0]);
+                }
+                else {
+                    GameInputContext.Instance.AddEvent(new UIEvent(UIEventID.OnClickMapThing, null));
+                    ui.SetCurTrackedThing(null);
+                }
             }
+
         }
     }
 

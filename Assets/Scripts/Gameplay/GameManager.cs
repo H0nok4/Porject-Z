@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerController.Instance.HandleInput();
+        PlayerController.Instance.Update();
         GameTicker.Instance.UpdateTick();
     }
 }

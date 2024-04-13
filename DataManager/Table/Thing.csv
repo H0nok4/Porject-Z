@@ -3,5 +3,5 @@ int32,string,string,Type,ThingCategory,bool,bool,int32,int32,bool,bool,int32[],T
 ID,Name,Describe,ThingClass,Category,Destroyable,UseHitPoint,StackLimit,MaxHitPoint,EverHaulable,Rotatable,WorkGiverDefineTypeID,Passability,MoveCost,SizeX,SizeY,BlueprintSpritePath,ThingSpritePath,FrameSpritePath,Workload,BuildCostThingID,BuildCostThingNum,Selectable
 ID,,,物体使用的类,类型,是否可以被摧毁,是否使用血量,堆叠限制数量,血量上限,是否能够被搬运,是否可以旋转,使用的WorkGiverDefine的ID列表,是否可通行性,在移动时所添加的额外消耗,大小的宽度,大小的高度,作为蓝图存在时显示的图片路径,作为物体存在时显示的图片路径,作为结构存在时显示的图片路径,建筑建造的工作量,如果是建筑的建筑消耗物品ID列表,如果是建筑的建筑消耗物品数量列表,物体是否可以被选中
 ,,,,None,TRUE,TRUE,1,100,FALSE,TRUE,,OnlyThrough,0,1,1,,,Sprite/GeneralFrame,60,,,TRUE
-1,Pawn,,Thing_Unit_Pawn,,,,,,,,,,,,,,Sprite/PlayerTest,,,,,
-2,Wall,,Thing_Building_Wall,,,,,,,,,Impassable,,,,Sprite/Barricade_Blueprint,Sprite/Barricade,,,202,10,
+1,Pawn,,Thing_Unit_Pawn,Unit,,,,,,,,,,,,,Sprite/PlayerTest,,,,,
+2,Wall,,Thing_Building_Wall,Building,,,,,,,,Impassable,,,,Sprite/Barricade_Blueprint,Sprite/Barricade,,,202,10,

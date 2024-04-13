@@ -25,6 +25,7 @@ namespace FairyGUI
             GraphicsOnStage = Stats.GraphicsCount;
         }
 
+
         void OnGUI()
         {
             Stage.inst.HandleGUIEvents(Event.current);

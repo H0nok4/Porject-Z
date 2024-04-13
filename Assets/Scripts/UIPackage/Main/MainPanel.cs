@@ -35,6 +35,11 @@ public class MainPanel : FGUIView
     }
 
     public void SetCurTrackedThing(Thing thing) {
+        if (thing == null)
+        {
+            _main.m_CtrlShowThingDes.SetSelectedIndex(0);
+            return;
+        }
         _main.m_CtrlShowThingDes.SetSelectedIndex(1);
         switch (thing.Def.Category) {
             case ThingCategory.Unit:

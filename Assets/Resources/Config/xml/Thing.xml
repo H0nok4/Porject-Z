@@ -7,7 +7,7 @@
 		<ThingClass>
 			<TypeName>Thing_Unit_Pawn</TypeName>
 		</ThingClass>
-		<Category>None</Category>
+		<Category>Unit</Category>
 		<Destroyable>true</Destroyable>
 		<UseHitPoint>true</UseHitPoint>
 		<StackLimit>1</StackLimit>
@@ -34,7 +34,7 @@
 		<ThingClass>
 			<TypeName>Thing_Building_Wall</TypeName>
 		</ThingClass>
-		<Category>None</Category>
+		<Category>Building</Category>
 		<Destroyable>true</Destroyable>
 		<UseHitPoint>true</UseHitPoint>
 		<StackLimit>1</StackLimit>

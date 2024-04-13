@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="450,360">
-  <controller name="CtrlThingType" pages="0,None,1,Unit,2,Blueprint,3,Frame,4,Building" selected="2"/>
+  <controller name="CtrlThingType" pages="0,None,1,Unit,2,Blueprint,3,Frame,4,Building" selected="1"/>
   <displayList>
     <graph id="n5_f1nd" name="n5" xy="0,0" size="450,360" type="rect"/>
     <text id="n6_f1nd" name="TxtName" xy="2,2" size="225,54" fontSize="40" autoSize="shrink" text="ThingName"/>
-    <component id="n7_mk93" name="n7" src="mk935" fileName="component/BtnThingBag.xml" xy="1,-57">
+    <component id="n7_mk93" name="BtnInventory" src="mk935" fileName="component/BtnThingBag.xml" xy="1,-57">
       <gearDisplay controller="CtrlThingType" pages="1"/>
     </component>
     <text id="n9_mk93" name="n9" xy="4,61" size="124,39" fontSize="28" text="所需材料:">
