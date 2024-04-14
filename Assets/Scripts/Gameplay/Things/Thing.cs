@@ -286,6 +286,7 @@ public abstract class Thing : IThing {
             MapController.Instance.Map.ListThings.Remove(this);
             UnityEngine.GameObject.Destroy(GameObject.GO);
             GameObject = null;
+            Spawned = false;
         }
 
         //TODO:如果当前选中了该物体
@@ -296,6 +297,7 @@ public abstract class Thing : IThing {
         }
 
         GameTicker.Instance.UnRegisterThing(this);
+
 
         IsDestroyed = true;
     }

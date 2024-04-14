@@ -50,6 +50,14 @@ namespace UI
             //panelObject.Rect.localPosition = Vector3.zero;
         }
 
+        public void Update()
+        {
+            foreach (var viewBase in UIStack)
+            {
+                viewBase.Update();
+            }
+
+        }
         private void OpenUI(ViewBase viewBase)
         {
             if (!viewBase.IsActive)

@@ -12,20 +12,45 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
+public class DragBox
+{
+    public Vector3 StartDragUIPosition;
+
+    public Vector3 CurDragPosition => UIUtility.GetUIPositionByInputPos(Input.mousePosition);
+
+    public bool IsDrag;
+
+    public bool IsValid =>
+        Vector3.Distance(StartDragUIPosition, UIUtility.GetUIPositionByInputPos(Input.mousePosition)) > 0.5f;
+
+    
+}
+
+public static class UIUtility
+{
+    public static Vector3 GetUIPositionByInputPos(Vector3 mousePosition)
+    {
+        return new Vector3(mousePosition.x,Screen.height - mousePosition.y);
+    }
+}
+
 public class PlayerController : Singleton<PlayerController>
 {
+    public MainPanel MainPanel => UIManager.Instance.Find<MainPanel>();
+
+    public DragBox DragBox = new DragBox();
+
     public Thing_Unit_Pawn ThingUnitPawnUnit;
     public void HandleInput()
     {
-
-
-
-
         if (Input.GetMouseButtonDown(0))
         {
+            DragBox.IsDrag = true;
+            DragBox.StartDragUIPosition = UIUtility.GetUIPositionByInputPos(Input.mousePosition);
+
             var inputGetMouseDownPosition = Input.mousePosition;
             var hitTest = Stage.inst.HitTest(new Vector2(inputGetMouseDownPosition.x,
-                Screen.height - inputGetMouseDownPosition.y),true);
+                Screen.height - inputGetMouseDownPosition.y),true); 
             if (hitTest != null && hitTest is not Stage)
             {
                 GameInputContext.Instance.HitUI = true;
@@ -34,11 +59,22 @@ public class PlayerController : Singleton<PlayerController>
             {
                 GameInputContext.Instance.HitUI = false;
             }
+
             OnPlayerMouseButton0Down();    
         }
         else if (Input.GetMouseButtonDown(1))
         {
             OnPlayerMouseButton1Down();
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (DragBox.IsDrag)
+            {
+                //TODO:选择DragBox中所有的物体(按优先级)
+                DragBox.IsDrag = false;
+                SelectDragBox();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -61,6 +97,14 @@ public class PlayerController : Singleton<PlayerController>
                 GameTicker.Instance.Pause();
             }
         }
+    }
+
+    private void SelectDragBox()
+    {
+        //TODO:按优先级选中单位 Unit > Item > Blueprint > Frame > Building
+        //TODO:有一个对应类型的就选中当前所有同类型的,其他的忽略
+
+        Debug.Log("选中界面中的东西");
     }
 
     public void Update()

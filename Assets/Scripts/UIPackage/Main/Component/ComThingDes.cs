@@ -43,6 +43,12 @@ namespace Main {
 
         public void RefreshAsItem(Thing thing)
         {
+            m_CtrlThingType.SetSelectedIndex(5);
+            m_TxtName.Set(thing.Def.Name);
+        }
+
+        public void RefreshAsBuilding(Thing thing)
+        {
             m_CtrlThingType.SetSelectedIndex(4);
             m_TxtName.Set(thing.Def.Name);
         }

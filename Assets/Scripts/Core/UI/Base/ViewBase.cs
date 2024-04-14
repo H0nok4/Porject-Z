@@ -25,6 +25,7 @@ namespace UI {
 
         public virtual void OnShow() { }
         
+        public virtual void Update() { }
         public virtual void OnHide() { }
 
         public virtual void Hide()
