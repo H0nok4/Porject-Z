@@ -21,7 +21,7 @@ public class DragBox
     public bool IsDrag;
 
     public bool IsValid =>
-        Vector3.Distance(StartDragUIPosition, UIUtility.GetUIPositionByInputPos(Input.mousePosition)) > 0.5f;
+        Vector3.Distance(StartDragUIPosition, UIUtility.GetUIPositionByInputPos(Input.mousePosition)) > 50f;
 
     /// <summary>
     /// 在UI上的左上角坐标
@@ -169,7 +169,8 @@ public class PlayerController : Singleton<PlayerController>
             {
                 //TODO:选择DragBox中所有的物体(按优先级)
                 DragBox.IsDrag = false;
-                SelectDragBox();
+                if (DragBox.IsValid)
+                    SelectDragBox();
             }
         }
 
@@ -259,12 +260,10 @@ public class PlayerController : Singleton<PlayerController>
             {
                 var ui = UIManager.Instance.Find<MainPanel>();
                 if (ui != null && things.Count > 0) {
-                    GameInputContext.Instance.AddEvent(new UIEvent(UIEventID.OnClickMapThing, things[0]));
-                    ui.SetCurTrackedThing(things[0]);
+                    SelectManager.Instance.SetSelectThings(things[0]);
                 }
                 else {
-                    GameInputContext.Instance.AddEvent(new UIEvent(UIEventID.OnClickMapThing, null));
-                    ui.SetCurTrackedThing(null);
+                    SelectManager.Instance.ClearSelectThings();
                 }
             }
 

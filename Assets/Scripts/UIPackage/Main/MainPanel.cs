@@ -11,8 +11,8 @@ public class MainPanel : FGUIView
 {
     public UI_MainView _main;
 
-    public Thing TrackedThing;
-
+    public Thing TrackedThing =>
+        SelectManager.Instance.SelectThings.Count > 0 ? SelectManager.Instance.SelectThings[0] : null;
     public override void OnShow()
     {
         _main.m_BtnPlaceThing.onClick.Set(OnClickBtnPlacingThing);
@@ -42,6 +42,13 @@ public class MainPanel : FGUIView
         if (TrackedThing != null)
         {
             UpdateCurTrackedThing();
+        }
+        else
+        {
+            if (_main.m_CtrlShowThingDes.selectedIndex == 1)
+            {
+                _main.m_CtrlShowThingDes.SetSelectedIndex(0);
+            }
         }
 
         if (PlayerController.Instance.DragBox.IsDrag && PlayerController.Instance.DragBox.IsValid)
@@ -88,7 +95,6 @@ public class MainPanel : FGUIView
     {
         if (TrackedThing == null || !TrackedThing.Spawned)
         {
-            TrackedThing = null;
             _main.m_CtrlShowThingDes.SetSelectedIndex(0);
             return;
         }
@@ -121,16 +127,4 @@ public class MainPanel : FGUIView
         }
     }
 
-    public void SetCurTrackedThing(Thing thing) {
-        if (thing == null)
-        {
-            _main.m_CtrlShowThingDes.SetSelectedIndex(0);
-            TrackedThing = null;
-            return;
-        }
-
-        TrackedThing = thing;
-        UpdateCurTrackedThing();
-
-    }
 }
