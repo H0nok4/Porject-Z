@@ -23,6 +23,97 @@ public class DragBox
     public bool IsValid =>
         Vector3.Distance(StartDragUIPosition, UIUtility.GetUIPositionByInputPos(Input.mousePosition)) > 0.5f;
 
+    /// <summary>
+    /// 在UI上的左上角坐标
+    /// </summary>
+    public Vector3 LeftUpPos {
+        get {
+            var dragBox = PlayerController.Instance.DragBox;
+ 
+            var startPos = dragBox.StartDragUIPosition;
+            var curPos = dragBox.CurDragPosition;
+            if (startPos.x > curPos.x && startPos.y > curPos.y) {
+                //当前在左上角,点击位置在右下角,UI位置为当前鼠标位置,长度为起始位置X -  当前位置X 高度为起始位置Y - 当前位置Y;
+                return new Vector3(curPos.x, curPos.y);
+            }
+            else if (startPos.x < curPos.x && startPos.y > curPos.y) {
+                return new Vector3(startPos.x, curPos.y);
+            }
+            else if (startPos.x < curPos.x && startPos.y < curPos.y) {
+                return new Vector3(startPos.x, startPos.y, 0);
+            }
+            else {
+                return new Vector3(curPos.x, startPos.y);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 在UI上的右下角坐标
+    /// </summary>
+    public Vector3 RightDownPos {
+        get {
+            var dragBox = PlayerController.Instance.DragBox;
+
+            var startPos = dragBox.StartDragUIPosition;
+            var curPos = dragBox.CurDragPosition;
+            if (startPos.x > curPos.x && startPos.y > curPos.y) {
+                //当前在左上角,点击位置在右下角,UI位置为当前鼠标位置,长度为起始位置X -  当前位置X 高度为起始位置Y - 当前位置Y;
+                return new Vector3(startPos.x, startPos.y);
+            }
+            else if (startPos.x < curPos.x && startPos.y > curPos.y) {
+                return new Vector3(curPos.x, startPos.y);
+            }
+            else if (startPos.x < curPos.x && startPos.y < curPos.y) {
+                return new Vector3(curPos.x,curPos.y, 0);
+            }
+            else {
+                return new Vector3(startPos.x, curPos.y);
+            }
+        }
+    }
+
+    public float Width {
+        get {
+            var dragBox = PlayerController.Instance.DragBox;
+            var startPos = dragBox.StartDragUIPosition;
+            var curPos = dragBox.CurDragPosition;
+            if (startPos.x > curPos.x && startPos.y > curPos.y) {
+                //当前在左上角,点击位置在右下角,UI位置为当前鼠标位置,长度为起始位置X -  当前位置X 高度为起始位置Y - 当前位置Y;
+                return startPos.x - curPos.x;
+            }
+            else if (startPos.x < curPos.x && startPos.y > curPos.y) {
+                return curPos.x - startPos.x;
+            }
+            else if (startPos.x < curPos.x && startPos.y < curPos.y) {
+                return curPos.x - startPos.x;
+            }
+            else {
+                return startPos.x - curPos.x;
+            }
+        }
+    }
+
+    public float Height {
+        get {
+            var dragBox = PlayerController.Instance.DragBox;
+            var startPos = dragBox.StartDragUIPosition;
+            var curPos = dragBox.CurDragPosition;
+            if (startPos.x > curPos.x && startPos.y > curPos.y) {
+                //当前在左上角,点击位置在右下角,UI位置为当前鼠标位置,长度为起始位置X -  当前位置X 高度为起始位置Y - 当前位置Y;
+                return startPos.y - curPos.y;
+            }
+            else if (startPos.x < curPos.x && startPos.y > curPos.y) {
+                return startPos.y - curPos.y;
+            }
+            else if (startPos.x < curPos.x && startPos.y < curPos.y) {
+                return curPos.y - startPos.y;
+            }
+            else {
+                return curPos.y - startPos.y;
+            }
+        }
+    }
     
 }
 
@@ -31,6 +122,11 @@ public static class UIUtility
     public static Vector3 GetUIPositionByInputPos(Vector3 mousePosition)
     {
         return new Vector3(mousePosition.x,Screen.height - mousePosition.y);
+    }
+
+    public static Vector3 GetWorldPositionByUIPosition(Vector3 uiPosition) {
+        var toUnityPositioin = new Vector3(uiPosition.x, Screen.height - uiPosition.y, 0);
+        return Camera.main.ScreenToWorldPoint(toUnityPositioin);
     }
 }
 
@@ -105,6 +201,26 @@ public class PlayerController : Singleton<PlayerController>
         //TODO:有一个对应类型的就选中当前所有同类型的,其他的忽略
 
         Debug.Log("选中界面中的东西");
+        //TODO:先获得地图中范围内的所有物体
+        var worldStartPos = UIUtility.GetWorldPositionByUIPosition(DragBox.LeftUpPos);
+        var worldEndPos = UIUtility.GetWorldPositionByUIPosition(DragBox.RightDownPos);
+        Debug.Log($"当前拖拽世界位置:起始：{worldStartPos},结束:{worldEndPos}");
+        var startY = (int) worldEndPos.y;
+        var endY = (int) worldStartPos.y;
+        var startX = (int) worldStartPos.x;
+        var endX = (int) worldStartPos.y;
+        var things = new List<Thing>();
+        for (int i = startY; i < endY; i++) {
+            for (int j = startX; j < endX; j++) {
+                if (MapController.Instance.Map.GetMapDataByIndex(0).ThingMap.ThingsAt(new IntVec2(j,i)) is {} enumrableThings) {
+                    things.AddRange(enumrableThings);
+                }
+            }
+        }
+        Debug.Log($"拖拽范围内一共有{things.Count}个物体");
+
+        //TODO:后面按优先级选择
+        SelectManager.Instance.SetSelectThings(things);
     }
 
     public void Update()
