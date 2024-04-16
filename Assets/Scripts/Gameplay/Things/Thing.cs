@@ -357,6 +357,7 @@ public abstract class Thing : IThing {
             }
 
             //TODO:分割出所有的物品，那干脆直接把这个对象整个给你算了
+            Debug.Log("把所有数量的物体都捡起来了，开始DeSpawn物体");
             DespawnAndDeselect();
             //TODO:
             if (HoldingOwner != null)

@@ -8,7 +8,9 @@ public class SelectManager : Singleton<SelectManager> {
     public void ClearSelectThings() {
         foreach (var selectThing in SelectThings)
         {
-            selectThing.GameObject.DeSelect();
+            if (selectThing.Spawned) {
+                selectThing.GameObject.DeSelect();
+            }
         }
         SelectThings.Clear();
     }
@@ -18,7 +20,9 @@ public class SelectManager : Singleton<SelectManager> {
         SelectThings.AddRange(thingList);
         foreach (var selectThing in SelectThings)
         {
-            selectThing.GameObject.Select();
+            if (selectThing.Spawned) {
+                selectThing.GameObject.Select();
+            }
         }
     }
 

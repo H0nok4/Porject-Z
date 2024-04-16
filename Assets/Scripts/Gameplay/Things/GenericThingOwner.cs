@@ -101,7 +101,7 @@ public class ThingOwner<T> : ThingOwner where T : Thing {
                 int canAddNum = Math.Min(addThing.Count, hadThing.Def.StackLimit - hadThing.Count);
 
                 if (canAddNum > 0) {
-                    Thing splitThing = addThing.SplitOff(canAddNum);
+                    //Thing splitThing = addThing.SplitOff(canAddNum);
                     int curHadNum = hadThing.Count;
                     hadThing.TryAbsorbStack(addThing, true);
                     if (hadThing.Count > curHadNum) {

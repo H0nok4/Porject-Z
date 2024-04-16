@@ -168,6 +168,7 @@ public static class Work_Haul {
                     {
                         if (inQueueTarget[i].Thing.Def.ID == unit.CarryTracker.CarriedThing.Def.ID)
                         {
+                            Debug.Log($"还可以继续拿东西，切换当前的目标为index={i}");
                             curJob.SetTarget(jobTargetIndex, inQueueTarget[i]);
                             inQueueTarget.RemoveAt(i);
                             unit.JobTracker.JobDriver.JumpToWork(goToWork);
