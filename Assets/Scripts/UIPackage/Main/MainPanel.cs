@@ -16,14 +16,62 @@ public class MainPanel : FGUIView
     public override void OnShow()
     {
         _main.m_BtnPlaceThing.onClick.Set(OnClickBtnPlacingThing);
-        _main.m_BtnBuildWall.onClick.Set(OnClickBtnBuildWall);
+        //_main.m_BtnBuildWall.onClick.Set(OnClickBtnBuildWall);
         _main.m_CtrlShowThingDes.SetSelectedIndex(0);
+
+        RefreshListSelection();
+        RefreshDesignPanel();
     }
 
-    private void OnClickBtnBuildWall()
+    private void HideDesignPanelAndListCommand()
     {
-        //TODO:接下来的左键点击都将会创建一个Frame物体和对应的工作
-        DesignatorManager.Instance.DesignatorType = DesignatorType.Building;
+        _main.m_CtrlShowDesignator.SetSelectedIndex(0);
+        _main.m_CtrlShowListCommand.SetSelectedIndex(0);
+    }
+
+    private void RefreshDesignPanel()
+    {
+        //TODO:测试用,后面需要抽象
+        _main.m_ComDesignPanel.m_ListType.numItems = 1;
+        var buildDesign = (UI_ComDesignatorType)_main.m_ComDesignPanel.m_ListType.GetChildAt(0);
+        var buildingDesignator = new Design_Building();
+        buildDesign.DesignType = buildingDesignator;
+        buildDesign.m_TxtName.text = "建筑";
+        buildDesign.onClick.Set(() => { RefreshListDesignators(buildDesign.DesignType.GetDesignators());});
+    }
+
+    private void RefreshListDesignators(IEnumerable<DesignatorDecoratorBase> designators)
+    {
+        _main.m_CtrlShowListCommand.SetSelectedIndex(1);
+        _main.m_ListCommand.RemoveChildrenToPool();
+        foreach (var designatorDecoratorBase in designators)
+        {
+            var btnDesignType = (UI_BtnDesignatorType1)_main.m_ListCommand.AddItemFromPool();
+            btnDesignType.m_TxtName.text = designatorDecoratorBase.Name;
+            btnDesignType.m_LoaderIcon.url = designatorDecoratorBase.Sprite;
+            btnDesignType.onClick.Set(designatorDecoratorBase.OnClick);
+        }
+    }
+
+    //private void OnClickBtnBuildWall()
+    //{
+    //    //TODO:接下来的左键点击都将会创建一个Frame物体和对应的工作
+        
+    //}
+
+    private void RefreshListSelection()
+    {
+        var list = _main.m_ListMainSelection;
+        var btnBuildCommand = list.GetChildAt(0);
+        btnBuildCommand.onClick.Set(OnClickBtnBuildCommand);
+    }
+
+    private void OnClickBtnBuildCommand()
+    {
+        _main.m_CtrlShowThingDes.SetSelectedIndex(0);
+        _main.m_CtrlShowDesignator.SetSelectedIndex(1);
+
+
     }
 
     private void OnClickBtnPlacingThing()

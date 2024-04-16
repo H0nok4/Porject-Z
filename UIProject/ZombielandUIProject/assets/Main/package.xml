@@ -7,6 +7,10 @@
     <component id="f1nd3" name="ComThingDes.xml" path="/component/" exported="true"/>
     <component id="mk935" name="BtnThingBag.xml" path="/component/" exported="true"/>
     <component id="mk936" name="ComBuildNeedResource.xml" path="/component/" exported="true"/>
+    <component id="l0ax7" name="ComDesignPanel.xml" path="/component/" exported="true"/>
+    <component id="l0ax8" name="ComDesignatorType.xml" path="/component/" exported="true"/>
+    <component id="l0ax9" name="BtnDesignatorType1.xml" path="/component/"/>
+    <component id="l0axa" name="BtnBuildingCommand.xml" path="/component/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="100,50">
+  <displayList>
+    <graph id="n13_l0ax" name="n13" xy="0,0" size="100,50" type="rect"/>
+    <text id="n14_l0ax" name="TxtName" xy="1,1" size="99,48" fontSize="34" align="center" vAlign="middle" autoSize="shrink" text="名称"/>
+  </displayList>
+</component>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="100,100">
+  <displayList>
+    <graph id="n14_l0ax" name="n14" xy="0,0" size="100,100" type="rect"/>
+    <loader id="n16_l0ax" name="LoaderIcon" xy="0,0" size="100,98" align="center" vAlign="middle" fill="scale"/>
+    <text id="n17_l0ax" name="TxtName" xy="23,65" size="52,34" fontSize="24" text="名称"/>
+  </displayList>
+</component>
