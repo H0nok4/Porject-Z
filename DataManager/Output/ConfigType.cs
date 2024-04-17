@@ -183,6 +183,12 @@ namespace ConfigType
         Delay
     }
 
+    public partial class DesignTypeDefine
+    {
+        public int ID; // ID 
+        public string Name; //  
+    }
+
     public partial class JobDefine
     {
         public int ID; // ID 

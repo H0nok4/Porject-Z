@@ -6,6 +6,13 @@ namespace ConfigType
 {
     public partial class DataManager : Singleton<DataManager>
     {
+        public List<DesignTypeDefine> DesignTypeDefineList = new List<DesignTypeDefine>();
+        public Dictionary<int, DesignTypeDefine> DesignTypeDefineDic = new Dictionary<int, DesignTypeDefine>();
+        public DesignTypeDefine GetDesignTypeDefineByID(int ID)
+        {
+            return DesignTypeDefineDic[ID];
+        }
+
         public List<JobDefine> JobDefineList = new List<JobDefine>();
         public Dictionary<int, JobDefine> JobDefineDic = new Dictionary<int, JobDefine>();
         public JobDefine GetJobDefineByID(int ID)
@@ -30,6 +37,9 @@ namespace ConfigType
         public void InitConfigs()
         {
             string ConfigPath = "Assets/Resources/Config/xml/";
+            FileStream DesignTypeStream = File.OpenRead(ConfigPath + "DesignType.xml");
+            XmlSerializer DesignTypeDefineserializer = new XmlSerializer(typeof(List<DesignTypeDefine>));
+            DesignTypeDefineList = (List<DesignTypeDefine>)DesignTypeDefineserializer.Deserialize(DesignTypeStream);
             FileStream JobStream = File.OpenRead(ConfigPath + "Job.xml");
             XmlSerializer JobDefineserializer = new XmlSerializer(typeof(List<JobDefine>));
             JobDefineList = (List<JobDefine>)JobDefineserializer.Deserialize(JobStream);
@@ -44,6 +54,11 @@ namespace ConfigType
 
         public void InitDictionary()
         {
+            foreach (var i in DesignTypeDefineList)
+            {
+                DesignTypeDefineDic.Add(i.ID, i);
+            }
+
             foreach (var i in JobDefineList)
             {
                 JobDefineDic.Add(i.ID, i);

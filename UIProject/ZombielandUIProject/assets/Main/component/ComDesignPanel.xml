@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="200,300">
+<component size="200,300" pivot="0,1">
   <displayList>
-    <graph id="n12_l0ax" name="n12" xy="0,0" size="200,300" type="rect"/>
+    <graph id="n12_l0ax" name="n12" xy="0,0" size="200,300" type="rect">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
     <list id="n11_l0ax" name="ListType" xy="0,0" size="200,300" layout="flow_hz" overflow="scroll" scroll="horizontal" defaultItem="ui://0kazkhhcl0ax8">
       <item/>
       <item/>
@@ -10,4 +12,5 @@
       <item/>
     </list>
   </displayList>
+  <relation target="n11_l0ax" sidePair="width-width,height-height"/>
 </component>

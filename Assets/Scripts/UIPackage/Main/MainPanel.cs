@@ -11,6 +11,8 @@ public class MainPanel : FGUIView
 {
     public UI_MainView _main;
 
+    public readonly List<DesignTypeBase> MainDesignList = new List<DesignTypeBase>() {new Design_Building()};
+
     public Thing TrackedThing =>
         SelectManager.Instance.SelectThings.Count > 0 ? SelectManager.Instance.SelectThings[0] : null;
     public override void OnShow()
@@ -23,8 +25,9 @@ public class MainPanel : FGUIView
         RefreshDesignPanel();
     }
 
-    private void HideDesignPanelAndListCommand()
+    public void HideAllPanel()
     {
+        _main.m_CtrlShowThingDes.SetSelectedIndex(0);
         _main.m_CtrlShowDesignator.SetSelectedIndex(0);
         _main.m_CtrlShowListCommand.SetSelectedIndex(0);
     }
@@ -32,12 +35,14 @@ public class MainPanel : FGUIView
     private void RefreshDesignPanel()
     {
         //TODO:测试用,后面需要抽象
-        _main.m_ComDesignPanel.m_ListType.numItems = 1;
-        var buildDesign = (UI_ComDesignatorType)_main.m_ComDesignPanel.m_ListType.GetChildAt(0);
-        var buildingDesignator = new Design_Building();
-        buildDesign.DesignType = buildingDesignator;
-        buildDesign.m_TxtName.text = "建筑";
-        buildDesign.onClick.Set(() => { RefreshListDesignators(buildDesign.DesignType.GetDesignators());});
+        _main.m_ComDesignPanel.m_ListType.numItems = MainDesignList.Count;
+        for (int i = 0; i < MainDesignList.Count; i++) {
+            var buildDesign = (UI_ComDesignatorType)_main.m_ComDesignPanel.m_ListType.GetChildAt(0);
+            buildDesign.DesignType = MainDesignList[i];
+            buildDesign.m_TxtName.text = MainDesignList[i].Define.Name;
+            buildDesign.onClick.Set(() => { RefreshListDesignators(buildDesign.DesignType.GetDesignators()); });
+        }
+        _main.m_ComDesignPanel.m_ListType.ResizeToFit();
     }
 
     private void RefreshListDesignators(IEnumerable<DesignatorDecoratorBase> designators)
@@ -51,6 +56,7 @@ public class MainPanel : FGUIView
             btnDesignType.m_LoaderIcon.url = designatorDecoratorBase.Sprite;
             btnDesignType.onClick.Set(designatorDecoratorBase.OnClick);
         }
+        _main.m_ListCommand.ResizeToFit();
     }
 
     //private void OnClickBtnBuildWall()

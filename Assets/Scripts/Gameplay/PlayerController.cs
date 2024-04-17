@@ -264,6 +264,7 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 else {
                     SelectManager.Instance.ClearSelectThings();
+                    ui?.HideAllPanel();
                 }
             }
 
