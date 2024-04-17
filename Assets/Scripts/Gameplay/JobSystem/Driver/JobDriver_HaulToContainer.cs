@@ -10,7 +10,7 @@ public class JobDriver_HaulToContainer : JobDriver
         Work goToThingWork = Work_MoveTo.MoveToThing(JobTargetIndex.A, PathMoveEndType.Touch);
         Work haulThingWork = Work_Haul.StartCarryThing(JobTargetIndex.A);
         Work addedExtraHaulThingWork = Work_Haul.JumpToExtraHaulThingIfPossible(goToThingWork,JobTargetIndex.A);
-        Work carryThingToContainerWork = Work_Haul.CarryThingToContainer();
+        Work carryThingToContainerWork = Work_Haul.CarryThingToContainer(JobTargetIndex.B);
         yield return goToThingWork;
         yield return haulThingWork;
         yield return addedExtraHaulThingWork;

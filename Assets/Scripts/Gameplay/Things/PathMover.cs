@@ -66,7 +66,23 @@ public class PathMover {
 
     private Action _onPathMoveFail;
 
-    private MoveTargetInfo _targetInfo;
+    private MoveTargetInfo m_targetInfo;
+    private MoveTargetInfo _targetInfo
+    {
+        get
+        {
+            return m_targetInfo;
+        }
+        set
+        {
+            Debug.Log($"设置当前的目标,目标是否为Null={value == null}");
+            if (value is { IsTrackThing: true })
+            {
+                Debug.Log("当前目标的名称为:" + value.ThingTarget.Def.Name);
+            }
+            m_targetInfo = value;
+        }
+    }
 
     public int MoveToNextPosTickTotal;
 
@@ -121,7 +137,7 @@ public class PathMover {
             return;
         }
 
-
+        Debug.Log($"MoveToThing => {thing.Def.Name}");
         SetMoveTarget(new MoveTargetInfo(null,thing, endType));
     }
 

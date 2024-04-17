@@ -8,6 +8,7 @@ using ConfigType;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public static class Work_Haul {
     public static bool CanCarryThing(Thing_Unit unit, Thing haulThing)
@@ -32,14 +33,15 @@ public static class Work_Haul {
         return true;
     }
 
-    public static Work CarryThingToContainer()
+    public static Work CarryThingToContainer(JobTargetIndex targetIndex)
     {
         Work work = WorkMaker.MakeWork();
         work.InitAction = delegate
         {
             var unit = work.Unit;
-            var targetThing = unit.JobTracker.Job.GetTarget(JobTargetIndex.B);
-            work.Unit.PathMover.StartPath(new PawnPath(PathFinder.AStarFindPath(unit, targetThing.Thing.Position,PathMoveEndType.Touch)));
+            //var targetThing = unit.JobTracker.Job.GetTarget(JobTargetIndex.B);
+            //work.Unit.PathMover.StartPath(new PawnPath(PathFinder.AStarFindPath(unit, targetThing.Thing.Position)));
+            work.Unit.PathMover.SetMoveTarget(unit.JobTracker.Job.GetTarget(targetIndex).Thing, PathMoveEndType.Touch);
         };
         //TODO:添加失败条件
         work.CompleteMode = WorkCompleteMode.PathMoveEnd;

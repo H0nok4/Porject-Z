@@ -6,10 +6,10 @@ namespace Main {
     {
         public DesignTypeBase DesignType;
 
-        public void Refresh(DesignTypeBase designType, string name)
+        public void Refresh(DesignTypeBase designType)
         {
             DesignType = designType;
-            m_TxtName.text = name;
+            m_TxtName.text = designType.Define.Name;
         }
 
 

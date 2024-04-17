@@ -37,10 +37,9 @@ public class MainPanel : FGUIView
         //TODO:测试用,后面需要抽象
         _main.m_ComDesignPanel.m_ListType.numItems = MainDesignList.Count;
         for (int i = 0; i < MainDesignList.Count; i++) {
-            var buildDesign = (UI_ComDesignatorType)_main.m_ComDesignPanel.m_ListType.GetChildAt(0);
-            buildDesign.DesignType = MainDesignList[i];
-            buildDesign.m_TxtName.text = MainDesignList[i].Define.Name;
-            buildDesign.onClick.Set(() => { RefreshListDesignators(buildDesign.DesignType.GetDesignators()); });
+            var design = (UI_ComDesignatorType)_main.m_ComDesignPanel.m_ListType.GetChildAt(0);
+            design.Refresh(MainDesignList[i]);
+            design.onClick.Set(() => { RefreshListDesignators(design.DesignType.GetDesignators()); });
         }
         _main.m_ComDesignPanel.m_ListType.ResizeToFit();
     }
@@ -58,12 +57,6 @@ public class MainPanel : FGUIView
         }
         _main.m_ListCommand.ResizeToFit();
     }
-
-    //private void OnClickBtnBuildWall()
-    //{
-    //    //TODO:接下来的左键点击都将会创建一个Frame物体和对应的工作
-        
-    //}
 
     private void RefreshListSelection()
     {
