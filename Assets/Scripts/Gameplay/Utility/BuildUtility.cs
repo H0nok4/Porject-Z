@@ -14,6 +14,21 @@ public static class BuildUtility
         return true;
     }
 
+    public static bool CanBuildAt(ThingDefine def,IntVec2 pos)
+    {
+        foreach (var thing in MapController.Instance.Map.CurrentActiveMap.ThingMap.ThingsAt(pos))
+        {
+            //TODO:测试,如果thing不为空就不能建造
+            if (thing != null)
+                return false;
+        }
+
+        if (!MapController.Instance.Map.CurrentActiveMap.GetSectionByPosition(pos).Walkable)
+            return false;
+
+        return true;
+    }
+
     public static Thing FirstBlockingThing(Thing buildingThing,Thing_Unit_Pawn builder)
     {
         Thing miniOrRebuildThing = ((buildingThing is not Blueprint b) ? null : MiniToInstallOrBuildingToReinstall(b));

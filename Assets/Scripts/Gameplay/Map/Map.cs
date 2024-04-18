@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Map
 {
+    public int ActiveIndex = 0;
     //TODO:地图有多层，0位置为地面一层，1位置为地面二层，以此类推，每层地图的大小是一样的，上下层就是在同一个位置放出口
     private List<MapData> _mapDatas = new List<MapData>();
 
@@ -12,6 +13,15 @@ public class Map
     public Map()
     {
         ListThings = new ListThings();
+    }
+
+    public MapData CurrentActiveMap
+    {
+        get
+        {
+            return _mapDatas[ActiveIndex];
+        }
+
     }
 
     public IEnumerable<MapData> MapDatas()

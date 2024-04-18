@@ -24,6 +24,7 @@ public static class Work_MoveTo {
         Work moveWork = WorkMaker.MakeWork();
         moveWork.InitAction = delegate
         {
+
             var pawn = moveWork.Unit;
             pawn.PathMover.SetMoveTarget(pawn.JobTracker.Job.GetTarget(targetIndex).Thing, endType);
         };

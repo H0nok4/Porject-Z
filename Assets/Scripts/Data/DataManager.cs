@@ -34,8 +34,20 @@ namespace ConfigType
             }
         }
 
+        private PreviewObject _previewObject;
 
+        public PreviewObject PreviewObject
+        {
+            get
+            {
+                if (_previewObject == null)
+                {
+                    _previewObject = Resources.Load<GameObject>("GameObject/PreviewObject").GetComponent<PreviewObject>();
+                }
 
+                return _previewObject;
+            }
+        }
 
         private MainPanel _mainPanel;
 

@@ -23,6 +23,7 @@ public class DragBox
     public bool IsValid =>
         Vector3.Distance(StartDragUIPosition, UIUtility.GetUIPositionByInputPos(Input.mousePosition)) > 50f;
 
+
     /// <summary>
     /// 在UI上的左上角坐标
     /// </summary>
@@ -137,6 +138,8 @@ public class PlayerController : Singleton<PlayerController>
     public DragBox DragBox = new DragBox();
 
     public Thing_Unit_Pawn ThingUnitPawnUnit;
+
+    public PreviewObject PreviewObject { get; private set; }
     public void HandleInput()
     {
         if (Input.GetMouseButtonDown(0))
@@ -228,6 +231,48 @@ public class PlayerController : Singleton<PlayerController>
     {
         GameInputContext.Instance.Clear();
         HandleInput();
+        //TODO:在建造状态下,鼠标移动到地图的合法位置可以显示一个蓝图的Sprite在地图上
+        HandlePreview();
+    }
+
+    private void HandlePreview()
+    {
+        if (DesignatorManager.Instance.IsBuildingState)
+        {
+            //TODO:
+            var mousePosition = MapUtility.GetMapPosByInputMousePosition();
+            if (mousePosition != IntVec2.Invalid)
+            {
+                //TODO:有效位置
+                if (PreviewObject == null)
+                {
+                    PreviewObject = GameObject.Instantiate(DataManager.Instance.PreviewObject);
+                }
+
+                if (!PreviewObject.isActiveAndEnabled)
+                {
+                    PreviewObject.gameObject.SetActive(true);
+                }
+
+                PreviewObject.Valid = BuildUtility.CanBuildAt(DesignatorManager.Instance.BuildingDef, mousePosition);
+
+                PreviewObject.SetSprite(DesignatorManager.Instance.BuildingDef.BlueprintSprite);
+                PreviewObject.transform.position = new Vector3(mousePosition.X,mousePosition.Y);
+                return;
+            }
+
+            if (PreviewObject != null && PreviewObject.isActiveAndEnabled) {
+                PreviewObject.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            if (PreviewObject != null && PreviewObject.isActiveAndEnabled) {
+                PreviewObject.gameObject.SetActive(false);
+            }
+        }
+
+
     }
 
     public void OnPlayerMouseButton0Down()
