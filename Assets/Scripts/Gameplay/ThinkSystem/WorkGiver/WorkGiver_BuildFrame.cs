@@ -22,9 +22,10 @@ public class WorkGiver_BuildFrame : WorkGiver_Scanner
         }
 
         //TODO:可能有人站在建筑上，到时候得判断建筑位置上是否有人
-
+        //if (BuildUtility.BuildingBlocked()) {
+            
+        //}
         //TODO:需要判断可抵达性，技能是否满足要求之类的
-
         if (!BuildUtility.CanBuild(thing,unit))
         {
             return null;

@@ -16,7 +16,7 @@ namespace Main {
                 var resourcesCom = (UI_ComBuildNeedResource)m_ListNeedResources.AddItemFromPool();
                 resourcesCom.m_TxtNum.RefreshValue("name",defineThingClassCount.Def.Name);
                 var max = frame.Def.EntityBuildDef.CostList.Find((costRes) => costRes.Def.ID == defineThingClassCount.Def.ID).Count;
-                resourcesCom.m_TxtNum.RefreshValue("cur", defineThingClassCount.Count);
+                resourcesCom.m_TxtNum.RefreshValue("cur", max - defineThingClassCount.Count);
                 resourcesCom.m_TxtNum.RefreshValue("max",max);
             }
         }

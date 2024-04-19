@@ -101,7 +101,10 @@ public static class SpawnHelper
         //{
 
         //}
+        if (wantPlaceThingDef.Category == ThingCategory.Item && existThingDef.Passability != Traversability.Impassable) {
+            return false;
+        }
 
-        return false;
+        return true;
     }
 }

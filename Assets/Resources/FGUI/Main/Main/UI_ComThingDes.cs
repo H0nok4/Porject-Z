@@ -10,8 +10,9 @@ namespace Main
         public Controller m_CtrlThingType;
         public Controller m_CtrlShowDragBox;
         public GTextField m_TxtName;
-        public GComponent m_BtnInventory;
         public GList m_ListNeedResources;
+        public GList m_ListUnitNeed;
+        public GList m_ListThingBtn;
         public const string URL = "ui://0kazkhhcf1nd3";
 
         public static UI_ComThingDes CreateInstance()
@@ -26,8 +27,9 @@ namespace Main
             m_CtrlThingType = GetControllerAt(0);
             m_CtrlShowDragBox = GetControllerAt(1);
             m_TxtName = (GTextField)GetChildAt(1);
-            m_BtnInventory = (GComponent)GetChildAt(2);
-            m_ListNeedResources = (GList)GetChildAt(4);
+            m_ListNeedResources = (GList)GetChildAt(3);
+            m_ListUnitNeed = (GList)GetChildAt(4);
+            m_ListThingBtn = (GList)GetChildAt(5);
         }
     }
 }

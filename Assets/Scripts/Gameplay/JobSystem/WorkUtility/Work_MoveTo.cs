@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using ConfigType;
 using UnityEngine;
@@ -31,6 +32,16 @@ public static class Work_MoveTo {
         moveWork.CompleteMode = WorkCompleteMode.PathMoveEnd;
         return moveWork;
     }
+
+    //public static Work MoveToThingNotStand(JobTargetIndex targetIndex, PathMoveEndType endType) {
+    //    Work moveWork = WorkMaker.MakeWork();
+    //    moveWork.InitAction = delegate {
+    //        var unit = moveWork.Unit;
+    //        var job = unit.JobTracker.Job.GetTarget(targetIndex);
+
+
+    //    };
+    //}
 
     public static Work MoveOffToThing(JobTargetIndex jobTargetIndex)
     {

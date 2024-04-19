@@ -30,17 +30,17 @@ public class DesignatorManager : Singleton<DesignatorManager> {
         }
     }
 
-    public void PlaceFrameAt(IntVec2 pos, MapData map) {
-        if (!CanPlace(pos, map)) {
-            return;
-        }
+    //public void PlaceFrameAt(IntVec2 pos, MapData map) {
+    //    if (!CanPlace(pos, map)) {
+    //        return;
+    //    }
 
-        SpawnHelper.Spawn(BuildingDef, new PosNode(){Pos = pos,MapDataIndex = map.Index});
-    }
+    //    SpawnHelper.Spawn(BuildingDef, new PosNode(){Pos = pos,MapDataIndex = map.Index});
+    //}
 
     public void PlaceBlueprintAt(IntVec2 pos, MapData map)
     {
-        if (!CanPlace(pos, map)) {
+        if (!CanPlace(pos,BuildingDef, map)) {
             return;
         }
 
@@ -50,7 +50,7 @@ public class DesignatorManager : Singleton<DesignatorManager> {
 
     public void PlaceThing(IntVec2 pos, MapData map)
     {
-        if (!CanPlace(pos,map))
+        if (!CanPlace(pos,PlacingDef,map))
         {
             return;
         }
@@ -58,7 +58,7 @@ public class DesignatorManager : Singleton<DesignatorManager> {
         SpawnHelper.Spawn(PlacingDef, new PosNode() { Pos = pos, MapDataIndex = map.Index },9);
     }
 
-    public bool CanPlace(IntVec2 pos, MapData map) {
+    public bool CanPlace(IntVec2 pos,ThingDefine wantPlaceDefine,MapData map) {
         if (!map.ThingMap.InBound(pos)) {
             return false;
         }
@@ -67,7 +67,7 @@ public class DesignatorManager : Singleton<DesignatorManager> {
         var things = map.ThingMap.ThingsAt(pos);
         foreach (var thing in things)
         {
-            if (!SpawnHelper.SpawningWipes(BuildingDef,thing.Def))
+            if (SpawnHelper.SpawningWipes(wantPlaceDefine, thing.Def))
             {
                 return false;
             }

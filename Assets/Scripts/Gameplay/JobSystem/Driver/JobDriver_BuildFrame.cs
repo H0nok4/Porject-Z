@@ -10,6 +10,7 @@ public class JobDriver_BuildFrame : JobDriver {
         var moveTo = Work_MoveTo.MoveToThing(JobTargetIndex.A, PathMoveEndType.Touch);
         //DONE:需要考虑有时候是会移动的Thing,所以需要修改寻路类能够设置一个目标点后自动开始寻路并且在寻路过程中能够去获取最新的位置和路径
         yield return moveTo;
+        //TODO:如果当前站在目标位置上，需要移动到最近的点
         //TODO:然后不断减少建筑的剩余工作量
         var work = WorkMaker.MakeWork();
         work.InitAction = delegate

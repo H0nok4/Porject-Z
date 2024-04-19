@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -47,6 +47,7 @@ public static class ThingUtility {
         Debug.Log("创建了一个Frame配置");
         var baseFrameDef = BaseFrameDef();
         //TODO:Frame点击的时候还是需要一些建成之后的建筑的信息，比如名称，工作量之类的
+        baseFrameDef.ID = def.ID;
         baseFrameDef.SizeX = def.SizeX;
         baseFrameDef.SizeY = def.SizeY;
         baseFrameDef.Name = def.Name;
@@ -69,6 +70,7 @@ public static class ThingUtility {
     {
         Debug.Log("创建了一个蓝图配置");
         var baseBlueprintDef = BaseBlueprintDef();
+        baseBlueprintDef.ID = thingDefine.ID;
         baseBlueprintDef.SizeX = thingDefine.SizeX;
         baseBlueprintDef.SizeY = thingDefine.SizeY;
         baseBlueprintDef.Name = thingDefine.Name;

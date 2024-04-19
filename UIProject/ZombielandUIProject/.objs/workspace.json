@@ -1,5 +1,5 @@
 {
-  "libview.firstColumnWidth": 283,
+  "libview.firstColumnWidth": 333,
   "libview.iconScale": 0,
   "backgroundColor": 6710886,
   "auxline1": true,
@@ -9,7 +9,9 @@
   "libview.twoColumn": false,
   "libview.expandedNodes": [
     "0kazkhhc",
-    "/"
+    "/",
+    "0kazkhhc",
+    "/component/"
   ],
   "doc.openedDocs": [
     "ui://0kazkhhcc0f50",

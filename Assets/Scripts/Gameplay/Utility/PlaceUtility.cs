@@ -149,6 +149,7 @@ public static class PlaceUtility
         }
 
         //TODO:开始判断优先级
+        Debug.LogWarning("没有可以放置的位置，返回Unusable");
 
         return PlaceSpotPriority.Unusable;
     }
