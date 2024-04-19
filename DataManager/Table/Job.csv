@@ -7,5 +7,5 @@ ID,,DriverClass,ø…“‘÷–∂œ
 2,BuildJobDefine,JobDriver_BuildFrame,
 3,WalkAroundJobDefine,JobDriver_WalkAround,
 4,ImmediatelyBuildBlueprintToFrame,JobDriver_ImmediatelyBuildBlueprintToFrame,
-5,HaulToCell,,
+5,HaulToCell,JobDriver_HaulToCell,
 6,HaulToContainer,JobDriver_HaulToContainer,

@@ -149,9 +149,13 @@ public static class PlaceUtility
         }
 
         //TODO:开始判断优先级
-        Debug.LogWarning("没有可以放置的位置，返回Unusable");
+        
+        //TODO: 如果这里有同类物品,返回最高优先级
 
-        return PlaceSpotPriority.Unusable;
+        //TODO:如果这里有容器,容器中可以堆叠,返回较高优先级
+        Debug.LogWarning("没有可以放置的位置，返回Unusable");
+        //什么都没,返回中等优先级
+        return PlaceSpotPriority.Medium;
     }
 
     public static List<PosNode> GetWalkablePosByBFS(Thing thing, int maxLength) {
