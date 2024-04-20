@@ -13,7 +13,7 @@ public class JobDriver_HaulToCell : JobDriver
         var carryThing = Work_Haul.StartCarryThing(JobTargetIndex.A);
         var moveToCell = Work_MoveTo.MoveToCell(JobTargetIndex.B, PathMoveEndType.Touch);
         //TODO:需要考虑到，可能目标位置是个容器，需要放在容器里面
-        var putDownToCell = Work_Haul.PutHauledThingIntoCell();
+        var putDownToCell = Work_Haul.PutHauledThingIntoCell(JobTargetIndex.B);
     }
 
     public override bool TryMakeWorkReservations(bool errorOnFailed)
