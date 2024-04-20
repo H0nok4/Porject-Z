@@ -213,4 +213,24 @@ public static class Work_Haul {
 
         return work;
     }
+
+    public static Work PutHauledThingIntoCell(JobTargetIndex jobTargetIndex) {
+        Work work = WorkMaker.MakeWork();
+        work.InitAction = () => {
+            //TODO:将手上拿着的东西放在目标位置，需要判断目标位置是否有容器，如果是的话要放在容器里
+            var unit = work.Unit;
+            var job = unit.JobTracker.Job;
+            var targetInfo = job.GetTarget(jobTargetIndex);
+            if (targetInfo.Thing != null) {
+                //TODO:如果Thing不为空，则代表是容器，需要在JobGiver那边提前准备好
+            }
+            else if(targetInfo.Position != null){
+                //TODO:直接放地上
+                
+            }
+        };
+
+
+        return work;
+    }
 }
