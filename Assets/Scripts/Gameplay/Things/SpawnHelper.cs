@@ -103,6 +103,9 @@ public static class SpawnHelper
         //}
         if (wantPlaceThingDef.Category == ThingCategory.Item && existThingDef.Passability != Traversability.Impassable) {
             return false;
+        }else if (wantPlaceThingDef.IsFrame || wantPlaceThingDef.IsBlueprint)
+        {
+            return false;
         }
 
         return true;
