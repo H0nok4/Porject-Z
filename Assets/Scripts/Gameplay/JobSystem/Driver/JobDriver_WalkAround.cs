@@ -10,7 +10,7 @@ public class JobDriver_WalkAround : JobDriver {
     public override IEnumerable<Work> MakeWorks()
     {
         //TODO:开始闲逛时，JobGiver会随机选择使用广度优先（或者迪杰斯特拉）算法获取的半径3格的某个地方，然后将那个地方设置为闲逛的目标点
-        var walkWork = Work_MoveTo.MoveToCell(JobTargetIndex.A, PathMoveEndType.InCell);
+        var walkWork = WorkUtility_MoveTo.MoveToCell(JobTargetIndex.A, PathMoveEndType.InCell);
         yield return walkWork;
         var endWork = WorkMaker.MakeWork();
         endWork.InitAction = delegate {

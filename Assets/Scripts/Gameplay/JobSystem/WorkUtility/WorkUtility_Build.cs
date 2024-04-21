@@ -1,7 +1,7 @@
 ﻿
 using ConfigType;
 
-public static class Work_Build {
+public static class WorkUtility_Build {
     public static Work BuildBlueprintToFrameIfNeed(JobTargetIndex blueprintIndex,JobTargetIndex buildFrameSetToTargetIndex = JobTargetIndex.None) {
         Work work = WorkMaker.MakeWork();
         work.InitAction = delegate

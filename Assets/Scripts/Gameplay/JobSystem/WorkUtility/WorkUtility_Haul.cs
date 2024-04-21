@@ -10,7 +10,7 @@ using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public static class Work_Haul {
+public static class WorkUtility_Haul {
     public static bool CanCarryThing(Thing_Unit unit, Thing haulThing)
     {
         if (!haulThing.Spawned)
@@ -226,7 +226,7 @@ public static class Work_Haul {
             }
             else if(targetInfo.Position != null){
                 //TODO:直接放地上
-                
+                unit.CarryTracker.TryDropCarryThing(targetInfo.Position,ThingPlaceMode.Direct,out _);
             }
         };
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConfigType;
 using JetBrains.Annotations;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEditor;
@@ -227,4 +228,13 @@ public class ThingOwner<T> : ThingOwner where T : Thing {
 
         return item.Count;
     }
+
+    public bool TryDrop(Thing thing, PosNode pos, ThingPlaceMode mode, out T resultDroppedThing,Action<Thing,int> onDropped = null,Predicate<PosNode> nearPlaceValidator = null)
+    {
+        Thing droppedThing = null;
+        bool result = TryDrop(thing, pos, mode, out droppedThing, onDropped, nearPlaceValidator, true);
+        resultDroppedThing = (T)droppedThing;
+        return result;
+    }
+
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using ConfigType;
 using UnityEngine;
 
-public static class Work_MoveTo {
+public static class WorkUtility_MoveTo {
     public static Work MoveToCell(JobTargetIndex targetIndex, PathMoveEndType endType) {
         Work moveWork = WorkMaker.MakeWork();
         moveWork.InitAction = delegate {

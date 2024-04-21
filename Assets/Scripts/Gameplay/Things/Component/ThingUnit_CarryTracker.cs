@@ -88,4 +88,28 @@ public class ThingUnit_CarryTracker : IThingHolder
 
         return addNum;
     }
+
+    public bool TryDropCarryThing(PosNode targetPos,ThingPlaceMode mode,out Thing resultThing,Action<Thing,int> onDropped = null)
+    {
+        if (ThingContainer.TryDrop(CarriedThing, targetPos, mode, out resultThing, onDropped))
+        {
+            if (resultThing != null)
+            {
+                //TODO:成功掉落可以有一些操作,比如手动丢弃的需要设置为不可互动
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool IsCarrying()
+    {
+        if (!Unit.IsDestroyed && CarriedThing != null)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }

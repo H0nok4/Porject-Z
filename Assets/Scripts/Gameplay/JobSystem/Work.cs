@@ -24,6 +24,8 @@ public class Work
 
     public bool InPool;
 
+    public bool AtomicWithPrevious;
+
     public Thing_Unit GetActor()
     {
         return Unit;
@@ -37,6 +39,7 @@ public class Work
         TickAction = null;
         InitAction = null;
         FinishedAction = null;
+        AtomicWithPrevious = false;
 
         if (FinishedAction == null)
         {

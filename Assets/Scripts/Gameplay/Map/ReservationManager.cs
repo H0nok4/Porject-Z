@@ -14,14 +14,22 @@ public class ReservationManager : Singleton<ReservationManager> {
 
         public JobTargetInfo TargetInfo;
 
+        private int _maxUnitCount;
+        public int MaxUnitCount => _maxUnitCount;
 
+        public Reservation(Thing_Unit unit, Job job, JobTargetInfo targetInfo, int maxUnitCount) {
+            Unit = unit;
+            Job = job;
+            TargetInfo = targetInfo;
+            _maxUnitCount = maxUnitCount;
+        }
     }
 
     public List<Reservation> Reservations = new List<Reservation>();
 
     private Map Map => MapController.Instance.Map;
 
-    public bool Reserve(Thing_Unit unit,Job job,JobTargetInfo targetInfo) {
+    public bool Reserve(Thing_Unit unit,Job job,JobTargetInfo targetInfo,int maxUnitCount = 1) {
         //TODO:先看是否有相同的预定
         if (unit == null) {
             return false;
@@ -35,16 +43,16 @@ public class ReservationManager : Singleton<ReservationManager> {
             }
         }
 
-        if (!CanReserve(unit,targetInfo)) {
+        if (!CanReserve(unit,targetInfo,maxUnitCount)) {
 
             return false;
         }
 
-        Reservations.Add(new Reservation(){Unit = unit,Job = job,TargetInfo = targetInfo});
+        Reservations.Add(new Reservation(unit,job,targetInfo, maxUnitCount));
         return true;
     }
 
-    public bool CanReserve(Thing_Unit unit, JobTargetInfo targetInfo,bool ignoreOtherReservation = false) {
+    public bool CanReserve(Thing_Unit unit, JobTargetInfo targetInfo,int maxUnitCount = 1,bool ignoreOtherReservation = false) {
         if (unit == null) {
             return false;
         }
@@ -54,13 +62,32 @@ public class ReservationManager : Singleton<ReservationManager> {
         }
         //TODO:查看是否有冲突的预定
 
-        for (int i = 0; i < Reservations.Count; i++) {
-            var reservation = Reservations[i];
-            if (reservation.TargetInfo == targetInfo && reservation.Unit != unit) {
+        if (!ignoreOtherReservation)
+        {
+            int sameReservationUnitCount = 0;
+            for (int i = 0; i < Reservations.Count; i++) {
+                Reservation reservation = Reservations[i];
+                if (reservation.TargetInfo == targetInfo && reservation.Unit != unit) {
 
-                return false;
+                    //相当于是俩类的Reservation,直接返回false
+                    if (reservation.MaxUnitCount != maxUnitCount)
+                    {
+                        return false;
+                    }
+
+                    sameReservationUnitCount++;
+
+                    if (sameReservationUnitCount >= reservation.MaxUnitCount)
+                    {
+                        //重复预定的人太多了,返回false
+                        return false;
+                    }
+
+                    return false;
+                }
             }
         }
+        
 
         return true;
     }

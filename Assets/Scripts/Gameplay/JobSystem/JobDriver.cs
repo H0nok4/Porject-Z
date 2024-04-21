@@ -44,6 +44,19 @@ public abstract class JobDriver
         }
     }
 
+    public bool CanStartNextWorkInBusy
+    {
+        get
+        {
+            int nextIndex = CurrentWorkIndex + 1;
+            if (nextIndex >= Works.Count)
+            {
+                return false;
+            }
+
+            return Works[nextIndex].AtomicWithPrevious;
+        }
+    }
 
     public void Tick()
     {
@@ -153,7 +166,7 @@ public abstract class JobDriver
         }
 
         DelayWaitingTickCount = CurrentWork.NeedWaitingTick;
-        if (CheckCurrentToilEndOrFail())
+        if (CheckCurrentWorkEndOrFail())
         {
             return;
         }
@@ -170,7 +183,7 @@ public abstract class JobDriver
         }
     }
 
-    public bool CheckCurrentToilEndOrFail()
+    public bool CheckCurrentWorkEndOrFail()
     {
         //TODO:有一些工作可能会失败
         return false;

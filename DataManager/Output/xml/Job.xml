@@ -35,7 +35,9 @@
 	<JobDefine>
 		<ID>5</ID>
 		<Name>HaulToCell</Name>
-		<DriverClass />
+		<DriverClass>
+			<TypeName>JobDriver_HaulToCell</TypeName>
+		</DriverClass>
 		<CanSuspend>true</CanSuspend>
 	</JobDefine>
 	<JobDefine>

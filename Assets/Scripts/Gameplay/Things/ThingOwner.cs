@@ -244,4 +244,20 @@ public abstract class ThingOwner : IList<Thing>
 
         return 0;
     }
+
+    public bool TryDrop(Thing thing, PosNode pos, ThingPlaceMode mode, out Thing resultDroppedThing,
+        Action<Thing, int> onDropped = null, Predicate<PosNode> nearPlaceValidator = null, bool playSound = true) {
+        if (!Contains(thing)) {
+            Debug.LogError("想要丢弃不属于自己或者不存在的东西");
+            resultDroppedThing = null;
+            return false;
+        }
+
+        if (DropUtility.TryDropSpawn(thing, pos, mode, out resultDroppedThing, onDropped, nearPlaceValidator, playSound)) {
+            Remove(thing);
+            return true;
+        }
+
+        return false;
+    }
 }

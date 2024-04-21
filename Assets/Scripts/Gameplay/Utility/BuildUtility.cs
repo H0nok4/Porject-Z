@@ -36,7 +36,8 @@ public static class BuildUtility
         List<Thing> thingList = buildingThing.MapData.ThingMap.ThingsListAt(buildingThing.Position.Pos);
         foreach (var thing in thingList)
         {
-            if (BuildingBlocked(buildingThing,thing))
+            //建造者不会阻挡建筑建造
+            if (BuildingBlocked(buildingThing,thing) && thing != builder)
             {
                 return thing;
             }

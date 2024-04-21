@@ -149,7 +149,14 @@ public static class PlaceUtility
         }
 
         //TODO:开始判断优先级
-        
+        foreach (var thing in pos.MapData.ThingMap.ThingsAt(pos.Pos))
+        {
+            if (thing is Blueprint || thing is Thing_Building_Frame)
+            {
+                //TODO:最好不要放在蓝图和框架上
+                return PlaceSpotPriority.Unusable;
+            }
+        }
         //TODO: 如果这里有同类物品,返回最高优先级
 
         //TODO:如果这里有容器,容器中可以堆叠,返回较高优先级

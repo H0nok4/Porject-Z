@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class JobDriver_MoveTo : JobDriver  {
     public override IEnumerable<Work> MakeWorks() {
-        var moveWork = Work_MoveTo.MoveToCell(JobTargetIndex.A, PathMoveEndType.InCell);
+        var moveWork = WorkUtility_MoveTo.MoveToCell(JobTargetIndex.A, PathMoveEndType.InCell);
         moveWork.CompleteMode = WorkCompleteMode.PathMoveEnd;
         moveWork.InitAction = delegate
         {
