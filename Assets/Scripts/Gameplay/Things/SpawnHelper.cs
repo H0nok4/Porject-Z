@@ -101,13 +101,17 @@ public static class SpawnHelper
         //{
 
         //}
-        if (wantPlaceThingDef.Category == ThingCategory.Item && existThingDef.Passability != Traversability.Impassable) {
-            return false;
-        }else if (wantPlaceThingDef.IsFrame || wantPlaceThingDef.IsBlueprint)
+        if (wantPlaceThingDef.Category == ThingCategory.Item && existThingDef.Passability == Traversability.Impassable)
+        {
+            return true;
+        }else if (wantPlaceThingDef.IsBlueprint)
         {
             return false;
+        }else if (wantPlaceThingDef.IsFrame && SpawningWipes(wantPlaceThingDef.EntityBuildDef, existThingDef))
+        {
+            return true;
         }
 
-        return true;
+        return false;
     }
 }
