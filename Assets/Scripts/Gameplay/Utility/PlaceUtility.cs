@@ -227,6 +227,7 @@ public static class PlaceUtility
                         //合并完了，结果就是当前的物品
                         placeThing = thing;
                         onPlaceAction?.Invoke(thing,beforeStackCount);
+                        return true;
                     }
 
                     //数量变动了，说明有一部分成功合并进去了
@@ -234,6 +235,8 @@ public static class PlaceUtility
                     {
                         onPlaceAction.Invoke(thing,beforeStackCount - placeThing.Count);
                     }
+
+
                 }
             }
         }

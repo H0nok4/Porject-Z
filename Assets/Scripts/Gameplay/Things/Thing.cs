@@ -422,7 +422,7 @@ public abstract class Thing : IThing {
             return false;
         }
 
-        return this.Def == thing.Def;
+        return this.Def.ID == thing.Def.ID;
     }
 
     public bool TryStackWith(Thing placeThing)
