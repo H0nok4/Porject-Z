@@ -204,7 +204,45 @@ public static class PlaceUtility
 
         return result;
     }
+    public static List<PosNode> GetWalkablePosByBFS(PosNode targetPos, int maxLength) {
+        var result = new List<PosNode>();
+        var startPos = targetPos;
+        var queue = new Queue<PosNode>();
+        queue.Enqueue(startPos);
+        var closeList = new HashSet<PosNode>(new PathNodeComparer());
+        closeList.Clear();
+        while (queue.Count > 0) {
+            var curNode = queue.Dequeue();
 
+            var mapData = MapController.Instance.Map.GetMapDataByIndex(curNode.MapDataIndex);
+            foreach (var dir in PathFinder.DirVecList) {
+                if (mapData.GetSectionByPosition(curNode.Pos + dir) is { } section) {
+                    if (!section.Walkable) {
+                        //必须要可以走的
+                        continue;
+                    }
+                    var newNode = section.CreatePathNode();
+                    if (closeList.Contains(newNode)) {
+                        continue;
+                    }
+
+                    newNode.Length = curNode.Length + 1;
+                    if (newNode.Length > maxLength) {
+                        continue;
+                    }
+
+                    newNode.Parent = curNode;
+                    queue.Enqueue(newNode);
+                    DebugDrawer.DrawBox(newNode.Pos);
+                }
+            }
+
+            result.Add(curNode);
+            closeList.Add(curNode);
+        }
+
+        return result;
+    }
     public static bool TryPlaceThingDirect(Thing placeThing, PosNode pos, out Thing placedThing,
         Rotation rotation = default(Rotation), Action<Thing, int> onPlaceAction = null)
     {

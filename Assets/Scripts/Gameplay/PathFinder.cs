@@ -62,6 +62,25 @@ public static class PathFinder {
             map = useMap;
         }
 
+        bool hasCanTouchPos = false;
+        if (endType == PathMoveEndType.Touch) {
+            //TODO:需要获得目标位置附近是否有可以站立的位置，如果有的话则需要一个标志位
+            var walkablePosAroundList = PlaceUtility.GetWalkablePosByBFS(endPos, 1);
+            foreach (var posNode in walkablePosAroundList) {
+                bool posCanStand = true; 
+                foreach (var thing in endPos.MapData.ThingMap.ThingsAt(posNode.Pos)) {
+                    if (thing.Def.Passability != Traversability.CanStand) {
+                        posCanStand = false;
+                    }
+                }
+
+                if (posCanStand) {
+                    hasCanTouchPos = true;
+                    break;
+                }
+            }
+        }
+
         var openList = SimplePool<PriorityQueue<PosNode>>.Get();
         openList.Clear();
         var closeList = new HashSet<PosNode>(new PathNodeComparer());
@@ -90,12 +109,19 @@ public static class PathFinder {
                         continue;
                     }
 
+                    //TODO:如果这个位置可以当结束位置，需要判断是否可以站立在这里
+                    if (endType == PathMoveEndType.Touch && hasCanTouchPos) {
+                        if (mapData.ThingMap.ThingsAt(section.Position).Any((thing)=>thing.Def.Passability != Traversability.CanStand)) {
+                            continue;
+                        }
+                    }
+
                     var newNode = section.CreatePathNode();
                     if (closeList.Contains(newNode)) {
                         continue;
                     }
 
-
+                    //TODO:有问题，之前触摸的结束位置是想要找到一个位置的新位置能够是目标地点，需要改一下
                     bool isSameNodeFlag = newNode.IsSameNode(endPos);
 
                     //触碰在走之前可以判断

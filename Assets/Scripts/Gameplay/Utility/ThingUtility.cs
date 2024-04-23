@@ -13,6 +13,14 @@ public static class ThingUtility {
         return Math.Min(wantToStackThing.Count, main.Def.StackLimit - main.Count);
     }
 
+    public static Traversability GetThingTraversability(Thing thing) {
+        if (thing.Def.IsBlueprint)
+            return Traversability.CanStand;
+        if (thing.Def.IsFrame)
+            return Traversability.OnlyThrough;
+
+        return thing.Def.Passability;
+    }
     /// <summary>
     /// 因为所有Frame都为一个类，所以可以直接创建Frame配置
     /// </summary>
@@ -27,6 +35,7 @@ public static class ThingUtility {
             Destroyable = true,
             ThingClass = new EditableType(){TypeName = "Thing_Building_Frame" },
             FrameSpritePath = DataManager.Instance.FrameSpritePath,
+            Passability = Traversability.OnlyThrough,
     };
     }
 
@@ -39,6 +48,7 @@ public static class ThingUtility {
             ThingClass = new EditableType(){TypeName = "Thing_Blueprint_Building" },
             Selectable = true,
             Destroyable = true,
+            Passability = Traversability.CanStand
         };
     }
 
