@@ -109,12 +109,7 @@ public static class PathFinder {
                         continue;
                     }
 
-                    //TODO:如果这个位置可以当结束位置，需要判断是否可以站立在这里
-                    if (endType == PathMoveEndType.Touch && hasCanTouchPos) {
-                        if (mapData.ThingMap.ThingsAt(section.Position).Any((thing)=>thing.Def.Passability != Traversability.CanStand)) {
-                            continue;
-                        }
-                    }
+
 
                     var newNode = section.CreatePathNode();
                     if (closeList.Contains(newNode)) {
@@ -127,6 +122,13 @@ public static class PathFinder {
                     //触碰在走之前可以判断
                     if (isSameNodeFlag && endType == PathMoveEndType.Touch)
                     {
+                        //TODO:如果这个位置可以当结束位置，需要判断是否可以站立在这里
+                        if (hasCanTouchPos) {
+                            if (mapData.ThingMap.ThingsAt(node.Pos).Any((thing) => thing.Def.Passability != Traversability.CanStand)) {
+                                Debug.LogWarning($"这个位置{newNode.Pos}可以当结束位置，但是不可以站立,跳过");
+                                continue;
+                            }
+                        }
                         //直接从当前位置创建一个路径
                         CreateResultPath(result, node);
                         return result;
@@ -174,7 +176,12 @@ public static class PathFinder {
                 throw;
             }
 
-            closeList.Add(node);
+            if (endType != PathMoveEndType.Touch || !node.IsSameNode(endPos))
+            {
+                closeList.Add(node);
+            }
+            
+            
             //为了防止找了超级大的范围，需要一个跳出
 
             if (openList.Count >= 100000)
