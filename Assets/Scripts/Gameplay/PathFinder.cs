@@ -10,7 +10,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public static class PathFinder {
-    public static List<PosNode> AStarFindPath(Thing_Unit_Pawn thingUnitPawn, PosNode targetPos, Map useMap = null) {
+    public static List<PosNode> AStarFindPath(Thing_Unit_Pawn unit, PosNode targetPos, Map useMap = null) {
         //TODO:A*寻路
 
         Map map = MapController.Instance.Map;
@@ -18,7 +18,7 @@ public static class PathFinder {
             map = useMap;
         }
 
-        return AStarFindPath(map.GetPathNodeByUnit(thingUnitPawn), targetPos,PathMoveEndType.InCell, map);
+        return AStarFindPath(unit, map.GetPathNodeByUnit(unit), targetPos,PathMoveEndType.InCell, map);
     }
 
     public static List<PosNode> AStarFindPath(Thing_Unit pawn, PosNode targetPos, Map useMap = null) {
@@ -29,7 +29,7 @@ public static class PathFinder {
             map = useMap;
         }
 
-        return AStarFindPath(map.GetPathNodeByUnit(pawn), targetPos,PathMoveEndType.InCell, map);
+        return AStarFindPath(pawn,map.GetPathNodeByUnit(pawn), targetPos,PathMoveEndType.InCell, map);
     }
 
     public static List<PosNode> AStarFindPath(Thing_Unit pawn, PosNode targetPos, PathMoveEndType endType,
@@ -39,7 +39,7 @@ public static class PathFinder {
             map = useMap;
         }
 
-        return AStarFindPath(map.GetPathNodeByUnit(pawn), targetPos,endType, map);
+        return AStarFindPath(pawn,map.GetPathNodeByUnit(pawn), targetPos,endType, map);
     }
 
     public static readonly List<IntVec2> DirVecList = new List<IntVec2>()
@@ -53,7 +53,7 @@ public static class PathFinder {
     /// <param name="endType"></param>
     /// <param name="useMap"></param>
     /// <returns></returns>
-    public static List<PosNode> AStarFindPath(PosNode startPos, PosNode endPos,PathMoveEndType endType, Map useMap = null) {
+    public static List<PosNode> AStarFindPath(Thing_Unit finder,PosNode startPos, PosNode endPos,PathMoveEndType endType, Map useMap = null) {
         //A*寻路
         List<PosNode> result = SimplePool<List<PosNode>>.Get();
         result.Clear();
@@ -124,7 +124,7 @@ public static class PathFinder {
                     {
                         //TODO:如果这个位置可以当结束位置，需要判断是否可以站立在这里
                         if (hasCanTouchPos) {
-                            if (mapData.ThingMap.ThingsAt(node.Pos).Any((thing) => thing.Def.Passability != Traversability.CanStand)) {
+                            if (mapData.ThingMap.ThingsAt(node.Pos).Any((thing) => thing != finder && thing.Def.Passability != Traversability.CanStand)) {
                                 Debug.LogWarning($"这个位置{newNode.Pos}可以当结束位置，但是不可以站立,跳过");
                                 continue;
                             }
