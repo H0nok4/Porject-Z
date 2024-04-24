@@ -139,6 +139,8 @@ public class PlayerController : Singleton<PlayerController>
 
     public Thing_Unit_Pawn ThingUnitPawnUnit;
 
+    public Thing_Unit_Pawn ThingUnitPawnUnit2;
+
     public PreviewObject PreviewObject { get; private set; }
     public void HandleInput()
     {

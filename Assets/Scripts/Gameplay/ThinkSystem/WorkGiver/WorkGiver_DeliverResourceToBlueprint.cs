@@ -19,6 +19,11 @@ public class WorkGiver_DeliverResourceToBlueprint : WorkGiver_DeliverResourceTo
             return null;
         }
 
+        //TODO:看看目标是否被人预定
+        if (!ReservationManager.Instance.CanReserve(unit, thing)) {
+            return null;
+        }
+
         if (BuildUtility.FirstBlockingThing(blueprint,(Thing_Unit_Pawn)unit) != null)
         {
             //TODO:有东西正在阻挡建造蓝图，看情况需要搬离之类的

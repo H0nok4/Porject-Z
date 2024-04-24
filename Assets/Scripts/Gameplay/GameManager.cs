@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     {
         Init();
 
+        PlayerController.Instance.ThingUnitPawnUnit2 = (Thing_Unit_Pawn)SpawnHelper.Spawn(DataManager.Instance.GetThingDefineByID(1), new PosNode() { Pos = new IntVec2(0, 1), MapDataIndex = 0 });
 
         PlayerController.Instance.ThingUnitPawnUnit = (Thing_Unit_Pawn)SpawnHelper.Spawn(DataManager.Instance.GetThingDefineByID(1), new PosNode(){Pos = new IntVec2(0,0),MapDataIndex = 0});
         UIManager.Instance.Show(DataManager.Instance.MainPanelType);

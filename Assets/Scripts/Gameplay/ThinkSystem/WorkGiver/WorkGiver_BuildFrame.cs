@@ -16,6 +16,11 @@ public class WorkGiver_BuildFrame : WorkGiver_Scanner
             return null;
         }
 
+        //TODO:看看目标是否被人预定
+        if (!ReservationManager.Instance.CanReserve(unit, thing)) {
+            return null;
+        }
+
         //TODO:后面Frame需要材料来建造的时候，需要加上已经放进去的材料是否足够
         if (frame.NeedResources().Count != 0) {
             return null;
