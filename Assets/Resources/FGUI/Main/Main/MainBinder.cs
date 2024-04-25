@@ -14,6 +14,7 @@ namespace Main
             UIObjectFactory.SetPackageItemExtension(UI_ComDesignatorType.URL, typeof(UI_ComDesignatorType));
             UIObjectFactory.SetPackageItemExtension(UI_BtnDesignatorType1.URL, typeof(UI_BtnDesignatorType1));
             UIObjectFactory.SetPackageItemExtension(UI_ComBuildNeedResource.URL, typeof(UI_ComBuildNeedResource));
+            UIObjectFactory.SetPackageItemExtension(UI_ComNeed.URL, typeof(UI_ComNeed));
         }
     }
 }

@@ -39,6 +39,12 @@ namespace Main {
         {
             m_CtrlThingType.SetSelectedIndex(1);
             m_TxtName.Set(thing.Def.Name);
+            m_ListUnitNeed.numItems = thing.NeedTracker.Needs.Count;
+            for (int i = 0; i < m_ListUnitNeed.numItems; i++) {
+                var comNeed = (UI_ComNeed)m_ListUnitNeed._children[i];
+                comNeed.Refresh(thing.NeedTracker.Needs[i]);
+            }
+
         }
 
         public void RefreshAsItem(Thing thing)

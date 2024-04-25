@@ -11,6 +11,8 @@
     <component id="l0ax8" name="ComDesignatorType.xml" path="/component/" exported="true"/>
     <component id="l0ax9" name="BtnDesignatorType1.xml" path="/component/"/>
     <component id="l0axa" name="BtnBuildingCommand.xml" path="/component/" exported="true"/>
+    <component id="nrf9b" name="BarNeed.xml" path="/component/"/>
+    <component id="nrf9c" name="ComNeed.xml" path="/component/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

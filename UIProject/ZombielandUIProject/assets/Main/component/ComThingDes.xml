@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="450,412" pivot="0,1">
+<component size="372,500" pivot="0,1">
   <controller name="CtrlThingType" pages="0,None,1,Unit,2,Blueprint,3,Frame,4,Building,5,Item" selected="1"/>
   <controller name="CtrlShowDragBox" pages="0,,1," selected="0"/>
   <displayList>
-    <graph id="n5_f1nd" name="n5" xy="0,52" size="450,360" type="rect">
+    <graph id="n5_f1nd" name="n5" xy="0,52" size="372,448" type="rect">
       <relation target="" sidePair="bottom-bottom"/>
     </graph>
     <text id="n6_f1nd" name="TxtName" xy="2,54" size="225,54" fontSize="40" autoSize="shrink" text="ThingName">
@@ -15,10 +15,13 @@
     <list id="n11_mk93" name="ListNeedResources" xy="4,101" size="442,168" layout="flow_hz" overflow="scroll" defaultItem="ui://0kazkhhcmk936">
       <gearDisplay controller="CtrlThingType" pages="2,3"/>
     </list>
-    <list id="n12_ljlr" name="ListUnitNeed" xy="3,114" size="445,66" overflow="scroll">
+    <list id="n12_ljlr" name="ListUnitNeed" xy="3,114" size="364,50" layout="flow_hz" defaultItem="ui://0kazkhhcnrf9c">
       <gearDisplay controller="CtrlThingType" pages="1"/>
       <relation target="n6_f1nd" sidePair="top-bottom"/>
+      <item/>
+      <item/>
+      <item/>
     </list>
-    <list id="n13_ljlr" name="ListThingBtn" xy="3,0" size="445,50" overflow="scroll"/>
+    <list id="n13_ljlr" name="ListThingBtn" xy="0,0" size="371,50" overflow="scroll"/>
   </displayList>
 </component>

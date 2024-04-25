@@ -18,30 +18,32 @@ public abstract class Thing_Unit : ThingWithComponent , IThingHolder {
 
     public ThingUnit_CarryTracker CarryTracker;
 
+    public ThingUnit_NeedTracker NeedTracker;
+
     public PathMover PathMover;
     public int TickPerMoveDiagonal => TicksPerMove(true);
     public int TickPerMoveCardinal => TicksPerMove(false);
     /// <summary>
-    /// ×î»ù´¡µÄÒÆ¶¯Ò»¸ñĞèÒª¶àÉÙTick
+    /// æœ€åŸºç¡€çš„ç§»åŠ¨ä¸€æ ¼éœ€è¦å¤šå°‘Tick
     /// </summary>
     /// <param name="cardinal"></param>
     /// <returns></returns>
     public int TicksPerMove(bool cardinal)
     {
-        //±ÈÈç5¸ñµÄÒÆËÙ£¬µÈÓÚÔÚ60TickÖĞ¿ÉÒÔ×ß5¸ñ£¬µÈÓÚ12TickÃ¿¸ñ
+        //æ¯”å¦‚5æ ¼çš„ç§»é€Ÿï¼Œç­‰äºåœ¨60Tickä¸­å¯ä»¥èµ°5æ ¼ï¼Œç­‰äº12Tickæ¯æ ¼
         var moveSpeed = MoveSpeed; 
 
         float perSecondMoveCount = GameTicker.TicksPerSecond / moveSpeed;
 
         if (perSecondMoveCount < 1)
         {
-            //×îÉÙ¶¼µÃ1Tick×ß1¸ñ
+            //æœ€å°‘éƒ½å¾—1Tickèµ°1æ ¼
             perSecondMoveCount = 1;
         }
 
         if (cardinal)
         {
-            //¶Ô½ÇÏßĞèÒª*1.414
+            //å¯¹è§’çº¿éœ€è¦*1.414
             perSecondMoveCount *= 1.414f;
         }
 
@@ -92,7 +94,7 @@ public abstract class Thing_Unit : ThingWithComponent , IThingHolder {
 
     public void GetChildren(List<IThingHolder> outChildren)
     {
-        //TODO:ÀıÈç½ÇÉ«¿ÉÄÜ»áÓĞ±³°ü£¬ÉíÉÏµÄ×°±¸ÀÃ£¬ÊÖÉÏĞ¯´øµÄ¶«Î÷
+        //TODO:ä¾‹å¦‚è§’è‰²å¯èƒ½ä¼šæœ‰èƒŒåŒ…ï¼Œèº«ä¸Šçš„è£…å¤‡çƒ‚ï¼Œæ‰‹ä¸Šæºå¸¦çš„ä¸œè¥¿
 
     }
 
@@ -104,7 +106,7 @@ public abstract class Thing_Unit : ThingWithComponent , IThingHolder {
 
     public bool IsInside(Thing thing)
     {
-        //TODO:Ä¿Ç°Ö»ÓĞµ¥¸ñ´óĞ¡µÄÎïÌå£¬ºóĞø¼ÓÈëÌå»ıÉè¶¨ºóĞèÒªÖØĞÂ×ö
+        //TODO:ç›®å‰åªæœ‰å•æ ¼å¤§å°çš„ç‰©ä½“ï¼Œåç»­åŠ å…¥ä½“ç§¯è®¾å®šåéœ€è¦é‡æ–°åš
         if (Position.MapDataIndex != thing.Position.MapDataIndex)
         {
             return false;

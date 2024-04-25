@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using FairyGUI.Utils;
@@ -11,7 +11,7 @@ namespace FairyGUI
     /// <summary>
     /// Component
     /// </summary>
-    public class GComponent : GObject
+    public partial class GComponent : GObject
     {
         /// <summary>
         /// Root container.
@@ -26,7 +26,7 @@ namespace FairyGUI
         /// </summary>
         public ScrollPane scrollPane { get; private set; }
 
-        internal List<GObject> _children;
+
         internal List<Controller> _controllers;
         internal List<Transition> _transitions;
         internal bool _buildingDisplayList;

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="120,34">
+  <displayList>
+    <text id="n14_nrf9" name="TxtTitle" xy="0,0" size="52,34" fontSize="24" text="饥饿"/>
+    <component id="n15_nrf9" name="ComBar" src="nrf9b" fileName="component/BarNeed.xml" xy="52,0">
+      <ProgressBar value="82" max="100"/>
+    </component>
+  </displayList>
+</component>

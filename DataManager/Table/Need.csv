@@ -1,0 +1,10 @@
+*,,,
+int32,string,Type,bool
+ID,Name,NeedClass,ActiveOnPawn
+ID,–Ë«Û√˚≥∆,,
+,,,TRUE
+1,Food,FoodNeed,
+2,Joy,JoyNeed,
+3,Mood,MoodNeed,
+4,Rest,RestNeed,
+5,Thirsty,ThirstyNeed,
