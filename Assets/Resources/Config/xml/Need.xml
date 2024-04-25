@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfNeedDefine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<NeedDefine>
+		<ID>1</ID>
+		<Name>Food</Name>
+		<NeedClass>
+			<TypeName>FoodNeed</TypeName>
+		</NeedClass>
+		<ActiveOnPawn>true</ActiveOnPawn>
+	</NeedDefine>
+	<NeedDefine>
+		<ID>2</ID>
+		<Name>Joy</Name>
+		<NeedClass>
+			<TypeName>JoyNeed</TypeName>
+		</NeedClass>
+		<ActiveOnPawn>true</ActiveOnPawn>
+	</NeedDefine>
+	<NeedDefine>
+		<ID>3</ID>
+		<Name>Mood</Name>
+		<NeedClass>
+			<TypeName>MoodNeed</TypeName>
+		</NeedClass>
+		<ActiveOnPawn>true</ActiveOnPawn>
+	</NeedDefine>
+	<NeedDefine>
+		<ID>4</ID>
+		<Name>Rest</Name>
+		<NeedClass>
+			<TypeName>RestNeed</TypeName>
+		</NeedClass>
+		<ActiveOnPawn>true</ActiveOnPawn>
+	</NeedDefine>
+	<NeedDefine>
+		<ID>5</ID>
+		<Name>Thirsty</Name>
+		<NeedClass>
+			<TypeName>ThirstyNeed</TypeName>
+		</NeedClass>
+		<ActiveOnPawn>true</ActiveOnPawn>
+	</NeedDefine>
+</ArrayOfNeedDefine>

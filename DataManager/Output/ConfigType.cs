@@ -197,6 +197,14 @@ namespace ConfigType
         public bool CanSuspend; // 可以中断 
     }
 
+    public partial class NeedDefine
+    {
+        public int ID; // ID 
+        public string Name; // 需求名称 
+        public ConfigType.EditableType NeedClass; //  
+        public bool ActiveOnPawn; //  
+    }
+
     public partial class ThingDefine
     {
         public int ID; // ID 

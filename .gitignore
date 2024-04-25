@@ -74,3 +74,4 @@ crashlytics-build.properties
 Library
 
 !/DataManager/DataManager/DataManager.sln
+!/DataManager/DataManager/DataManager/DataManager.csproj

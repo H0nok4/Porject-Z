@@ -20,6 +20,13 @@ namespace ConfigType
             return JobDefineDic[ID];
         }
 
+        public List<NeedDefine> NeedDefineList = new List<NeedDefine>();
+        public Dictionary<int, NeedDefine> NeedDefineDic = new Dictionary<int, NeedDefine>();
+        public NeedDefine GetNeedDefineByID(int ID)
+        {
+            return NeedDefineDic[ID];
+        }
+
         public List<ThingDefine> ThingDefineList = new List<ThingDefine>();
         public Dictionary<int, ThingDefine> ThingDefineDic = new Dictionary<int, ThingDefine>();
         public ThingDefine GetThingDefineByID(int ID)
@@ -43,6 +50,9 @@ namespace ConfigType
             FileStream JobStream = File.OpenRead(ConfigPath + "Job.xml");
             XmlSerializer JobDefineserializer = new XmlSerializer(typeof(List<JobDefine>));
             JobDefineList = (List<JobDefine>)JobDefineserializer.Deserialize(JobStream);
+            FileStream NeedStream = File.OpenRead(ConfigPath + "Need.xml");
+            XmlSerializer NeedDefineserializer = new XmlSerializer(typeof(List<NeedDefine>));
+            NeedDefineList = (List<NeedDefine>)NeedDefineserializer.Deserialize(NeedStream);
             FileStream ThingStream = File.OpenRead(ConfigPath + "Thing.xml");
             XmlSerializer ThingDefineserializer = new XmlSerializer(typeof(List<ThingDefine>));
             ThingDefineList = (List<ThingDefine>)ThingDefineserializer.Deserialize(ThingStream);
@@ -62,6 +72,11 @@ namespace ConfigType
             foreach (var i in JobDefineList)
             {
                 JobDefineDic.Add(i.ID, i);
+            }
+
+            foreach (var i in NeedDefineList)
+            {
+                NeedDefineDic.Add(i.ID, i);
             }
 
             foreach (var i in ThingDefineList)

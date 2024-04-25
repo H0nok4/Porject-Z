@@ -17,7 +17,7 @@ public class WorkGiver_BuildFrame : WorkGiver_Scanner
         }
 
         //TODO:看看目标是否被人预定
-        if (!ReservationManager.Instance.CanReserve(unit, thing)) {
+        if (!unit.CanReserveAndReach(thing,PathMoveEndType.Touch)) {
             return null;
         }
 
