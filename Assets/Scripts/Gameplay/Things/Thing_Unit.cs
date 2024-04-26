@@ -53,6 +53,7 @@ public abstract class Thing_Unit : ThingWithComponent , IThingHolder {
     public override void Tick()
     {
         PathMover.Tick();
+        NeedTracker.Tick();
 
         if (JobTracker != null) {
             JobTracker.JobTrackTick();
@@ -69,6 +70,7 @@ public abstract class Thing_Unit : ThingWithComponent , IThingHolder {
         ThingType = ThingCategory.Unit;
         WorkSetting = new ThingUnit_WorkSetting(this);
         CarryTracker = new ThingUnit_CarryTracker(this);
+        NeedTracker = new ThingUnit_NeedTracker(this);
 
         GameTicker.Instance.RegisterThing(this);
     }

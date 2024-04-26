@@ -48,19 +48,9 @@ public abstract class Need
 
     public abstract void Tick(int interval);
 
-    public Need()
-    {
-
-    }
-
-    public Need(Thing_Unit unit)
-    {
+    public virtual void Init(NeedDefine define,Thing_Unit unit) {
         Unit = unit;
-        Init();
-    }
-
-    public virtual void Init()
-    {
+        NeedDef = define;
         CurValue = MaxValue;
     }
 }
