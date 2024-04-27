@@ -1,7 +1,7 @@
 ﻿
-using ConfigType;
+//using ConfigType;
 
-public class NeedDefine : BaseDefine {
-    public EditableType NeedClassType;
+//public class NeedDefine : BaseDefine {
+//    public EditableType NeedClassType;
 
-}
+//}

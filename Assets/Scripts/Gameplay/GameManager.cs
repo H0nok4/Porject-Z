@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         PlayerController.Instance.Update();
+        CameraController.Instance.HandleUpdate();
         GameTicker.Instance.UpdateTick();
+
     }
 }

@@ -1,3 +1,4 @@
+using ConfigType;
 using UnityEngine;
 
 public abstract class Need
