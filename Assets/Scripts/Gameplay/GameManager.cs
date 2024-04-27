@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
 
         PlayerController.Instance.ThingUnitPawnUnit = (Thing_Unit_Pawn)SpawnHelper.Spawn(DataManager.Instance.GetThingDefineByID(1), new PosNode(){Pos = new IntVec2(0,0),MapDataIndex = 0});
         UIManager.Instance.Show(DataManager.Instance.MainPanelType);
+        FogManager.Instance.Init(1);
     }
 
     // Update is called once per frame
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
         PlayerController.Instance.Update();
         CameraController.Instance.HandleUpdate();
         GameTicker.Instance.UpdateTick();
+
 
     }
 }

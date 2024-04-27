@@ -88,11 +88,6 @@ public class MapController :  Singleton<MapController>
 
                 sb.Append("\n");
             }
-
-
-            Debug.Log(sb);
-
-            
         }
 
 
