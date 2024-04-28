@@ -50,3 +50,6 @@ TagManager:
   - name: Things
     uniqueID: 875991855
     locked: 0
+  - name: FogOfWar
+    uniqueID: 1663069021
+    locked: 0
