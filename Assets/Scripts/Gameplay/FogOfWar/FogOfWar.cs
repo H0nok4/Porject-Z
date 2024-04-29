@@ -5,7 +5,6 @@ using UnityEngine;
 public class FogOfWar : MonoBehaviour
 {
     public SpriteRenderer SpriteRenderer;
-
     public Material FOWMaterial;
 
     public Texture2D texBuffer;

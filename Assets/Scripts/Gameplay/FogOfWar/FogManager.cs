@@ -9,11 +9,16 @@ public interface IFOWUnit {
 
 public class FOWCache {
     public bool IsDirty;
+    public int CurrentIndex;
     public List<IntVec2> CurrentVisiblePos;
+
+    public int CachedIndex;
     public List<IntVec2> CachedVisiblePos;
 
-    public void Update(IEnumerable<IntVec2> updatePos) {
-        if (!IsDirty) {
+    public void Update(int index,IEnumerable<IntVec2> updatePos) {
+        if (!IsDirty)
+        {
+            CurrentIndex = index;
             CachedVisiblePos.Clear();
             CachedVisiblePos.AddRange(CurrentVisiblePos);
             CurrentVisiblePos.AddRange(updatePos);
@@ -36,7 +41,11 @@ public class FogManager : Singleton<FogManager>
     public Texture2D[] TextureBuffer;
     private Color32[][] FogColors;
 
+    private RenderTexture CurMapDataTexture => FogTexture[MapController.Instance.Map.ActiveIndex];
 
+    private Map Map => MapController.Instance.Map;
+
+    private Color32 VisitedColor = new Color32(0, 0, 0, 127);
 
     private bool IsDirty;
     private readonly Dictionary<IFOWUnit, FOWCache> _cachedFOWUnit = new Dictionary<IFOWUnit, FOWCache>(); 
@@ -67,9 +76,45 @@ public class FogManager : Singleton<FogManager>
         if (!IsDirty) {
             return;
         }
+        //TODO:先向之前保存的点刷新成半透明,然后再将现在的点刷新成透明
+        RefreshCache();
+        RefreshCurrent();
+        //TODO:后面建筑物或者装饰需要留在RenderTexture上,可以后面加一张RenderTexture,然后用一个专门的FogCamera将场景渲染到上面,再叠加到Fog上
         //TODO:更新战争迷雾
+        FOWMaterial.SetTexture("_RenderTex", CurMapDataTexture);
     }
 
+    private void RefreshCache()
+    {
+        foreach (var fowCach in _cachedFOWUnit)
+        {
+            if (!fowCach.Value.IsDirty)
+            {
+                continue;
+            }
+
+            if (fowCach.Value.CachedVisiblePos == null)
+            {
+                continue;
+            }
+
+            foreach (var cachedPos in fowCach.Value.CachedVisiblePos)
+            {
+                FogColors[fowCach.Value.CachedIndex][ToColorIndex(cachedPos.X, cachedPos.Y)] = VisitedColor;
+            }
+        }
+    }
+
+    private void RefreshNew()
+    {
+        foreach (var fowCach in _cachedFOWUnit)
+        {
+            if (!fowCach.Value.IsDirty)
+            {
+                continue;
+            }
+        }
+    }
     public int ToColorIndex(int x, int y)
     {
         return x + y * _height;
