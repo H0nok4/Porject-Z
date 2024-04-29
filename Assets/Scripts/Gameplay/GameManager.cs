@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
         ConfigType.DataManager.Instance.InitConfigs();
         UIManager.Instance.Init();
         MapController.Instance.InitMap(GameObject.Find("Grid"));
-        Application.targetFrameRate = 60;//TODO:ÏÈÄ¬ÈÏ60Ö¡½ÚÊ¡×ÊÔ´£¬ºóÃæĞèÒª¸ã³ÉTPSÔ½¸ßFPSÔ½µÍ
+        Application.targetFrameRate = 60;//TODO:å…ˆé»˜è®¤60å¸§èŠ‚çœèµ„æºï¼Œåé¢éœ€è¦ææˆTPSè¶Šé«˜FPSè¶Šä½
     }
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
         PlayerController.Instance.ThingUnitPawnUnit = (Thing_Unit_Pawn)SpawnHelper.Spawn(DataManager.Instance.GetThingDefineByID(1), new PosNode(){Pos = new IntVec2(0,0),MapDataIndex = 0});
         UIManager.Instance.Show(DataManager.Instance.MainPanelType);
-        FogManager.Instance.Init(1);
+        FogManager.Instance.Init(1,512,512);
     }
 
     // Update is called once per frame
