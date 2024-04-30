@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using Assets.Scripts.Gameplay;
 using ConfigType;
 using UI;
 using UnityEngine;
@@ -28,14 +30,25 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.Show(DataManager.Instance.MainPanelType);
         FogManager.Instance.Init(1,512,512);
 
-        FogManager.Instance.UpdateFOWUnit(PlayerController.Instance.ThingUnitPawnUnit,0,
-            new List<IntVec2>() {
-                new IntVec2(0,0), new IntVec2(1, 0), new IntVec2(2, 0), new IntVec2(3, 0), new IntVec2(4, 0),
-                new IntVec2(0,1),new IntVec2(1,1),new IntVec2(2,1),new IntVec2(3,1),new IntVec2(4,1),
-                new IntVec2(0,2),new IntVec2(1,2),new IntVec2(2,2),new IntVec2(3,2),new IntVec2(4,2),
-                new IntVec2(0,3),new IntVec2(1,3),new IntVec2(2,3),new IntVec2(3,3),new IntVec2(4,3),
-                new IntVec2(0,4),new IntVec2(1,4),new IntVec2(2,4),new IntVec2(3,4),new IntVec2(4,4),
-            });
+        //FogManager.Instance.UpdateFOWUnit(PlayerController.Instance.ThingUnitPawnUnit,0,
+        //    new List<IntVec2>() {
+        //        new IntVec2(0,0), new IntVec2(1, 0), new IntVec2(2, 0), new IntVec2(3, 0), new IntVec2(4, 0),
+        //        new IntVec2(0,1),new IntVec2(1,1),new IntVec2(2,1),new IntVec2(3,1),new IntVec2(4,1),
+        //        new IntVec2(0,2),new IntVec2(1,2),new IntVec2(2,2),new IntVec2(3,2),new IntVec2(4,2),
+        //        new IntVec2(0,3),new IntVec2(1,3),new IntVec2(2,3),new IntVec2(3,3),new IntVec2(4,3),
+        //        new IntVec2(0,4),new IntVec2(1,4),new IntVec2(2,4),new IntVec2(3,4),new IntVec2(4,4),
+        //    });
+
+        //var vec = ;
+        //StringBuilder sb = new StringBuilder();
+        //sb.AppendLine("视野范围内的点为:");
+        //foreach (var intVec2 in vec)
+        //{
+        //    sb.Append($"{intVec2},");
+        //    DebugDrawer.DrawBox(intVec2);
+        //}
+        //Debug.LogWarning(sb);
+        
     }
 
     // Update is called once per frame

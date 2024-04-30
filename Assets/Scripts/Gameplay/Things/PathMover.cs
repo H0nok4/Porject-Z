@@ -270,6 +270,7 @@ public class PathMover {
 
         //TODO:可能从其他地图进来的
         RegisterPawn.SetPosition(node.Pos.Copy(), node.MapDataIndex);
+        RegisterPawn.UpdateFogOfWar();
 
         //TODO:更新下一格的位置，如果下一格是门之类的需要等待打开门
         CurrentMovingPath.CurMovingIndex++;

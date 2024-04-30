@@ -21,6 +21,7 @@ public class FOWCache {
             CurrentIndex = index;
             CachedVisiblePos.Clear();
             CachedVisiblePos.AddRange(CurrentVisiblePos);
+            CurrentVisiblePos.Clear();
             CurrentVisiblePos.AddRange(updatePos);
             IsDirty = true;
         }
@@ -115,11 +116,6 @@ public class FogManager : Singleton<FogManager>
     {
         foreach (var fowCach in _cachedFOWUnit)
         {
-            if (!fowCach.Value.IsDirty)
-            {
-                continue;
-            }
-
             if (fowCach.Value.CachedVisiblePos == null)
             {
                 continue;
@@ -136,10 +132,6 @@ public class FogManager : Singleton<FogManager>
     {
         foreach (var fowCach in _cachedFOWUnit)
         {
-            if (!fowCach.Value.IsDirty)
-            {
-                continue;
-            }
 
             if (fowCach.Value.CurrentVisiblePos == null) {
                 continue;
@@ -148,6 +140,8 @@ public class FogManager : Singleton<FogManager>
             foreach (var currentPos in fowCach.Value.CurrentVisiblePos) {
                 FogColors[fowCach.Value.CurrentIndex][ToColorIndex(currentPos.X, currentPos.Y)] = ShowColor;
             }
+
+            fowCach.Value.IsDirty = false;
         }
     }
     public int ToColorIndex(int x, int y)

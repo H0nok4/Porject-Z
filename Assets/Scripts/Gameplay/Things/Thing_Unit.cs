@@ -73,6 +73,8 @@ public abstract class Thing_Unit : ThingWithComponent , IThingHolder {
         NeedTracker = new ThingUnit_NeedTracker(this);
 
         GameTicker.Instance.RegisterThing(this);
+
+        UpdateFogOfWar();
     }
 
 
@@ -115,5 +117,11 @@ public abstract class Thing_Unit : ThingWithComponent , IThingHolder {
         }
 
         return this.Position.Pos.X == thing.Position.Pos.X && this.Position.Pos.Y == thing.Position.Pos.Y;
+    }
+
+    public void UpdateFogOfWar()
+    {
+        var posSet = FogOfWarUtility.GetUnitRangeVisiblePos(Position.Pos, Position.MapDataIndex, 3);
+        FogManager.Instance.UpdateFOWUnit(this,Position.MapDataIndex,posSet);
     }
 }
