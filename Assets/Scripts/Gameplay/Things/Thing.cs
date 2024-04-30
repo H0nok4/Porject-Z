@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.Rendering.DebugUI;
 
-public abstract class Thing : IThing {
+public abstract class Thing : IThing,IFOWUnit {
 
 
     public ThingDefine Def;
