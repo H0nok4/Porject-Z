@@ -18,9 +18,9 @@
 	</JobDefine>
 	<JobDefine>
 		<ID>3</ID>
-		<Name>WalkAroundJobDefine</Name>
+		<Name>MoveToJobDefine</Name>
 		<DriverClass>
-			<TypeName>JobDriver_WalkAround</TypeName>
+			<TypeName>JobDriver_MoveTo</TypeName>
 		</DriverClass>
 		<CanSuspend>true</CanSuspend>
 	</JobDefine>

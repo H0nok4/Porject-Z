@@ -117,6 +117,7 @@ public class PosNode : IComparable<PosNode> {
 
         return true;
     }
+
 }
 
 public class PathNodeComparer : IEqualityComparer<PosNode>

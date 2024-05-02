@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ConfigType;
 using UnityEngine;
 using UnityEngine.UIElements;
-
+using ThinkSystem;
 public abstract class Thing_Unit : ThingWithComponent , IThingHolder {
     private const int MaxTickPerMove = 600;
 
@@ -94,6 +94,8 @@ public abstract class Thing_Unit : ThingWithComponent , IThingHolder {
 
     public bool IsDead { get; set; }
     public bool IsDown { get; set; }
+    public bool IsColonist { get; set; }
+    public bool IsDrafted { get; set; }
 
 
     public void GetChildren(List<IThingHolder> outChildren)

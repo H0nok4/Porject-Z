@@ -7,8 +7,8 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class CameraController : Singleton<CameraController>
 {
     public Camera MainCamera => Camera.main;
-    public float maxX = 14; // 最大X范围
-    public float maxY = 9; // 最大Y范围
+    public float maxX = 512; // 最大X范围
+    public float maxY = 512; // 最大Y范围
     private float _cameraMoveSpeed = 20f; // 移动速度
     private float _zoomSpeed = 5f; // 缩放速度
     private float _panBorderThickness = 10f; // 鼠标移动到屏幕边缘的触发距离

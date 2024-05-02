@@ -8,7 +8,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject TestPawnObject;
 
     public void Init()
     {
