@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1102664190757609959}
   - component: {fileID: 1091751752582805034}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Selector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3540633571899822287}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ThingObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9120124023927928667}
   - component: {fileID: 9120124023927928666}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

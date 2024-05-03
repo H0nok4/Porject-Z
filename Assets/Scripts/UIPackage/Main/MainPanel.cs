@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ConfigType;
 using FairyGUI;
+using JetBrains.Annotations;
 using Main;
 using UI;
 using UnityEngine;
@@ -47,15 +48,15 @@ public class MainPanel : FGUIView
     private void RefreshListDesignators(IEnumerable<DesignatorDecoratorBase> designators)
     {
         _main.m_CtrlShowListCommand.SetSelectedIndex(1);
-        _main.m_ListCommand.RemoveChildrenToPool();
+        _main.m_ComDesignPanel.m_ListCommand.RemoveChildrenToPool();
         foreach (var designatorDecoratorBase in designators)
         {
-            var btnDesignType = (UI_BtnDesignatorType1)_main.m_ListCommand.AddItemFromPool();
+            var btnDesignType = (UI_BtnDesignatorType1)_main.m_ComDesignPanel.m_ListCommand.AddItemFromPool();
             btnDesignType.m_TxtName.text = designatorDecoratorBase.Name;
             btnDesignType.m_LoaderIcon.url = designatorDecoratorBase.Sprite;
             btnDesignType.onClick.Set(designatorDecoratorBase.OnClick);
         }
-        _main.m_ListCommand.ResizeToFit();
+        _main.m_ComDesignPanel.m_ListCommand.ResizeToFit();
     }
 
     private void RefreshListSelection()

@@ -20,7 +20,21 @@ public abstract class Thing_Unit : ThingWithComponent , IThingHolder {
 
     public ThingUnit_NeedTracker NeedTracker;
 
+    public ThingUnit_DraftTracker DraftTracker;
+
     public PathMover PathMover;
+
+    public bool IsDraft
+    {
+        get => DraftTracker != null && DraftTracker.IsDraft;
+        set
+        {
+            if (DraftTracker != null)
+            {
+                DraftTracker.IsDraft = value;
+            }
+        }
+    }
     public int TickPerMoveDiagonal => TicksPerMove(true);
     public int TickPerMoveCardinal => TicksPerMove(false);
     /// <summary>
@@ -71,7 +85,7 @@ public abstract class Thing_Unit : ThingWithComponent , IThingHolder {
         WorkSetting = new ThingUnit_WorkSetting(this);
         CarryTracker = new ThingUnit_CarryTracker(this);
         NeedTracker = new ThingUnit_NeedTracker(this);
-
+        DraftTracker = new ThingUnit_DraftTracker(this);
         GameTicker.Instance.RegisterThing(this);
 
         UpdateFogOfWar();

@@ -3,6 +3,7 @@ Shader "GamePlay/FogOfWarShader"
     Properties
     {
         _RenderTex ("Render Texture", 2D) = "black" {}
+        _BuildingTex ("Building Texture", 2D) = "while" {}
     }
     
     SubShader

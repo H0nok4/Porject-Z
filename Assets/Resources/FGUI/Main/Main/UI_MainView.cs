@@ -16,7 +16,6 @@ namespace Main
         public UI_ComThingDes m_ComThingDes;
         public GGraph m_DragBox;
         public UI_ComDesignPanel m_ComDesignPanel;
-        public GList m_ListCommand;
         public const string URL = "ui://0kazkhhcc0f50";
 
         public static UI_MainView CreateInstance()
@@ -37,7 +36,6 @@ namespace Main
             m_ComThingDes = (UI_ComThingDes)GetChildAt(3);
             m_DragBox = (GGraph)GetChildAt(4);
             m_ComDesignPanel = (UI_ComDesignPanel)GetChildAt(5);
-            m_ListCommand = (GList)GetChildAt(6);
         }
     }
 }

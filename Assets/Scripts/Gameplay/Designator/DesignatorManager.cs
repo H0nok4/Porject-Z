@@ -30,14 +30,6 @@ public class DesignatorManager : Singleton<DesignatorManager> {
         }
     }
 
-    //public void PlaceFrameAt(IntVec2 pos, MapData map) {
-    //    if (!CanPlace(pos, map)) {
-    //        return;
-    //    }
-
-    //    SpawnHelper.Spawn(BuildingDef, new PosNode(){Pos = pos,MapDataIndex = map.Index});
-    //}
-
     public void PlaceBlueprintAt(IntVec2 pos, MapData map)
     {
         if (!CanPlace(pos,BuildingDef, map)) {

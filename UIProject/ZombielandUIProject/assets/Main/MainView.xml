@@ -2,7 +2,7 @@
 <component size="1920,1080" opaque="false">
   <controller name="CtrlShowThingDes" pages="0,No,1,Yes" selected="1"/>
   <controller name="CtrlShowDragBox" pages="0,False,1,True" selected="0"/>
-  <controller name="CtrlShowDesignator" pages="0,No,1,Yes" selected="0"/>
+  <controller name="CtrlShowDesignator" pages="0,No,1,Yes" selected="1"/>
   <controller name="CtrlShowListCommand" pages="0,No,1,Yes" selected="0"/>
   <displayList>
     <component id="n2_f1nd" name="BtnPlaceThing" src="f1nd2" fileName="component/BtnPlaceThing.xml" xy="14,137"/>
@@ -19,15 +19,5 @@
     <component id="n12_l0ax" name="ComDesignPanel" src="l0ax7" fileName="component/ComDesignPanel.xml" xy="0,718">
       <gearDisplay controller="CtrlShowDesignator" pages="1"/>
     </component>
-    <list id="n13_l0ax" name="ListCommand" xy="200,716" pivot="0,1" size="1637,300" layout="flow_hz" margin="0,5,5,0" colGap="7" defaultItem="ui://0kazkhhcl0ax9" vAlign="bottom">
-      <gearDisplay controller="CtrlShowDesignator" pages="1"/>
-      <gearDisplay2 controller="CtrlShowListCommand" pages="1" condition="0"/>
-      <item/>
-      <item/>
-      <item/>
-      <item/>
-      <item/>
-      <item/>
-    </list>
   </displayList>
 </component>

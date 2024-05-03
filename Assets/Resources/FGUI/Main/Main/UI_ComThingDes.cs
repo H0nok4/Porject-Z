@@ -13,6 +13,7 @@ namespace Main
         public GList m_ListNeedResources;
         public GList m_ListUnitNeed;
         public GList m_ListThingBtn;
+        public GList m_ListCommand;
         public const string URL = "ui://0kazkhhcf1nd3";
 
         public static UI_ComThingDes CreateInstance()
@@ -30,6 +31,7 @@ namespace Main
             m_ListNeedResources = (GList)GetChildAt(3);
             m_ListUnitNeed = (GList)GetChildAt(4);
             m_ListThingBtn = (GList)GetChildAt(5);
+            m_ListCommand = (GList)GetChildAt(6);
         }
     }
 }

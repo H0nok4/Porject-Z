@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="372,500" pivot="0,1">
-  <controller name="CtrlThingType" pages="0,None,1,Unit,2,Blueprint,3,Frame,4,Building,5,Item" selected="1"/>
+<component size="1920,500" pivot="0,1">
+  <controller name="CtrlThingType" pages="0,None,1,Unit,2,Blueprint,3,Frame,4,Building,5,Item" selected="0"/>
   <controller name="CtrlShowDragBox" pages="0,,1," selected="0"/>
   <displayList>
     <graph id="n5_f1nd" name="n5" xy="0,52" size="372,448" type="rect">
@@ -23,5 +23,13 @@
       <item/>
     </list>
     <list id="n13_ljlr" name="ListThingBtn" xy="0,0" size="371,50" overflow="scroll"/>
+    <list id="n14_vft0" name="ListCommand" xy="372,199" pivot="0,1" size="1547,300" layout="flow_hz" margin="0,5,5,0" colGap="7" defaultItem="ui://0kazkhhcl0ax9" vAlign="bottom">
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+    </list>
   </displayList>
 </component>
