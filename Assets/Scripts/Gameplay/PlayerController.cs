@@ -10,6 +10,7 @@ using FairyGUI;
 using UI;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using static UnityEditor.PlayerSettings;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class DragBox
@@ -243,7 +244,7 @@ public class PlayerController : Singleton<PlayerController>
         {
             //TODO:
             var mousePosition = MapUtility.GetMapPosByInputMousePosition();
-            if (mousePosition != IntVec2.Invalid)
+            if (mousePosition != null)
             {
                 //TODO:有效位置
                 if (PreviewObject == null)
@@ -259,7 +260,7 @@ public class PlayerController : Singleton<PlayerController>
                 PreviewObject.Valid = BuildUtility.CanBuildAt(DesignatorManager.Instance.BuildingDef, mousePosition);
 
                 PreviewObject.SetSprite(DesignatorManager.Instance.BuildingDef.BlueprintSprite);
-                PreviewObject.transform.position = new Vector3(mousePosition.X,mousePosition.Y);
+                PreviewObject.transform.position = new Vector3(mousePosition.Pos.X,mousePosition.Pos.Y);
                 return;
             }
 
@@ -322,6 +323,19 @@ public class PlayerController : Singleton<PlayerController>
     {
         //TODO:如果当前处于建筑模式，退出建筑模式
         DesignatorManager.Instance.DesignatorType = DesignatorType.None;
+
+        if (SelectManager.Instance.SelectThingCount > 0)
+        {
+            foreach (var selectThing in SelectManager.Instance.SelectThings)
+            {
+                if (selectThing is Thing_Unit unit && unit.IsDraft)
+                {
+                    var findFirstStandPos = MapUtility.GetFirstStandablePosByPosNode(MapUtility.GetMapPosByInputMousePosition());
+                    unit.JobTracker.StartJob(JobMaker.MakeJob(DataManager.Instance.GetJobDefineByID(3),findFirstStandPos));
+                }
+            }
+        }
+
         //else
         //{
         //    //按下右键测试寻路

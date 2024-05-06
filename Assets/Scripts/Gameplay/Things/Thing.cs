@@ -9,7 +9,12 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.Rendering.DebugUI;
 
-public abstract class Thing : IThing,IFOWUnit {
+public interface ISelectable
+{
+    public IEnumerable<CommandBase> GetCommands();
+}
+
+public abstract class Thing : IThing,IFOWUnit,ISelectable {
 
 
     public ThingDefine Def;
@@ -76,7 +81,7 @@ public abstract class Thing : IThing,IFOWUnit {
         }
         else
         {
-            _position = new PosNode() { Pos = pos, MapDataIndex = mapDataIndex };
+            _position = new PosNode(pos, mapDataIndex);
         }
 
         if (Spawned)
@@ -290,10 +295,10 @@ public abstract class Thing : IThing,IFOWUnit {
         }
 
         //TODO:如果当前选中了该物体
-        if (SelectThingManager.Instance.IsSelected(this))
+        if (SelectManager.Instance.IsSelected(this))
         {
             //TODO:取消选中
-            SelectThingManager.Instance.DeSelecte(this);
+            SelectManager.Instance.RemoveSelectThing(this);
         }
 
         GameTicker.Instance.UnRegisterThing(this);
@@ -451,5 +456,8 @@ public abstract class Thing : IThing,IFOWUnit {
     }
 
 
-
+    public virtual IEnumerable<CommandBase> GetCommands()
+    {
+        yield break;
+    }
 }

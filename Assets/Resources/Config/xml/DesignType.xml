@@ -4,4 +4,8 @@
 		<ID>1</ID>
 		<Name>建造</Name>
 	</DesignTypeDefine>
+	<DesignTypeDefine>
+		<ID>2</ID>
+		<Name>征召</Name>
+	</DesignTypeDefine>
 </ArrayOfDesignTypeDefine>

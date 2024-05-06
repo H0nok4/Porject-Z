@@ -47,11 +47,11 @@ public class Section
     public PosNode CreatePathNode(bool findPath = true)
     {
         if (findPath) {
-            return new PosNode() { Pos = Position.Copy(), MapDataIndex = MapIndex };
+            return new PosNode(Position.Copy(), MapIndex);
         }
 
         if (PosNodeInstance == null) {
-            PosNodeInstance = new PosNode() {Pos = Position.Copy(), MapDataIndex = MapIndex};
+            PosNodeInstance = new PosNode(Position.Copy(), MapIndex);
         }
 
         return PosNodeInstance;

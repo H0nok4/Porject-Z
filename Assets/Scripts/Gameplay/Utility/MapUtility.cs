@@ -9,21 +9,21 @@ using UnityEngine;
 
 public static class MapUtility {
     
-    public static IntVec2 GetMapPosByInputMousePosition()
+    public static PosNode GetMapPosByInputMousePosition()
     {
         var mousePosToWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var currentMap = MapController.Instance.Map.CurrentActiveMap;
         if (mousePosToWorld.x < 0 || mousePosToWorld.x >= currentMap.Width)
         {
-            return IntVec2.Invalid;
+            return null;
         }
 
         if (mousePosToWorld.y < 0 || mousePosToWorld.y >= currentMap.Height)
         {
-            return IntVec2.Invalid;
+            return null;
         }
 
-        return new IntVec2(Mathf.FloorToInt(mousePosToWorld.x), Mathf.FloorToInt(mousePosToWorld.y));
+        return new PosNode(new IntVec2(Mathf.FloorToInt(mousePosToWorld.x), Mathf.FloorToInt(mousePosToWorld.y)),currentMap.Index);
     }
 
     public static PosNode GetFirstStandablePosByPosNode(PosNode startPos)

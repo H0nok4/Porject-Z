@@ -5,6 +5,8 @@ using UnityEngine;
 public class SelectManager : Singleton<SelectManager> {
     public readonly List<Thing> SelectThings = new List<Thing>();
 
+    public int SelectThingCount => SelectThings.Count;
+
     public void ClearSelectThings() {
         foreach (var selectThing in SelectThings)
         {
@@ -43,5 +45,18 @@ public class SelectManager : Singleton<SelectManager> {
     public void AddSelectThings(Thing thing) {
         SelectThings.Add(thing);
         thing.GameObject.Select();
+    }
+
+    public void RemoveSelectThing(Thing thing)
+    {
+        if(!IsSelected(thing))
+            return;
+
+        SelectThings.Remove(thing);
+    }
+
+    public bool IsSelected(Thing thing)
+    {
+        return SelectThings.Contains(thing);
     }
 }

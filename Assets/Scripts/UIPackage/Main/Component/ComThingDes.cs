@@ -1,7 +1,9 @@
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
 
+using System.Collections.Generic;
 using FairyGUI;
 using FairyGUI.Utils;
+using UnityEngine;
 
 namespace Main {
     public partial class UI_ComThingDes : GComponent {
@@ -45,7 +47,27 @@ namespace Main {
                 comNeed.Refresh(thing.NeedTracker.Needs[i]);
             }
 
+            var commands = ThingCommandUtility.CreateCommandsByThings(thing);
+            m_ListCommand.RemoveChildrenToPool();
+            foreach (var thingUiCommand in commands)
+            {
+                //TODO:通过command创建一个UI
+                var commandSlot = thingUiCommand.GetUIComponent(m_ListCommand);
+                commandSlot.Refresh(thingUiCommand);
+            }
         }
+
+        //public GObject GetUIByCommand(GList list,CommandBase commandBase)
+        //{
+        //    if (commandBase is Command_Toggle)
+        //    {
+        //        return list.AddItemFromPool(UI_BtnDesignatorType1.URL);
+        //    }
+
+
+        //    Debug.LogError($"意料之外的Command类型,CommandType={commandBase.GetType()}");
+        //    return null;
+        //}
 
         public void RefreshAsItem(Thing thing)
         {

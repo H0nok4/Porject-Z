@@ -10,6 +10,7 @@
             var colonistNode = new ThinkNode_ConditionColonist();
             var draftNode = new ThinkNode_ConditionDraft();
             draftNode.Children.Add(new JobGiver_GoToStandablePos());
+            draftNode.Children.Add(new JobGiver_WaitForCombat());
             colonistNode.Children.Add(draftNode);
             //TODO:征兆的默认只会站在原地等人战斗
             Root.Children.Add(colonistNode);

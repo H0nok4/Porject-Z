@@ -30,6 +30,18 @@ public class PosNode : IComparable<PosNode> {
         }
     }
 
+    public PosNode()
+    {
+
+    }
+
+
+    public PosNode(IntVec2 pos, int mapIndex)
+    {
+        Pos = pos;
+        MapDataIndex = mapIndex;
+    }
+
     public MapData MapData => MapController.Instance.Map.GetMapDataByIndex(MapDataIndex);
 
     public bool IsSameNode(PosNode other)
@@ -95,7 +107,7 @@ public class PosNode : IComparable<PosNode> {
 
     public PosNode DeepCopy()
     {
-        return new PosNode() { Pos = this.Pos.Copy(), MapDataIndex = MapDataIndex };
+        return new PosNode(Pos.Copy(), MapDataIndex) { };
     }
 
     public bool Standable()

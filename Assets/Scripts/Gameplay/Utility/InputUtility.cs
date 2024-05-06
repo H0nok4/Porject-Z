@@ -20,4 +20,5 @@ public static class InputUtility {
     {
         return Input.GetAxis("Mouse ScrollWheel");
     }
+
 }

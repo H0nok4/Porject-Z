@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 
 public class ThingUnit_DraftTracker
@@ -12,7 +13,11 @@ public class ThingUnit_DraftTracker
     private bool _isDraft;
     public bool IsDraft {
         get => _isDraft;
-        set => _isDraft = value;
+        set
+        {
+            _isDraft = value;
+            Debug.Log("单位被征召");
+        }
     }
 
     public ThingUnit_DraftTracker(Thing_Unit unit)

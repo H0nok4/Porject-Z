@@ -23,9 +23,10 @@ public class GameManager : MonoBehaviour
     {
         Init();
 
-        PlayerController.Instance.ThingUnitPawnUnit2 = (Thing_Unit_Pawn)SpawnHelper.Spawn(DataManager.Instance.GetThingDefineByID(1), new PosNode() { Pos = new IntVec2(0, 1), MapDataIndex = 0 });
-
-        PlayerController.Instance.ThingUnitPawnUnit = (Thing_Unit_Pawn)SpawnHelper.Spawn(DataManager.Instance.GetThingDefineByID(1), new PosNode(){Pos = new IntVec2(0,0),MapDataIndex = 0});
+        PlayerController.Instance.ThingUnitPawnUnit2 = (Thing_Unit_Pawn)SpawnHelper.Spawn(DataManager.Instance.GetThingDefineByID(1), new PosNode(new IntVec2(0, 1), 0) { });
+        PlayerController.Instance.ThingUnitPawnUnit2.IsColonist = true;
+        PlayerController.Instance.ThingUnitPawnUnit = (Thing_Unit_Pawn)SpawnHelper.Spawn(DataManager.Instance.GetThingDefineByID(1), new PosNode(new IntVec2(0, 0), 0) { });
+        PlayerController.Instance.ThingUnitPawnUnit.IsColonist = true;
         UIManager.Instance.Show(DataManager.Instance.MainPanelType);
         FogManager.Instance.Init(1,512,512);
 

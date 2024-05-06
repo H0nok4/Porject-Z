@@ -14,16 +14,16 @@ public static class BuildUtility
         return true;
     }
 
-    public static bool CanBuildAt(ThingDefine def,IntVec2 pos)
+    public static bool CanBuildAt(ThingDefine def,PosNode pos)
     {
-        foreach (var thing in MapController.Instance.Map.CurrentActiveMap.ThingMap.ThingsAt(pos))
+        foreach (var thing in MapController.Instance.Map.CurrentActiveMap.ThingMap.ThingsAt(pos.Pos))
         {
             //TODO:测试,如果thing不为空就不能建造
             if (thing != null)
                 return false;
         }
 
-        if (!MapController.Instance.Map.CurrentActiveMap.GetSectionByPosition(pos).Walkable)
+        if (!MapController.Instance.Map.CurrentActiveMap.GetSectionByPosition(pos.Pos).Walkable)
             return false;
 
         return true;
