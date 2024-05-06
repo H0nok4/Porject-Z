@@ -331,6 +331,7 @@ public class PlayerController : Singleton<PlayerController>
                 if (selectThing is Thing_Unit unit && unit.IsDraft)
                 {
                     var findFirstStandPos = MapUtility.GetFirstStandablePosByPosNode(MapUtility.GetMapPosByInputMousePosition());
+                    unit.JobTracker.CleanCurrentJob();
                     unit.JobTracker.StartJob(JobMaker.MakeJob(DataManager.Instance.GetJobDefineByID(3),findFirstStandPos));
                 }
             }
