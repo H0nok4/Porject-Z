@@ -13,7 +13,7 @@ public class JobDriver_MoveTo : JobDriver  {
         var endWork = WorkMaker.MakeWork();
         endWork.InitAction = delegate
         {
-            Debug.Log("移动结束叻");
+            //Debug.Log("移动结束叻");
         };
         endWork.CompleteMode = WorkCompleteMode.Instant;
         yield return endWork;
@@ -23,7 +23,7 @@ public class JobDriver_MoveTo : JobDriver  {
 
         //TODO:将目标点加入到预定中
         if (ReservationManager.Instance.Reserve(Unit,Job,Job.InfoA)) {
-            Debug.Log("工作-成功加入目标点到预订列表中");
+            //Debug.Log("工作-成功加入目标点到预订列表中");
             return true;
         }
 

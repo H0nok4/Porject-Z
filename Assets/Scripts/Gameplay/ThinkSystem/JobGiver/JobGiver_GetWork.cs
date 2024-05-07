@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -45,7 +45,7 @@ namespace ThinkSystem
                 }
             }
 
-            Debug.LogError("没有扫描到可以用的工作");
+            //Debug.LogError("没有扫描到可以用的工作");
 
             return ThinkResult.NoJob;
         }

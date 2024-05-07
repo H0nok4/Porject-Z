@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +15,7 @@ class JobDriver_Blankly : JobDriver{
         var work = WorkMaker.MakeWork();
         work.InitAction = delegate
         {
-            Debug.Log("没什么事干，开始发呆");
+            //Debug.Log("没什么事干，开始发呆");
         };
         work.CompleteMode = WorkCompleteMode.Delay;
         work.NeedWaitingTick = 300;
@@ -23,7 +23,7 @@ class JobDriver_Blankly : JobDriver{
         var finishWork = WorkMaker.MakeWork();
         finishWork.InitAction = delegate
         {
-            Debug.Log("发呆结束了");
+            //Debug.Log("发呆结束了");
         };
         finishWork.CompleteMode = WorkCompleteMode.Instant;
         yield return finishWork;

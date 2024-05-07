@@ -12,7 +12,7 @@ public static class WorkUtility_MoveTo {
         Work moveWork = WorkMaker.MakeWork();
         moveWork.InitAction = delegate {
             var pawn = moveWork.Unit;
-            Debug.Log($"开始行走，目标点为:{pawn.JobTracker.Job.InfoA.Position}");
+            //Debug.Log($"开始行走，目标点为:{pawn.JobTracker.Job.InfoA.Position.Pos}");
             //pawn.PathMover.CurrentMovingPath = new PawnPath() { FindingPath = PathFinder.AStarFindPath(pawn, pawn.JobTracker.Job.InfoA.Section.CreatePathNode()), Using = true }; 
             pawn.PathMover.SetMoveTarget(pawn.JobTracker.Job.GetTarget(targetIndex).Position, endType);
         };

@@ -75,10 +75,10 @@ public class PathMover {
         }
         set
         {
-            Debug.Log($"设置当前的目标,目标是否为Null={value == null}");
+            //Debug.Log($"设置当前的目标,目标是否为Null={value == null}");
             if (value is { IsTrackThing: true })
             {
-                Debug.Log("当前目标的名称为:" + value.ThingTarget.Def.Name);
+                //Debug.Log("当前目标的名称为:" + value.ThingTarget.Def.Name);
             }
             m_targetInfo = value;
         }
@@ -198,7 +198,10 @@ public class PathMover {
         //TODO:
         if (IsMoving) {
             //TODO:下个移动点还是保持不变,所以时间也不需要变
-            path.FindingPath.Insert(0, CurrentMovingPath.GetCurrentPosition());
+            if (!path.FindingPath[0].IsSameNode(CurrentMovingPath.GetCurrentPosition())) {
+                path.FindingPath.Insert(0, CurrentMovingPath.GetCurrentPosition());
+            }
+
             CurrentMovingPath = path;
         }
 
@@ -213,7 +216,7 @@ public class PathMover {
         //TODO:更新下一个位置，到下一个位置的总时间
         var nextPos = path.GetCurrentPosition();
         MoveToNextPosTickTotal = CalculateCostToNextPosition(nextPos.Pos);
-        MoveToNextPosTickLeft = MoveToNextPosTickTotal;
+        MoveToNextPosTickLeft = MoveToNextPosTickLeft <= 0 ? MoveToNextPosTickTotal : MoveToNextPosTickLeft;
         //Debug.Log($"当前MoveTick需要：{MoveToNextPosTickTotal}");
 
         IsMoving = true;
@@ -283,7 +286,7 @@ public class PathMover {
         {
             MoveToNextPosTickTotal = CalculateCostToNextPosition(CurrentMovingPath.GetCurrentPosition().Pos);
             MoveToNextPosTickLeft = MoveToNextPosTickTotal;
-            Debug.Log($"当前MoveTick需要：{MoveToNextPosTickTotal}");
+            //Debug.Log($"当前MoveTick需要：{MoveToNextPosTickTotal}");
         }
     }
 }

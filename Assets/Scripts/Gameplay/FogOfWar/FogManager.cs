@@ -109,7 +109,7 @@ public class FogManager : Singleton<FogManager>
 
         Graphics.Blit(CurTextureBuffer,CurMapDataTexture);
         FOWMaterial.SetTexture("_RenderTex",CurMapDataTexture);
-        Debug.Log("刷新Texture");
+        //Debug.Log("刷新Texture");
     }
 
     private void RefreshCache()

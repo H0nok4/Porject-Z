@@ -204,7 +204,15 @@ public static class PathFinder {
                 path.Add(node);
                 node = node.Parent;
             }
-            Debug.Log($"创建一个寻路路径，长度为：{path.Count}");
+#if UNITY_EDITOR
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"创建一个寻路路径，长度为：{path.Count},路径点为:");
+            foreach (var posNode in path) {
+                sb.Append($",{posNode.Pos}");
+            }
+            Debug.Log(sb);
+#endif
+
             //因为是从终点开始加的，所以倒过来，后面需要用其他的数据结构优化一下
             path.Reverse();
         }
