@@ -44,10 +44,14 @@ public class Section
 
     private PosNode PosNodeInstance;
 
-    public PosNode CreatePathNode(bool findPath = true)
+    public PosNode CreatePathNode(bool findPath = false)
     {
         if (findPath) {
-            return new PosNode(Position.Copy(), MapIndex);
+            var node = SimplePool<PosNode>.Get();
+            node.Clear();
+            node.Pos = Position.Copy();
+            node.MapDataIndex = MapIndex;
+            return node;
         }
 
         if (PosNodeInstance == null) {
@@ -55,5 +59,13 @@ public class Section
         }
 
         return PosNodeInstance;
+    }
+
+    public PathFindNode CreatePathFindNode() {
+        var node = SimplePool<PathFindNode>.Get();
+        node.Clear();
+        node.Pos = Position;
+        node.MapDataIndex = MapIndex;
+        return node;
     }
 }

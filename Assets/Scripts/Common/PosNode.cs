@@ -42,6 +42,15 @@ public class PosNode : IComparable<PosNode> {
         MapDataIndex = mapIndex;
     }
 
+    public void Clear() {
+        IsStartPoint = false;
+        IsEndPoint = false;
+        Parent = null;
+        Length = 0;
+        curCost = 0;
+        targetCost = 0;
+    }
+
     public MapData MapData => MapController.Instance.Map.GetMapDataByIndex(MapDataIndex);
 
     public bool IsSameNode(PosNode other)

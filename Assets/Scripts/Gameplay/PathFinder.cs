@@ -45,6 +45,7 @@ public static class PathFinder {
     public static readonly List<IntVec2> DirVecList = new List<IntVec2>()
         { IntVec2.North,IntVec2.NorthEast, IntVec2.East,IntVec2.EastSouth, IntVec2.South,IntVec2.SouthWest, IntVec2.West ,IntVec2.WestNorth};
 
+    public static PathFindNodeComparer PathFindNodeComparer = new PathFindNodeComparer();
     /// <summary>
     /// 真正的寻路方法
     /// </summary>
@@ -81,17 +82,22 @@ public static class PathFinder {
             }
         }
 
-        var openList = SimplePool<PriorityQueue<PosNode>>.Get();
+        var openList = SimplePool<PriorityQueue<PathFindNode>>.Get();
+        while (openList.Count > 0) {
+            var clearNode = openList.Dequeue();
+            SimplePool<PathFindNode>.Return(clearNode);
+        }
         openList.Clear();
-        var closeList = new HashSet<PosNode>(new PathNodeComparer());
+        var closeList = SimplePool<HashSet<PathFindNode>>.FreeItemsCount > 0 ? SimplePool<HashSet<PathFindNode>>.Get() : new HashSet<PathFindNode>(new PathFindNodeComparer());
         closeList.Clear();
-        
-        openList.Enqueue(startPos);
+
+        var startPathNode = new PathFindNode(startPos.Pos, startPos.MapDataIndex);
+        openList.Enqueue(startPathNode);
 
         while (openList.Count > 0)
         {
             var node = openList.Dequeue();
-            //将附近的格子加入到队列中
+            //将附近的格子加入到队列中wa
             var mapData = map.GetMapDataByIndex(node.MapDataIndex);
 
             foreach (var dir in DirVecList) {
@@ -111,8 +117,9 @@ public static class PathFinder {
 
 
 
-                    var newNode = section.CreatePathNode();
-                    if (closeList.Contains(newNode)) {
+                    var newNode = section.CreatePathFindNode();
+                    if (closeList.Contains(newNode, PathFindNodeComparer)) {
+                        SimplePool<PathFindNode>.Return(newNode);
                         continue;
                     }
 
@@ -131,6 +138,8 @@ public static class PathFinder {
                         }
                         //直接从当前位置创建一个路径
                         CreateResultPath(result, node);
+                        ClearOpenList(openList);
+                        ClearCloseSet(closeList);
                         return result;
                     }
 
@@ -154,6 +163,8 @@ public static class PathFinder {
                         if (endType == PathMoveEndType.InCell) {
                             //从这个Node的Parent开始找到一条路径到起始点
                             CreateResultPath(result, newNode);
+                            ClearOpenList(openList);
+                            ClearCloseSet(closeList);
                             return result;
                         }
                     }
@@ -194,14 +205,16 @@ public static class PathFinder {
         //找遍了地图没有找到终点，可能没有路径能够到达
         Debug.LogError("没有对应的路径到达目标点");
 
+        ClearOpenList(openList);
+        ClearCloseSet(closeList);
         return result;
 
-        void CreateResultPath(List<PosNode> path,PosNode end)
+        void CreateResultPath(List<PosNode> path,PathFindNode end)
         {
             var node = end;
             while (node.Parent != null)
             {
-                path.Add(node);
+                path.Add(new PosNode(node.Pos,node.MapDataIndex));
                 node = node.Parent;
             }
 #if UNITY_EDITOR
@@ -217,7 +230,7 @@ public static class PathFinder {
             path.Reverse();
         }
 
-        int GetTargetCost(PosNode node,PosNode endNode)
+        int GetTargetCost(PathFindNode node, PosNode endNode)
         {
             //计算到目标点的消耗
             //如果是同一个地图，计算距离，如果非同一个地图，需要根据地图的层级差距来增加权重
@@ -234,6 +247,24 @@ public static class PathFinder {
 
     }
 
+    private static void ClearCloseSet(HashSet<PathFindNode> set) {
+        Debug.Log($"当前准备回收:{set.Count}个PosNode,引用池中总共有:{SimplePool<PathFindNode>.FreeItemsCount}个PosNode");
+        foreach (var posNode in set) {
+            SimplePool<PathFindNode>.Return(posNode);
+        }
+        set.Clear();
+        SimplePool<HashSet<PathFindNode>>.Return(set);
+    }
+
+    private static void ClearOpenList(PriorityQueue<PathFindNode> openList) {
+        Debug.Log($"当前准备回收:{openList.Count}个PosNode,引用池中总共有:{SimplePool<PathFindNode>.FreeItemsCount}个PosNode");
+        while (openList.Count > 0) {
+            SimplePool<PathFindNode>.Return(openList.Dequeue());
+        }
+        openList.Clear();
+        SimplePool<PriorityQueue<PathFindNode>>.Return(openList);
+    }
+
     public static readonly Dictionary<IntVec2, IntVec2[]> IsDirWillTripByThing = new Dictionary<IntVec2, IntVec2[]>()
     {
         { IntVec2.EastSouth, new IntVec2[] { IntVec2.East, IntVec2.South } },
@@ -242,7 +273,7 @@ public static class PathFinder {
         { IntVec2.WestNorth, new IntVec2[] { IntVec2.West, IntVec2.North } }
     };
 
-    private static bool IsTripByImpassableThing(IntVec2 dir, PosNode startPos)
+    private static bool IsTripByImpassableThing(IntVec2 dir, PathFindNode startPos)
     {
 
 
@@ -292,7 +323,7 @@ public static class PathFinder {
 
     }
 
-    private static int CalculateNodeCurCost(PosNode node, PosNode newNode)
+    private static int CalculateNodeCurCost(PathFindNode node, PathFindNode newNode)
     {
         //TODO:后面需要根据位置移动的CostTick值来算Cost
         float costBase = 5;
@@ -304,7 +335,7 @@ public static class PathFinder {
         return Mathf.FloorToInt(node.curCost + costBase);
     }
 
-    private static bool IsDiagonal(PosNode node, PosNode newNode)
+    private static bool IsDiagonal(PathFindNode node, PathFindNode newNode)
     {
         return node.Pos.X != newNode.Pos.X && node.Pos.Y != newNode.Pos.Y;
     }
@@ -314,7 +345,9 @@ public static class PathFinder {
         var result = new List<PosNode>();
         var startPos = unit.MapData.GetSectionByPos(unit.Position.Pos);
         var queue = new Queue<PosNode>();
-        queue.Enqueue(startPos.CreatePathNode());
+        var startNode = startPos.CreatePathNode(true);
+        startNode.Length = 0;
+        queue.Enqueue(startNode);
         var closeList = new HashSet<PosNode>(new PathNodeComparer());
         closeList.Clear();
         while (queue.Count > 0)
@@ -329,15 +362,17 @@ public static class PathFinder {
                         //必须要可以走的
                         continue;
                     }
-                    var newNode = section.CreatePathNode();
+                    var newNode = section.CreatePathNode(true);
                     if (closeList.Contains(newNode))
                     {
+                        SimplePool<PosNode>.Return(newNode);
                         continue;
                     }
                     
                     newNode.Length = curNode.Length + 1;
                     if (newNode.Length > maxLength)
                     {
+                        SimplePool<PosNode>.Return(newNode);
                         continue;
                     }
 
