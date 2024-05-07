@@ -234,15 +234,16 @@ public static class PathFinder {
         {
             //计算到目标点的消耗
             //如果是同一个地图，计算距离，如果非同一个地图，需要根据地图的层级差距来增加权重
-            var deltaX = endNode.Pos.X - node.Pos.X;
-            var deltaY = endNode.Pos.Y - node.Pos.Y;
-            var distance = (int)Math.Sqrt((deltaX * deltaX) + (deltaY * deltaY));
+            var deltaX = Math.Abs(endNode.Pos.X - node.Pos.X);
+            var deltaY = Math.Abs(endNode.Pos.Y - node.Pos.Y);
+            var distance = (deltaX + deltaY);
+            var costBase = 10;
             if (node.MapDataIndex == endNode.MapDataIndex)
             {
-                return distance;
+                return distance * costBase;
             }
 
-            return distance + (Math.Abs(endNode.MapDataIndex - node.MapDataIndex) * 20);//TODO:后面需要改成如果不在同一个平面上，需要对当前层向下或者向上的楼梯类位置加权移动
+            return (distance * costBase) + (Math.Abs(endNode.MapDataIndex - node.MapDataIndex) * 20);//TODO:后面需要改成如果不在同一个平面上，需要对当前层向下或者向上的楼梯类位置加权移动
         }
 
     }
