@@ -153,7 +153,7 @@ public abstract class Thing_Unit : ThingWithComponent , IThingHolder {
         if (IsColonist)
         {
             //TODO:返回征兆
-            var draftCommand = new Command_Toggle(2, (isActive) => IsDraft = isActive);
+            var draftCommand = new Command_Toggle(2, (isActive) => IsDraft = isActive,IsDraft);
             yield return draftCommand;
         }
 

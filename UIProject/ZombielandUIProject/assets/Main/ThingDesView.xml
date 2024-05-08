@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1920,1080" pivot="0,1" opaque="false">
+  <controller name="CtrlThingType" pages="0,None,1,Unit,2,Blueprint,3,Frame,4,Building,5,Item" selected="5"/>
+  <displayList>
+    <graph id="n5_f1nd" name="n5" xy="0,580" size="372,448" type="rect">
+      <relation target="" sidePair="bottom-bottom"/>
+    </graph>
+    <text id="n6_f1nd" name="TxtName" xy="2,582" size="225,54" fontSize="40" autoSize="shrink" text="ThingName">
+      <relation target="n5_f1nd" sidePair="top-top"/>
+    </text>
+    <text id="n9_mk93" name="n9" xy="-1,639" size="125,39" fontSize="28" autoSize="none" text="所需材料:">
+      <gearDisplay controller="CtrlThingType" pages="2,3"/>
+    </text>
+    <list id="n11_mk93" name="ListNeedResources" xy="-1,679" size="370,168" layout="flow_hz" overflow="scroll" defaultItem="ui://0kazkhhcmk936">
+      <gearDisplay controller="CtrlThingType" pages="2,3"/>
+    </list>
+    <list id="n12_ljlr" name="ListUnitNeed" xy="3,642" size="364,50" layout="flow_hz" defaultItem="ui://0kazkhhcnrf9c">
+      <gearDisplay controller="CtrlThingType" pages="1"/>
+      <relation target="n6_f1nd" sidePair="top-bottom"/>
+      <item/>
+      <item/>
+      <item/>
+    </list>
+    <list id="n13_ljlr" name="ListThingBtn" xy="1,529" size="371,50" overflow="scroll"/>
+    <list id="n14_vft0" name="ListCommand" xy="372,726" pivot="0,1" size="1547,300" layout="flow_hz" margin="0,5,5,0" colGap="7" defaultItem="ui://0kazkhhcl0ax9" vAlign="bottom">
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+    </list>
+  </displayList>
+</component>

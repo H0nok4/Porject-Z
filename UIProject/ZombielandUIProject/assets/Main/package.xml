@@ -4,15 +4,16 @@
     <component id="c0f50" name="MainView.xml" path="/" exported="true"/>
     <component id="f1nd1" name="BtnBuildWall.xml" path="/component/" exported="true"/>
     <component id="f1nd2" name="BtnPlaceThing.xml" path="/component/" exported="true"/>
-    <component id="f1nd3" name="ComThingDes.xml" path="/component/" exported="true"/>
+    <component id="f1nd3" name="ThingDesView.xml" path="/" exported="true"/>
     <component id="mk935" name="BtnThingBag.xml" path="/component/" exported="true"/>
     <component id="mk936" name="ComBuildNeedResource.xml" path="/component/" exported="true"/>
-    <component id="l0ax7" name="ComDesignPanel.xml" path="/component/" exported="true"/>
+    <component id="l0ax7" name="DesignView.xml" path="/" exported="true"/>
     <component id="l0ax8" name="ComDesignatorType.xml" path="/component/" exported="true"/>
     <component id="l0ax9" name="BtnDesignatorType1.xml" path="/component/"/>
     <component id="l0axa" name="BtnBuildingCommand.xml" path="/component/" exported="true"/>
     <component id="nrf9b" name="BarNeed.xml" path="/component/"/>
     <component id="nrf9c" name="ComNeed.xml" path="/component/" exported="true"/>
+    <component id="ipbld" name="ComDesignTypePanel.xml" path="/component/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

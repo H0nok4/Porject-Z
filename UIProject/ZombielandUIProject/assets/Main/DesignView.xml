@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1920,1080" pivot="0,1" opaque="false">
+  <controller name="CtrlShowListCommand" pages="0,No,1,Yes" selected="0"/>
+  <displayList>
+    <component id="n12_l0ax" name="n12" src="ipbld" fileName="ComDesignTypePanel.xml" xy="-1,776"/>
+    <list id="n13_vft0" name="ListCommand" xy="200,777" pivot="0,1" size="1717,300" layout="flow_hz" margin="0,5,5,0" colGap="7" defaultItem="ui://0kazkhhcl0ax9" vAlign="bottom">
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+    </list>
+  </displayList>
+</component>

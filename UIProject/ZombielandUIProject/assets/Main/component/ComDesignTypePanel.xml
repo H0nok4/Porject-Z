@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="201,304">
+  <displayList>
+    <graph id="n12_l0ax" name="n12" xy="1,0" size="200,304" type="rect">
+      <relation target="" sidePair="height-height"/>
+    </graph>
+    <list id="n11_l0ax" name="ListType" xy="0,0" size="200,300" layout="flow_hz" overflow="scroll" scroll="horizontal" defaultItem="ui://0kazkhhcl0ax8">
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+    </list>
+  </displayList>
+</component>

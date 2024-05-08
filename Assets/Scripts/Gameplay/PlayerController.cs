@@ -298,6 +298,9 @@ public class PlayerController : Singleton<PlayerController>
         else {
             //TODO：点击的话，看看该位置是否有可以点击的物体，然后选中其中一个刷新到UI上
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (!(mousePosition.x > 0 && mousePosition.y > 0 && mousePosition.x < MapController.Instance.Map.CurrentActiveMap.Width && mousePosition.y < MapController.Instance.Map.CurrentActiveMap.Height)) {
+                return;
+            }
             Vector3Int cellPosition = MapController.Instance.Map.GetMapDataByIndex(0).TileMapObject.WorldToCell(mousePosition);
             var things = MapController.Instance.Map.GetMapDataByIndex(0).ThingMap
                 .ThingsListAt(new IntVec2(cellPosition.x, cellPosition.y));

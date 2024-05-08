@@ -51,10 +51,11 @@ namespace Main {
             m_ListCommand.RemoveChildrenToPool();
             foreach (var thingUiCommand in commands)
             {
-                //TODO:通过command创建一个UI
+                //TODO:閫氳繃command鍒涘缓涓�涓猆I
                 var commandSlot = thingUiCommand.GetUIComponent(m_ListCommand);
                 commandSlot.Refresh(thingUiCommand);
             }
+            m_ListCommand.ResizeToFit();
         }
 
         //public GObject GetUIByCommand(GList list,CommandBase commandBase)
@@ -65,7 +66,7 @@ namespace Main {
         //    }
 
 
-        //    Debug.LogError($"意料之外的Command类型,CommandType={commandBase.GetType()}");
+        //    Debug.LogError($"鎰忔枡涔嬪鐨凜ommand绫诲瀷,CommandType={commandBase.GetType()}");
         //    return null;
         //}
 
