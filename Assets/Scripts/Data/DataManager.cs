@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mono.Cecil;
+using UI;
 using UnityEditor.Rendering;
 using UnityEngine;
 
@@ -49,13 +50,12 @@ namespace ConfigType
             }
         }
 
-        private MainPanel _mainPanel;
 
         public Type MainPanelType => typeof(MainPanel);
 
-        public void Init() {
+        public Type ThingDesViewType => typeof(ThingDesView);
 
-        }
+        public Type DesignViewType => typeof(DesignView);
 
         public Sprite GetSpriteByPath(string path)
         {

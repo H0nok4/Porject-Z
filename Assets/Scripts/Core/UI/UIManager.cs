@@ -50,6 +50,16 @@ namespace UI
             //panelObject.Rect.localPosition = Vector3.zero;
         }
 
+        public void Close(Type uiPanelType)
+        {
+            var ui = UIStack.Find((view) => view.GetType() == uiPanelType);
+            if (ui == null)
+                return;
+            //TODO:后面还需要改造成关闭后显示出其他界面的时候需要一个事件
+            CloseUI(ui);
+
+        }
+
         public void Update()
         {
             foreach (var viewBase in UIStack)
@@ -99,10 +109,6 @@ namespace UI
 
             return null;
         }
-
-        //public T Find<T>() where T : FGUIView {
-
-        //}
 
     }
 

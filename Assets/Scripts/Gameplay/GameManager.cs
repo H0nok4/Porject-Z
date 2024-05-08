@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
 
     public void Init()
     {
-        DataManager.Instance.Init();
         UIPackageManager.FGUIBindAll();
         ConfigType.DataManager.Instance.InitConfigs();
         UIManager.Instance.Init();

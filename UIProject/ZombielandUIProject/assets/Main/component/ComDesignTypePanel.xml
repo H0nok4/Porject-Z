@@ -5,6 +5,7 @@
       <relation target="" sidePair="height-height"/>
     </graph>
     <list id="n11_l0ax" name="ListType" xy="0,0" size="200,300" layout="flow_hz" overflow="scroll" scroll="horizontal" defaultItem="ui://0kazkhhcl0ax8">
+      <relation target="" sidePair="top-top"/>
       <item/>
       <item/>
       <item/>
@@ -12,4 +13,5 @@
       <item/>
     </list>
   </displayList>
+  <relation target="n11_l0ax" sidePair="height-height"/>
 </component>

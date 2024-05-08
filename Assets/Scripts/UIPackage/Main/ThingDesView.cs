@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace UI
 {
+    [View("Main", "ThingDesView")]
     public class ThingDesView : FGUIView
     {
         public UI_ThingDesView _main;

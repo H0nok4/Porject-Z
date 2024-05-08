@@ -13,7 +13,7 @@ namespace UI
     public class MainPanel : FGUIView {
         public UI_MainView _main;
 
-        public readonly List<DesignTypeBase> MainDesignList = new List<DesignTypeBase>() { new Design_Building() };
+
 
         public Thing TrackedThing =>
             SelectManager.Instance.SelectThings.Count > 0 ? SelectManager.Instance.SelectThings[0] : null;
@@ -25,7 +25,7 @@ namespace UI
         }
 
         public void HideAllPanel() {
-
+            UIManager.Instance.Close(typeof(DesignView));
         }
 
         private void RefreshDesignPanel() {
@@ -39,18 +39,7 @@ namespace UI
             //_main.m_ComDesignPanel.m_ListType.ResizeToFit();
         }
 
-        private void RefreshListDesignators(IEnumerable<DesignatorDecoratorBase> designators) {
-            //_main.m_CtrlShowListCommand.SetSelectedIndex(1);
-            //_main.m_ComDesignPanel.m_ListCommand.RemoveChildrenToPool();
-            //foreach (var designatorDecoratorBase in designators)
-            //{
-            //    var btnDesignType = (UI_BtnDesignatorType1)_main.m_ComDesignPanel.m_ListCommand.AddItemFromPool();
-            //    btnDesignType.m_TxtName.text = designatorDecoratorBase.Name;
-            //    btnDesignType.m_LoaderIcon.url = designatorDecoratorBase.Sprite;
-            //    btnDesignType.onClick.Set(designatorDecoratorBase.OnClick);
-            //}
-            //_main.m_ComDesignPanel.m_ListCommand.ResizeToFit();
-        }
+
 
         private void RefreshListSelection() {
             var list = _main.m_ListMainSelection;
@@ -62,7 +51,7 @@ namespace UI
             //_main.m_CtrlShowThingDes.SetSelectedIndex(0);
             //_main.m_CtrlShowDesignator.SetSelectedIndex(1);
             //TODO:打开建筑的界面
-
+            UIManager.Instance.Show(DataManager.Instance.DesignViewType);
         }
 
         private void OnClickBtnPlacingThing() {
