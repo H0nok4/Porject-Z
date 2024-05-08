@@ -19,8 +19,6 @@ public class MainPanel : FGUIView
     public override void OnShow()
     {
         _main.m_BtnPlaceThing.onClick.Set(OnClickBtnPlacingThing);
-        //_main.m_BtnBuildWall.onClick.Set(OnClickBtnBuildWall);
-        _main.m_CtrlShowThingDes.SetSelectedIndex(0);
 
         RefreshListSelection();
         RefreshDesignPanel();
@@ -28,35 +26,33 @@ public class MainPanel : FGUIView
 
     public void HideAllPanel()
     {
-        _main.m_CtrlShowThingDes.SetSelectedIndex(0);
-        _main.m_CtrlShowDesignator.SetSelectedIndex(0);
-        _main.m_CtrlShowListCommand.SetSelectedIndex(0);
+
     }
 
     private void RefreshDesignPanel()
     {
-        //TODO:测试用,后面需要抽象
-        _main.m_ComDesignPanel.m_ListType.numItems = MainDesignList.Count;
-        for (int i = 0; i < MainDesignList.Count; i++) {
-            var design = (UI_ComDesignatorType)_main.m_ComDesignPanel.m_ListType.GetChildAt(0);
-            design.Refresh(MainDesignList[i]);
-            design.onClick.Set(() => { RefreshListDesignators(design.DesignType.GetDesignators()); });
-        }
-        _main.m_ComDesignPanel.m_ListType.ResizeToFit();
+        ////TODO:测试用,后面需要抽象
+        //_main.m_ComDesignPanel.m_ListType.numItems = MainDesignList.Count;
+        //for (int i = 0; i < MainDesignList.Count; i++) {
+        //    var design = (UI_ComDesignatorType)_main.m_ComDesignPanel.m_ListType.GetChildAt(0);
+        //    design.Refresh(MainDesignList[i]);
+        //    design.onClick.Set(() => { RefreshListDesignators(design.DesignType.GetDesignators()); });
+        //}
+        //_main.m_ComDesignPanel.m_ListType.ResizeToFit();
     }
 
     private void RefreshListDesignators(IEnumerable<DesignatorDecoratorBase> designators)
     {
-        _main.m_CtrlShowListCommand.SetSelectedIndex(1);
-        _main.m_ComDesignPanel.m_ListCommand.RemoveChildrenToPool();
-        foreach (var designatorDecoratorBase in designators)
-        {
-            var btnDesignType = (UI_BtnDesignatorType1)_main.m_ComDesignPanel.m_ListCommand.AddItemFromPool();
-            btnDesignType.m_TxtName.text = designatorDecoratorBase.Name;
-            btnDesignType.m_LoaderIcon.url = designatorDecoratorBase.Sprite;
-            btnDesignType.onClick.Set(designatorDecoratorBase.OnClick);
-        }
-        _main.m_ComDesignPanel.m_ListCommand.ResizeToFit();
+        //_main.m_CtrlShowListCommand.SetSelectedIndex(1);
+        //_main.m_ComDesignPanel.m_ListCommand.RemoveChildrenToPool();
+        //foreach (var designatorDecoratorBase in designators)
+        //{
+        //    var btnDesignType = (UI_BtnDesignatorType1)_main.m_ComDesignPanel.m_ListCommand.AddItemFromPool();
+        //    btnDesignType.m_TxtName.text = designatorDecoratorBase.Name;
+        //    btnDesignType.m_LoaderIcon.url = designatorDecoratorBase.Sprite;
+        //    btnDesignType.onClick.Set(designatorDecoratorBase.OnClick);
+        //}
+        //_main.m_ComDesignPanel.m_ListCommand.ResizeToFit();
     }
 
     private void RefreshListSelection()
@@ -68,8 +64,8 @@ public class MainPanel : FGUIView
 
     private void OnClickBtnBuildCommand()
     {
-        _main.m_CtrlShowThingDes.SetSelectedIndex(0);
-        _main.m_CtrlShowDesignator.SetSelectedIndex(1);
+        //_main.m_CtrlShowThingDes.SetSelectedIndex(0);
+        //_main.m_CtrlShowDesignator.SetSelectedIndex(1);
 
 
     }
@@ -87,17 +83,17 @@ public class MainPanel : FGUIView
 
     public override void Update()
     {
-        if (TrackedThing != null)
-        {
-            UpdateCurTrackedThing();
-        }
-        else
-        {
-            if (_main.m_CtrlShowThingDes.selectedIndex == 1)
-            {
-                _main.m_CtrlShowThingDes.SetSelectedIndex(0);
-            }
-        }
+        //if (TrackedThing != null)
+        //{
+        //    UpdateCurTrackedThing();
+        //}
+        //else
+        //{
+        //    if (_main.m_CtrlShowThingDes.selectedIndex == 1)
+        //    {
+        //        _main.m_CtrlShowThingDes.SetSelectedIndex(0);
+        //    }
+        //}
 
         if (PlayerController.Instance.DragBox.IsDrag && PlayerController.Instance.DragBox.IsValid)
         {
@@ -139,40 +135,40 @@ public class MainPanel : FGUIView
         }
     }
 
-    private void UpdateCurTrackedThing()
-    {
-        if (TrackedThing == null || !TrackedThing.Spawned)
-        {
-            _main.m_CtrlShowThingDes.SetSelectedIndex(0);
-            return;
-        }
+    //private void UpdateCurTrackedThing()
+    //{
+    //    if (TrackedThing == null || !TrackedThing.Spawned)
+    //    {
+    //        _main.m_CtrlShowThingDes.SetSelectedIndex(0);
+    //        return;
+    //    }
 
-        _main.m_CtrlShowThingDes.SetSelectedIndex(1);
-        switch (TrackedThing.Def.Category) {
-            case ThingCategory.Unit:
-                //TODO:刷新单位
-                _main.m_ComThingDes.RefreshAsUnit((Thing_Unit)TrackedThing);
-                break;
-            case ThingCategory.Building:
-                if (TrackedThing.Def.IsFrame) {
+    //    _main.m_CtrlShowThingDes.SetSelectedIndex(1);
+    //    switch (TrackedThing.Def.Category) {
+    //        case ThingCategory.Unit:
+    //            //TODO:刷新单位
+    //            _main.m_ComThingDes.RefreshAsUnit((Thing_Unit)TrackedThing);
+    //            break;
+    //        case ThingCategory.Building:
+    //            if (TrackedThing.Def.IsFrame) {
   
-                    _main.m_ComThingDes.RefreshAsFrame((Thing_Building_Frame)TrackedThing);
-                }
-                else {
-                    Debug.Log("当前点击的是实际的建筑");
-                    _main.m_ComThingDes.RefreshAsBuilding(TrackedThing);
-                }
-                break;
-            case ThingCategory.Mirage:
-                _main.m_ComThingDes.RefreshAsBlueprint((Thing_Blueprint_Building)TrackedThing);
-                break;
-            case ThingCategory.Item:
-                Debug.Log("当前点击的是物品");
-                _main.m_ComThingDes.RefreshAsItem(TrackedThing);
-                break;
-            default:
-                return;
-        }
-    }
+    //                _main.m_ComThingDes.RefreshAsFrame((Thing_Building_Frame)TrackedThing);
+    //            }
+    //            else {
+    //                Debug.Log("当前点击的是实际的建筑");
+    //                _main.m_ComThingDes.RefreshAsBuilding(TrackedThing);
+    //            }
+    //            break;
+    //        case ThingCategory.Mirage:
+    //            _main.m_ComThingDes.RefreshAsBlueprint((Thing_Blueprint_Building)TrackedThing);
+    //            break;
+    //        case ThingCategory.Item:
+    //            Debug.Log("当前点击的是物品");
+    //            _main.m_ComThingDes.RefreshAsItem(TrackedThing);
+    //            break;
+    //        default:
+    //            return;
+    //    }
+    //}
 
 }
