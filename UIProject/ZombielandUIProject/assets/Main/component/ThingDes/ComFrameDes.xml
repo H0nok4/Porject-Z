@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="373,448">
+  <displayList>
+    <graph id="n5_f1nd" name="n5" xy="1,0" size="372,448" type="rect">
+      <relation target="" sidePair="bottom-bottom"/>
+    </graph>
+    <text id="n6_f1nd" name="TxtName" xy="3,2" size="225,54" fontSize="40" autoSize="shrink" text="ThingName">
+      <relation target="n5_f1nd" sidePair="top-top"/>
+    </text>
+    <text id="n9_mk93" name="n9" xy="0,59" size="125,39" fontSize="28" autoSize="none" text="所需材料:"/>
+    <list id="n11_mk93" name="ListNeedResources" xy="0,99" size="370,168" layout="flow_hz" overflow="scroll" defaultItem="ui://0kazkhhcmk936"/>
+  </displayList>
+</component>

@@ -7,12 +7,9 @@ namespace Main
 {
     public partial class UI_ThingDesView : GComponent
     {
-        public Controller m_CtrlThingType;
-        public GTextField m_TxtName;
-        public GList m_ListNeedResources;
-        public GList m_ListUnitNeed;
         public GList m_ListThingBtn;
         public GList m_ListCommand;
+        public GLoader m_DesLoader;
         public const string URL = "ui://0kazkhhcf1nd3";
 
         public static UI_ThingDesView CreateInstance()
@@ -24,12 +21,9 @@ namespace Main
         {
             base.ConstructFromXML(xml);
 
-            m_CtrlThingType = GetControllerAt(0);
-            m_TxtName = (GTextField)GetChildAt(1);
-            m_ListNeedResources = (GList)GetChildAt(3);
-            m_ListUnitNeed = (GList)GetChildAt(4);
-            m_ListThingBtn = (GList)GetChildAt(5);
-            m_ListCommand = (GList)GetChildAt(6);
+            m_ListThingBtn = (GList)GetChildAt(0);
+            m_ListCommand = (GList)GetChildAt(1);
+            m_DesLoader = (GLoader)GetChildAt(2);
         }
     }
 }
