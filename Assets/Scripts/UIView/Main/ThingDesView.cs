@@ -15,7 +15,23 @@ namespace UI
 
         public override void OnShow() {
             base.OnShow();
-            _main.m_DesLoader.url = CreateLoaderByThing(SelectManager.Instance.SelectThings.First());
+
+            RefreshTrackedThings();
+        }
+
+        private void RefreshTrackedThings() {
+            var selectThing = SelectManager.Instance.SelectThings.First();
+            if (selectThing == null) {
+                return;
+            }
+
+            _main.m_DesLoader.url = CreateLoaderByThing(selectThing);
+            IThingDesBase thingDes = (IThingDesBase)_main.m_DesLoader.component;
+            thingDes.Refresh(selectThing);
+        }
+
+        public override void Update() {
+            RefreshTrackedThings();
         }
 
         private string CreateLoaderByThing(Thing thing) {

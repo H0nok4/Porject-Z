@@ -7,7 +7,8 @@ namespace Main {
     public partial class UI_ComNeed : GComponent {
         public void Refresh(Need need) {
             m_TxtTitle.Set(need.NeedDef.Name);
-            m_ComBar.max = 1;
+            m_ComBar.max = 1f;
+            m_ComBar.min = 0f;
             m_ComBar.value = need.CurValuePercent;
         }
     }
