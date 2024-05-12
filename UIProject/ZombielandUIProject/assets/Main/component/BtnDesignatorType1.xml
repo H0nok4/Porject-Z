@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="100,100">
+  <controller name="CtrlType" pages="0,None,1,Toggle" selected="1"/>
+  <controller name="CtrlToggleActive" pages="0,No,1,Yes" selected="0"/>
   <displayList>
     <graph id="n14_l0ax" name="n14" xy="0,0" size="100,100" type="rect"/>
     <loader id="n16_l0ax" name="LoaderIcon" xy="0,0" size="100,98" align="center" vAlign="middle" fill="scale"/>
     <text id="n17_l0ax" name="TxtName" xy="23,65" size="52,34" fontSize="24" text="名称"/>
+    <image id="n18_kezo" name="n18" src="kezof" fileName="image/Yes.png" xy="30,36" size="45,52">
+      <gearDisplay controller="CtrlToggleActive" pages="1"/>
+      <gearDisplay2 controller="CtrlType" pages="1" condition="0"/>
+    </image>
+    <image id="n19_kezo" name="n19" src="kezoe" fileName="image/No.png" xy="28,38" size="40,56">
+      <gearDisplay controller="CtrlType" pages="1"/>
+      <gearDisplay2 controller="CtrlToggleActive" pages="0" condition="0"/>
+    </image>
   </displayList>
 </component>

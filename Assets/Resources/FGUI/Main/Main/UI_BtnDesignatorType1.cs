@@ -7,6 +7,8 @@ namespace Main
 {
     public partial class UI_BtnDesignatorType1 : GComponent
     {
+        public Controller m_CtrlType;
+        public Controller m_CtrlToggleActive;
         public GLoader m_LoaderIcon;
         public GTextField m_TxtName;
         public const string URL = "ui://0kazkhhcl0ax9";
@@ -20,6 +22,8 @@ namespace Main
         {
             base.ConstructFromXML(xml);
 
+            m_CtrlType = GetControllerAt(0);
+            m_CtrlToggleActive = GetControllerAt(1);
             m_LoaderIcon = (GLoader)GetChildAt(1);
             m_TxtName = (GTextField)GetChildAt(2);
         }
