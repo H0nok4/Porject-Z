@@ -15,7 +15,7 @@ public interface ISelectable
 }
 
 public abstract class Thing : IThing,IFOWUnit,ISelectable {
-
+    public abstract string Name { get; }
 
     public ThingDefine Def;
     /// <summary>

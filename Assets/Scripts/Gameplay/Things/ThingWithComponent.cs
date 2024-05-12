@@ -9,6 +9,8 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 public class ThingWithComponent : Thing {
+    public override string Name => Def.Name;
+
     private List<ThingComponentBase> _componentList;
 
     public static List<ThingComponentBase> EmptyComponentList = new List<ThingComponentBase>();
