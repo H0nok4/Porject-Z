@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using ConfigType;
+using EventSystem;
 using FairyGUI;
 using JetBrains.Annotations;
 using Main;
@@ -9,6 +10,7 @@ using UnityEngine;
 
 namespace UI
 {
+    [CmdReg(EventDef.OnSelectThing)]
     [View("Main", "MainView")]
     public class MainPanel : FGUIView {
         public UI_MainView _main;

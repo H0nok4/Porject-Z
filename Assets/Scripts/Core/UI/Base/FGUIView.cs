@@ -7,6 +7,24 @@ using FairyGUI;
 using UnityEngine;
 
 namespace UI {
+    public struct CmdData
+    {
+        public string CmdName;
+
+        public List<object> Param;
+
+        public bool TryGetParam<T>(int index, out T result)
+        {
+            if (Param[index] is T)
+            {
+                result = (T)Param[index];
+                return true;
+            }
+
+            result = default(T);
+            return false;
+        }
+    }
     public class FGUIView : ViewBase
     {
 
@@ -103,6 +121,11 @@ namespace UI {
         }
         public virtual void Bind(GComponent component) {
 
+        }
+
+        public virtual void OnCmd(CmdData data)
+        {
+            
         }
     }
 }

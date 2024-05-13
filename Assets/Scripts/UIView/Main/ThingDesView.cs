@@ -13,10 +13,24 @@ namespace UI
     {
         public UI_ThingDesView _main;
 
+        public Thing TrackedThing =>
+            SelectManager.Instance.SelectThings.Count > 0 ? SelectManager.Instance.SelectThings[0] : null;
+
         public override void OnShow() {
             base.OnShow();
 
             RefreshTrackedThings();
+            RefreshTrackedThingsCommands();
+        }
+
+        private void RefreshTrackedThingsCommands()
+        {
+            var commands = TrackedThing.GetCommands();
+            foreach (var commandBase in commands)
+            {
+                var com = commandBase.GetUIComponent(_main.m_ListCommand);
+                com.Refresh(commandBase);
+            }
         }
 
         private void RefreshTrackedThings() {
