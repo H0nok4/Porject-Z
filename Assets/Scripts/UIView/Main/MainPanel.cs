@@ -7,6 +7,7 @@ using JetBrains.Annotations;
 using Main;
 using UI;
 using UnityEngine;
+using EventDispatcher = EventSystem.EventDispatcher;
 
 namespace UI
 {
@@ -107,6 +108,15 @@ namespace UI
             else {
                 dragBoxUI.SetPosition(curPos.x, startPos.y, 0);
                 dragBoxUI.SetSize(startPos.x - curPos.x, curPos.y - startPos.y);
+            }
+        }
+
+        public override void OnCmd(CmdData data) {
+            base.OnCmd(data);
+            switch (data.CmdName) {
+                case EventDef.OnSelectThing:
+                    UIManager.Instance.Show(DataManager.Instance.ThingDesViewType);
+                    break;
             }
         }
 

@@ -25,6 +25,7 @@ namespace UI
 
         private void RefreshTrackedThingsCommands()
         {
+            _main.m_ListCommand.RemoveChildrenToPool();
             var commands = TrackedThing.GetCommands();
             foreach (var commandBase in commands)
             {
@@ -34,7 +35,7 @@ namespace UI
         }
 
         private void RefreshTrackedThings() {
-            var selectThing = SelectManager.Instance.SelectThings.First();
+            var selectThing = SelectManager.Instance.SelectThings.FirstOrDefault();
             if (selectThing == null) {
                 return;
             }

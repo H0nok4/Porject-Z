@@ -7,7 +7,12 @@ namespace Main {
         public void Refresh(CommandBase command)
         {
             m_TxtName.Set(command.Define.Name);
-            onClick.Set(command.Execute);
+            onClick.Set(()=> {
+                command.Execute();
+                m_CtrlToggleActive.SetSelectedIndex(command is IActivableCommand activeCommand
+                    ? activeCommand.IsActive ? 1 : 0
+                    : 0);
+            });
             m_CtrlToggleActive.SetSelectedIndex(command is IActivableCommand activeCommand
                 ? activeCommand.IsActive ? 1 : 0
                 : 0);

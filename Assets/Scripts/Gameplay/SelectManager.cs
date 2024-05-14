@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using EventSystem;
+using UI;
 using UnityEngine;
 
 public class SelectManager : Singleton<SelectManager> {
@@ -30,7 +31,7 @@ public class SelectManager : Singleton<SelectManager> {
             }
         }
 
-        EventDispatcher.TriggerEvent(EventDef.OnSelectThing);
+        UIManager.Instance.SendUIEvent(EventDef.OnSelectThing);
     }
 
     public void SetSelectThings(Thing thing) {
@@ -38,7 +39,7 @@ public class SelectManager : Singleton<SelectManager> {
         SelectThings.Add(thing);
         thing.GameObject.Select();
 
-        EventDispatcher.TriggerEvent(EventDef.OnSelectThing);
+        UIManager.Instance.SendUIEvent(EventDef.OnSelectThing);
     }
 
     public void AddSelectThings(List<Thing> thingList) {
@@ -48,14 +49,14 @@ public class SelectManager : Singleton<SelectManager> {
             thing.GameObject.Select();
         }
 
-        EventDispatcher.TriggerEvent(EventDef.OnSelectThing);
+        UIManager.Instance.SendUIEvent(EventDef.OnSelectThing);
     }
 
     public void AddSelectThings(Thing thing) {
         SelectThings.Add(thing);
         thing.GameObject.Select();
 
-        EventDispatcher.TriggerEvent(EventDef.OnSelectThing);
+        UIManager.Instance.SendUIEvent(EventDef.OnSelectThing);
     }
 
     public void RemoveSelectThing(Thing thing)
