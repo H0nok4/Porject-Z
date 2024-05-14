@@ -76,13 +76,13 @@ namespace UI
 
         private void RegisterCmd(FGUIView view,CmdRegAttribute cmdAttribute) {
             foreach (var cmd in cmdAttribute.CmdArray) {
-                EventDispatcher.RegEventListener<CmdData>(cmd,view.OnCmd);
+                EventManager.RegEventListener<CmdData>(cmd,view.OnCmd);
             }
         }
 
         public void SendUIEvent(string cmdName,params object[] paramArray) {
             var cmdReg = new CmdData() { CmdName = cmdName, Param = new List<object>(paramArray) };
-            EventDispatcher.TriggerEvent(cmdName,cmdReg);
+            EventManager.TriggerEvent(cmdName,cmdReg);
         }
 
         public void Close(Type uiPanelType)
@@ -117,6 +117,8 @@ namespace UI
             {
                 viewBase.Hide();
             }
+
+            //TODO:关闭任意位置的UI,如果再最上层,则需要重新打开下层UI,不是的话则直接关闭   
         }
 
         public void CloseCurrent() {

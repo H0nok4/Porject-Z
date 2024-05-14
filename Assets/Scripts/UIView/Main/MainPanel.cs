@@ -7,7 +7,6 @@ using JetBrains.Annotations;
 using Main;
 using UI;
 using UnityEngine;
-using EventDispatcher = EventSystem.EventDispatcher;
 
 namespace UI
 {

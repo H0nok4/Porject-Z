@@ -16,9 +16,12 @@ public class SelectManager : Singleton<SelectManager> {
                 selectThing.GameObject.DeSelect();
             }
         }
+
         SelectThings.Clear();
 
+        UIManager.Instance.SendUIEvent(EventDef.OnDeselectThing);
 
+        UIManager.Instance.SendUIEvent(EventDef.OnDeselectAllThing);
     }
 
     public void SetSelectThings(List<Thing> thingList) {
@@ -65,6 +68,13 @@ public class SelectManager : Singleton<SelectManager> {
             return;
 
         SelectThings.Remove(thing);
+
+        UIManager.Instance.SendUIEvent(EventDef.OnDeselectThing);
+
+        if (SelectThings.Count <= 0)
+        {
+            UIManager.Instance.SendUIEvent(EventDef.OnDeselectAllThing);
+        }
     }
 
     public bool IsSelected(Thing thing)

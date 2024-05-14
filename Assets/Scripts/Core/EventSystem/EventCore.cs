@@ -14,7 +14,7 @@ namespace EventSystem
         }
     }
 
-    internal class EventInternal {
+    internal class EventCore {
 
         private readonly Dictionary<string, Delegate> _eventRouter = new();
 

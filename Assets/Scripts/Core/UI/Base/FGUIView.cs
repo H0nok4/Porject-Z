@@ -127,5 +127,10 @@ namespace UI {
         {
             
         }
+
+        public virtual void CloseSelf()
+        {
+            UIManager.Instance.Close(this.GetType());
+        }
     }
 }

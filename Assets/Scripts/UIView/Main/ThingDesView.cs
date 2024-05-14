@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using EventSystem;
 using FairyGUI;
 using Main;
 using UnityEngine;
 
 namespace UI
 {
+    [CmdReg(EventDef.OnDeselectAllThing,EventDef.OnDeselectThing,EventDef.OnSelectThing)]
     [View("Main", "ThingDesView")]
     public class ThingDesView : FGUIView
     {
@@ -19,6 +21,11 @@ namespace UI
         public override void OnShow() {
             base.OnShow();
 
+            Refresh();
+        }
+
+        public void Refresh()
+        {
             RefreshTrackedThings();
             RefreshTrackedThingsCommands();
         }
@@ -26,6 +33,11 @@ namespace UI
         private void RefreshTrackedThingsCommands()
         {
             _main.m_ListCommand.RemoveChildrenToPool();
+            if (TrackedThing == null)
+            {
+                return;
+            }
+
             var commands = TrackedThing.GetCommands();
             foreach (var commandBase in commands)
             {
@@ -36,7 +48,9 @@ namespace UI
 
         private void RefreshTrackedThings() {
             var selectThing = SelectManager.Instance.SelectThings.FirstOrDefault();
-            if (selectThing == null) {
+            if (selectThing == null)
+            {
+                _main.m_DesLoader.url = null;
                 return;
             }
 
@@ -59,6 +73,26 @@ namespace UI
             }
 
             return string.Empty;
+        }
+
+        public override void OnCmd(CmdData data)
+        {
+            base.OnCmd(data);
+            switch (data.CmdName)
+            {
+                case EventDef.OnDeselectThing:
+                    //TODO:刷新界面
+                    RefreshTrackedThings();
+                    break;
+                case EventDef.OnDeselectAllThing:
+                    //TODO:没有选中东西,把当前界面关闭
+                    CloseSelf();
+                    break;
+                case EventDef.OnSelectThing:
+                    //TODO:刷新界面
+                    RefreshTrackedThings();
+                    break;
+            }
         }
 
         public override void Bind(GComponent component)
