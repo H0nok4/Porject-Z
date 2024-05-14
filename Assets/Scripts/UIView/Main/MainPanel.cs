@@ -14,9 +14,6 @@ namespace UI
     [View("Main", "MainView")]
     public class MainPanel : FGUIView {
         public UI_MainView _main;
-
-
-
         public Thing TrackedThing =>
             SelectManager.Instance.SelectThings.Count > 0 ? SelectManager.Instance.SelectThings[0] : null;
         public override void OnShow() {

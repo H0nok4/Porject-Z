@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 using FairyGUI;
 using Main;
 
-public class Command_Toggle : CommandBase {
+public interface IActivableCommand {
+    public bool IsActive { get; set; }
+}
+
+public class Command_Toggle : CommandBase, IActivableCommand {
     public Action<bool> Toggle;
 
-    public bool IsActive;
+    public bool IsActive { get; set; }
 
     public Command_Toggle(int id,Action<bool> toggle, bool isActive = false): base(id) {
         Toggle = toggle;

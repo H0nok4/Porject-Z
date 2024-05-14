@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using EventSystem;
 using UnityEngine;
 
 public class SelectManager : Singleton<SelectManager> {
@@ -15,6 +16,8 @@ public class SelectManager : Singleton<SelectManager> {
             }
         }
         SelectThings.Clear();
+
+
     }
 
     public void SetSelectThings(List<Thing> thingList) {
@@ -26,12 +29,16 @@ public class SelectManager : Singleton<SelectManager> {
                 selectThing.GameObject.Select();
             }
         }
+
+        EventDispatcher.TriggerEvent(EventDef.OnSelectThing);
     }
 
     public void SetSelectThings(Thing thing) {
         ClearSelectThings();
         SelectThings.Add(thing);
         thing.GameObject.Select();
+
+        EventDispatcher.TriggerEvent(EventDef.OnSelectThing);
     }
 
     public void AddSelectThings(List<Thing> thingList) {
@@ -40,11 +47,15 @@ public class SelectManager : Singleton<SelectManager> {
         {
             thing.GameObject.Select();
         }
+
+        EventDispatcher.TriggerEvent(EventDef.OnSelectThing);
     }
 
     public void AddSelectThings(Thing thing) {
         SelectThings.Add(thing);
         thing.GameObject.Select();
+
+        EventDispatcher.TriggerEvent(EventDef.OnSelectThing);
     }
 
     public void RemoveSelectThing(Thing thing)
