@@ -93,6 +93,7 @@ namespace UI
             //TODO:后面还需要改造成关闭后显示出其他界面的时候需要一个事件
             CloseUI(ui);
 
+            
         }
 
         public void Update()
@@ -119,6 +120,22 @@ namespace UI
             }
 
             //TODO:关闭任意位置的UI,如果再最上层,则需要重新打开下层UI,不是的话则直接关闭   
+            var uiIndex = UIStack.FindLastIndex((view) => view == viewBase);
+            if (uiIndex == -1)
+            {
+                return;
+            }
+
+            if (uiIndex == UIStack.Count - 1)
+            {
+                //TODO:最上层,打开下层UI
+                UIStack.RemoveAt(uiIndex);
+                UIStack.Last()?.Show();//TOOD:到时候得有个Resume的
+            }
+            else
+            {
+                UIStack.RemoveAt(uiIndex);
+            }
         }
 
         public void CloseCurrent() {
