@@ -331,9 +331,9 @@ public class PlayerController : Singleton<PlayerController>
         {
             foreach (var selectThing in SelectManager.Instance.SelectThings)
             {
-                if (selectThing is Thing_Unit unit && unit.IsDraft)
-                {
-                    var findFirstStandPos = MapUtility.GetFirstStandablePosByPosNode(MapUtility.GetMapPosByInputMousePosition());
+                if (selectThing is Thing_Unit unit && unit.IsDraft) {
+                    var targetPos = MapUtility.GetMapPosByInputMousePosition();
+                    var findFirstStandPos = MapUtility.GetFirstStandablePosByPosNodeContainsSourcePos(targetPos);
                     unit.JobTracker.CleanCurrentJob();
                     unit.JobTracker.StartJob(JobMaker.MakeJob(DataManager.Instance.GetJobDefineByID(3),findFirstStandPos));
                 }
