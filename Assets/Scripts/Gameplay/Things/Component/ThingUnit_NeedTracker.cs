@@ -44,13 +44,15 @@ public class ThingUnit_NeedTracker {
             return;
         }
 
-        if (GameTicker.Instance.CurrentTick - PreUpdateTick > UpdateTick) {
+        if (GameTicker.Instance.CurrentTick - PreUpdateTick < UpdateTick) {
             return;
         }
 
         foreach (var need in Needs) {
             need.Tick(UpdateTick);
         }
+
+        PreUpdateTick = GameTicker.Instance.CurrentTick;
     }
 
     public bool CanTrackNeed(NeedDefine needDefine, Thing_Unit unit) {
