@@ -13,7 +13,7 @@ namespace ConfigType
     {
         private Dictionary<string, Sprite> _spriteCacheDic = new Dictionary<string, Sprite>();
 
-        private GameObject _thingObject;
+ 
 
         private Sprite _frameSprite;
 
@@ -25,6 +25,7 @@ namespace ConfigType
             }
         }
 
+        private GameObject _thingObject;
         public GameObject ThingObject {
             get {
                 if (_thingObject == null) {
@@ -32,6 +33,28 @@ namespace ConfigType
                 }
 
                 return _thingObject;
+            }
+        }
+
+        private GameObject _buildingObject;
+        public GameObject BuildingObject {
+            get {
+                if (_buildingObject == null) {
+                    _buildingObject = Resources.Load<GameObject>("GameObject/BuildingObject");
+                }
+
+                return _buildingObject;
+            }
+        }
+
+        private GameObject _unitObject;
+        public GameObject UnitObject {
+            get {
+                if (_unitObject == null) {
+                    _unitObject = Resources.Load<GameObject>("GameObject/UnitObject");
+                }
+
+                return _unitObject;
             }
         }
 
@@ -72,7 +95,7 @@ namespace ConfigType
                 return sprite;
             }
 
-            Debug.LogError($"找不到对应路径的Sprite,使用的路径为:{path}");
+            Debug.LogError($"鎵句笉鍒板搴旇矾寰勭殑Sprite,浣跨敤鐨勮矾寰勪负:{path}");
             return null;
         }
     }

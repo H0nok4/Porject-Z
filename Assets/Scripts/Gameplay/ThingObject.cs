@@ -1,10 +1,28 @@
 using UnityEngine;
 
-public class ThingObject {
-    public GameObject GO;
+public interface IThingObject {
+    public GameObject GO { get; set; }
 
-    public SpriteRenderer SpriteRenderer;
-    public GameObject Selector;
+    public SpriteRenderer SpriteRenderer { get; set; }
+
+    public GameObject Selector { get; set; }
+
+    void SetPosition(PosNode node);
+
+    void Select();
+
+    void DeSelect();
+
+    void SetSprite(Sprite sprite);
+
+    void Dispose();
+}
+
+public class ThingObject : IThingObject {
+    public GameObject GO { get; set; }
+    public SpriteRenderer SpriteRenderer { get; set; }
+    public GameObject Selector { get; set; }
+
     public ThingObject(GameObject go) {
         GO = go;
         SpriteRenderer = go.transform.GetChild(1).GetComponentInChildren<SpriteRenderer>();
@@ -31,7 +49,7 @@ public class ThingObject {
 
     public void Dispose()
     {
-        //TODO:后面可以用对象池管理
+        //TODO:鍚庨潰鍙互鐢ㄥ璞℃睜绠＄悊
         SpriteRenderer = null;
         GameObject.Destroy(this.GO);
     }
