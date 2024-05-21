@@ -47,7 +47,7 @@ public class FogManager : Singleton<FogManager>
     private Texture2D CurTextureBuffer => TextureBuffer[MapController.Instance.Map.ActiveIndex];
     private Map Map => MapController.Instance.Map;
 
-    private Color32 VisitedColor = new Color32(0, 0, 0, 127);
+    //private Color32 VisitedColor = new Color32(0, 0, 0, 127);
 
     private Color32 ShowColor = new Color32(0, 0, 0, 0);
 
@@ -91,7 +91,7 @@ public class FogManager : Singleton<FogManager>
             return;
         }
         //TODO:先向之前保存的点刷新成半透明,然后再将现在的点刷新成透明
-        RefreshCache();
+        //RefreshCache();
         RefreshNew();
         RefreshTexture();
         //TODO:后面建筑物或者装饰需要留在RenderTexture上,可以后面加一张RenderTexture,然后用一个专门的FogCamera将场景渲染到上面,再叠加到Fog上
@@ -112,21 +112,21 @@ public class FogManager : Singleton<FogManager>
         //Debug.Log("刷新Texture");
     }
 
-    private void RefreshCache()
-    {
-        foreach (var fowCach in _cachedFOWUnit)
-        {
-            if (fowCach.Value.CachedVisiblePos == null)
-            {
-                continue;
-            }
+    //private void RefreshCache()
+    //{
+    //    foreach (var fowCach in _cachedFOWUnit)
+    //    {
+    //        if (fowCach.Value.CachedVisiblePos == null)
+    //        {
+    //            continue;
+    //        }
 
-            foreach (var cachedPos in fowCach.Value.CachedVisiblePos)
-            {
-                FogColors[fowCach.Value.CachedIndex][ToColorIndex(cachedPos.X, cachedPos.Y)] = VisitedColor;
-            }
-        }
-    }
+    //        foreach (var cachedPos in fowCach.Value.CachedVisiblePos)
+    //        {
+    //            FogColors[fowCach.Value.CachedIndex][ToColorIndex(cachedPos.X, cachedPos.Y)] = VisitedColor;
+    //        }
+    //    }
+    //}
 
     private void RefreshNew()
     {
