@@ -6,3 +6,5 @@ ID,,,类型,物体使用的类,堆叠限制数量,作为物体存在时显示的图片路径,是否可通行性,是
 200,TestItem,,,,,,,,,
 201,Wood,在现代有着广泛应用的材料,,,,,,,,
 202,Iron,在现代有着广泛应用的材料,,,,Sprite/Item_Iron,,,,10
+2001,饼干,一包可以充饥的饼干,,,25,Sprite/Item_Food_Cookie,CanPass,,,
+3001,矿泉水,一瓶可以解渴的矿泉水,,,16,Sprite/Item_Drink_QuarryWater,CanPass,,,
