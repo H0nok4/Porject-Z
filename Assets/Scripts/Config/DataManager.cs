@@ -13,6 +13,13 @@ namespace ConfigType
             return DesignTypeDefineDic[ID];
         }
 
+        public List<IngestibleDefine> IngestibleDefineList = new List<IngestibleDefine>();
+        public Dictionary<int, IngestibleDefine> IngestibleDefineDic = new Dictionary<int, IngestibleDefine>();
+        public IngestibleDefine GetIngestibleDefineByID(int ID)
+        {
+            return IngestibleDefineDic[ID];
+        }
+
         public List<JobDefine> JobDefineList = new List<JobDefine>();
         public Dictionary<int, JobDefine> JobDefineDic = new Dictionary<int, JobDefine>();
         public JobDefine GetJobDefineByID(int ID)
@@ -47,6 +54,9 @@ namespace ConfigType
             FileStream DesignTypeStream = File.OpenRead(ConfigPath + "DesignType.xml");
             XmlSerializer DesignTypeDefineserializer = new XmlSerializer(typeof(List<DesignTypeDefine>));
             DesignTypeDefineList = (List<DesignTypeDefine>)DesignTypeDefineserializer.Deserialize(DesignTypeStream);
+            FileStream IngestibleStream = File.OpenRead(ConfigPath + "Ingestible.xml");
+            XmlSerializer IngestibleDefineserializer = new XmlSerializer(typeof(List<IngestibleDefine>));
+            IngestibleDefineList = (List<IngestibleDefine>)IngestibleDefineserializer.Deserialize(IngestibleStream);
             FileStream JobStream = File.OpenRead(ConfigPath + "Job.xml");
             XmlSerializer JobDefineserializer = new XmlSerializer(typeof(List<JobDefine>));
             JobDefineList = (List<JobDefine>)JobDefineserializer.Deserialize(JobStream);
@@ -67,6 +77,11 @@ namespace ConfigType
             foreach (var i in DesignTypeDefineList)
             {
                 DesignTypeDefineDic.Add(i.ID, i);
+            }
+
+            foreach (var i in IngestibleDefineList)
+            {
+                IngestibleDefineDic.Add(i.ID, i);
             }
 
             foreach (var i in JobDefineList)

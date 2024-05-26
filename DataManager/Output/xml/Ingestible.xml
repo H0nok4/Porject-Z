@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfIngestibleDefine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<IngestibleDefine>
+		<ID>1</ID>
+		<RecoverFood>20</RecoverFood>
+		<RecoverThirsty>20</RecoverThirsty>
+		<RecoverJoy>0</RecoverJoy>
+		<AddBuffIDs />
+		<AddBuffDurations />
+	</IngestibleDefine>
+	<IngestibleDefine>
+		<ID>2</ID>
+		<RecoverFood>20</RecoverFood>
+		<RecoverThirsty>0</RecoverThirsty>
+		<RecoverJoy>0</RecoverJoy>
+		<AddBuffIDs />
+		<AddBuffDurations />
+	</IngestibleDefine>
+	<IngestibleDefine>
+		<ID>3</ID>
+		<RecoverFood>0</RecoverFood>
+		<RecoverThirsty>20</RecoverThirsty>
+		<RecoverJoy>0</RecoverJoy>
+		<AddBuffIDs />
+		<AddBuffDurations />
+	</IngestibleDefine>
+</ArrayOfIngestibleDefine>

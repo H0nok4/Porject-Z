@@ -4,3 +4,5 @@ ID,RecoverFood,RecoverThirsty,RecoverJoy,AddBuffIDs,AddBuffDurations
 ID,可以提供的饱食度,可以提供的饥渴度,可以提供的娱乐度,使用后添加的Buff状态,使用后添加的Buff时间
 ,0,0,0,,
 1,20,20,,,
+2,20,0,,,
+3,0,20,,,

@@ -189,6 +189,16 @@ namespace ConfigType
         public string Name; //  
     }
 
+    public partial class IngestibleDefine
+    {
+        public int ID; // ID 
+        public int RecoverFood; // 可以提供的饱食度 
+        public int RecoverThirsty; // 可以提供的饥渴度 
+        public int RecoverJoy; // 可以提供的娱乐度 
+        public List<int> AddBuffIDs; // 使用后添加的Buff状态 
+        public List<int> AddBuffDurations; // 使用后添加的Buff时间 
+    }
+
     public partial class JobDefine
     {
         public int ID; // ID 
@@ -230,6 +240,7 @@ namespace ConfigType
         public List<int> BuildCostThingID; // 如果是建筑的建筑消耗物品ID列表 
         public List<int> BuildCostThingNum; // 如果是建筑的建筑消耗物品数量列表 
         public bool Selectable; // 物体是否可以被选中 
+        public int IngestibleID; // 拿来吃时添加的数据 
     }
 
     public partial class WorkGiverDefine

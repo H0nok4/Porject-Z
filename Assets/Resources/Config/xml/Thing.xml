@@ -26,6 +26,7 @@
 		<BuildCostThingID />
 		<BuildCostThingNum />
 		<Selectable>true</Selectable>
+		<IngestibleID>0</IngestibleID>
 	</ThingDefine>
 	<ThingDefine>
 		<ID>2</ID>
@@ -57,6 +58,7 @@
 			<int>10</int>
 		</BuildCostThingNum>
 		<Selectable>true</Selectable>
+		<IngestibleID>0</IngestibleID>
 	</ThingDefine>
 	<ThingDefine>
 		<ID>200</ID>
@@ -84,6 +86,7 @@
 		<BuildCostThingID />
 		<BuildCostThingNum />
 		<Selectable>true</Selectable>
+		<IngestibleID>0</IngestibleID>
 	</ThingDefine>
 	<ThingDefine>
 		<ID>201</ID>
@@ -111,6 +114,7 @@
 		<BuildCostThingID />
 		<BuildCostThingNum />
 		<Selectable>true</Selectable>
+		<IngestibleID>0</IngestibleID>
 	</ThingDefine>
 	<ThingDefine>
 		<ID>202</ID>
@@ -138,5 +142,62 @@
 		<BuildCostThingID />
 		<BuildCostThingNum />
 		<Selectable>true</Selectable>
+		<IngestibleID>0</IngestibleID>
+	</ThingDefine>
+	<ThingDefine>
+		<ID>2001</ID>
+		<Name>饼干</Name>
+		<Describe>一包可以充饥的饼干</Describe>
+		<ThingClass>
+			<TypeName>ThingWithComponent</TypeName>
+		</ThingClass>
+		<Category>Item</Category>
+		<Destroyable>true</Destroyable>
+		<UseHitPoint>true</UseHitPoint>
+		<StackLimit>25</StackLimit>
+		<MaxHitPoint>100</MaxHitPoint>
+		<EverHaulable>true</EverHaulable>
+		<Rotatable>true</Rotatable>
+		<WorkGiverDefineTypeID />
+		<Passability>CanStand</Passability>
+		<MoveCost>0</MoveCost>
+		<SizeX>1</SizeX>
+		<SizeY>1</SizeY>
+		<BlueprintSpritePath />
+		<ThingSpritePath>Sprite/Item_Food_Cookie</ThingSpritePath>
+		<FrameSpritePath>Sprite/GeneralFrame</FrameSpritePath>
+		<Workload>60</Workload>
+		<BuildCostThingID />
+		<BuildCostThingNum />
+		<Selectable>true</Selectable>
+		<IngestibleID>2</IngestibleID>
+	</ThingDefine>
+	<ThingDefine>
+		<ID>3001</ID>
+		<Name>矿泉水</Name>
+		<Describe>一瓶可以解渴的矿泉水</Describe>
+		<ThingClass>
+			<TypeName>ThingWithComponent</TypeName>
+		</ThingClass>
+		<Category>Item</Category>
+		<Destroyable>true</Destroyable>
+		<UseHitPoint>true</UseHitPoint>
+		<StackLimit>16</StackLimit>
+		<MaxHitPoint>100</MaxHitPoint>
+		<EverHaulable>true</EverHaulable>
+		<Rotatable>true</Rotatable>
+		<WorkGiverDefineTypeID />
+		<Passability>CanStand</Passability>
+		<MoveCost>0</MoveCost>
+		<SizeX>1</SizeX>
+		<SizeY>1</SizeY>
+		<BlueprintSpritePath />
+		<ThingSpritePath>Sprite/Item_Drink_QuarryWater</ThingSpritePath>
+		<FrameSpritePath>Sprite/GeneralFrame</FrameSpritePath>
+		<Workload>60</Workload>
+		<BuildCostThingID />
+		<BuildCostThingNum />
+		<Selectable>true</Selectable>
+		<IngestibleID>3</IngestibleID>
 	</ThingDefine>
 </ArrayOfThingDefine>
