@@ -17,7 +17,8 @@ public abstract class WorkGiver_DeliverResourceTo : WorkGiver_Scanner {
         foreach (var defineCount in build.NeedResources()) {
             //TODO:找到地图上存在的允许互动的同类物品运过去
             var exitsThing = new List<Thing>();
-            exitsThing.AddRange(MapController.Instance.Map.ListThings.GetThingsByThingDefine(defineCount.Def));
+            //只能拿没被预定的材料
+            exitsThing.AddRange(MapController.Instance.Map.ListThings.GetThingsByThingDefine(defineCount.Def).Where((thing)=>unit.CanReserveAndReach(thing,PathMoveEndType.Touch)));
             if (exitsThing.Count > 0) {
                 //TODO:先暂时直接获取所有物品数量来测试
                 int avaliableItemCount = exitsThing.Sum((thing) => thing.Count);
