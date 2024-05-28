@@ -14,9 +14,6 @@ public class Thing_Item : ThingWithComponent
         }
     }
 
-    private 
-
-
     public override void SpawnSetup(MapData mapData) {
         base.SpawnSetup(mapData);
 
