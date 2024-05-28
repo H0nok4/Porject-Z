@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class Thing_Item : ThingWithComponent
 {
-    //ÎïÆ·Ò²·ÖºÜ¶àÖÖ,µ¥´¿µÄ²ÄÁÏ,×°±¸,ÎäÆ÷,µÀ¾ß.
-    //µÀ¾ß·ÖÊ¹ÓÃÊ±Ñ¡ÔñÄ¿±ê,Ê¹ÓÃÊ±×Ô¶¯Ñ¡Ôñ×Ô¼º,±»¶¯Ê¹ÓÃµÄÀàËÆÒ½ÁÆÎï×ÊµÈ.
+    //ç‰©å“ä¹Ÿåˆ†å¾ˆå¤šç§,å•çº¯çš„ææ–™,è£…å¤‡,æ­¦å™¨,é“å…·.
+    //é“å…·åˆ†ä½¿ç”¨æ—¶é€‰æ‹©ç›®æ ‡,ä½¿ç”¨æ—¶è‡ªåŠ¨é€‰æ‹©è‡ªå·±,è¢«åŠ¨ä½¿ç”¨çš„ç±»ä¼¼åŒ»ç–—ç‰©èµ„ç­‰.
     public bool Ingestible
     {
         get
         {
             return Def.IngestibleID != 0;
         }
+    }
+
+    private 
+
+
+    public override void SpawnSetup(MapData mapData) {
+        base.SpawnSetup(mapData);
+
+        var com = GameObject.GO.AddComponent<DrawItemNum>();
+        com.Init(this);
     }
 }

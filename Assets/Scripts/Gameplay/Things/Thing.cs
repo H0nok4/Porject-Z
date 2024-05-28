@@ -385,7 +385,7 @@ public abstract class Thing : IThing,IFOWUnit,ISelectable {
         }
         if (Def.UseHitPoint)
         {
-            //TODO:分离出来的物品，需要继承原物品的血量
+            //TODO:分离出来的物品，需要继承原物品的血量,后面可以改成百分比继承
             newThing.HP = HP;
         }
         return newThing;

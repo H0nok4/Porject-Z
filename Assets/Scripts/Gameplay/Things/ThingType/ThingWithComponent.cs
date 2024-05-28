@@ -35,7 +35,7 @@ public class ThingWithComponent : Thing {
     {
         base.SpawnSetup(mapData);
 
-        var com = GameObject.GO.AddComponent<DrawItemNum>();
-        com.Init(this);
+        //var com = GameObject.GO.AddComponent<DrawItemNum>();
+        //com.Init(this);
     }
 }

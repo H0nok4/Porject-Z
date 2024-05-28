@@ -65,7 +65,7 @@
 		<Name>TestItem</Name>
 		<Describe />
 		<ThingClass>
-			<TypeName>ThingWithComponent</TypeName>
+			<TypeName>Thing_Item</TypeName>
 		</ThingClass>
 		<Category>Item</Category>
 		<Destroyable>true</Destroyable>
@@ -93,7 +93,7 @@
 		<Name>Wood</Name>
 		<Describe>在现代有着广泛应用的材料</Describe>
 		<ThingClass>
-			<TypeName>ThingWithComponent</TypeName>
+			<TypeName>Thing_Item</TypeName>
 		</ThingClass>
 		<Category>Item</Category>
 		<Destroyable>true</Destroyable>
@@ -121,7 +121,7 @@
 		<Name>Iron</Name>
 		<Describe>在现代有着广泛应用的材料</Describe>
 		<ThingClass>
-			<TypeName>ThingWithComponent</TypeName>
+			<TypeName>Thing_Item</TypeName>
 		</ThingClass>
 		<Category>Item</Category>
 		<Destroyable>true</Destroyable>
@@ -149,7 +149,7 @@
 		<Name>饼干</Name>
 		<Describe>一包可以充饥的饼干</Describe>
 		<ThingClass>
-			<TypeName>ThingWithComponent</TypeName>
+			<TypeName>Thing_Item</TypeName>
 		</ThingClass>
 		<Category>Item</Category>
 		<Destroyable>true</Destroyable>
@@ -177,7 +177,7 @@
 		<Name>矿泉水</Name>
 		<Describe>一瓶可以解渴的矿泉水</Describe>
 		<ThingClass>
-			<TypeName>ThingWithComponent</TypeName>
+			<TypeName>Thing_Item</TypeName>
 		</ThingClass>
 		<Category>Item</Category>
 		<Destroyable>true</Destroyable>
