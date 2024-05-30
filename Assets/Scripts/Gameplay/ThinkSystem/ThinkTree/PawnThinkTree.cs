@@ -1,4 +1,4 @@
-﻿namespace ThinkSystem
+namespace ThinkSystem
 {
     public class PawnThinkTree : ThinkTreeDefine {
 
@@ -14,6 +14,11 @@
             colonistNode.Children.Add(draftNode);
             //TODO:征兆的默认只会站在原地等人战斗
             Root.Children.Add(colonistNode);
+            var satisifyNode = new ThinkNode_Priority();
+
+            //TODO:添加满足各种食物,饥渴度,娱乐等需求的节点
+
+
             var noJobNode = new ThinkNode_ConditionNoJob();
             Root.Children.Add(noJobNode);
             noJobNode.Children.Add(new JobGiver_GetWork());
