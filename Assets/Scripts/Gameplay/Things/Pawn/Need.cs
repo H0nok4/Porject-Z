@@ -12,6 +12,8 @@ public abstract class Need
 
     protected virtual float MaxValue => 1f;
 
+    protected NeedType Type => NeedDef.Type;
+
     protected virtual float CurValue
     {
         get

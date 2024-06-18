@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfNeedDefine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<NeedDefine>
-		<ID>1</ID>
+		<Type>Food</Type>
 		<Name>Food</Name>
 		<NeedClass>
 			<TypeName>FoodNeed</TypeName>
@@ -9,7 +9,7 @@
 		<ActiveOnPawn>true</ActiveOnPawn>
 	</NeedDefine>
 	<NeedDefine>
-		<ID>2</ID>
+		<Type>Joy</Type>
 		<Name>Joy</Name>
 		<NeedClass>
 			<TypeName>JoyNeed</TypeName>
@@ -17,15 +17,7 @@
 		<ActiveOnPawn>true</ActiveOnPawn>
 	</NeedDefine>
 	<NeedDefine>
-		<ID>3</ID>
-		<Name>Mood</Name>
-		<NeedClass>
-			<TypeName>MoodNeed</TypeName>
-		</NeedClass>
-		<ActiveOnPawn>true</ActiveOnPawn>
-	</NeedDefine>
-	<NeedDefine>
-		<ID>4</ID>
+		<Type>Rest</Type>
 		<Name>Rest</Name>
 		<NeedClass>
 			<TypeName>RestNeed</TypeName>
@@ -33,7 +25,7 @@
 		<ActiveOnPawn>true</ActiveOnPawn>
 	</NeedDefine>
 	<NeedDefine>
-		<ID>5</ID>
+		<Type>Thirsty</Type>
 		<Name>Thirsty</Name>
 		<NeedClass>
 			<TypeName>ThirstyNeed</TypeName>

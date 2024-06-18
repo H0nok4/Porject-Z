@@ -183,6 +183,14 @@ namespace ConfigType
         Delay
     }
 
+    public enum NeedType
+    {
+        Food,
+        Joy,
+        Rest,
+        Thirsty
+    }
+
     public partial class DesignTypeDefine
     {
         public int ID; // ID 
@@ -209,7 +217,7 @@ namespace ConfigType
 
     public partial class NeedDefine
     {
-        public int ID; // ID 
+        public NeedType Type; // 需求类型 
         public string Name; // 需求名称 
         public ConfigType.EditableType NeedClass; //  
         public bool ActiveOnPawn; //  

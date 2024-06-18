@@ -85,3 +85,7 @@ WorkCompleteMode,None,
 ,PathMoveEnd,
 ,Instant,
 ,Delay,
+NeedType,Food,食物需求
+,Joy,娱乐需求
+,Rest,休息需求
+,Thirsty,饮品需求

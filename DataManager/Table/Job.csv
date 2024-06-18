@@ -9,3 +9,4 @@ ID,,DriverClass,ø…“‘÷–∂œ
 4,ImmediatelyBuildBlueprintToFrame,JobDriver_ImmediatelyBuildBlueprintToFrame,
 5,HaulToCell,JobDriver_HaulToCell,
 6,HaulToContainer,JobDriver_HaulToContainer,
+7,FindFoodAndEat,JobDriver_FindFoodAndEat,

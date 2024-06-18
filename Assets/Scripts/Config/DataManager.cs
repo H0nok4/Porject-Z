@@ -28,10 +28,10 @@ namespace ConfigType
         }
 
         public List<NeedDefine> NeedDefineList = new List<NeedDefine>();
-        public Dictionary<int, NeedDefine> NeedDefineDic = new Dictionary<int, NeedDefine>();
-        public NeedDefine GetNeedDefineByID(int ID)
+        public Dictionary<NeedType, NeedDefine> NeedDefineDic = new Dictionary<NeedType, NeedDefine>();
+        public NeedDefine GetNeedDefineByType(NeedType Type)
         {
-            return NeedDefineDic[ID];
+            return NeedDefineDic[Type];
         }
 
         public List<ThingDefine> ThingDefineList = new List<ThingDefine>();
@@ -91,7 +91,7 @@ namespace ConfigType
 
             foreach (var i in NeedDefineList)
             {
-                NeedDefineDic.Add(i.ID, i);
+                NeedDefineDic.Add(i.Type, i);
             }
 
             foreach (var i in ThingDefineList)

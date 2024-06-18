@@ -13,6 +13,18 @@ public class ThingUnit_NeedTracker {
 
     public int PreUpdateTick;
 
+
+    public FoodNeed Food {
+        get {
+            foreach (var need in Needs) {
+                if (need.NeedDef.Type == NeedType.Food)
+                    return (FoodNeed)need;
+            }
+
+            return null;
+        }
+    }
+
     public ThingUnit_NeedTracker(Thing_Unit unit) {
         //TODO:添加Need实例
         Unit = unit;
