@@ -1,8 +1,8 @@
 using ConfigType;
 using UnityEngine;
 
-public abstract class Need
-{
+public abstract class Need {
+    protected const int TrySatisfyInterval = 600;
     //TODO:人物相关的需求
     public NeedDefine NeedDef;
 
@@ -14,6 +14,7 @@ public abstract class Need
 
     protected NeedType Type => NeedDef.Type;
 
+    public long PreTrySatisfyTick;
     protected virtual float CurValue
     {
         get
@@ -54,5 +55,11 @@ public abstract class Need
         Unit = unit;
         NeedDef = define;
         CurValue = MaxValue;
+    }
+    public bool CanTrySatisfied() {
+        //暂定每10秒检测一次
+        bool result = PreTrySatisfyTick + TrySatisfyInterval < GameTicker.Instance.CurrentTick;
+        PreTrySatisfyTick = GameTicker.Instance.CurrentTick;
+        return result;
     }
 }

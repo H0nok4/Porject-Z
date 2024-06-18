@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -9,7 +9,7 @@ using UnityEngine;
 using static UnityEngine.InputManagerEntry;
 
 public class TimeSlower {
-    private int forceNormalSpeedUntil;
+    private long forceNormalSpeedUntil;
 
     private const int ForceTicksStandard = 800;
 
@@ -22,11 +22,11 @@ public class TimeSlower {
     }
 
     public void SignalForceNormalSpeed() {
-        forceNormalSpeedUntil = Mathf.Max(GameTicker.Instance.CurrentTick + 800);
+        forceNormalSpeedUntil = Math.Max(forceNormalSpeedUntil, GameTicker.Instance.CurrentTick + ForceTicksStandard);
     }
 
     public void SignalForceNormalSpeedShort() {
-        forceNormalSpeedUntil = Mathf.Max(forceNormalSpeedUntil, GameTicker.Instance.CurrentTick + 240);
+        forceNormalSpeedUntil = Math.Max(forceNormalSpeedUntil, GameTicker.Instance.CurrentTick + ForceTicksShort);
     }
 }
 
@@ -35,7 +35,7 @@ public class GameTicker : Singleton<GameTicker>
 {
     public const float TicksPerSecond = 60f;
 
-    public int CurrentTick;
+    public long CurrentTick;
 
     private int _ticksThisFrame;
 

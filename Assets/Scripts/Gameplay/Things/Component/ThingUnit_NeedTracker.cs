@@ -11,7 +11,8 @@ public class ThingUnit_NeedTracker {
 
     public Thing_Unit Unit;
 
-    public int PreUpdateTick;
+    public long PreUpdateTick;
+
 
 
     public FoodNeed Food {
@@ -39,7 +40,7 @@ public class ThingUnit_NeedTracker {
 
             var needType = needDefine.NeedClass.ToType();
             if (needType == null) {
-                Debug.LogError($"不存在的Need类型，NeedDefine.ID = {needDefine.ID}");
+                Debug.LogError($"不存在的Need类型，NeedDefine.Type = {needDefine.Type}");
                 continue;
             }
             var needInstance = (Need)Activator.CreateInstance(needType);
@@ -74,4 +75,6 @@ public class ThingUnit_NeedTracker {
 
         return false;
     }
+
+
 }

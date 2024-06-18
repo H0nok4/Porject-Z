@@ -18,8 +18,9 @@ public class Thing_Item : ThingWithComponent
 
     public override void SpawnSetup(MapData mapData) {
         base.SpawnSetup(mapData);
-        IngestibleEffect = new IngestibleEffect(Def.IngestibleID);
-
+        if (Ingestible) {
+            IngestibleEffect = new IngestibleEffect(Def.IngestibleID);
+        }
 
         var com = GameObject.GO.AddComponent<DrawItemNum>();
         com.Init(this);

@@ -11,7 +11,7 @@ public class ThingUnit_JobTracker
 {
     private const int THINK_INTERVAL = 30;
 
-    private int LastTimeThinkTick;
+    private long LastTimeThinkTick;
 
     public Thing_Unit Unit;
 
