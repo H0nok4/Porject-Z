@@ -13,7 +13,7 @@ public class JobDriver_GetFoodAndEat : JobDriver{
         yield return WorkUtility_MoveTo.MoveToThing(JobTargetIndex.A, PathMoveEndType.Touch);
         yield return WorkUtility_Haul.StartCarryThing(JobTargetIndex.A);
         //TODO:³Ô
-        yield return WorkUtility_Food.StartEad(JobTargetIndex.A);
+        yield return WorkUtility_Food.StartEat(JobTargetIndex.A);
 
     }
 
