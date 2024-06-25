@@ -18,6 +18,7 @@ namespace ThinkSystem{
             //TODO:如果没有食物的话可能会反复进入这个状态导致卡死,只能隔一段时间判断一次
             if (unit.NeedTracker.Food != null && unit.NeedTracker.Food.HungryStage == HungryStageType.Starvation && unit.NeedTracker.Food.CanTrySatisfied()) {
                 var getFoodJob = JobMaker.MakeJob(DataManager.Instance.GetJobDefineByID(7));
+                getFoodJob.InfoA = thing;
                 return getFoodJob;
             }
 
