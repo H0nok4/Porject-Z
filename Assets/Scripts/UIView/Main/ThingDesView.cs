@@ -72,6 +72,11 @@ namespace UI
                 return UI_ComUnitDes.URL;
             }
 
+            if (thing is Thing_Item)
+            {
+                return UI_ComItemDes.URL;
+            }
+
             return string.Empty;
         }
 

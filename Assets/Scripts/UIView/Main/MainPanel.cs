@@ -18,6 +18,7 @@ namespace UI
             SelectManager.Instance.SelectThings.Count > 0 ? SelectManager.Instance.SelectThings[0] : null;
         public override void OnShow() {
             _main.m_BtnPlaceThing.onClick.Set(OnClickBtnPlacingThing);
+            _main.m_BtnPlaceFood.onClick.Set(OnClickBtnPlacingFood);
 
             RefreshListSelection();
 
@@ -55,6 +56,13 @@ namespace UI
 
         private void OnClickBtnPlacingThing() {
             DesignatorManager.Instance.DesignatorType = DesignatorType.Placing;
+            DesignatorManager.Instance.PlacingDef = DataManager.Instance.GetThingDefineByID(201);
+        }
+
+        private void OnClickBtnPlacingFood()
+        {
+            DesignatorManager.Instance.DesignatorType = DesignatorType.Placing;
+            DesignatorManager.Instance.PlacingDef = DataManager.Instance.GetThingDefineByID(2001);
         }
 
         public override void Bind(GComponent component) {

@@ -11,6 +11,7 @@ namespace Main
         public GComponent m_BtnPlaceThing;
         public GList m_ListMainSelection;
         public GGraph m_DragBox;
+        public GComponent m_BtnPlaceFood;
         public const string URL = "ui://0kazkhhcc0f50";
 
         public static UI_MainView CreateInstance()
@@ -26,6 +27,7 @@ namespace Main
             m_BtnPlaceThing = (GComponent)GetChildAt(0);
             m_ListMainSelection = (GList)GetChildAt(2);
             m_DragBox = (GGraph)GetChildAt(3);
+            m_BtnPlaceFood = (GComponent)GetChildAt(4);
         }
     }
 }
