@@ -14,8 +14,10 @@ namespace ThinkSystem
             colonistNode.Children.Add(draftNode);
             //TODO:征兆的默认只会站在原地等人战斗
             Root.Children.Add(colonistNode);
-            var satisifyNode = new ThinkNode_Priority();
 
+            var satisifyNode = new ThinkNode_Priority();
+            satisifyNode.Children.Add(new JobGiver_GetFood());
+            Root.Children.Add(satisifyNode);
             //TODO:添加满足各种食物,饥渴度,娱乐等需求的节点
 
 

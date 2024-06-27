@@ -48,4 +48,12 @@
 		</DriverClass>
 		<CanSuspend>true</CanSuspend>
 	</JobDefine>
+	<JobDefine>
+		<ID>7</ID>
+		<Name>FindFoodAndEat</Name>
+		<DriverClass>
+			<TypeName>JobDriver_FindFoodAndEat</TypeName>
+		</DriverClass>
+		<CanSuspend>true</CanSuspend>
+	</JobDefine>
 </ArrayOfJobDefine>

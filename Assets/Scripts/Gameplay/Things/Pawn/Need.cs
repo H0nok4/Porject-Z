@@ -59,7 +59,9 @@ public abstract class Need {
     public bool CanTrySatisfied() {
         //暂定每10秒检测一次
         bool result = PreTrySatisfyTick + TrySatisfyInterval < GameTicker.Instance.CurrentTick;
-        PreTrySatisfyTick = GameTicker.Instance.CurrentTick;
+        if (result) {
+            PreTrySatisfyTick = GameTicker.Instance.CurrentTick;
+        }
         return result;
     }
 }

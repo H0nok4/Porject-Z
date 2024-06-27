@@ -29,7 +29,7 @@ public class FoodNeed : Need{
     public override void Tick(int interval) {
         //TODO:饱食度会随时间降低
         //Rimworld中60000Tick为游戏内1天,目前先假设1天就会把饱食度掉到0
-        CurValue -= (1  / 60000f) * interval;
+        CurValue -= (1  / 3000f) * interval;
 
         //TODO:当掉到0的时候,进入营养不良的状态
     }

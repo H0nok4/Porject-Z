@@ -23,19 +23,19 @@ public  class IngestibleEffect {
 
     public int RecoverHungry {
         get {
-            return _def.RecoverFood;
+            return Define.RecoverFood;
         }
     }
 
     public int RecoverThirsty {
         get {
-            return _def.RecoverThirsty;
+            return Define.RecoverThirsty;
         }
     }
 
     public int RecoverJoy {
         get {
-            return _def.RecoverJoy;
+            return Define.RecoverJoy;
         }
     }
 
