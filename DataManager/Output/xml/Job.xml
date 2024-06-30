@@ -52,7 +52,7 @@
 		<ID>7</ID>
 		<Name>FindFoodAndEat</Name>
 		<DriverClass>
-			<TypeName>JobDriver_FindFoodAndEat</TypeName>
+			<TypeName>JobDriver_GetFoodAndEat</TypeName>
 		</DriverClass>
 		<CanSuspend>true</CanSuspend>
 	</JobDefine>

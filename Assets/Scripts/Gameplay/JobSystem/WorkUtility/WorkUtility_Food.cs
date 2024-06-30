@@ -16,34 +16,18 @@ public static class WorkUtility_Food {
         work.InitAction = delegate
         {
             Thing_Unit unit = work.Unit;
-            Job curJob = unit.JobTracker.Job;
-            if (unit.CarryTracker.CarriedThing == null) {
-                Debug.LogError("有搬运物体的工作但是单位没有拿物体");
-            }
-            else
-            {
-                var target = work.Unit.JobTracker.Job.GetTarget(containerTargetIndex).Thing;
-                var thingOwner = target.TryGetThingOwner();
-                if (thingOwner != null && thingOwner == work.Unit.CarryTracker.ThingContainer)
-                {
-                    Debug.Log("当前拿着的就是想吃的");
-                }
-                else
-                {
-                    Debug.LogError("当前拿着的东西不是准备吃的东西");
-                    unit.JobTracker.EndCurrentJob(JobEndCondition.Error);
-                }
-
-
-            }
+            Debug.LogError("开始吃食物");
 
         };
         work.FinishedAction = delegate
         {
             var unit = work.Unit;
-            unit.NeedTracker.Food.CurValuePercent = 1f;
+            var target = (Thing_Item)unit.JobTracker.Job.GetTarget(0).Thing;
+            //TODO:后面需要加个吃东西的接口
+            unit.NeedTracker.Food.CurValuePercent = 1;
             Debug.Log("吃完了,恢复食物");
             unit.CarryTracker.CarriedThing.Destroy();
+
         };
         work.NeedWaitingTick = 180;//TODO:暂定吃3秒
         work.CompleteMode = WorkCompleteMode.Delay;

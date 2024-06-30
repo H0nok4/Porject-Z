@@ -14,10 +14,9 @@ namespace ThinkSystem{
             }
 
             //TODO:如果没有食物的话可能会反复进入这个状态导致卡死,只能隔一段时间判断一次
-            if (unit.NeedTracker.Food != null && unit.NeedTracker.Food.HungryStage <= HungryStageType.WantFood && unit.NeedTracker.Food.CanTrySatisfied()) {
+            if (unit.NeedTracker.Food != null && unit.NeedTracker.Food.HungryStage <= HungryStageType.WantFood /*&& unit.NeedTracker.Food.CanTrySatisfied()*/) {
                 var getFoodJob = JobMaker.MakeJob(DataManager.Instance.GetJobDefineByID(7));
-                var items = MapController.Instance.Map.ListThings.ThingsMatching(
-                    new ThingRequest() {Group = ThingRequestGroup.Item});
+                var items = MapController.Instance.Map.ListThings.ThingsMatching(ThingRequest.ForGroup(ThingRequestGroup.Item));
                 Thing_Item food = null;
                 //TODO:遍历所有物品找到可以恢复饱食度的
                 foreach (var thing in items) {
@@ -28,10 +27,14 @@ namespace ThinkSystem{
                 }
 
                 if (food != null) {
-                    getFoodJob.InfoA = food;
-                    return getFoodJob;
+                    if (ReservationManager.Instance.CanReserve(unit, food)) {
+                        getFoodJob.InfoA = food;
+                        getFoodJob.Count = 1;
+                        return getFoodJob;
+                    }
                 }
 
+                JobMaker.ReturnJob(getFoodJob);
             }
 
             return null;
