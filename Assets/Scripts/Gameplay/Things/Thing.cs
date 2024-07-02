@@ -279,13 +279,14 @@ public abstract class Thing : IThing,IFOWUnit,ISelectable {
 
         bool spawned = Spawned;
         //TODO:作为已经生成在地图上的物体，需要额外处理一下摧毁的流程
+
+        if (HoldingOwner != null) {
+            this.HoldingOwner.Remove(this);
+        }
+
         if (spawned)
         {
             //TODO:摧毁物体，移除父物体等
-            if (HoldingOwner != null)
-            {
-                this.HoldingOwner.Remove(this);
-            }
             _mapData.UnRegisterThingHandle(this);
             _mapData.UnRegisterThingMapPos(this);
             MapController.Instance.Map.ListThings.Remove(this);

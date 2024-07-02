@@ -175,6 +175,7 @@ public class ThingUnit_JobTracker
             JobDriver.Clean();
         }
 
+        ClearJobReservation();
 
         var cachedJob = Job;
         ClearJobDriver();

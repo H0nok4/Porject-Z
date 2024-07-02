@@ -94,5 +94,8 @@ public class ReservationManager : Singleton<ReservationManager> {
 
     public void ClearReservationByJob(Thing_Unit unit, Job job) {
         //TODO:清理掉由这个单位创建的Reservation
+        Reservations.RemoveAll((re) => re.Unit == unit && re.Job == job);
     }
+
+    
 }
