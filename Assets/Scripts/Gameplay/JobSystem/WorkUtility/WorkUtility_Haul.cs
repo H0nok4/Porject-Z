@@ -45,7 +45,7 @@ public static class WorkUtility_Haul {
         Work work = WorkMaker.MakeWork();
         work.InitAction = delegate
         {
-            Thing_Unit unit = work.Unit;
+             Thing_Unit unit = work.Unit;
             Job curJob = unit.JobTracker.Job;
             Thing targetThing = curJob.GetTarget(targetIndex).Thing;
             if (CanCarryThing(unit,targetThing))

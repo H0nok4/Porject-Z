@@ -26,6 +26,21 @@ public class ThingUnit_NeedTracker {
         }
     }
 
+    public ThirstyNeed Thirsty
+    {
+        get
+        {
+            foreach (var need in Needs)
+            {
+                if (need.NeedDef.Type == NeedType.Thirsty)
+                {
+                    return (ThirstyNeed)need;
+                }
+            }
+
+            return null;
+        }
+    }
     public ThingUnit_NeedTracker(Thing_Unit unit) {
         //TODO:添加Need实例
         Unit = unit;
