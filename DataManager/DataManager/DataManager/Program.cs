@@ -6,12 +6,14 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CsvParser {
     class Program {
@@ -27,29 +29,39 @@ namespace CsvParser {
         private static List<CSVFile> csvFiles = new List<CSVFile>();
         private static Dictionary<string,Type> EnumTypes = new Dictionary<string, Type>();
         static void Main(string[] args) {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            try
+            {
+                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-            ReadAllCSV();
+                ReadAllCSV();
 
-            //整理主表和子表
-            SetMainFileAndChildren();
-            //校验CSV表的主键
-            VerifyCSV();
+                //整理主表和子表
+                SetMainFileAndChildren();
+                //校验CSV表的主键
+                VerifyCSV();
 
-            GenerateKeyValueTable();
-            //TODO:可能还得校验数据的有效性，比如所填的数据是否是对应的类型
+                GenerateKeyValueTable();
+                //TODO:可能还得校验数据的有效性，比如所填的数据是否是对应的类型
 
-            //先生成Type的文件
-            GenerateConfigTypeScriptFile();
+                //先生成Type的文件
+                GenerateConfigTypeScriptFile();
 
-            //根据生成的Type文件，使用Roslyn来生成对应的List数据
-            GenerateData();
+                //根据生成的Type文件，使用Roslyn来生成对应的List数据
+                GenerateData();
 
-            //将生成出来的代码和XML文件拷贝到游戏工程中
-            CopyToGameProject();
+                //将生成出来的代码和XML文件拷贝到游戏工程中
+                CopyToGameProject();
 
-            //开始生成一个DataManager.cs文件，用于游戏内获取所有的游戏配置
-            GenerateDataManagerScriptFile();
+                //开始生成一个DataManager.cs文件，用于游戏内获取所有的游戏配置
+                GenerateDataManagerScriptFile();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Console.ReadKey();
+            }
+            Console.WriteLine("按任意键结束......");
+            Console.ReadKey();
         }
 
         private static void ReadAllCSV()
@@ -869,6 +881,7 @@ namespace CsvParser {
 
         public static CSVFile ReadCSVFile(string path)
         {
+            //TODO:遇到同名同类型的列,需要合并到第一次出现的地方
             CSVFile csvFile = new CSVFile();
 
             csvFile.FileName = Path.GetFileNameWithoutExtension(path);
@@ -888,7 +901,47 @@ namespace CsvParser {
 
             csvFile.SetKeys();
 
+            CombineSameNameRow(csvFile);
+
             return csvFile;
+        }
+
+        public static void CombineSameNameRow(CSVFile csvFile)
+        {
+            var name = csvFile.PropertyName;
+            Dictionary<string, int> nameToIndex = new Dictionary<string, int>();
+            List<int> colToRemove = new List<int>();
+
+            for (int i = 0; i < name.Count; i++) {
+                string columnName = name[i];
+                if (nameToIndex.ContainsKey(columnName)) {
+                    int firstIndex = nameToIndex[columnName];
+                    for (int j = 5; j < csvFile.Data.Count; j++) {
+                        csvFile.Data[j][firstIndex] += ";" + csvFile.Data[j][i];
+                    }
+                    colToRemove.Add(i);
+                }
+                else {
+                    nameToIndex[columnName] = i;
+                }
+            }
+
+            // 删除重复的列
+            for (int i = colToRemove.Count - 1; i >= 0; i--) {
+                int columnIndex = colToRemove[i];
+                foreach (var row in csvFile.Data) {
+                    row.RemoveAt(columnIndex);
+                }
+            }
+
+            if (csvFile.Children is { Count: > 0 } )
+            {
+                for (int i = 0; i < csvFile.Children.Count; i++)
+                {
+                    CombineSameNameRow(csvFile.Children[i]);
+                }
+            }
+
         }
 
         private void SetKeys()

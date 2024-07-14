@@ -207,6 +207,14 @@ namespace ConfigType
         public List<int> AddBuffDurations; // 使用后添加的Buff时间 
     }
 
+    public partial class JackpotDefine
+    {
+        public int ID; // ID 
+        public List<int> ItemIDList; // 物品ID 
+        public List<int> MinCount; // 最小值 
+        public List<int> MaxCount; // 最大值 
+    }
+
     public partial class JobDefine
     {
         public int ID; // ID 

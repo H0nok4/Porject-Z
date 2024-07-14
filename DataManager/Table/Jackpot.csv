@@ -1,0 +1,7 @@
+*,,,,,,,,,,,,,,,
+int32,int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[]
+ID,ItemIDList,MinCount,MaxCount,ItemIDList,MinCount,MaxCount,ItemIDList,MinCount,MaxCount,ItemIDList,MinCount,MaxCount,ItemIDList,MinCount,MaxCount
+ID,物品ID,最小值,最大值,物品ID,最小值,最大值,物品ID,最小值,最大值,物品ID,最小值,最大值,物品ID,最小值,最大值
+,0,,,0,,,0,,,0,,,0,,
+1,1,1,5,2,1,5,3,1,5,4,1,5,5,1,5
+2,1,1,5,2,1,5,3,1,5,4,1,5,,,

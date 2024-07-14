@@ -20,6 +20,13 @@ namespace ConfigType
             return IngestibleDefineDic[ID];
         }
 
+        public List<JackpotDefine> JackpotDefineList = new List<JackpotDefine>();
+        public Dictionary<int, JackpotDefine> JackpotDefineDic = new Dictionary<int, JackpotDefine>();
+        public JackpotDefine GetJackpotDefineByID(int ID)
+        {
+            return JackpotDefineDic[ID];
+        }
+
         public List<JobDefine> JobDefineList = new List<JobDefine>();
         public Dictionary<int, JobDefine> JobDefineDic = new Dictionary<int, JobDefine>();
         public JobDefine GetJobDefineByID(int ID)
@@ -57,6 +64,9 @@ namespace ConfigType
             FileStream IngestibleStream = File.OpenRead(ConfigPath + "Ingestible.xml");
             XmlSerializer IngestibleDefineserializer = new XmlSerializer(typeof(List<IngestibleDefine>));
             IngestibleDefineList = (List<IngestibleDefine>)IngestibleDefineserializer.Deserialize(IngestibleStream);
+            FileStream JackpotStream = File.OpenRead(ConfigPath + "Jackpot.xml");
+            XmlSerializer JackpotDefineserializer = new XmlSerializer(typeof(List<JackpotDefine>));
+            JackpotDefineList = (List<JackpotDefine>)JackpotDefineserializer.Deserialize(JackpotStream);
             FileStream JobStream = File.OpenRead(ConfigPath + "Job.xml");
             XmlSerializer JobDefineserializer = new XmlSerializer(typeof(List<JobDefine>));
             JobDefineList = (List<JobDefine>)JobDefineserializer.Deserialize(JobStream);
@@ -82,6 +92,11 @@ namespace ConfigType
             foreach (var i in IngestibleDefineList)
             {
                 IngestibleDefineDic.Add(i.ID, i);
+            }
+
+            foreach (var i in JackpotDefineList)
+            {
+                JackpotDefineDic.Add(i.ID, i);
             }
 
             foreach (var i in JobDefineList)
