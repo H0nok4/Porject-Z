@@ -132,7 +132,7 @@ public static class PathFinder {
                         //TODO:如果这个位置可以当结束位置，需要判断是否可以站立在这里
                         if (hasCanTouchPos) {
                             if (mapData.ThingMap.ThingsAt(node.Pos).Any((thing) => thing != finder && thing.Def.Passability != Traversability.CanStand)) {
-                                Debug.LogWarning($"这个位置{newNode.Pos}可以当结束位置，但是不可以站立,跳过");
+                                Logger.Instance?.LogWarning($"这个位置{newNode.Pos}可以当结束位置，但是不可以站立,跳过");
                                 continue;
                             }
                         }
@@ -203,7 +203,7 @@ public static class PathFinder {
 
 
         //找遍了地图没有找到终点，可能没有路径能够到达
-        Debug.LogError("没有对应的路径到达目标点");
+        Logger.Instance?.LogError("没有对应的路径到达目标点");
 
         ClearOpenList(openList);
         ClearCloseSet(closeList);
@@ -223,7 +223,7 @@ public static class PathFinder {
             foreach (var posNode in path) {
                 sb.Append($",{posNode.Pos}");
             }
-            Debug.Log(sb);
+            Logger.Instance?.Log(sb.ToString());
 #endif
 
             //因为是从终点开始加的，所以倒过来，后面需要用其他的数据结构优化一下
@@ -249,7 +249,7 @@ public static class PathFinder {
     }
 
     private static void ClearCloseSet(HashSet<PathFindNode> set) {
-        Debug.Log($"当前准备回收:{set.Count}个PosNode,引用池中总共有:{SimplePool<PathFindNode>.FreeItemsCount}个PosNode");
+        Logger.Instance?.Log($"当前准备回收:{set.Count}个PosNode,引用池中总共有:{SimplePool<PathFindNode>.FreeItemsCount}个PosNode");
         foreach (var posNode in set) {
             SimplePool<PathFindNode>.Return(posNode);
         }
@@ -258,7 +258,7 @@ public static class PathFinder {
     }
 
     private static void ClearOpenList(PriorityQueue<PathFindNode> openList) {
-        Debug.Log($"当前准备回收:{openList.Count}个PosNode,引用池中总共有:{SimplePool<PathFindNode>.FreeItemsCount}个PosNode");
+        Logger.Instance?.Log($"当前准备回收:{openList.Count}个PosNode,引用池中总共有:{SimplePool<PathFindNode>.FreeItemsCount}个PosNode");
         while (openList.Count > 0) {
             SimplePool<PathFindNode>.Return(openList.Dequeue());
         }
@@ -309,7 +309,7 @@ public static class PathFinder {
             {
                 if (things.Def == null)
                 {
-                    Debug.LogError("判断物体是否可通行的时候遇到了空配置的物体");
+                    Logger.Instance?.LogError("判断物体是否可通行的时候遇到了空配置的物体");
                     continue;
                 }
 

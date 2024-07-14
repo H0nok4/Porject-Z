@@ -46,7 +46,7 @@ namespace UI {
 
                     if (contentPane == null)
                     {
-                        Debug.LogError($"ContentPanel创建失败,Name = {ViewView.PackageAndComponentName}");
+                        Logger.Instance?.LogError($"ContentPanel创建失败,Name = {ViewView.PackageAndComponentName}");
                         return;
                     }
 

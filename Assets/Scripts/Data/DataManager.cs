@@ -95,7 +95,7 @@ namespace ConfigType
                 return sprite;
             }
 
-            Debug.LogError($"找不到对应路径的Sprite,使用的路径为:{path}");
+            Logger.Instance?.LogError($"找不到对应路径的Sprite,使用的路径为:{path}");
             return null;
         }
     }

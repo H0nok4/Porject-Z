@@ -41,7 +41,7 @@ namespace UI
             //    .First((type) => type.GetType() == typeof(ViewAttribute)) as ViewAttribute;
             if (uiData.viewAttribute == null)
             {
-                Debug.LogError("打开的UIPanel没有ViewAttribute");
+                Logger.Instance?.LogError("打开的UIPanel没有ViewAttribute");
                 return null;
             }
 

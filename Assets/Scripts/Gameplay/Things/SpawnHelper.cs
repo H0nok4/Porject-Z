@@ -24,7 +24,7 @@ public static class SpawnHelper
         var mapData = node.MapData;
         if (mapData == null)
         {
-            Debug.LogError($"生成物体到不存在的地图层级上,index = {node.MapDataIndex}");
+            Logger.Instance?.LogError($"生成物体到不存在的地图层级上,index = {node.MapDataIndex}");
             return null;
         }
         //TODO:如果该位置有Thing，需要移动到最近的点上

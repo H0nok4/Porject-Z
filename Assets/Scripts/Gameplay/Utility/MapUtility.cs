@@ -75,7 +75,7 @@ public static class MapUtility {
 
 
         //找遍所有地方都没找到可以站立的点,有问题
-        Debug.LogError($"找遍所有地方都没找到可以站立的点,起始点:{startPos.Pos}");
+        Logger.Instance?.LogError($"找遍所有地方都没找到可以站立的点,起始点:{startPos.Pos}");
         return null;
     }
 
@@ -146,7 +146,7 @@ public static class MapUtility {
 
 
         //找遍所有地方都没找到可以站立的点,有问题
-        Debug.LogError($"找遍所有地方都没找到可以站立的点,起始点:{startPos.Pos}");
+        Logger.Instance?.LogError($"找遍所有地方都没找到可以站立的点,起始点:{startPos.Pos}");
         return null;
     }
 }

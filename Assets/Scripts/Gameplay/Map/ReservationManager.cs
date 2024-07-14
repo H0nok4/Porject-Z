@@ -38,7 +38,7 @@ public class ReservationManager : Singleton<ReservationManager> {
         for (int i = 0; i < Reservations.Count; i++) {
             var reservation = Reservations[i];
             if (reservation.Unit == unit && reservation.Job == job && reservation.TargetInfo == targetInfo) {
-                Debug.Log("有相同的预定,直接返回True");
+                Logger.Instance?.Log("有相同的预定,直接返回True");
                 return true;
             }
         }

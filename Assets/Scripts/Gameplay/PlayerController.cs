@@ -207,11 +207,11 @@ public class PlayerController : Singleton<PlayerController>
         //TODO:按优先级选中单位 Unit > Item > Blueprint > Frame > Building
         //TODO:有一个对应类型的就选中当前所有同类型的,其他的忽略
 
-        Debug.Log("选中界面中的东西");
+        Logger.Instance?.Log("选中界面中的东西");
         //TODO:先获得地图中范围内的所有物体
         var worldStartPos = UIUtility.GetWorldPositionByUIPosition(DragBox.LeftUpPos);
         var worldEndPos = UIUtility.GetWorldPositionByUIPosition(DragBox.RightDownPos);
-        Debug.Log($"当前拖拽世界位置:起始：{worldStartPos},结束:{worldEndPos}");
+        Logger.Instance?.Log($"当前拖拽世界位置:起始：{worldStartPos},结束:{worldEndPos}");
         var startY = (int) worldEndPos.y;
         var endY = (int) worldStartPos.y;
         var startX = (int) worldStartPos.x;
@@ -224,7 +224,7 @@ public class PlayerController : Singleton<PlayerController>
                 }
             }
         }
-        Debug.Log($"拖拽范围内一共有{things.Count}个物体");
+        Logger.Instance?.Log($"拖拽范围内一共有{things.Count}个物体");
 
         //TODO:后面按优先级选择
         SelectManager.Instance.SetSelectThings(things);

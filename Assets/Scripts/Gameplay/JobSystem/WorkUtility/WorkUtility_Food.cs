@@ -16,7 +16,7 @@ public static class WorkUtility_Food {
         work.InitAction = delegate
         {
             Thing_Unit unit = work.Unit;
-            Debug.LogError("开始吃食物");
+            Logger.Instance?.LogError("开始吃食物");
 
         };
         work.FinishedAction = delegate
@@ -25,7 +25,7 @@ public static class WorkUtility_Food {
             var target = (Thing_Item)unit.JobTracker.Job.GetTarget(0).Thing;
             //TODO:后面需要加个吃东西的接口
             unit.NeedTracker.Food.CurValuePercent = 1;
-            Debug.Log("吃完了,恢复食物");
+            Logger.Instance?.Log("吃完了,恢复食物");
             unit.CarryTracker.CarriedThing.Destroy();
 
         };

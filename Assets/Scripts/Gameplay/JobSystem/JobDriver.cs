@@ -63,7 +63,7 @@ public abstract class JobDriver
         DelayWaitingTickCount--;
         if (CurrentWork == null)
         {
-            Debug.Log("当前没有工作，开始一个新的工作");
+            Logger.Instance?.Log("当前没有工作，开始一个新的工作");
             CanStartNextWork();
         }
         else
@@ -125,7 +125,7 @@ public abstract class JobDriver
             if (work.CompleteMode == WorkCompleteMode.None)
             {
                 work.CompleteMode = WorkCompleteMode.Instant;
-                Debug.LogError($"正在进行中的工作没有结束的类型");
+                Logger.Instance?.LogError($"正在进行中的工作没有结束的类型");
             }
 
             Works.Add(work);
@@ -228,7 +228,7 @@ public abstract class JobDriver
     {
         if (targetWork == null)
         {
-            Debug.LogError("想要跳转岛不存在的工作");
+            Logger.Instance?.LogError("想要跳转岛不存在的工作");
             return;
         }
         SetNextWork(targetWork);

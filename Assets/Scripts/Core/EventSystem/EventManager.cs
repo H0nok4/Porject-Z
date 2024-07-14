@@ -16,7 +16,7 @@ namespace EventSystem
             }
 
             if (Params[index] is not T) {
-                Debug.LogError($"类型转换错误, index: {index}, Type: {typeof(T)}");
+                Logger.Instance?.LogError($"类型转换错误, index: {index}, Type: {typeof(T)}");
                 return default;
             }
 

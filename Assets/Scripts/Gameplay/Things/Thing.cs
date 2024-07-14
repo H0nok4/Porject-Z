@@ -202,7 +202,7 @@ public abstract class Thing : IThing,IFOWUnit,ISelectable {
 
         if (Spawned)
         {
-            Debug.LogError("想要生成一个使用中的物体");
+            Logger.Instance?.LogError("想要生成一个使用中的物体");
             return;
         }
 
@@ -230,13 +230,13 @@ public abstract class Thing : IThing,IFOWUnit,ISelectable {
     {
         if (IsDestroyed)
         {
-            Debug.LogError("想要摧毁一个已经摧毁了的物体");
+            Logger.Instance?.LogError("想要摧毁一个已经摧毁了的物体");
             return;
         }
 
         if (!Spawned)
         {
-            Debug.LogError("想要摧毁一个未生成的物体");
+            Logger.Instance?.LogError("想要摧毁一个未生成的物体");
             return;
         }
 
@@ -267,13 +267,13 @@ public abstract class Thing : IThing,IFOWUnit,ISelectable {
     {
         if (!Def.Destroyable)
         {
-            Debug.LogError("尝试摧毁一个配置为无法摧毁的物体");
+            Logger.Instance?.LogError("尝试摧毁一个配置为无法摧毁的物体");
             return;
         }
 
         if (IsDestroyed)
         {
-            Debug.LogError("尝试摧毁一个已经被摧毁的物体");
+            Logger.Instance?.LogError("尝试摧毁一个已经被摧毁的物体");
             return;
         }
 
@@ -358,12 +358,12 @@ public abstract class Thing : IThing,IFOWUnit,ISelectable {
         {
             if (count > Count)
             {
-                Debug.LogError($"想要分离数量为{count}个的物品，但是只有{Count}个");
+                Logger.Instance?.LogError($"想要分离数量为{count}个的物品，但是只有{Count}个");
                 //count = Count;
             }
 
             //TODO:分割出所有的物品，那干脆直接把这个对象整个给你算了
-            Debug.Log("把所有数量的物体都捡起来了，开始DeSpawn物体");
+            Logger.Instance?.Log("把所有数量的物体都捡起来了，开始DeSpawn物体");
             DespawnAndDeselect();
             //TODO:
             if (HoldingOwner != null)
@@ -382,7 +382,7 @@ public abstract class Thing : IThing,IFOWUnit,ISelectable {
         if (Spawned)
         {
             //TODO:在地图上的物品需要更新数量之类的,需要给地图发出一个时间
-            Debug.LogError("未实现-一个物品分离出一个新的物品，需要刷新地图数据");
+            Logger.Instance?.LogError("未实现-一个物品分离出一个新的物品，需要刷新地图数据");
         }
         if (Def.UseHitPoint)
         {

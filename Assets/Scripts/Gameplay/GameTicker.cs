@@ -200,7 +200,7 @@ public class TickList
             }
             catch (Exception e)
             {
-                UnityEngine.Debug.LogError($"Tick物体的时候出现了致命错误,错误为{e}");
+                Logger.Instance?.LogError($"Tick物体的时候出现了致命错误,错误为{e}");
             }
  
         }

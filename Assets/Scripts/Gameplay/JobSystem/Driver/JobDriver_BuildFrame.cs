@@ -15,7 +15,7 @@ public class JobDriver_BuildFrame : JobDriver {
         var work = WorkMaker.MakeWork();
         work.InitAction = delegate
         {
-            Debug.Log("开始建造建筑");
+            Logger.Instance?.Log("开始建造建筑");
         };
         work.TickAction = delegate
         {
@@ -31,7 +31,7 @@ public class JobDriver_BuildFrame : JobDriver {
             if (frame.CurrentWorkCount >= frame.WorkToBuild)
             {
                 //TODO：成功建造完成，在完成后,将Frame替换成实际建筑
-                Debug.LogError("成功建造建筑");
+                Logger.Instance?.LogError("成功建造建筑");
                 frame.CompleteBuild(unit);
                 CanStartNextWork();
             }

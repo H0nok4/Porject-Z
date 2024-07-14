@@ -123,7 +123,7 @@ namespace EventSystem
                         action();
                     }
                     catch (Exception ex) {
-                        UnityEngine.Debug.LogError(ex.ToString());
+                        Logger.Instance?.LogError(ex.ToString());
                     }
                 }
             }
@@ -141,7 +141,7 @@ namespace EventSystem
                         action(arg1);
                     }
                     catch (Exception ex) {
-                        UnityEngine.Debug.LogError(ex.ToString());
+                        Logger.Instance?.LogError(ex.ToString());
                     }
                 }
             }
@@ -159,7 +159,7 @@ namespace EventSystem
                         action(arg1, arg2);
                     }
                     catch (Exception ex) {
-                        UnityEngine.Debug.LogError(ex.ToString());
+                        Logger.Instance?.LogError(ex.ToString());
                     }
                 }
             }
@@ -177,7 +177,7 @@ namespace EventSystem
                         action(arg1, arg2, arg3);
                     }
                     catch (Exception ex) {
-                        UnityEngine.Debug.LogError(ex.ToString());
+                        Logger.Instance?.LogError(ex.ToString());
                     }
                 }
             }
@@ -195,7 +195,7 @@ namespace EventSystem
                         action(arg1, arg2, arg3, arg4);
                     }
                     catch (Exception ex) {
-                        UnityEngine.Debug.LogError(ex.ToString());
+                        Logger.Instance?.LogError(ex.ToString());
                     }
                 }
             }

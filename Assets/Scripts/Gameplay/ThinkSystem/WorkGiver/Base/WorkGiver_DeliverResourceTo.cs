@@ -22,7 +22,7 @@ public abstract class WorkGiver_DeliverResourceTo : WorkGiver_Scanner {
             if (exitsThing.Count > 0) {
                 //TODO:先暂时直接获取所有物品数量来测试
                 int avaliableItemCount = exitsThing.Sum((thing) => thing.Count);
-                Debug.Log($"当前有{avaliableItemCount}个物品");
+                Logger.Instance?.Log($"当前有{avaliableItemCount}个物品");
                 var haulToContainerJob = JobMaker.MakeJob(DataManager.Instance.GetJobDefineByID(6));
                 haulToContainerJob.SetTarget(JobTargetIndex.A, exitsThing[0]);
                 exitsThing.RemoveAt(0);
@@ -59,7 +59,7 @@ public abstract class WorkGiver_DeliverResourceTo : WorkGiver_Scanner {
         }
 
         if (MissingResources.Count > 0) {
-            Debug.LogError("没有找到材料来建造");
+            Logger.Instance?.LogError("没有找到材料来建造");
         }
 
         return null;

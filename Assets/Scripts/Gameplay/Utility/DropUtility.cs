@@ -12,14 +12,14 @@ public static class DropUtility {
     {
         if (!pos.InBound())
         {
-            Debug.LogError("物品想要掉落在地图之外");
+            Logger.Instance?.LogError("物品想要掉落在地图之外");
             droppedResult = null;
             return false;
         }
 
         if (playSound)
         {
-            Debug.LogWarning("未实现-掉落声效");
+            Logger.Instance?.LogWarning("未实现-掉落声效");
         }
 
         return PlaceUtility.TryPlaceThing(thing, pos, placeMode, out droppedResult, onPlaceAction: onDropped,

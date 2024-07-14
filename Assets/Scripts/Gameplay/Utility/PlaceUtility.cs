@@ -48,12 +48,12 @@ public static class PlaceUtility
                     }
                 } while (placeThing.Count != placeCount);
 
-                Debug.LogError($"在{pos.Pos}位置以{placeMode}的模式放置物品失败");
+                Logger.Instance?.LogError($"在{pos.Pos}位置以{placeMode}的模式放置物品失败");
                 placedThing = null;
                 return false;
                 break;
             default:
-                Debug.LogError($"意料之外的错误，在{pos.Pos}位置以{placeMode}的模式放置物品失败");
+                Logger.Instance?.LogError($"意料之外的错误，在{pos.Pos}位置以{placeMode}的模式放置物品失败");
                 placedThing = null;
                 return false;
         }
@@ -160,7 +160,7 @@ public static class PlaceUtility
         //TODO: 如果这里有同类物品,返回最高优先级
 
         //TODO:如果这里有容器,容器中可以堆叠,返回较高优先级
-        Debug.LogWarning("没有可以放置的位置，返回Unusable");
+        Logger.Instance?.LogWarning("没有可以放置的位置，返回Unusable");
         //什么都没,返回中等优先级
         return PlaceSpotPriority.Medium;
     }

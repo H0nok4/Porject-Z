@@ -53,13 +53,13 @@ public class Map
     {
         if (layer < 0)
         {
-            Debug.LogError($"想取的地图层级索引小于0，LayerIndex = {layer}");
+            Logger.Instance?.LogError($"想取的地图层级索引小于0，LayerIndex = {layer}");
             return null;
         }
 
         if (layer >= _mapDatas.Count)
         {
-            Debug.LogError($"想取的地图层级索引大于当前地图最高层数，LayerIndex = {layer}，当前最高地图层数 = {_mapDatas.Count}");
+            Logger.Instance?.LogError($"想取的地图层级索引大于当前地图最高层数，LayerIndex = {layer}，当前最高地图层数 = {_mapDatas.Count}");
             return null;
         }
 

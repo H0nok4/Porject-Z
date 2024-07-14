@@ -122,7 +122,7 @@ public class PathMover {
         if (_targetInfo != null && posNode == _targetInfo.Position) {
             //设置成相同的位置，如果正在移动的话就不需要更新
             //TODO:设置成相同的目标，如果正在移动的话就不需要更新
-            Debug.LogError("设置成了相同的目标");
+            Logger.Instance?.LogError("设置成了相同的目标");
             return;
         }
         SetMoveTarget(new MoveTargetInfo(posNode, null, endType));
@@ -133,11 +133,11 @@ public class PathMover {
         if (_targetInfo != null && thing == _targetInfo.ThingTarget && IsMoving)
         {
             //TODO:设置成相同的目标，如果正在移动的话就不需要更新
-            Debug.LogError("设置成了相同的目标");
+            Logger.Instance?.LogError("设置成了相同的目标");
             return;
         }
 
-        Debug.Log($"MoveToThing => {thing.Def.Name}");
+        Logger.Instance?.Log($"MoveToThing => {thing.Def.Name}");
         SetMoveTarget(new MoveTargetInfo(null,thing, endType));
     }
 
@@ -150,7 +150,7 @@ public class PathMover {
 
         if (MoveTarget == null && CurrentMovingPath == null)
         {
-            Debug.LogError("移动未结束，但是没有目标");
+            Logger.Instance?.LogError("移动未结束，但是没有目标");
             return;
         }
 

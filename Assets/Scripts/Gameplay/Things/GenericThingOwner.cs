@@ -36,12 +36,12 @@ public class ThingOwner<T> : ThingOwner where T : Thing {
         }
 
         if (Contains(addThing)) {
-            Debug.LogWarning("尝试重复添加物体");
+            Logger.Instance?.LogWarning("尝试重复添加物体");
             return 0;
         }
 
         if (addThing.HoldingOwner != null) {
-            Debug.LogWarning("尝试添加一个已经有持有者的物品");
+            Logger.Instance?.LogWarning("尝试添加一个已经有持有者的物品");
             return 0;
         }
 
@@ -78,12 +78,12 @@ public class ThingOwner<T> : ThingOwner where T : Thing {
         }
 
         if (Contains(addThing)) {
-            Debug.LogWarning("尝试重复添加物体");
+            Logger.Instance?.LogWarning("尝试重复添加物体");
             return false;
         }
 
         if (addThing.HoldingOwner != null) {
-            Debug.LogWarning("尝试添加一个已经有持有者的物品");
+            Logger.Instance?.LogWarning("尝试添加一个已经有持有者的物品");
             return false;
         }
 
@@ -161,7 +161,7 @@ public class ThingOwner<T> : ThingOwner where T : Thing {
         bool canMergeWithExitsThing = true) {
         //TODO:尝试将物品存入ThingOwner中
         if (!Contains(item)) {
-            Debug.LogError("想要转移不属于自己的物品给别的容器");
+            Logger.Instance?.LogError("想要转移不属于自己的物品给别的容器");
             resultItem = null;
             return 0;
         }
@@ -193,22 +193,22 @@ public class ThingOwner<T> : ThingOwner where T : Thing {
         if (Contains(giveThing))
         {
             //如果全部都给别人了,就移除该物体
-            Debug.Log("把材料都给别人了");
+            Logger.Instance?.Log("把材料都给别人了");
             Remove(giveThing);
         }
         else
         {
-            Debug.Log($"给出去了{giveThing.Count}个材料,还剩{item.Count}个材料");
+            Logger.Instance?.Log($"给出去了{giveThing.Count}个材料,还剩{item.Count}个材料");
         }
 
         if (otherContainer.TryAdd(giveThing,canMergeWithExitsThing))
         {
             resultItem = giveThing;
-            Debug.Log($"成功给出");
+            Logger.Instance?.Log($"成功给出");
             return giveThing.Count;
         }
         //没有添加成功
-        Debug.Log($"给出失败了,需要放回自己身上");
+        Logger.Instance?.Log($"给出失败了,需要放回自己身上");
         resultItem = null;
         if (!otherContainer.Contains(resultItem) && resultItem.Count > 0 && !resultItem.IsDestroyed)
         {

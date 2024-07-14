@@ -22,7 +22,7 @@ public class MapController :  Singleton<MapController>
 
             tilemap.CompressBounds();
             var size = tilemap.size;
-            Debug.Log($"TileMap Size : X = {size.x} Y = {size.y} Z = {size.z}");
+            Logger.Instance?.Log($"TileMap Size : X = {size.x} Y = {size.y} Z = {size.z}");
 
 
             StringBuilder sb = new StringBuilder();
@@ -43,8 +43,8 @@ public class MapController :  Singleton<MapController>
 
                     var tile = tilemap.GetTile<MapTile>(cellPosition);
                     if (tile == null) {
-                        Debug.LogError($"错误，在{cellPosition.x},{cellPosition.y},{0}位置没有找到Tile");
-                        Debug.Log(sb.ToString());
+                        Logger.Instance?.LogError($"错误，在{cellPosition.x},{cellPosition.y},{0}位置没有找到Tile");
+                        Logger.Instance?.Log(sb.ToString());
                         return;
                     }
                     sb.Append(GetSectionName(tile.SectionType));
@@ -74,7 +74,7 @@ public class MapController :  Singleton<MapController>
                     }
                     catch (Exception e)
                     {
-                        Debug.LogError($"出错的位置是：X={mapX},Y={mapY}");
+                        Logger.Instance?.LogError($"出错的位置是：X={mapX},Y={mapY}");
                         throw;
                     }
 

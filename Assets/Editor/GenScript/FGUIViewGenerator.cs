@@ -27,7 +27,7 @@ public class FGUIViewTemplateGenerator : EditorWindow {
 
         if (GUILayout.Button("生成")) {
             RunFunction();
-            Debug.Log("生成成功");
+            Logger.Instance?.Log("生成成功");
         }
     }
 

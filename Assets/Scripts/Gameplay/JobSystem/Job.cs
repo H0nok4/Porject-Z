@@ -52,7 +52,7 @@ public class Job
         JobDriver driver = (JobDriver)Activator.CreateInstance(JobDefine.DriverClass.ToType());
         if (driver == null) 
         {
-            Debug.LogError("Job没有配置对应的Driver");
+            Logger.Instance?.LogError("Job没有配置对应的Driver");
             return null;
         }
 

@@ -45,6 +45,6 @@ public class RestNeed : Need
     public void ForceSleep()
     {
         //当休息值降低到0的时候，会强制触发睡眠
-        Debug.LogWarning("未实现-强制睡眠");
+        Logger.Instance?.LogWarning("未实现-强制睡眠");
     }
 }

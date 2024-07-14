@@ -55,7 +55,7 @@ public class ThingUnit_NeedTracker {
 
             var needType = needDefine.NeedClass.ToType();
             if (needType == null) {
-                Debug.LogError($"不存在的Need类型，NeedDefine.Type = {needDefine.Type}");
+                Logger.Instance?.LogError($"不存在的Need类型，NeedDefine.Type = {needDefine.Type}");
                 continue;
             }
             var needInstance = (Need)Activator.CreateInstance(needType);

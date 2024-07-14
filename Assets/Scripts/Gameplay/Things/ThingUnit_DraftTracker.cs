@@ -16,7 +16,7 @@ public class ThingUnit_DraftTracker
         set
         {
             _isDraft = value;
-            Debug.Log("单位被征召");
+            Logger.Instance?.Log("单位被征召");
         }
     }
 

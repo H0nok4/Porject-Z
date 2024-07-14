@@ -64,7 +64,7 @@ public class ThingUnit_JobTracker
         {
             if (currentJobEndCondition == JobEndCondition.None)
             {
-                Debug.LogError("当前工作的停止条件不应该为None");
+                Logger.Instance?.LogError("当前工作的停止条件不应该为None");
                 currentJobEndCondition = JobEndCondition.ForceEnd;
             }
 
@@ -83,7 +83,7 @@ public class ThingUnit_JobTracker
         }
         if (newJob == null)
         {
-            Debug.LogError("开始了一个空的工作!");
+            Logger.Instance?.LogError("开始了一个空的工作!");
             return;
         }
 
@@ -99,7 +99,7 @@ public class ThingUnit_JobTracker
         }
         else
         {
-            Debug.LogError("准备开始任务，设置预约时出现问题");
+            Logger.Instance?.LogError("准备开始任务，设置预约时出现问题");
             EndCurrentJob(JobEndCondition.Error);
         }
 
@@ -145,13 +145,13 @@ public class ThingUnit_JobTracker
     {
         if (Unit.JobThinker == null)
         {
-            Debug.LogError("单位没有Thinker，无法尝试开始新的工作");
+            Logger.Instance?.LogError("单位没有Thinker，无法尝试开始新的工作");
             return;
         }
 
         if (Job != null)
         {
-            Debug.LogWarning("单位在有工作的情况下尝试开始新的工作,需要打断");
+            Logger.Instance?.LogWarning("单位在有工作的情况下尝试开始新的工作,需要打断");
         }
 
         var result = ThinkNextStep(out ThinkTreeDefine define);

@@ -7,13 +7,13 @@ public static class WorkUtility_Haul {
     {
         if (!haulThing.Spawned)
         {
-            Debug.LogError("想要拣起不存在的东西");
+            Logger.Instance?.LogError("想要拣起不存在的东西");
             return false;
         }
 
         if (haulThing.Count == 0)
         {
-            Debug.LogError("想要捡起数量为0的东西");
+            Logger.Instance?.LogError("想要捡起数量为0的东西");
             return false;
         }
 
@@ -97,7 +97,7 @@ public static class WorkUtility_Haul {
             Job curJob = unit.JobTracker.Job;
             if (unit.CarryTracker.CarriedThing == null)
             {
-                Debug.LogError("有搬运物体的工作但是单位没有拿物体");
+                Logger.Instance?.LogError("有搬运物体的工作但是单位没有拿物体");
             }
             else
             {
@@ -134,7 +134,7 @@ public static class WorkUtility_Haul {
                 }
                 else
                 {
-                    Debug.LogError("无法将物品搬运到容器中");
+                    Logger.Instance?.LogError("无法将物品搬运到容器中");
                 }
             }
 
@@ -153,7 +153,7 @@ public static class WorkUtility_Haul {
             {
                 if (unit.CarryTracker.CarriedThing == null)
                 {
-                    Debug.LogError("当前没有拿着东西,按理说走到这里的话手上应该有东西的");
+                    Logger.Instance?.LogError("当前没有拿着东西,按理说走到这里的话手上应该有东西的");
                 }
                 else if(unit.CarryTracker.GetThingSpaceCountByDef(unit.CarryTracker.CarriedThing.Def) > 0)
                 {
@@ -162,7 +162,7 @@ public static class WorkUtility_Haul {
                     {
                         if (inQueueTarget[i].Thing.Def.ID == unit.CarryTracker.CarriedThing.Def.ID)
                         {
-                            Debug.Log($"还可以继续拿东西，切换当前的目标为index={i}");
+                            Logger.Instance?.Log($"还可以继续拿东西，切换当前的目标为index={i}");
                             curJob.SetTarget(jobTargetIndex, inQueueTarget[i]);
                             inQueueTarget.RemoveAt(i);
                             unit.JobTracker.JobDriver.JumpToWork(goToWork);

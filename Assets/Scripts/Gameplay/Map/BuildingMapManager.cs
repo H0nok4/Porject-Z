@@ -28,7 +28,7 @@ public class ThingMapManager {
         }
         else
         {
-            Debug.LogError("未实现，多格建筑的注册");
+            Logger.Instance?.LogError("未实现，多格建筑的注册");
         }
     }
 

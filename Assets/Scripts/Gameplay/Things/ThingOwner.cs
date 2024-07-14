@@ -69,13 +69,13 @@ public abstract class ThingOwner : IList<Thing>
     {
         if (!Contains(thing))
         {
-            Debug.LogError("想要取出不在库存中的物品");
+            Logger.Instance?.LogError("想要取出不在库存中的物品");
             return null;
         }
 
         if (count > thing.Count)
         {
-            Debug.LogError($"想要取出数量为{count}个的物品，但是只有{thing.Count}个");
+            Logger.Instance?.LogError($"想要取出数量为{count}个的物品，但是只有{thing.Count}个");
             count = thing.Count;
         }
 
@@ -207,7 +207,7 @@ public abstract class ThingOwner : IList<Thing>
     public void RemoveAt(int index) {
         if (index < 0 || index >= Count)
         {
-            Debug.LogError($"想要移除的索引大于ThingOwner持有的物品数量，当前物品数量为:{Count},想要移除的位置为:{index}");
+            Logger.Instance?.LogError($"想要移除的索引大于ThingOwner持有的物品数量，当前物品数量为:{Count},想要移除的位置为:{index}");
             return;
         }
 
@@ -248,7 +248,7 @@ public abstract class ThingOwner : IList<Thing>
     public bool TryDrop(Thing thing, PosNode pos, ThingPlaceMode mode, out Thing resultDroppedThing,
         Action<Thing, int> onDropped = null, Predicate<PosNode> nearPlaceValidator = null, bool playSound = true) {
         if (!Contains(thing)) {
-            Debug.LogError("想要丢弃不属于自己或者不存在的东西");
+            Logger.Instance?.LogError("想要丢弃不属于自己或者不存在的东西");
             resultDroppedThing = null;
             return false;
         }

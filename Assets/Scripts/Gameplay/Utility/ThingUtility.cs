@@ -54,7 +54,7 @@ public static class ThingUtility {
 
     public static void CreateFrameDefToThingDef(ThingDefine def)
     {
-        Debug.Log("创建了一个Frame配置");
+        Logger.Instance?.Log("创建了一个Frame配置");
         var baseFrameDef = BaseFrameDef();
         //TODO:Frame点击的时候还是需要一些建成之后的建筑的信息，比如名称，工作量之类的
         baseFrameDef.ID = def.ID;
@@ -78,7 +78,7 @@ public static class ThingUtility {
 
     public static void CreateBlueprintDefToThingDef(ThingDefine thingDefine)
     {
-        Debug.Log("创建了一个蓝图配置");
+        Logger.Instance?.Log("创建了一个蓝图配置");
         var baseBlueprintDef = BaseBlueprintDef();
         baseBlueprintDef.ID = thingDefine.ID;
         baseBlueprintDef.SizeX = thingDefine.SizeX;
