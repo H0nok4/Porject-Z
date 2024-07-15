@@ -61,6 +61,7 @@ ThingCategory,None,
 ,Item,
 ,Building,
 ,Mirage,
+,GenResContainer,
 ThingPlaceMode,Direct,就只能放在这个地方
 ,Near,BFS找到最近的空位
 ThingType,Building,建筑

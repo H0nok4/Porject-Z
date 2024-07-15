@@ -128,7 +128,8 @@ namespace ConfigType
         Unit,
         Item,
         Building,
-        Mirage
+        Mirage,
+        GenResContainer
     }
 
     public enum ThingPlaceMode
@@ -213,6 +214,7 @@ namespace ConfigType
         public List<int> ItemIDList; // 物品ID 
         public List<int> MinCount; // 最小值 
         public List<int> MaxCount; // 最大值 
+        public List<int> Weight; // 权重 
     }
 
     public partial class JobDefine

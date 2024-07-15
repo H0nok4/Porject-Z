@@ -61,6 +61,34 @@
 		<IngestibleID>0</IngestibleID>
 	</ThingDefine>
 	<ThingDefine>
+		<ID>50</ID>
+		<Name>ResBox</Name>
+		<Describe />
+		<ThingClass>
+			<TypeName>Thing_Thing_GenResourceContainer</TypeName>
+		</ThingClass>
+		<Category>GenResContainer</Category>
+		<Destroyable>true</Destroyable>
+		<UseHitPoint>true</UseHitPoint>
+		<StackLimit>1</StackLimit>
+		<MaxHitPoint>200</MaxHitPoint>
+		<EverHaulable>false</EverHaulable>
+		<Rotatable>true</Rotatable>
+		<WorkGiverDefineTypeID />
+		<Passability>Impassable</Passability>
+		<MoveCost>0</MoveCost>
+		<SizeX>1</SizeX>
+		<SizeY>1</SizeY>
+		<BlueprintSpritePath>Sprite/ResBoxEmpty</BlueprintSpritePath>
+		<ThingSpritePath>Sprite/ResBox</ThingSpritePath>
+		<FrameSpritePath>Sprite/GeneralFrame</FrameSpritePath>
+		<Workload>60</Workload>
+		<BuildCostThingID />
+		<BuildCostThingNum />
+		<Selectable>true</Selectable>
+		<IngestibleID>0</IngestibleID>
+	</ThingDefine>
+	<ThingDefine>
 		<ID>200</ID>
 		<Name>TestItem</Name>
 		<Describe />

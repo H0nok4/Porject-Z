@@ -23,6 +23,13 @@
 			<int>5</int>
 			<int>5</int>
 		</MaxCount>
+		<Weight>
+			<int>100</int>
+			<int>100</int>
+			<int>100</int>
+			<int>100</int>
+			<int>100</int>
+		</Weight>
 	</JackpotDefine>
 	<JackpotDefine>
 		<ID>2</ID>
@@ -44,5 +51,11 @@
 			<int>5</int>
 			<int>5</int>
 		</MaxCount>
+		<Weight>
+			<int>100</int>
+			<int>100</int>
+			<int>100</int>
+			<int>100</int>
+		</Weight>
 	</JackpotDefine>
 </ArrayOfJackpotDefine>
