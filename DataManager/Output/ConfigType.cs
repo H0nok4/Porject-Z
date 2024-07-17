@@ -211,6 +211,8 @@ namespace ConfigType
     public partial class JackpotDefine
     {
         public int ID; // ID 
+        public int MinItemCount; // 最小生成物品种类数量 
+        public int MaxItemCount; // 最大生成物品种类数量 
         public List<int> ItemIDList; // 物品ID 
         public List<int> MinCount; // 最小值 
         public List<int> MaxCount; // 最大值 

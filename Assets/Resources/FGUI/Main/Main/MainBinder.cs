@@ -9,6 +9,7 @@ namespace Main
         public static void BindAll()
         {
             UIObjectFactory.SetPackageItemExtension(UI_MainView.URL, typeof(UI_MainView));
+            UIObjectFactory.SetPackageItemExtension(UI_ComResContainerDes.URL, typeof(UI_ComResContainerDes));
             UIObjectFactory.SetPackageItemExtension(UI_ThingDesView.URL, typeof(UI_ThingDesView));
             UIObjectFactory.SetPackageItemExtension(UI_ComDesignTypePanel.URL, typeof(UI_ComDesignTypePanel));
             UIObjectFactory.SetPackageItemExtension(UI_DesignView.URL, typeof(UI_DesignView));

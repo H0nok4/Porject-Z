@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="373,448">
+  <displayList>
+    <graph id="n5_f1nd" name="n5" xy="1,0" size="372,448" type="rect">
+      <relation target="" sidePair="bottom-bottom"/>
+    </graph>
+    <text id="n6_f1nd" name="TxtName" xy="3,2" size="225,54" fontSize="40" autoSize="shrink" text="ThingName">
+      <relation target="n5_f1nd" sidePair="top-top"/>
+    </text>
+  </displayList>
+</component>

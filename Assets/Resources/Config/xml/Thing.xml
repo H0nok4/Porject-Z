@@ -65,7 +65,7 @@
 		<Name>ResBox</Name>
 		<Describe />
 		<ThingClass>
-			<TypeName>Thing_Thing_GenResourceContainer</TypeName>
+			<TypeName>Thing_GenResourceContainer</TypeName>
 		</ThingClass>
 		<Category>GenResContainer</Category>
 		<Destroyable>true</Destroyable>

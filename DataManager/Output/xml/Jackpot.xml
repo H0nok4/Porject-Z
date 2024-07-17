@@ -2,6 +2,8 @@
 <ArrayOfJackpotDefine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<JackpotDefine>
 		<ID>1</ID>
+		<MinItemCount>1</MinItemCount>
+		<MaxItemCount>5</MaxItemCount>
 		<ItemIDList>
 			<int>1</int>
 			<int>2</int>
@@ -33,6 +35,8 @@
 	</JackpotDefine>
 	<JackpotDefine>
 		<ID>2</ID>
+		<MinItemCount>1</MinItemCount>
+		<MaxItemCount>5</MaxItemCount>
 		<ItemIDList>
 			<int>1</int>
 			<int>2</int>

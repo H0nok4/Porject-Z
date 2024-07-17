@@ -77,6 +77,11 @@ namespace UI
                 return UI_ComItemDes.URL;
             }
 
+            if (thing is Thing_GenResourceContainer)
+            {
+                return UI_ComResContainerDes.URL;
+            }
+
             return string.Empty;
         }
 

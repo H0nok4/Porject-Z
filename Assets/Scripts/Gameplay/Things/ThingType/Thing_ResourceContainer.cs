@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConfigType;
 using UnityEngine;
 
 public class Thing_GenResourceContainer : ThingWithComponent
@@ -56,6 +57,8 @@ public class Thing_GenResourceContainer : ThingWithComponent
             return;
         }
         Container = new ThingOwner<Thing>();
+        var def = DataManager.Instance.GetJackpotDefineByID(UseJackpotDefineID);
+        ItemNumRange = new IntVec2(def.MinItemCount, def.MaxItemCount);
         //TODO:需要一个随机物品生成器,根据配置在奖池中随机生成一些物品.
         var items = RandomThingGenerator.Instance.GenerateThingByJackpotID(UseJackpotDefineID,
             UnityEngine.Random.Range(ItemNumRange.X, ItemNumRange.Y));

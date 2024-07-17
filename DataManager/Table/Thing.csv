@@ -5,4 +5,4 @@ ID,,,ÎïÌåÊ¹ÓÃµÄÀà,ÀàĞÍ,ÊÇ·ñ¿ÉÒÔ±»´İ»Ù,ÊÇ·ñÊ¹ÓÃÑªÁ¿,¶ÑµşÏŞÖÆÊıÁ¿,ÑªÁ¿ÉÏÏŞ,ÊÇ·ñÄÜ¹
 ,,,,None,TRUE,TRUE,1,100,FALSE,TRUE,,OnlyThrough,0,1,1,,,Sprite/GeneralFrame,60,,,TRUE,0
 1,Pawn,,Thing_Unit_Pawn,Unit,,,,,,,,,,,,,Sprite/PlayerTest,,,,,,
 2,Wall,,Thing_Building_Wall,Building,,,,,,,,Impassable,,,,Sprite/Barricade_Blueprint,Sprite/Barricade,,,202,10,,
-50,ResBox,,Thing_Thing_GenResourceContainer,GenResContainer,,,,200,,,,Impassable,,,,Sprite/ResBoxEmpty,Sprite/ResBox,,,,,,
+50,ResBox,,Thing_GenResourceContainer,GenResContainer,,,,200,,,,Impassable,,,,Sprite/ResBoxEmpty,Sprite/ResBox,,,,,,

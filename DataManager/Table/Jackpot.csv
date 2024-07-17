@@ -1,7 +1,7 @@
-*,,,,,,,,,,,,,,,,,,,,
-int32,int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[]
-ID,ItemIDList,MinCount,MaxCount,Weight,ItemIDList,MinCount,MaxCount,Weight,ItemIDList,MinCount,MaxCount,Weight,ItemIDList,MinCount,MaxCount,Weight,ItemIDList,MinCount,MaxCount,Weight
-ID,物品ID,最小值,最大值,权重,物品ID,最小值,最大值,权重,物品ID,最小值,最大值,权重,物品ID,最小值,最大值,权重,物品ID,最小值,最大值,权重
-,0,,,,0,,,,0,,,,0,,,,0,,,
-1,1,1,5,100,2,1,5,100,3,1,5,100,4,1,5,100,5,1,5,100
-2,1,1,5,100,2,1,5,100,3,1,5,100,4,1,5,100,,,,
+*,,,,,,,,,,,,,,,,,,,,,,
+int32,int32,int32,int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[],int32[]
+ID,MinItemCount,MaxItemCount,ItemIDList,MinCount,MaxCount,Weight,ItemIDList,MinCount,MaxCount,Weight,ItemIDList,MinCount,MaxCount,Weight,ItemIDList,MinCount,MaxCount,Weight,ItemIDList,MinCount,MaxCount,Weight
+ID,最小生成物品种类数量,最大生成物品种类数量,物品ID,最小值,最大值,权重,物品ID,最小值,最大值,权重,物品ID,最小值,最大值,权重,物品ID,最小值,最大值,权重,物品ID,最小值,最大值,权重
+,1,5,0,,,,0,,,,0,,,,0,,,,0,,,
+1,,,1,1,5,100,2,1,5,100,3,1,5,100,4,1,5,100,5,1,5,100
+2,,,1,1,5,100,2,1,5,100,3,1,5,100,4,1,5,100,,,,

@@ -50,5 +50,13 @@ public class PresetsThingManager : Singleton<PresetsThingManager>
 
             _regisgerControllers.Add(instance.Type,instance);
         }
+
+        //TODO:初始化物体
+        var objects = GameObject.FindGameObjectsWithTag("PresetsObject");
+        foreach (var gameObject in objects)
+        {
+            var iPresetsThing = gameObject.GetComponent<PresetsThing>();
+            Register(iPresetsThing);
+        }
     }
 }

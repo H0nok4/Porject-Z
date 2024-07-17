@@ -139,6 +139,10 @@ public class PosNode : IComparable<PosNode> {
         return true;
     }
 
+    public override string ToString()
+    {
+        return $"Pos = {Pos},MapIndex = {MapDataIndex}";
+    }
 }
 
 public class PathNodeComparer : IEqualityComparer<PosNode>

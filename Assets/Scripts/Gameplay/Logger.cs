@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Logger : MonoSingleton<Logger>
 {
-    public static bool Logable = false;
+    public static bool Logable = true;
 
     private static Logger instance;
 

@@ -18,9 +18,9 @@
     <component id="ruxwf" name="ComFrameDes.xml" path="/component/ThingDes/" exported="true"/>
     <component id="ruxwg" name="ComUnitDes.xml" path="/component/ThingDes/" exported="true"/>
     <component id="ruxwh" name="ComItemDes.xml" path="/component/ThingDes/" exported="true"/>
-    <component id="ipbld" name="ComDesignTypePanel.xml" path="/component/"/>
     <image id="kezoe" name="No.png" path="/image/"/>
     <image id="kezof" name="Yes.png" path="/image/"/>
+    <component id="eliri" name="ComResContainerDes.xml" path="/component/ThingDes/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

@@ -29,8 +29,15 @@ public class PresetGenResourceContainer : PresetsThing
         if (container is Thing_GenResourceContainer genContainer)
         {
             //TODO:注册   
+            genContainer.UseJackpotDefineID = JackpotID;
         }
 
+        Logger.Instance?.Log($"生成一个ResContainer在:Pos = {container.Position} 位置");
         gameObject.SetActive(false);
+    }
+
+    public override void OnUnRegister()
+    {
+        
     }
 }
