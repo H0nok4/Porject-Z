@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ConfigType;
+using EventSystem;
 using UnityEngine;
 
 public class Thing_GenResourceContainer : ThingWithComponent
@@ -56,6 +57,7 @@ public class Thing_GenResourceContainer : ThingWithComponent
         {
             return;
         }
+
         Container = new ThingOwner<Thing>();
         var def = DataManager.Instance.GetJackpotDefineByID(UseJackpotDefineID);
         ItemNumRange = new IntVec2(def.MinItemCount, def.MaxItemCount);
@@ -70,5 +72,64 @@ public class Thing_GenResourceContainer : ThingWithComponent
 
         Showed = new bool[Container.Count];
         Inited = true;
+    }
+
+    public override IEnumerable<CommandBase> GetCommands()
+    {
+        if (!Inited)
+        {
+            yield return new Command_Toggle(3, AddToSearch, IsAddToSearch);
+            yield return new Command_Toggle(4, AddToSearchAndHaul, IsAddToSearchAndHaul);
+        }
+    }
+
+    private bool IsAddToSearch = false;
+
+
+    private void AddToSearch(bool add)
+    {
+        if (add)
+        {
+            if (IsAddToSearchAndHaul) {
+                //TODO:这俩个互为冲突,如果其中一个为True,开启另一个的话需要卸载
+                MapController.Instance.Map.ListThings.Remove(this, ThingRequestGroup.WaitForSearchAndHaulContainer);
+                IsAddToSearchAndHaul = false;
+            }
+
+            IsAddToSearch = true;
+        }
+        else
+        {
+            MapController.Instance.Map.ListThings.Remove(this,ThingRequestGroup.WaitForSearchContainer);
+            IsAddToSearch = false;
+            //TODO:取消后需要发送事件,以便取消正在处理的相关工作
+            EventManager.TriggerEvent(EventDef.OnContainerDisableSearch, this);
+        }
+
+    }
+
+    private bool IsAddToSearchAndHaul = false;
+
+    private void AddToSearchAndHaul(bool add)
+    {
+        if (add)
+        {
+            if (IsAddToSearch) {
+                MapController.Instance.Map.ListThings.Remove(this, ThingRequestGroup.WaitForSearchContainer);
+                IsAddToSearch = false;
+            }
+
+            MapController.Instance.Map.ListThings.Add(this,ThingRequestGroup.WaitForSearchAndHaulContainer);
+            IsAddToSearchAndHaul = true;
+        }
+        else
+        {
+            MapController.Instance.Map.ListThings.Remove(this,ThingRequestGroup.WaitForSearchAndHaulContainer);
+            IsAddToSearchAndHaul = false;
+            //TODO:取消后需要发送事件,以便取消正在处理的相关工作
+            EventManager.TriggerEvent(EventDef.OnContainerDisableSearchAndHaul, this);
+        }
+
+ 
     }
 }

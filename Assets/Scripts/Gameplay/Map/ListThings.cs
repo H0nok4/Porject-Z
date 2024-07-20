@@ -58,6 +58,16 @@ public sealed class ListThings
         return AllThing.Contains(thing);
     }
 
+    public bool Contains(Thing thing, ThingRequestGroup specifyGroup)
+    {
+        if (ListByGroup[(int)specifyGroup] == null)
+        {
+            return false;
+        }
+
+        return ListByGroup[(int)specifyGroup].Contains(thing);
+    }
+
     public void Add(Thing thing)
     {
         if (!ListByDefine.TryGetValue(thing.Def.ID,out var list))
@@ -81,6 +91,38 @@ public sealed class ListThings
 
                 thingsList.Add(thing);
             }
+        }
+    }
+
+    public void Add(Thing thing, ThingRequestGroup specifyGroup)
+    {
+        var thingList = ListByGroup[(int)specifyGroup];
+        if (thingList == null)
+        {
+            thingList = new List<Thing>();
+            ListByGroup[(int)specifyGroup] = thingList;
+        }
+
+        //TODO:需要判断是否已经添加了,列表判断存在的复杂度为O(N),后面看看有没有性能问题,如果有的话得优化一下
+        if (thingList.Contains(thing))
+        {
+            thingList.Add(thing);
+        }
+
+    }
+
+    public void Remove(Thing thing, ThingRequestGroup specifyGroup)
+    {
+        var thingList = ListByGroup[(int)specifyGroup];
+        if (thingList == null) {
+            thingList = new List<Thing>();
+            ListByGroup[(int)specifyGroup] = thingList;
+            return;
+        }
+
+        //TODO:需要判断是否已经添加了,列表判断存在的复杂度为O(N),后面看看有没有性能问题,如果有的话得优化一下
+        if (thingList.Contains(thing)) {
+            thingList.Remove(thing);
         }
     }
 

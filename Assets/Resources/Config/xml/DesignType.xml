@@ -3,9 +3,21 @@
 	<DesignTypeDefine>
 		<ID>1</ID>
 		<Name>建造</Name>
+		<IconName />
 	</DesignTypeDefine>
 	<DesignTypeDefine>
 		<ID>2</ID>
 		<Name>征召</Name>
+		<IconName />
+	</DesignTypeDefine>
+	<DesignTypeDefine>
+		<ID>3</ID>
+		<Name>搜索</Name>
+		<IconName />
+	</DesignTypeDefine>
+	<DesignTypeDefine>
+		<ID>4</ID>
+		<Name>搜索并收集</Name>
+		<IconName />
 	</DesignTypeDefine>
 </ArrayOfDesignTypeDefine>

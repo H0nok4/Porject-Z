@@ -1,7 +1,9 @@
-*,
-int32,string
-ID,Name
-ID,
-,
-1,建造
-2,征召
+*,,
+int32,string,string
+ID,Name,IconName
+ID,,
+,,
+1,建造,
+2,征召,
+3,搜索,
+4,搜索并收集,

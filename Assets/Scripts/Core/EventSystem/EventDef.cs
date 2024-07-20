@@ -12,5 +12,9 @@ namespace EventSystem {
         public const string OnDeselectThing = "EventDef.OnDeselectThing";
 
         public const string OnDeselectAllThing = "EventDef.OnDeselectAllThing";
+
+        public const string OnContainerDisableSearchAndHaul = "EventDef.OnContainerDisableSearchAndHaul";
+
+        public const string OnContainerDisableSearch = "EventDef.OnContainerDisableSearch";
     }
 }

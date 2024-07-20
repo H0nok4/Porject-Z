@@ -196,6 +196,7 @@ namespace ConfigType
     {
         public int ID; // ID 
         public string Name; //  
+        public string IconName; //  
     }
 
     public partial class IngestibleDefine

@@ -84,5 +84,7 @@ public enum ThingRequestGroup
     All = 1,
     BuildingFrame,
     BuildingBlueprint,
-    Item
+    Item,
+    WaitForSearchContainer,
+    WaitForSearchAndHaulContainer,
 }
