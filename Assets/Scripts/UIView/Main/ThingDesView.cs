@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace UI
 {
-    [CmdReg(EventDef.OnDeselectAllThing,EventDef.OnDeselectThing,EventDef.OnSelectThing)]
+    [CmdReg(UICMD.OnDeselectAllThing, UICMD.OnDeselectThing, UICMD.OnSelectThing, UICMD.OnContainerDisableSearchAndHaul,UICMD.OnContainerDisableSearch)]
     [View("Main", "ThingDesView")]
     public class ThingDesView : FGUIView
     {
@@ -90,17 +90,21 @@ namespace UI
             base.OnCmd(data);
             switch (data.CmdName)
             {
-                case EventDef.OnDeselectThing:
+                case UICMD.OnDeselectThing:
                     //TODO:刷新界面
                     RefreshTrackedThings();
                     break;
-                case EventDef.OnDeselectAllThing:
+                case UICMD.OnDeselectAllThing:
                     //TODO:没有选中东西,把当前界面关闭
                     CloseSelf();
                     break;
-                case EventDef.OnSelectThing:
+                case UICMD.OnSelectThing:
                     //TODO:刷新界面
                     RefreshTrackedThings();
+                    break;
+                case UICMD.OnContainerDisableSearch:
+                case UICMD.OnContainerDisableSearchAndHaul:
+                    RefreshTrackedThingsCommands();
                     break;
             }
         }

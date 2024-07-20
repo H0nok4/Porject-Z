@@ -104,9 +104,10 @@ public sealed class ListThings
         }
 
         //TODO:需要判断是否已经添加了,列表判断存在的复杂度为O(N),后面看看有没有性能问题,如果有的话得优化一下
-        if (thingList.Contains(thing))
+        if (!thingList.Contains(thing))
         {
             thingList.Add(thing);
+            Logger.Instance.Log($"添加了一个指定的ThingRequestGroup={specifyGroup},ThingName={thing.Name},当前组里剩下的数量为:{thingList.Count}");
         }
 
     }
@@ -123,6 +124,8 @@ public sealed class ListThings
         //TODO:需要判断是否已经添加了,列表判断存在的复杂度为O(N),后面看看有没有性能问题,如果有的话得优化一下
         if (thingList.Contains(thing)) {
             thingList.Remove(thing);
+            Logger.Instance.Log($"移除了一个指定的ThingRequestGroup={specifyGroup},ThingName={thing.Name},当前组里剩下的数量为:{thingList.Count}");
+
         }
     }
 

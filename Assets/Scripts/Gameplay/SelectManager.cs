@@ -19,9 +19,9 @@ public class SelectManager : Singleton<SelectManager> {
 
         SelectThings.Clear();
 
-        UIManager.Instance.SendUIEvent(EventDef.OnDeselectThing);
+        UIManager.Instance.SendUIEvent(UICMD.OnDeselectThing);
 
-        UIManager.Instance.SendUIEvent(EventDef.OnDeselectAllThing);
+        UIManager.Instance.SendUIEvent(UICMD.OnDeselectAllThing);
     }
 
     public void SetSelectThings(List<Thing> thingList) {
@@ -34,7 +34,7 @@ public class SelectManager : Singleton<SelectManager> {
             }
         }
 
-        UIManager.Instance.SendUIEvent(EventDef.OnSelectThing);
+        UIManager.Instance.SendUIEvent(UICMD.OnSelectThing);
     }
 
     public void SetSelectThings(Thing thing) {
@@ -42,7 +42,7 @@ public class SelectManager : Singleton<SelectManager> {
         SelectThings.Add(thing);
         thing.GameObject.Select();
 
-        UIManager.Instance.SendUIEvent(EventDef.OnSelectThing);
+        UIManager.Instance.SendUIEvent(UICMD.OnSelectThing);
     }
 
     public void AddSelectThings(List<Thing> thingList) {
@@ -52,14 +52,14 @@ public class SelectManager : Singleton<SelectManager> {
             thing.GameObject.Select();
         }
 
-        UIManager.Instance.SendUIEvent(EventDef.OnSelectThing);
+        UIManager.Instance.SendUIEvent(UICMD.OnSelectThing);
     }
 
     public void AddSelectThings(Thing thing) {
         SelectThings.Add(thing);
         thing.GameObject.Select();
 
-        UIManager.Instance.SendUIEvent(EventDef.OnSelectThing);
+        UIManager.Instance.SendUIEvent(UICMD.OnSelectThing);
     }
 
     public void RemoveSelectThing(Thing thing)
@@ -69,11 +69,11 @@ public class SelectManager : Singleton<SelectManager> {
 
         SelectThings.Remove(thing);
 
-        UIManager.Instance.SendUIEvent(EventDef.OnDeselectThing);
+        UIManager.Instance.SendUIEvent(UICMD.OnDeselectThing);
 
         if (SelectThings.Count <= 0)
         {
-            UIManager.Instance.SendUIEvent(EventDef.OnDeselectAllThing);
+            UIManager.Instance.SendUIEvent(UICMD.OnDeselectAllThing);
         }
     }
 

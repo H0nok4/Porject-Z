@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ConfigType;
 using EventSystem;
+using UI;
 using UnityEngine;
 
 public class Thing_GenResourceContainer : ThingWithComponent
@@ -90,13 +91,21 @@ public class Thing_GenResourceContainer : ThingWithComponent
     {
         if (add)
         {
+            bool removeWaitForSearchAndHaul = false;
             if (IsAddToSearchAndHaul) {
-                //TODO:这俩个互为冲突,如果其中一个为True,开启另一个的话需要卸载
+                //这俩个互为冲突,如果其中一个为True,开启另一个的话需要卸载
                 MapController.Instance.Map.ListThings.Remove(this, ThingRequestGroup.WaitForSearchAndHaulContainer);
                 IsAddToSearchAndHaul = false;
+                removeWaitForSearchAndHaul = true;
             }
 
+            MapController.Instance.Map.ListThings.Add(this, ThingRequestGroup.WaitForSearchContainer);
             IsAddToSearch = true;
+            if (removeWaitForSearchAndHaul)
+            {
+                UIManager.Instance.SendUIEvent(UICMD.OnContainerDisableSearchAndHaul);
+            }
+            
         }
         else
         {
@@ -114,13 +123,21 @@ public class Thing_GenResourceContainer : ThingWithComponent
     {
         if (add)
         {
+            bool removeWaitForSearch = false;
             if (IsAddToSearch) {
                 MapController.Instance.Map.ListThings.Remove(this, ThingRequestGroup.WaitForSearchContainer);
                 IsAddToSearch = false;
+                removeWaitForSearch = true;
             }
 
             MapController.Instance.Map.ListThings.Add(this,ThingRequestGroup.WaitForSearchAndHaulContainer);
             IsAddToSearchAndHaul = true;
+
+
+            if (removeWaitForSearch)
+            {
+                UIManager.Instance.SendUIEvent(UICMD.OnContainerDisableSearch);
+            }
         }
         else
         {

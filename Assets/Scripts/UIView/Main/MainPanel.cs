@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace UI
 {
-    [CmdReg(EventDef.OnSelectThing)]
+    [CmdReg(UICMD.OnSelectThing)]
     [View("Main", "MainView")]
     public class MainPanel : FGUIView {
         public UI_MainView _main;
@@ -121,7 +121,7 @@ namespace UI
         public override void OnCmd(CmdData data) {
             base.OnCmd(data);
             switch (data.CmdName) {
-                case EventDef.OnSelectThing:
+                case UICMD.OnSelectThing:
                     UIManager.Instance.Show(DataManager.Instance.ThingDesViewType);
                     break;
             }
